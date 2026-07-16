@@ -55,6 +55,61 @@ $$
 2 \binom{n}{2} = n(n-1)
 $$
 
+**Q4**
+
+A round-robin tournament is being held with n tennis players; this means that every player will play against every other player exactly once.
+
+(a) How many possible outcomes are there for the tournament (the outcome lists out who won and who lost for each game)?
+
+(b) How many games are played in total?
+
+Answer:
+
+(a) Choose an unordered pair of players, the number of the subset is:
+$$
+\binom{n}{2}
+$$
+Each subset has 2 possible outcomes, so the possible coutcomes are:
+$$
+2^{\binom{n}{2}}
+$$
+
+(b) Each subset plays a game, so there are $\binom{n}{2}$ games are played in total.
+
+**Q5**
+
+A knock-out tournament is being held with $2^n$ tennis players. This means that for each round, the winners move on to the next round and the losers are eliminated, until only one person remains. For example, if initially there are $2^4 = 16$ players, then there are 8 games in the first round, then the 8 winners move on to round 2, then the 4 winners move on to round 3, then the 2 winners move on to round 4, the winner of which is declared the winner of the tournament. (There are various systems for determining who plays whom within a round, but these do not matter for this problem.)
+
+(a) How many rounds are there?
+
+(b) Count how many games in total are played, by adding up the numbers of games played in each round.
+
+(c) Count how many games in total are played, this time by directly thinking about it without doing almost any calculation.
+Hint: How many players need to be eliminated?
+
+Answer:
+
+(a) Each round eliminates half of the players. For $2^n$ players, we need $n$ rounds.
+
+(b) The first round needs $\frac{2^n}{2} = 2^{n-1}$ games. Each game produces a winner so $2^{n-1}$ players advance to the next round. Consequently, the second round has $2^{n-2}$ games. Continuing in this way, the total number of games is:
+$$
+\sum_{i=1}^n \frac{2^n}{2^i}
+$$
+
+(c) Each game eliminate 1 player, and we need to eliminate $2^n-1$ players, so the number of games in total is $2^n-1$.
+
+**Q6**
+
+There are 20 people at a chess club on a certain day. They each find opponents and start playing. How many possibilities are there for how they are matched up, assuming that in each game it does matter who has the white pieces (in a chess game, one player has the white pieces and the other player has the black pieces)?
+
+Answer:
+
+Arrange the 20 players in a line. Pair the first two players, the next two players, and so on. Within each pair assign the white pieces to the players who appears first in the line. 
+There are $20!$ possible lines. However this method overcounts because the ten games can appear in any order without changing the final matching. For each matching, the ten pairs can be arranged in $10!$ different orders. Therefore, the possibilities of how they are matched up are:
+$$
+\frac{20!}{10!}
+$$
+
 **Q7**
 
 Two chess players, A and B, are going to play 7 games. Each game has three possible outcomes: a win for A (which is a loss for B), a draw (tie), and a loss for A (which is a win for B). A win is worth 1 point, a draw is worth 0.5 points, and a loss is worth 0
@@ -187,4 +242,49 @@ $$
 
 Thus, the same final set is counted twice. More generally, a final set containing $k$ statistics courses is counted $k$ times, so the overcounting is not uniform.
 
+**Q11**
 
+Let $A$ and $B$ be sets with $|A|= n$, $|B|= m$.
+
+(a) How many functions are there from A to B (i.e., functions with domain A, assigning an element of B to each element of A)?
+
+(b) How many one-to-one functions are there from A to B? (See Section A.2.1 of the math appendix for information about one-to-one functions.)
+
+Answer:
+
+(a) For each element of A, there are m possible images in $B$. Since $A$ contains n elements, the multiplication rule gives $m^n$ functions from $A$ to $B$.
+
+(b) We need to consider two cases:
+* $n > m$
+* $n \le m$ 
+
+For the case of $n > m$, there aren't enough elements in $B$ for each element of $A$. So no one-to-one functions exist.
+
+For the case of $n \le m$, choose an element from $A$, it has $m$ images in $B$. The pick up another element from $A$, it has $m-1$ images in $B$. So the number of possible one-to-one functions is:
+$$
+\prod_{i=1}^n (m-i+1) = \frac{m!}{(m-n)!}
+$$
+
+**Q12**
+
+Four players, named A, B, C and D, are playing a card game. A standard, well-shuﬄed deck of cards is dealt to the players (so each player receives a 13-card hand).
+
+(a) How many possibilities are there for the hand that player A will get? (Within a hand, the order in which cards were received doesn’t matter.)
+
+(b) How many possibilities are there overall for what hands everyone will get, assuming
+that it matters which player gets which hand, but not the order of cards within a hand?
+
+(c) Explain intuitively why the answer to Part (b) is not the fourth power of the answer
+to Part (a).
+
+Answer:
+
+(a) Choose 13 of the 52 cards to form player A's hand. Therefore, the number of the possibilities is $\binom{52}{13}$.
+
+(b) Choose 13 cards from the deck to player A, similarly 13 cards to player B, C and D.
+By multiplication rule, the number of the possibilities is:
+$$
+\binom{52}{13} \binom{39}{13} \binom{26}{13} \binom{13}{13} 
+$$
+
+(c) The fourth power incorrectly assumes that each player’s hand can be chosen independently from all 52 cards. After A receives 13 cards, however, only 39 cards remain available for B. Therefore, the number of choices for each player depends on the hands already dealt.
