@@ -288,3 +288,78 @@ $$
 $$
 
 (c) The fourth power incorrectly assumes that each player’s hand can be chosen independently from all 52 cards. After A receives 13 cards, however, only 39 cards remain available for B. Therefore, the number of choices for each player depends on the hands already dealt.
+
+**Q13**
+
+A certain casino uses 10 standard decks of cards mixed together into one big deck, which we will call a superdeck. Thus, the superdeck has $52*10 = 520$ cards, with 10 copies of each card. How many different 10-card hands can be dealt from the superdeck? The order of the cards does not matter, nor does it matter which of the original 10 decks the cards came from. Express your answer as a binomial coefficient.
+
+Hint: Bose-Einstein.
+
+Answer:
+
+Binomial coefficient requires the set to be chosen has distinct elements, here the big deck has duplicated cards. Instead, rearrange the 10 standard decks so that the same kind of cards form a deck, so there are 52 decks each has 10 cards.
+So this problem can be translated into choose 10 cards from these 52 decks where a type can be chosen repeatedly, By using Bose-Einstein, the possibility is:
+$$
+\binom{52 + 10 - 1}{10}
+$$
+
+**Q14**
+
+You are ordering two pizzas. A pizza can be small, medium, large, or extra large, with any combination of 8 possible toppings (getting no toppings is allowed, as is getting all 8). How many possibilities are there for your two pizzas?
+
+Answer:
+
+First, multiplication rule to these steps:
+1. Choose the size, 4 possibilities.
+2. Choose the the toppings. Each topping can be selected or not, so there are $2^8$ possibilities.
+
+Therefore, the number of possibilities of a pizza is:
+$$
+N = 4 * 2^8
+$$
+
+Now consider the possibilities of two pizzas. The number of possibilities for the two pizzas are the same is $N$, The number of possibilities for the two pizzas are different is $\binom{N}{2}$. Therefore the number of the possibilities is:
+$$
+N + \binom{N}{2}
+$$
+
+**Q15**
+
+Give a story proof that:
+$$
+\sum_{k=0}^n \binom{n}{k} = 2^n
+$$
+
+Answer:
+
+A pizza can have any combination of 8 possible toppings (getting no toppings is allowed, as is getting all 8). The number of possibility of the pizza can be calculated in these two ways:
+
+1. Each topping can be selected or not, so there are $2^8$ possibilities.
+2. Select 0 toppings $\binom{8}{0}$, select 1 toppings $\binom{8}{1}$, and so on, therefore there are $\sum_{k=0}^n \binom{n}{k}$ possibilities.
+
+**Q16**
+
+Show that for all positive integers $n$ and $k$ with $n \ge k$,
+$$
+\binom{n}{k} + \binom{n}{k-1} = \binom{n+1}{k}
+$$
+
+Suppose there are $n$ student and 1 teacher in a class, we need to choose $k$ people from the class. Obviously, we can choose $k$ from $n+1$, the number of possibilities is $\binom{n+1}{k}$. Or we can separate the result in two groups, with or without the teacher:
+* For the groups with the teacher, it can be taken as select $k-1$ students from $n$ student, the number of possibilities is $\binom{n}{k-1}$.
+* For the groups without the teacher, it can be taken as select $k$ students from $n$ students, the number of possibilities is $\binom{n}{k}$.
+
+Therefore
+$$
+\binom{n}{k} + \binom{n}{k-1} = \binom{n+1}{k}
+$$
+
+**Q17**
+
+Give a story proof that
+$$
+\sum_{k=1}^n \binom{n}{k}^2 = \binom{2n}{n}
+$$
+for all positive integers $n$.
+
+Answer:
+
