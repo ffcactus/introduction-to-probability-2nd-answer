@@ -676,3 +676,110 @@ The two methods should end up with the same result, so we have:
 $$
 1^3 + 2^3 + 3^3 + ... + n^3 = 6 \binom{n+1}{4} + 6 \binom{n+1}{3} + \binom{n+1}{2}
 $$
+
+**Q23**
+
+Three people get into an empty elevator at the first floor of a building that has 10 floors. Each presses the button for their desired floor (unless one of the others has already pressed that button). Assume that they are equally likely to want to go to floors 2 through 10 (independently of each other). What is the probability that the buttons for 3 consecutive floors are pressed?
+
+Answer:
+
+The number of possibility of the three floors chosen by the three people is: $9^3=729$.
+
+From floor (2,3,4) to floor (8,9,10), there are 7 possibilities. We can classify on these 7 possibilities. For a fixed case there are $3*2*1$ possible ways for the three person to press the button. By multiplication rule, the total ways is $7*3*2*1=42$.
+
+Therefore the probability that the buttons for 3 consecutive floors are:
+$$
+\frac{42}{729}
+$$
+
+**Q24**
+
+A certain family has 6 children, consisting of 3 boys and 3 girls. Assuming that all birth orders are equally likely, what is the probability that the 3 eldest children are the 3 girls?
+
+Answer:
+
+There are $6!$ possible way for the 6 children to burn in order.
+
+For the outcomes that the 3 eldest children are the 3 girls, it can be calculated like this. First calculate the possible orders of the three girls, which is $3!$. Then calculate the possible orders of the three boys, which is also $3!$. By multiplication rule, the number of possible ways that 3 eldest children are the 3 girls is $3!3!$.
+
+Therefore, the probability is:
+$$
+\frac{3!3!}{6!} = \frac{1}{20}
+$$
+
+**Q25**
+
+A city with 6 districts has 6 robberies in a particular week. Assume the robberies are located randomly, with all possibilities for which robbery occurred where equally likely. What is the probability that at least one district had more than 1 robbery?
+
+Answer:
+
+To find the probability, first count the total number of equally likely ways to distribute the six robberies among the six districts. For example, suppose the robberies are $r_1,r_2,...,r_6$, in order; and the districts are $d_1,d_2,...,d_6$. A possible outcome is $(d_1, d_2, d_1, d_3, d_4, d_5)$, in which $r_1$ and $r_3$ occurred at $d_1$. Next, count the outcomes in which at least one district has more than one robbery.
+
+Assign these 6 robberies to the 6 districts which is choosing from {$d_1,d_2,...,d_6$} six times with replacement, the result is:
+$$
+6^6
+$$
+
+Now consider the possible outcomes for at least one district has more than one robbery. We can count the complement that every district has exactly one robbery, which is choosing from {$d_1, d_2,...,d_6$} without replacement. The number of possibilities is
+$$
+6!
+$$
+Therefore the probability is:
+$$
+\frac{6^6-6!}{6^6} 
+$$
+
+**Q26**
+
+A survey is being conducted in a city with 1 million residents. It would be far too expensive to survey all of the residents, so a random sample of size 1000 is chosen (in practice, there are many challenges with sampling, such as obtaining a complete list of everyone in the city, and dealing with people who refuse to participate). The survey is conducted by choosing people one at a time, with replacement and with equal probabilities.
+
+(a) Explain how sampling with vs. without replacement here relates to the birthday problem.
+
+(b) Find the probability that at least one person will get chosen more than once.
+
+Answer:
+
+(a) The birthday problem is analogous to sampling with replacement because one person’s birthday does not affect the possible birthdays of the others. This comes from the nature of birthdays.
+
+However, when we restrict attention to the event that all birthdays are different, the counting is similar to sampling without replacement, because each new birthday must differ from all the birthdays already observed.
+
+(b)
+
+The number of possibilities that choose 1000 person from 1 million residents with replacement is:
+$$
+(10^6)^{1000} = 10^{6000}
+$$
+
+The number of possibilities that at least one person will get chosen more than once is the complement of the event that all 1000 people are different. The number of ways to choose 1000 different people is the number of ways to choose from 1 million residents without replacement 1000 times:
+$$
+\prod_{i=1}^{1000} (10^6 - i + 1)
+$$
+
+Therefore, the probability is:
+$$
+1 - \frac{\prod_{i=1}^{1000} (10^6 - i + 1)}{10^{6000}}
+$$
+
+**Q27**
+
+A hash table is a commonly used data structure in computer science, allowing for fast
+information retrieval. For example, suppose we want to store some people’s phone numbers. Assume that no two of the people have the same name. For each name $x$, a hash function $h$ is used, letting $h(x)$ be the location that will be used to store $x$’s phone number. After such a table has been computed, to look up $x$’s phone number one just recomputes $h(x)$ and then looks up what is stored in that location.
+The hash function $h$ is deterministic, since we don’t want to get different results every time we compute $h(x)$. But $h$ is often chosen to be pseudorandom. For this problem, assume that true randomness is used. Let there be $k$ people, with each person’s phone number stored in a random location (with equal probabilities for each location, independently of where the other people’s numbers are stored), represented by an integer between 1 and $n$. Find the probability that at least one location has more than one phone number stored there.
+
+Answer:
+
+The total number of possible assignments of the $k$ phone numbers to the $n$ location is:
+$$
+n^k
+$$
+
+To count the outcomes in which at least one location contains more than one phone number, use the complement: each location is used at most once.
+The number of assignments with no collisions is:
+$$
+\prod_{i=1}^k (n-i+1)
+$$
+
+Therefore, the probability is:
+$$
+1 - \frac{\prod_{i=1}^k (n-i+1)} {n^k}
+$$
