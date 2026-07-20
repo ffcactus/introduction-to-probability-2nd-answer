@@ -783,3 +783,46 @@ Therefore, the probability is:
 $$
 1 - \frac{\prod_{i=1}^k (n-i+1)} {n^k}
 $$
+
+**Q28**
+
+A college has 10 time slots for its courses, and blithely assigns courses to completely random time slots, independently. The college offers exactly 3 statistics courses. What is the probability that 2 or more of the statistics courses are in the same time slot?
+
+Answer:
+
+Each of the three distinct statistics courses can be independently assigned to any of the ten time slots. Therefore, the total number of equally likely assignments is
+$$
+10^3
+$$
+
+The complementary event is all the three statistic courses are assigned to different time slot. The first course has 10 choices, the second has 9 remaining choices, and the third has 8 remaining choices. Thus, the number of assignments in the complementary event is:
+$$
+10*9*8
+$$
+
+Therefore, the probability is:
+$$
+1 - \frac{10*9*8} {10^3} = 0.28
+$$
+
+**Q29**
+
+For each part, decide whether the blank should be filled in with $=$, $\gt$, or $\lt$, and give
+a clear explanation.
+
+(a) (probability that the total after rolling 4 fair dice is 21) __ (probability that the total after rolling 4 fair dice is 22)
+
+(b) (probability that a random 2-letter word is a palindrome) __ (probability that a
+random 3-letter word is a palindrome)
+
+Answer:
+
+(a)
+If there is only one dice, the probability of each possible outcome is 1/6 obviously.
+If there are two dice, the possible combination is 1+1, 1+2, ... ,1+6, 2+1, 2+2, ..., 2+6, ... 6+1, 6+2, ..., 6+6. We have:
+* The probability of 1+1 and 6+6 are the same, which is 1/36. So the total of 2 and 12 has the same probability 1/36. 
+* The probability of 1+2 and 2+1 are the same, which is 1/36. So the total of 3 has the probability 2/36.
+* The probability of 1+3, 3+1, and 2+2 are the same, which is 1/36. So the total of 4 has the probability 4/36.
+* The probability of 1+4, 2+3, 3+2 and 4+1 are the same, which is 1/36. So the total of 5 has the probability 4/36.
+* The probability of 1+5, 2+4, 3+3, 4+2 and 5+1 are the same, which is 1/36. So the total of 6 has the probability 5/36.
+* The probability of 2+5, 3+4, 4+3 and 5+2 are the same, which is 1/36. So the total of 7 has the probability 4/36.
