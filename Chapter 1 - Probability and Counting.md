@@ -357,9 +357,322 @@ $$
 
 Give a story proof that
 $$
-\sum_{k=1}^n \binom{n}{k}^2 = \binom{2n}{n}
+\sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}
 $$
 for all positive integers $n$.
 
 Answer:
 
+Here is the story: 
+Count the possibilities of selecting $n$ people from $n$ men and $n$ women, the order of the $n$ people doesn't matter. 
+
+Obviously, the possiblities is $\binom{2n}{n}$. However the number of possibilities can also be calculated by summing over all the possibilites of different number of men have been selected. The number of selected men varies from 0 to n. In the cases of 0 man be selected, the possiblitis can be expressed as choosing 0 man from $n$ men, and then choosing $n$ women from $n$ women, which is $\binom{n}{0}\binom{n}{n}$. In the cases of 1 man be selected, the possiblitis can be expressed as choosing 1 man from $n$ men, and then choosing $n-1$ women from $n$ women, which is $\binom{n}{1}\binom{n}{n-1}$. Continue in this way and sum over these possibilities, it must match $\binom{2n}{n}$
+$$
+\sum_{k=0}^n \binom{n}{k} \binom{n}{n-k} = \sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}
+$$
+
+**Q18**
+
+Give a story proof that
+$$
+\sum_{k=1}^n k \binom{n}{k}^2 = n \binom{2n-1}{n-1}
+$$
+, for all possible integers $n$.
+
+Hint: Consider choosing a committee of size $n$ from two groups of size $n$ each, where
+only one of the two groups has people eligible to become the chair of the committee.
+
+Answer:
+
+Story: Choosing a committee of size $n$ from two groups of size $n$ each, where
+only one of the two groups has people eligible to become the chair of the committee. Find out the number of possibilities of the committee in which who is the chair matters.
+
+Suppose the chair of committee must be chosen from group A and the other group is B. The following two methods count the same possibilities.
+
+Method 1: Choose the chair first
+
+Use multiplication rule to the following step:
+1. Choose the chair of the committee from the group A. 
+2. Choose $n-1$ people from the remaining $2n-1$ people.
+
+The number of possibilities is:
+$$
+n \binom{2n-1}{n-1}
+$$
+
+Method 2: Classify by the number chosen from group A.
+
+Suppose $N_k$ is the number of the possiblities that there are $k$ people in the comittee were chosen from group A. It can be expressed by the following steps:
+1. Choose $k$ people from group A.
+2. Choose 1 people as the chair.
+3. Choose $n-k$ people from group B. 
+
+By multiplication rule, the number of possibilities is:
+$$
+N_k = k \binom{n}{k} \binom{n}{n-k}
+$$
+Because $\binom{n}{k} = \binom{n}{n-k}$, it becomes:
+$$
+N_k = k \binom{n}{k}^2
+$$
+Because $k$ varies from 1 to $n$, Summing over all possible value of $k$:
+$$
+\sum_{k=1}^n k \binom{n}{k}^2
+$$
+
+Because solution 1 and 2 should have the same result, so
+$$
+\sum_{k=1}^n k \binom{n}{k}^2 = n \binom{2n-1}{n-1}
+$$
+
+**Q19**
+
+Give a story proof that
+$$
+\sum_{k=2}^n \binom{k}{2} \binom{n-k+2}{2}  = \binom{n+3}{5}
+$$
+for all integers $n \ge 2$.
+
+Hint: Consider the middle number in a subset of {1,2,...,n+3} of size 5.
+
+Answer:
+
+Story:
+Find the number of possibilities of choosing a subset of size 5 from {1,2,...,n+3}, order doesn't matter.
+
+Obviously, by binomial coefficient the result is:
+$$
+\binom{n+3}{5}
+$$
+
+However, the following method should end up with the same result. Suppose $k+1$ is the middle number of the a valid outcome. And it separates the sampling space into 2 subspaces, (both subspaces do not include the middle number), the left sub space is {1,2,..,k} of size k, the right sub space is {k+2,k+3,...,n+3} of size $n+3-(k+1)=n-k+2$. Choose 2 number from both the left and right subspace. Summing over $k+1$ from 3 to $n+1$, that is summing over $k$ from 2 to $n$, we can get all the outcomes:
+$$
+\sum_{k=2}^n \binom{k}{2} \binom{n-k+2}{2}
+$$
+
+**Q20**
+
+(a) Show using a story proof that
+$$
+\binom{k}{k} + \binom{k+1}{k} + \binom{k+2}{k} + ... + \binom{n}{k} = \binom{n+1}{k+1}
+$$
+where $n$ and $k$ are positive integers with $n \ge k$. This is called the *hockey stick identity*.
+Hint: Imagine arranging a group of people by age, and then think about the oldest
+person in a chosen subgroup.
+
+(b) Suppose that a large pack of Haribo gummi bears can have anywhere between 30 and 50 gummi bears. There are 5 delicious flavors: pineapple (clear), raspberry (red), orange (orange), strawberry (green, mysteriously), and lemon (yellow). There are 0 non-delicious flavors. How many possibilities are there for the composition of such a pack of gummi bears? You can leave your answer in terms of a couple binomial coefficients, but not a sum of lots of binomial coefficients.
+
+Answer:
+
+(a)
+Suppose there are groups of $n+1$ people ordered by age from youngest to oldest. Consider the number of possibilities of choosing a subgroup of $k+1$ people.
+
+Obviously, by binomial coefficient the result is:
+$$
+\binom{n+1}{k+1}
+$$
+
+Now consider the alternative method, by classifying the original position of the oldest person in the subset. For a fixed oldest people in the subgroup, suppose his original position is $i$, we choose $k$ people from his left side with ${i-1} people, the number of possible choose is:
+$$
+\binom{i-1}{k}
+$$
+The range of $i$ is from $k+1$ to $n+1$, sum over the cases:
+$$
+\sum_{i=k+1}^{n+1} \binom{i-1}{k} = \sum_{i=k}^{n} \binom{i}{k}
+$$
+
+The alternative method should end up with the same result, so we have:
+$$
+\sum_{i=k}^{n} \binom{i}{k} = \binom{n+1}{k+1}
+$$
+where $n$ and $k$ are positive integers with $n \ge k$.
+
+(b) For a fixed total of $x$ gummi bears in a large pack, different color ones add up to $x$, by Bose-Einstein formula, the number of possibilities of this pack is:
+$$
+\binom{x + 5 - 1}{5 - 1}
+$$
+Sum over all possible pack sizes, we have:
+$$
+\sum_{x=30}^{50} \binom{x+4}{4}
+$$
+Reindex the sum by let $i=x+4$. Then
+$$
+\sum_{i=34}^{54} \binom{i}{4}
+$$
+To apply hockey stick identity, write:
+$$
+\sum_{i=34}^{54} \binom{i}{4} = \sum_{i=4}^{54} \binom{i}{4} - \sum_{i=4}^{33} \binom{i}{4}
+$$
+With hockey stick identity, we have
+$$
+\sum_{i=4}^{54} \binom{i}{4} = \binom{55}{5}, \qquad
+\sum_{i=4}^{33} \binom{i}{4} = \binom{34}{5}
+$$
+So the simplified result is:
+$$
+\sum_{i=34}^{54} \binom{i}{4} = \binom{55}{5} - \binom{34}{5}
+$$
+
+**Q21**
+
+Define $\begin{Bmatrix} n \\ k \end{Bmatrix}$ as the number of ways to partition {1,2,...,n} into k nonempty subsets, or
+the number of ways to have $n$ students split up into k groups such that each group has at least one student. For example, $\begin{Bmatrix} 4 \\ 2 \end{Bmatrix} = 7$ because we have the following possibilities.
+* {1}, {2,3,4}
+* {2}, {1,3,4}
+* {3}, {1,2,4}
+* {4}, {1,2,3}
+* {1,2}, {3,4}
+* {1,3}, {2,4}
+* {1,4}, {2,3}
+
+Prove the following identities:
+
+(a)
+$$
+\begin{Bmatrix}n+1 \\ k \end{Bmatrix} = 
+\begin{Bmatrix}n \\ k-1 \end{Bmatrix} +
+k \begin{Bmatrix}n \\ k \end{Bmatrix}
+$$
+Hint: I’m either in a group by myself or I’m not.
+
+(b)
+$$
+\sum_{j=k}^n \binom{n}{j} \begin{Bmatrix}j \\ k \end{Bmatrix} =
+\begin{Bmatrix}n+1 \\ k+1    \end{Bmatrix}
+$$
+Hint: First decide how many people are not going to be in my group.
+
+Answer:
+
+(a)
+
+Suppose the
+$$
+N=\begin{Bmatrix} n \\ k \end{Bmatrix}
+$$
+When adding a new element to the sampling space, classify the changes into two cases:
+1. The new element joins one of the partitions.
+2. The new element forms the a new block by itself.
+
+In case 1, for each outcome of $N$, there are $k$ partitions the new element can merge into, so the number of possibilities is $kN$.
+
+In case 2, we need to reduce the original $k$ partitions to $k-1$ so that the new element can form partition by itself, so the number of possibilities is $\begin{Bmatrix} n \\ k - 1 \end{Bmatrix}$.
+
+Summing over the two cases, we have:
+$$
+\begin{align}
+\begin{Bmatrix}n+1 \\ k \end{Bmatrix} &= 
+\begin{Bmatrix}n \\ k-1 \end{Bmatrix} +
+kN \\
+&= \begin{Bmatrix}n \\ k-1 \end{Bmatrix} +
+k \begin{Bmatrix}n \\ k \end{Bmatrix}
+\end{align}
+$$
+
+(b)
+Consider $n+1$ students, one of whom is a distinguished new student. We want to partition them into $k+1$ nonempty blocks. The number of such partitions is
+$$
+N = \begin{Bmatrix} n + 1\\ k + 1\end{Bmatrix}
+$$
+
+We can let the new student to form a block by himself, or let others to join his block. That means the number of students that join the block vary from 0 to $n-k$.
+
+For a fixed $i$ students join the new block with the new student. We first choose the $i$ students from $n$, the number of possibilities is:
+$$
+\binom{n}{i}
+$$
+The remaining $n - i$ students are partitioned into $k$ blocks, and the number of possibilities is:
+$$
+\begin{Bmatrix} n - i \\ k \end{Bmatrix}
+$$
+By multiplication rule, we have:
+$$
+\binom{n}{i} \begin{Bmatrix} n - i \\ k \end{Bmatrix}
+$$
+Summing over the number of students join the new block:
+$$
+N=
+\sum_{i=0}^{n-k} \binom{n}{i} \begin{Bmatrix} n - i \\ k \end{Bmatrix} =
+\sum_{i=0}^{n-k} \binom{n}{n-i} \begin{Bmatrix} n - i \\ k \end{Bmatrix}
+$$
+Reindex by $j=n-i$, because $i$ varies from 0 to $n-k$, $j$ varies from $n$ to $k$, so we have:
+$$
+N = \sum_{j=k}^{n} \binom{n}{j} \begin{Bmatrix} j \\ k \end{Bmatrix} = \begin{Bmatrix} n + 1\\ k + 1\end{Bmatrix}
+$$
+
+**Q22**
+
+The Dutch mathematician R.J. Stroeker remarked:
+
+*Every beginning student of number theory surely must have marveled at the miraculous
+fact that for each natural number $n$ the sum of the first $n$ positive consecutive cubes is
+a perfect square.*
+
+Every beginning student of number theory surely must have marveled at the miraculous
+fact that for each natural number n the sum of the first n positive consecutive cubes is
+a perfect square.
+
+Furthermore, it is the square of the sum of the first $n$ positive integers! That is,
+$$
+1^3 + 2^3 + 3^3 + ... + n^3 = (1+2+3+...+n)^2
+$$
+
+Usually this identity is proven by induction, but that does not give much insight into why the result is true, nor does it help much if we wanted to compute the left-hand side but didn’t already know this result. In this problem, you will give a story proof of the identity.
+
+(a) Give a story proof of the identity
+$$
+1 + 2 + 3 + ... + n = \binom{n+1}{2}
+$$
+
+Hint: Consider a round-robin tournament (see Exercise 4).
+
+(b) Give a story proof of the identity
+$$
+1^3 + 2^3 + 3^3 + ... + n^3 = 6 \binom{n+1}{4} + 6 \binom{n+1}{3} + \binom{n+1}{2}
+$$
+It is then just basic algebra (not required for this problem) to check that the square of the right-hand side in (a) is the right-hand side in (b).
+
+Hint: Imagine choosing a number between 1 and $n$ and then choosing 3 numbers between 0 and $n$ smaller than the original number, with replacement. Then consider cases based on how many distinct numbers were chosen.
+
+Answer:
+
+(a) Consider a round-robin tournament in which every player will play against every other player exactly once. Suppose the number of games is $N$ for $n$ player. Now consider the games when here comes a new player. The player must play with every other player, so it increases $n$ new games. Therefore, we have:
+$$
+1 + 2 + 3 + ... + n = \binom{n+1}{2}
+$$
+
+(b)
+Consider choosing 4 numbers in {0,1,...,n} with $n \ge 3$ like this:
+1. The first number must be chosen from {1,2,...,n}.
+2. The remaining 3 numbers are chosen from {0,1,...,n} with replacement.
+
+Counting the number of distinct 4 numbers, order matters.
+
+Method 1: classify on the first chosen number.
+
+For a fixed first chosen number $k$, we then choose 1 number from {0,1,...,k-1}, repeat 3 times. With multiplication rule, the number of possibilities is $k^3$.
+
+Summing over $k$ from 1 to $n$, the number of distinct 4 numbers is:
+$$
+\sum_{i=1}^n i^3
+$$
+
+Method 2: classify on the number of distinct numbers in a outcome.
+
+Because the first number is always different than the rest 3 numbers, the possible distinct number in a outcome are 2, 3 and 4.
+
+When there are 2 distinct numbers in the outcome, the number of possibilities is $\binom{n+1}{2}$.
+
+When there are 3 distinct numbers in the outcome, the number of possibilities can be calculated like this. First choose 3 from $n+1$. Suppose the numbers are A, B, C. Fix A as the first number, it can be expanded into: ABBC, ABCB, ABCC, ACBB, ACBC, ACCB. So there are $6\binom{n+1}{3}$ possibilities.
+
+When there are 4 distinct numbers in the outcome, the number of possibilities can be calculated like this. First choose 4 from $n+1$. Suppose the numbers are A, B, C, D. Fix A as the first number, it can be expanded into ABCD, ABDC, ACBD, ACDB, ADBC, ADCB. So there are $6\binom{n+1}{4}$ possibilities.
+
+Summing over on the three cases, we have:
+$$
+6 \binom{n+1}{4} + 6 \binom{n+1}{3} + \binom{n+1}{2}
+$$
+
+The two methods should end up with the same result, so we have:
+$$
+1^3 + 2^3 + 3^3 + ... + n^3 = 6 \binom{n+1}{4} + 6 \binom{n+1}{3} + \binom{n+1}{2}
+$$
