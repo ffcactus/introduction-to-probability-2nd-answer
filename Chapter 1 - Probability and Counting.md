@@ -818,11 +818,76 @@ random 3-letter word is a palindrome)
 Answer:
 
 (a)
-If there is only one dice, the probability of each possible outcome is 1/6 obviously.
-If there are two dice, the possible combination is 1+1, 1+2, ... ,1+6, 2+1, 2+2, ..., 2+6, ... 6+1, 6+2, ..., 6+6. We have:
-* The probability of 1+1 and 6+6 are the same, which is 1/36. So the total of 2 and 12 has the same probability 1/36. 
-* The probability of 1+2 and 2+1 are the same, which is 1/36. So the total of 3 has the probability 2/36.
-* The probability of 1+3, 3+1, and 2+2 are the same, which is 1/36. So the total of 4 has the probability 4/36.
-* The probability of 1+4, 2+3, 3+2 and 4+1 are the same, which is 1/36. So the total of 5 has the probability 4/36.
-* The probability of 1+5, 2+4, 3+3, 4+2 and 5+1 are the same, which is 1/36. So the total of 6 has the probability 5/36.
-* The probability of 2+5, 3+4, 4+3 and 5+2 are the same, which is 1/36. So the total of 7 has the probability 4/36.
+
+Rolling 4 fair dice, there are $6^4$ equally likely outcomes. 
+
+Here are the combinations that sum to 21:
+1. 6+6+6+3, there are $\frac{4!}{3!}=4$ possible ordering.
+2. 6+6+5+4, there are $\frac{4!}{2!}=12$ possible ordering.
+3. 5+5+5+6, there are $\frac{4!}{3!}=4$ possible ordering.
+
+Here are the combinations that sum to 22:
+1. 6+6+6+4, there are $\frac{4!}{3!}=4$ possible ordering.
+2. 6+6+5+5, there are $\frac{4!}{2!2!}=6$ possible ordering.
+
+So rolling 4 fair dice, the probability that the total is 21 is greater than 22.
+
+(b)
+
+There are 26^2 possible 2-letter word and they are equally likely. Among them, 26 are palindrome.
+
+There are 26^3 possible 3-letter word and they are equally likely. Among them, 26*26 are palindrome. Each possible choice of the first 2 letters determines exactly a 3-letter palindrome.
+$$
+\frac{26}{26^2} = \frac{26^2}{26^3}
+$$
+
+Therefore, the probability for the 2-letter palindrome and the 3-letter palindrome are the same.
+
+**Q30**
+
+With definitions as in the previous problem, find the probability that a random n-letter word is a palindrome for $n=7$ and for $n=8$.
+
+Answer:
+
+There are $26^7$ possible equally likely 7-letter words. There are $26^4$ possibilities for the first 4 letters, and each of them determines a 7-letter palindrome, so the probability of a 7-letter palindrome is $\frac{26^4}{26^7}=\frac{1}{26^3}$.
+
+There are $26^8$ possible equally likely 8-letter words. There are $26^4$ possibilities for the first 4 letters, and each of them determines a 7-letter palindrome, so the probability of an 8-letter palindrome is $\frac{26^4}{26^8}=\frac{1}{26^4}$.
+
+**Q31**
+
+Elk dwell in a certain forest. There are $N$ elk, of which a simple random sample of size $n$ are captured and tagged ("simple random sample" means that all $\binom{N}{n}$ sets of $n$ elk are equally likely). The captured elk are returned to the population, and then a new sample is drawn, this time with size $m$. This is an important method that is widely used in ecology, known as capture-recapture. What is the probability that exactly $k$ of the $m$ elk in the new sample were previously tagged? (Assume that an elk that was captured before doesn’t become more or less likely to be captured again.)
+
+Answer:
+
+After the first capture-and-release, there are $n$ tagged elk and $N-n$ untagged elk, and all of them are equally likely to be chosen next time.
+
+In the second capture, there are $\binom{N}{m}$ equally likely outcomes. 
+Next count the outcomes that have exactly $k$ tagged elk. Use the multiplication rule for the following two steps:
+
+1. Choose $k$ elk from $n$ tagged elk, which is $\binom{n}{k}$.
+2. Choose $m-k$ elk from $N-n$ untagged elk, which is $\binom{N-n}{m-k}$.
+
+So the number of second samples containing exactly $k$ tagged elk is:
+$$
+\binom{n}{k} \binom{N-n}{m-k}
+$$
+
+Therefore, the probability that exactly $k$ of the $m$ elk in the new sample were previously tagged is:
+$$
+\frac{\binom{n}{k} \binom{N-n}{m-k}}{\binom{N}{m}}
+$$ 
+
+**Q32**
+
+Four cards are face down on a table. You are told that two are red and two are black, and you need to guess which two are red and which two are black. You do this by pointing to the two cards you’re guessing are red (and then implicitly you’re guessing that the other two are black). Assume that all configurations are equally likely, and that you do not have psychic powers. Find the probability that exactly $j$ of your guesses are correct, for $j = 0,1,2,3,4$.
+
+Answer:
+
+The guess of the red card are equally likely and there are $\binom{4}{2} = 6$ possible outcomes.
+In the two guessing cards, each has the same possibility to be correct or not, so here are all the possibilities:
+1. First correct, second correct. But it implies that the guesses the black ones are also correct, so the total correct guesses is 4.
+2. First correct, second incorrect. But it implies that there is a correct guess on the black one, so the total correct guesses is 2.
+3. First incorrect, second correct. But it implies that there is a correct guess on the black one, so the total correct guesses is 2.
+4. First incorrect, second incorrect. But it implies that the guesses to the black ones are also incorrect, so the total correct guess is 0.
+
+So the probabilities that exactly $j$ of your guesses are correct, for $j = 0,1,2,3,4$ are $\frac{1}{6}$, 0, $\frac{2}{6}$, 0, $\frac{1}{6}$.
