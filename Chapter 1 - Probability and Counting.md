@@ -883,11 +883,61 @@ Four cards are face down on a table. You are told that two are red and two are b
 
 Answer:
 
-The guess of the red card are equally likely and there are $\binom{4}{2} = 6$ possible outcomes.
-In the two guessing cards, each has the same possibility to be correct or not, so here are all the possibilities:
-1. First correct, second correct. But it implies that the guesses the black ones are also correct, so the total correct guesses is 4.
-2. First correct, second incorrect. But it implies that there is a correct guess on the black one, so the total correct guesses is 2.
-3. First incorrect, second correct. But it implies that there is a correct guess on the black one, so the total correct guesses is 2.
-4. First incorrect, second incorrect. But it implies that the guesses to the black ones are also incorrect, so the total correct guess is 0.
+The guesses are equally likely, and there are $\binom{4}{2} = 6$ possible guesses.
 
-So the probabilities that exactly $j$ of your guesses are correct, for $j = 0,1,2,3,4$ are $\frac{1}{6}$, 0, $\frac{2}{6}$, 0, $\frac{1}{6}$.
+For a guess to contain exactly $r$ actual red cards, we can use the multiplication rule to create the outcome like this:
+
+1. Choose $r$ of the two actual red cards.
+2. Choose the remaining $2-r$ guessed-red cards from the two actual black cards.
+
+Therefore, the number of such guesses is
+$$
+\binom{2}{r} \binom{2}{2-r}
+$$
+
+However, if there are exactly $r$ correct guesses to the red cards, there must be exactly $r$ correct guesses to the black cards. So the correct guesses $j=2r$.
+
+* Because $j=2r$, the number of corrected guesses must be even, so $j=1$ and $j=3$ are impossible.
+* When $j=0$, $r=0$, the probability is $\frac{\binom{2}{0} \binom{2}{2}}{6} = \frac{1}{6}$.
+* When $j=2$, $r=1$, the probability is $\frac{\binom{2}{1} \binom{2}{1}}{6} = \frac{4}{6}$.
+* When $j=4$, $r=2$, the probability is $\frac{\binom{2}{2} \binom{2}{0}}{6} = \frac{1}{6}$.
+
+**Q33**
+
+A jar contains $r$ red balls and $g$ green balls, where $r$ and $g$ are fixed positive integers.
+A ball is drawn from the jar randomly (with all possibilities equally likely), and then a
+second ball is drawn randomly.
+
+(a) Explain intuitively why the probability of the second ball being green is the same as the probability of the first ball being green.
+
+(b) Define notation for the sample space of the problem, and use this to compute the
+probabilities from (a) and show that they are the same.
+
+(c) Suppose that there are 16 balls in total, and that the probability that the two balls
+are the same color is the same as the probability that they are different colors. What
+are $r$ and $g$ (list all possibilities)?
+
+Answer:
+
+(a) Imagine the balls in a line randomly, so each position is equally likely to be green, and the probability is $\frac{g} {r + g}$. Drawn the ball one by one, the probability of a green ball are all the same.
+
+(b) 
+
+Convert the original question to this one:
+
+*Randomly choose $g$ locations from $r+g$ locations, check the probability that the first location been chosen, and the probability that the second location be chosen.*
+
+There are $\binom{r+g}{g}$ possible equally likely assignment.
+
+For the fixed cases that the first location is chosen, the number of possibilities equals to the number of possible assignments that choosing $g-1$ location from the remaining $r+g-1$ locations, which is
+$$
+\binom{r+g-1}{g-1}
+$$.
+
+So the probability of the first location been chosen is
+$$
+\frac{\binom{r+g-1}{g-1}} {\binom{r+g}{g}}
+$$
+
+Similarly, the probability of the second location been chosen is the same.
+
