@@ -1018,3 +1018,80 @@ Therefore the probability of a hand contains at least 3 cards of every suit is
 $$
 \frac{4 \binom{13}{4}\binom{13}{3}^4}{\binom{52}{13}}
 $$
+
+**Q36**
+
+A group of 30 dice are arranged in a line. What is the probability that 5 of each of the values
+1,2,3,4,5,6 appear?
+
+Answer:
+
+The total number of ordered possible outcomes of 30 dice is
+$$
+6^{30}
+$$
+
+Suppose the 30 dice in a line randomly. Each valid outcome can be generated like this:
+1. Choose 5 positions from 30 available positions for the five dice of value 1.
+2. Choose 5 positions from the remaining 25 available positions for the five dice showing value 2.
+3. Choose 5 positions from the remaining 20 available positions for the five dice showing value 3.
+4. Choose 5 positions from the remaining 15 available positions for the five dice showing value 4.
+5. Choose 5 positions from the remaining 10 available positions for the five dice showing value 5.
+6. Choose 5 positions from the remaining 5 available positions for the five dice showing value 6.
+
+By using multiplication rule, there are
+$$
+\binom{30}{5} \binom{25}{5} \binom{20}{5} \binom{15}{5} \binom{10}{5} \binom{5}{5}
+$$
+possible assignments.
+
+Therefore, the probability that 5 of each of the values 1,2,3,4,5,6 appear is:
+$$
+\frac{\binom{30}{5} \binom{25}{5} \binom{20}{5} \binom{15}{5} \binom{10}{5} \binom{5}{5}}{6^{30}}
+$$
+
+**Q37**
+
+A deck of cards is shuffled well. The cards are dealt one by one, until the first time an
+ace appears.
+
+(a) Find the probability that no kings, queens, or jacks appear before the first ace.
+
+(b) Find the probability that exactly one king, exactly one queen, and exactly one jack
+appear (in any order) before the first ace.
+
+Answer:
+
+(a) The shuffled deck has $52!$ possible arrangements. Classify the favorable arrangements by the position $1 \le i \le 37$ that appear the first ace. For a fixed position, choose an ace from the 4 suits and put it at position $i$. For the remaining 3 aces, 4 kings, 4 queens and 4 jacks, put them behind the chosen ace. We need to choose 15 positions from the remaining $52-i$ positions to arrange them. So we have 
+$$
+4 \binom{52-i}{15} 15!
+$$
+arrangements for aces, kings, queens and jacks. And there are
+$$
+36!
+$$ 
+possible arrangements for the rest cards. Summing over the position, we have
+$$
+\sum_{i=1}^{37} 4 \binom{52-i}{15} 15! 36!
+$$
+possible favorable outcomes. Therefore the possibility is
+$$
+\frac{\sum_{i=1}^{37} 4 \binom{52-i}{15} 15! 36!}{52!}
+$$
+
+(b) Ignore the 36 cards that are neither aces, kings, queens, nor jacks. Among the 16 special cards there are $16!$ possible arrangements. To generate a favorable outcome, first choose one king, one queen and one jack, put them in the first three positions randomly, there are
+$$
+4^3 \cdot 3!
+$$ 
+possible ways. Then choose an ace, the possible ways become
+$$
+4^4 \cdot 3!
+$$
+Then arrange the rest 12 cards in any order, the possible ways become
+$$
+4^4 \cdot 3! \cdot 12!
+$$
+Therefore, the probability is
+$$
+\frac{4^4 \cdot 3! \cdot 12!}{16!} = \frac{16}{455}
+$$
