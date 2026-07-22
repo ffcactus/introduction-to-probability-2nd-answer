@@ -919,11 +919,9 @@ are $r$ and $g$ (list all possibilities)?
 
 Answer:
 
-(a) Imagine the balls in a line randomly, so each position is equally likely to be green, and the probability is $\frac{g} {r + g}$. Drawn the ball one by one, the probability of a green ball are all the same.
+(a) Imagine the balls in a line randomly, so each position is equally likely to be green, and the probability is $\frac{g} {r + g}$. If the balls are drawn one by one, the probability that each position contains a green ball is the same.
 
-(b) 
-
-Convert the original question to this one:
+(b) Convert the original question to this one:
 
 *Randomly choose $g$ locations from $r+g$ locations, check the probability that the first location been chosen, and the probability that the second location be chosen.*
 
@@ -936,8 +934,87 @@ $$.
 
 So the probability of the first location been chosen is
 $$
-\frac{\binom{r+g-1}{g-1}} {\binom{r+g}{g}}
+\frac{\binom{r+g-1}{g-1}} {\binom{r+g}{g}} = \frac{g}{g+r}
 $$
 
 Similarly, the probability of the second location been chosen is the same.
 
+(c) In (b) we proof that every time when draw a ball from the jar, the probability of red is $\frac{r}{g+r}$, the probability of green is $\frac{g}{r+g}$. If the probability of of same color and different color is the same, we have
+$$
+\frac{g}{g+r} \frac{g-1}{g+r-1} + \frac{r}{g+r} \frac{r-1}{g+r-1} = \frac{g}{g+r} \frac{r}{g+r-1} + \frac{r}{g+r} \frac{g}{g+r-1}
+$$
+
+Simplify it and we have
+$$
+g^2-2gr+r^2-g-r=0
+$$
+
+Solve the equations
+$$
+\begin{cases}
+g^2-2gr+r^2-g-r=0 \\
+g+r=16
+\end{cases}
+$$
+We have $g=10, r=6$ or $g=6, r=10$.
+
+**Q34**
+
+A random 5-card poker hand is dealt from a standard deck of cards. Find the probability of each of the following possibilities (in terms of binomial coefficients).
+
+(a) A flush (all 5 cards being of the same suit; do not count a royal flush, which is a flush with an ace, king, queen, jack, and 10).
+
+(b) Two pair (e.g., two 3’s, two 7’s, and an ace).
+
+Answer:
+
+(a) There are $\binom{52}{5}$ equally likely possible outcomes for a random 5-card poker hand. There are 4 possible suits for a flush. For a fixed suit, we can choose 5 cards from 13 possible cards but remove the single royal flush outcome. Summing over all four suits, we have
+$$
+4 \binom{13}{5} - 4
+$$
+
+Therefore, the probability of a flush is
+$$
+\frac{4 \binom{13}{5} - 4} {\binom{52}{5}}
+$$
+
+(b) First, chose the numbers for the two pair, there are
+$$
+\binom{13}{2}
+$$
+possible outcomes for the numbers. Each number has
+$$
+\binom{4}{2}
+$$
+possible outcomes from different suits. So for the two pair, we have 
+$$
+\binom{13}{2} \binom{4}{2} \binom{4}{2}
+$$
+possible outcomes. Second, chose the last card, We can't choose the number used in the two pair, so it is chosen from the remaining $52-8=44$ cards.
+
+Therefore, the probability for two pair is
+$$
+\frac{\binom{13}{2} \binom{4}{2} \binom{4}{2} \binom{48}{1}} {\binom{52}{5}}
+$$
+
+**Q35**
+
+A random 13-card hand is dealt from a standard deck of cards. What is the probability that the hand contains at least 3 cards of every suit?
+
+Answer:
+
+A random 13-card hand has
+$$
+\binom{52}{13}
+$$
+possible outcomes. And it at most can only 3 cards of every suit.
+
+If there are at least 3 cards of every suit, there must be exact 4 cards for a suit. Choose a suit that contains 4 cards in the hand. For the other suits, each contains 3 cards. By multiplication rule, the number of valid outcomes is:
+$$
+4 \binom{13}{4}\binom{13}{3}^4
+$$
+
+Therefore the probability of a hand contains at least 3 cards of every suit is
+$$
+\frac{4 \binom{13}{4}\binom{13}{3}^4}{\binom{52}{13}}
+$$
