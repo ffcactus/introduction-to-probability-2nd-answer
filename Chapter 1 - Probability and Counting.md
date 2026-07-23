@@ -1095,3 +1095,95 @@ Therefore, the probability is
 $$
 \frac{4^4 \cdot 3! \cdot 12!}{16!} = \frac{16}{455}
 $$
+
+**Q38**
+
+Tyrion, Cersei, and ten other people are sitting at a round table, with their seating arrangement having been randomly assigned. What is the probability that Tyrion and Cersei are sitting next to each other? Find this in two ways:
+
+(a) using a sample space of size 12!, where an outcome is fully detailed about the seating;
+
+(b) using a much smaller sample space, which focuses on Tyrion and Cersei.
+
+Answer:
+
+(a) There are $12!$ possible equally likely assignments. To find the favorable assignments, we can classify on the Tyrion's position. For a fixed Tyrion's position $1 \le i \le 12$, Cersei's position can be assigned to the left or right next to it, however, so there are $2$ choices for Cersei's position. There are $10!$ possible assignments for the other $10$ people to the rest positions. So the number of the favorable assignments is
+$$
+\sum_{i=1}^{12} 2 \cdot 10! = 24 \cdot 10!
+$$
+Therefore, the probability is
+$$
+\frac{24 \cdot 10!}{12!} = \frac{2}{11}
+$$
+
+(b) There are $12 \cdot 11$ equally likely assignments for Tyrion and Cersei combined position. Now, classify on Tyrion's position, for a fixed Tyrion's position, there are 2 possible choices for Cersei's position to be next to Tyrion's. Therefore, the probability is:
+$$
+\frac{12 \cdot 2}{12 \cdot 11} = \frac{2}{11}
+$$
+
+**Q38**
+
+An organization with $2n$ people consists of $n$ married couples. A committee of size $k$ is selected, with all possibilities equally likely. Find the probability that there are exactly $j$ married couples within the committee.
+
+Answer:
+
+To better explain the solution, arrange the couples in two lines, the men in a line and women in another line, the couple's position are the same in the lines. There are $n$ people in each line.
+
+There are $\binom{2n}{k}$ equally likely choices to choose $k$ people from the $2n$ people to form committee.
+
+To count the number of the favorable committee, first choose $j$ married couples from the $n$ married couples, and there are $\binom{n}{j}$ choices.
+
+Then choose the remaining $k-2j$ people for the rest of the committee from the remaining $n-j$ couples, and there are 2 choices from each chosen couple. So the number of ways to choose the uncoupled people in the committee is
+$$
+\binom{n-j}{k-2j} 2^{k-2j}
+$$
+
+By using the multiplication rule, the number of ways to choose the favorable committee is
+$$
+\binom{n}{j} \binom{n-j}{k-2j} 2^{k-2j}
+$$
+
+Therefore, when $k \le n+j$, the probability is
+$$
+\frac{\binom{n}{j} \binom{n-j}{k-2j} 2^{k-2j}}{\binom{2n}{k}}
+$$
+
+**Q40**
+
+There are $n$ balls in a jar, labeled with the numbers 1,2,...,$n$. A total of $k$ balls are drawn, one by one with replacement, to obtain a sequence of numbers.
+
+(a) What is the probability that the sequence obtained is strictly increasing?
+
+(b) What is the probability that the sequence obtained is increasing (but not necessarily strictly increasing, i.e., there can be repetitions)?
+
+Answer:
+
+(a) With replacement, there are $n^k$ equally likely possible sequences. For a strictly increasing sequence, the numbers must be distinct. This is choosing $k$ from $n$ without replacement, each choice maps to a strictly increasing sequence, so the number strictly increasing sequences is
+$$
+\binom{n}{k}
+$$
+Therefore, the probability is
+$$
+\frac{\binom{n}{k}}{n^k}
+$$
+
+(b) For a non-decreasing sequence, once we know the number of occurrences of each number, the sequence is completely determined. And those occurrence times sum to $k$, this is a stars-and-bars problem. Therefore, the probability is
+$$
+\frac{\binom{k+n-1}{k}}{n^k}
+$$
+
+**Q41**
+
+Each of $n$ balls is independently placed into one of $n$ boxes, with all boxes equally likely. What is the probability that exactly one box is empty?
+
+Answer:
+
+There are $n^n$ equally likely outcomes if order matters.
+
+Now consider the number of favorable outcomes. If one box is empty, we can take it as there are $n-1$ boxes. If we remove a particular box, and ensure other $n-1$ boxes are not empty, we can first choose n-1 balls from $n$ balls and put them to each of the $n-1$ boxes, we have $(n-1)!$ possible assignment. For the remaining 1 ball it can be put into any of the $n-1$ box. By using multiplication rule, we have
+$$
+\binom{n}{n-1} \cdot (n-1)! \cdot (n-1) = (n-1) \cdot n!
+$$
+However, each outcome is counted twice because the box containing two balls has two possible choices for which ball was placed last. Therefore the probability is:
+$$
+\frac{(n-1) \cdot n!}{2 \cdot n^n}
+$$
