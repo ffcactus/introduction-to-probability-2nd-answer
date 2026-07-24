@@ -1,3 +1,5 @@
+# Counting
+
 **Q1**
 
 How many ways are there to permute the letters in the word MISSISSIPPI?
@@ -322,6 +324,8 @@ Now consider the possibilities of two pizzas. The number of possibilities for th
 $$
 N + \binom{N}{2}
 $$
+
+# Story proofs
 
 **Q15**
 
@@ -676,6 +680,8 @@ The two methods should end up with the same result, so we have:
 $$
 1^3 + 2^3 + 3^3 + ... + n^3 = 6 \binom{n+1}{4} + 6 \binom{n+1}{3} + \binom{n+1}{2}
 $$
+
+# Naive definition of probability
 
 **Q23**
 
@@ -1187,3 +1193,108 @@ However, each outcome is counted twice because the box containing two balls has 
 $$
 \frac{(n-1) \cdot n!}{2 \cdot n^n}
 $$
+
+# Axioms of probability
+
+The following set operation is useful for using the axioms of probability:
+1. $A=(A\cap B)\cup(A\cap B^c)$
+2. $A\cup B=A\cup(B\cap A^c)$
+3. $(A\cup B)^c=A^c\cap B^c$
+4. $(A\cap B)^c=A^c\cup B^c$
+
+
+**Q42**
+
+Show that for any events $A$ and $B$,
+$$
+P(A) + P(B) - 1 \le P(A \cap B) \le P(A \cup B) \le P(A) + P(B)
+$$
+For each of these three inequalities, give a simple criterion for when the inequality is actually an equality (e.g., give a simple condition such that $P(A \cap B) = P(A \cup B)$ if and only if the condition holds).
+
+Answer:
+
+1. Proof for $P(A) + P(B) - 1 \le P(A \cap B)$
+
+We can first prove that
+$$
+P(A) + P(B) - P(A \cap B) = P(A \cup B)
+$$
+and because $P(A \cup B) \le P(S) = 1$, so
+$$
+P(A) + P(B) - P(A \cap B) \le 1
+$$
+Rearranging gives
+$$
+P(A) + P(B) - 1 \le P(A \cap B)
+$$
+
+Now, we prove $P(A) + P(B) - P(A \cap B) = P(A \cup B)$.
+
+Because $A \cup B = A \cup (B \cap A^c)$, and because $A$ and $B \cap A^c$ are disjoint. By the axiom, we have
+$$
+P(A \cup B) = P(A) + P(B \cap A^c)
+$$
+Rearranging gives
+$$
+P(B \cap A^c) = P(A \cup B) - P(A) \qquad (1)
+$$
+
+Because $B=(A \cap B) \cup (A^c \cap B)$, and because $A \cap B$ is disjoint with $A^c \cap B$. By the axiom, we have
+$$
+P(B) = P(B \cap A) + P(B \cap A^c)
+$$
+Rearranging gives
+$$
+P(B \cap A^c) = P(B) - P(B \cap A) \qquad (2)
+$$
+
+By (1) and (2) we have
+$$
+P(A \cup B) - P(A) = P(B) - P(B \cap A)
+$$
+Rearrange, we proof that
+$$
+P(A) + P(B) - P(A \cup B) = P(A \cap B)
+$$
+
+Hence, we proof that
+$$
+P(A) + P(B) - 1 \le P(A \cap B)
+$$
+When $P(A \cup B) = P(S) = 1$, the inequality is actually an equality.
+
+2. Proof $P(A \cap B) \le P(A \cup B)$.
+
+Because
+$$
+P(A) + P(B) - P(A \cap B) = P(A \cup B) \qquad (1)
+$$
+And
+$$
+P(A) = P(A \cap B) + P(A \cap B^c) \qquad (2) \\
+P(B) = P(B \cap A) + P(B \cap A^c) \qquad (3)
+$$
+Replace $P(A)$ and $P(B)$ by (2) and (3), (1) can be expressed as
+$$
+P(A \cap B) + P(A \cap B^c) + P(B \cap A^c) = P(A \cup B)
+$$
+
+So
+$$
+P(A \cap B) \le P(A \cup B)
+$$
+When $P(A \cap B^c) + P(B \cap A^c) = 0$, the inequality is actually an equality.
+
+3. Proof $P(A \cup B) \le P(A) + P(B)$
+
+Because
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+So
+$$
+P(A \cup B) \le P(A) + P(B)
+$$
+When $P(A \cap B) = 0$, the inequality is actually an equality.
+
+
