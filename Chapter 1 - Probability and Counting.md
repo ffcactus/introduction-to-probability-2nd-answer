@@ -1203,7 +1203,7 @@ The following set operation is useful for using the axioms of probability:
 4. $(A\cap B)^c=A^c\cup B^c$
 
 
-**Q42**
+**Q43**
 
 Show that for any events $A$ and $B$,
 $$
@@ -1297,4 +1297,459 @@ P(A \cup B) \le P(A) + P(B)
 $$
 When $P(A \cap B) = 0$, the inequality is actually an equality.
 
+**Q44**
 
+Let $A$ and $B$ be events. The difference $B-A$ is defined to be the set of all elements of
+B that are not in A. Show that if $A \subseteq B$, then $P(B−A) = P(B)−P(A)$, directly using the axioms of probability.
+
+Answer:
+
+Since $A \subseteq B$,
+$$
+B \setminus A= B \cap A^c \tag{1}
+$$
+We can decompose B as
+$$
+B = (B \cap A^c) \cup A
+$$
+
+Because $B \cap A^c$ and $A$ are disjoint sets. By the additivity axiom of probability function, we have
+$$
+P(B) = P(B \cap A^c) + P(A)
+$$
+Replace with (A) and with rearrange, we have
+$$
+P(B−A) = P(B)−P(A)
+$$
+
+**Q45**
+
+Let $A$ and $B$ be events. The symmetric difference $A \triangle B$ is defined to be the set of all elements that are in A or B but not both. In logic and engineering, this event is also
+called the XOR (exclusive or) of A and B. Show that
+$$
+P(A \triangle B) = P(A) + P(B) − 2 P(A \cap B)
+$$
+directly using the axioms of probability.
+
+Answer:
+
+Since $A=(A\cap B)\cup(A\cap B^c)$, and (A \cap B) and (A \cap B^c) are disjoint sets. By the additivity of probability, we obtain
+$$
+P(A) = P(A \cap B) + P(A \cap B^c) \tag{1}
+$$
+
+Similarly we have
+$$
+P(B) = P(B \cap A) + P(B \cap A^c) \tag{2}
+$$
+
+Add (1) and (2) we have
+$$
+P(A) + P(B) = 2 P(A \cap B) + P(A \cap B^c) + P(B \cap A^c)
+$$
+
+Rearrange gives
+$$
+P(A \cap B^c) + P(B \cap A^c) = P(A) + P(B) - 2 P(A \cap B) \tag{3}
+$$
+
+By definition
+$$
+A \triangle B = (A \cap B^c) \cup (B \cap A^c)
+$$
+And because (A \cap B^c) and (B \cap A^c) are disjoint sets, we have
+$$
+P(A \triangle B) = P(A \cap B^c) + P(B \cap A^c) \tag{4}
+$$
+
+Substituting (3) into (4), we obtain
+$$
+P(A \triangle B) = P(A) + P(B) - 2 P(A \cap B)
+$$
+
+**Q46**
+
+Let $A_1, A_2,\ldots,A_n$ be events. Let $B_k$ be the event exactly $k$ of the $A_i$ occur, and $C_k$ be the event that at least $k$ of the $A_i$ occur, for $0 \le k \le n$. Find a simple expression for $P(B_k)$ in terms of $P(C_k)$ and $P(C_{k+1})$.
+
+Answer:
+
+Because 
+$$
+A = (A \cap B) \cup (A \cap B^c) \tag{1}
+$$
+
+Substituting $A=A_1 \cap A_2$, and $B=A_3$ into (1) we obtain
+$$
+A_1 \cap A_2 = (A_1 \cap A_2 \cap A_3) \cup (A_1 \cap A_2 \cap A_3^c) \tag{2}
+$$
+
+We can define $C_k$ and $B_k$ like this
+$$
+C_k = \bigcup_{\substack{S \subseteq \{1,\ldots,n\}\\ |S| = k}}(\bigcap_{i \in S} A_i) \tag{3}
+$$
+
+$$
+B_k = \bigcup_{\substack{S \subseteq \{1,\ldots,n\}\\ |S| = k}} ((\bigcap_{i \in S} A_i) \cap (\bigcap_{j \notin S} A_j^c)) \tag{4}
+$$
+
+With (2), (3) and (4) we should have
+$$
+C_k = C_{k+1} \dot\cup B_k
+$$
+
+The events $B_k$ and $C_{k+1}$ are disjoint because exactly \(k\) events cannot occur while at least $k+$ events occur.
+$$
+P(C_k) = P(C_{k+1}) + P(B_k)
+$$
+Rearrange obtain
+$$
+P(B_k) = P(C_k) - P(C_{k+1})
+$$
+
+**Q47**
+
+Events $A$ and $B$ are independent if $P(A \cap B) = P(A)P(B)$ (independence is explored
+in detail in the next chapter).
+
+(a) Give an example of independent events $A$ and $B$ in a finite sample space $S$ (with
+neither equal to $\varnothing$ or $S$), and illustrate it with a Pebble World diagram.
+
+(b) Consider the experiment of picking a random point in the rectangle
+$$
+R = \{(x,y): 0 \lt x \lt 1, 0 \lt y \lt 1 \}
+$$
+
+where the probability of the point being in any particular region contained within $R$ is
+the area of that region. Let $A_1$ and $B_1$ be rectangles contained within R, with areas not
+equal to 0 or 1. Let $A$ be the event that the random point is in $A_1$, and $B$ be the event
+that the random point is in $B_1$. Give a geometric description of when it is true that $A$
+and $B$ are independent. Also, give an example where they are independent and another
+example where they are not independent.
+
+(c) Show that if $A$ and $B$ are independent, then
+$$
+P (A \cup B) = P(A) + P(B) - P(A)P(B) = 1 - P(A^c)P(B^c)
+$$
+
+
+Answer:
+
+(a) In the 2 by 2 Pebble World, Suppose $A$ is the event of choosing a pebble in the top row, $B$ is the event of choosing a pebble in the first column. $A \cap B$ is the event of choosing the top left pebble. $P(A) = 0.5$, $P(B) = 0.5$, $P(A \cap B) = 0.25$. So $P(A \cap B) = P(A)P(B)$. It means $A$ is independent of $B$.
+
+(b) Skip
+
+(c) Skip
+
+**Q48**
+
+Arby has a belief system assigning a number $P_{Arby}(A)$ between $0$ and $1$ to every event
+$A$ (for some sample space). This represents Arby’s degree of belief about how likely A
+is to occur. For any event $A$, Arby is willing to pay a price of $1000·P_{Arby}(A)$ dollars to
+buy a certificate such as the one shown below
+
+    Certificate
+
+    The owner of this certificate can redeem it for $1000 if A occurs. No
+    value if A does not occur, except as required by federal, state, or local
+    law. No expiration date.
+
+Likewise, Arby is willing to sell such a certificate at the same price. Indeed, Arby is
+willing to buy or sell any number of certificates at this price, as Arby considers it the
+"fair" price.
+
+Arby stubbornly refuses to accept the axioms of probability. In particular, suppose that
+there are two disjoint events A and B with
+$$
+P_{Arby}(A \cup B) \ne P_{Arby}(A) + P_{Arby}(B) \text{.}
+$$
+
+Show how to make Arby go bankrupt, by giving a list of transactions Arby is willing
+to make that will guarantee that Arby will lose money (you can assume it will be
+known whether $A$ occurred and whether $B$ occurred the day after any certificates are
+bought/sold).
+
+Answer: Skip
+
+# Inclusion-exclusion
+
+**Q49**
+
+A fair die is rolled $n$ times. What is the probability that at least $1$ of the $6$ values never appears?
+
+Answer:
+
+Suppose $A_i$ is the event that value $i$ never appears. The problem is to find out
+$$
+P(A_1 \cup \ldots \cup A_6)
+$$
+We can use inclusion-exclusion rule. First of all, there are $6^n$ equally likely outcomes of rolling a fair die $n$ times. If a particular value $i$ never appears, every roll has only 5 allowed values, therefore
+$$
+|A_i| = 5^n
+$$
+There are $\binom{6}{1}$ choices for which value is missing, give the first inclusion-exclusion term
+$$
+\binom{6}{1} 5^n
+$$
+Similarly, $|A_i \cap A_j| = 4^n$, the second term is
+$$
+\binom{6}{2} 5^n
+$$
+
+The last term is
+$$
+\binom{6}{6} 0^n = 0
+$$
+
+So the probability that at least one of the 6 values never appears is
+$$
+\frac{\binom{6}{1} 5^n - \binom{6}{2} 4^n + \binom{6}{3} 3^n - \binom{6}{4} 2^n + \binom{6}{5} 1^n}{6^n}
+$$
+
+**Q50**
+
+A card player is dealt a 13-card hand from a well-shuﬄed, standard deck of cards.
+What is the probability that the hand is void in at least one suit ("void in a suit" means
+having no cards of that suit)?
+
+Answer:
+
+Suppose $A_i$ is the event that suit $i$ is void in the hand. This problem is to figure out
+$$
+P(A_1 \cup A_2 \cup A_3 \cup A_4)
+$$
+We can use inclusion-exclusion rule. There are $\binom{52}{13}$ equally likely hands. Among these possible outcomes $|A_i| = \binom{39}{13}$. So the first term is
+$$
+\binom{4}{1} \binom{39}{13}
+$$
+
+Similarly the second term is
+$$
+\binom{4}{2} \binom{26}{13}
+$$
+
+The third term is
+$$
+\binom{4}{3} \binom{13}{13}
+$$
+
+The last term is 4 suits are avoid, and it's impossible.
+
+So the probability that the hand is void in at least one suit is
+$$
+\frac{\binom{4}{1} \binom{39}{13} - \binom{4}{2} \binom{26}{13} + \binom{4}{3} \binom{13}{13}}{\binom{52}{13}}
+$$
+
+**Q51**
+
+For a group of 7 people, find the probability that all 4 seasons (winter, spring, summer, fall) occur at least once each among their birthdays, assuming that all seasons are equally likely.
+
+Answer:
+
+There are $4^7$ equally likely outcomes for the birthdays among the 4 seasons. By using the Stirling number, the number of possible partitions that each block has at least 1 birthday is
+$$
+\begin{Bmatrix} 7 \\ 4 \end{Bmatrix}
+$$
+Each partition has $7!$ ordered possibilitis. Therefore the possibility is
+$$
+\frac{7! \cdot \begin{Bmatrix} 7 \\ 4 \end{Bmatrix}}{4^7}
+$$
+
+**Q52**
+
+A certain class has 20 students, and meets on Mondays and Wednesdays in a classroom with exactly 20 seats. In a certain week, everyone in the class attends both days. On both days, the students choose their seats completely randomly (with one student per seat). Find the probability that no one sits in the same seat on both days of that week.
+
+Answer:
+
+Fix any particular Monday seating. There are $20!$ equally likely Wednesday seatings.
+
+Let $A_i$ be the event that student $i$ occupies the same seat on Wednesday as on Monday. We want to count Wednesday seatings in which none of the $A_i$ occur. We can use inclusion-exclusion to calculate the complement probability
+$$
+P(\bigcup_{i=1}^{20} A_i)
+$$
+If there are $k$ students take the same seat, we only need to consider $20-k$ students, and there are $\binom{20}{k}$ ways to choose the $k$ students.
+
+By inclusion-exclusion, the number of favorable Wednesday seatings is
+$$
+\sum_{k=0}^{20} (-1)^k \binom{20}{k} (20-k)! \tag{1}
+$$
+
+Note that
+$$
+\binom{20}{k} (20-k)! = \frac{20!}{(20-k)!k!} (20-k)! = \frac{20!}{k!} \tag{2}
+$$
+
+Substituting (2) into (1), we obtain
+$$
+\sum_{k=0}^{20} (-1)^k \frac{20!}{k!} = 20! \sum_{k=0}^{20} (-1)^k \frac{1}{k!}
+$$
+
+Therefore the probability is
+$$
+\frac{20! \sum_{k=0}^{20} (-1)^k \frac{1}{k!}}{20!} = \sum_{k=0}^{20} (-1)^k \frac{1}{k!}
+$$
+
+**Q53**
+
+Fred needs to choose a password for a certain website. Assume that he will choose an 8-character password, and that the legal characters are the lowercase letters a, b, c, ... , z, the uppercase letters A, B, C, ... , Z, and the numbers 0, 1, ... , 9.
+
+(a) How many possibilities are there if he is required to have at least one lowercase letter in his password?
+
+(b) How many possibilities are there if he is required to have at least one lowercase letter and at least one uppercase letter in his password?
+
+(c) How many possibilities are there if he is required to have at least one lowercase letter, at least one uppercase letter, and at least one number in his password?
+
+Answer:
+
+(a)
+
+Assume $A_i$ is the event that the position $i$ contains a lowercase letter. We can consider using inclusion-exclusion to figure out
+$$
+|A_1 \cup \ldots \cup A_{26}|
+$$
+
+For a particular set of $k$ position:
+* Those $k$ positions have 26 lowercase choices.
+* The other $k-8$ positions have 62 choices.
+
+Thus, a k-fold intersection has
+$$
+26^k \cdot 62^{8-k}
+$$
+passwords. Inclusion-exclusion gives
+$$
+\sum_{k=1}^8 (-1)^{k+1} \binom{8}{k} 26^k \cdot 62^{8-k}
+$$
+
+Alternatively, at least one lowercases is complementory to no lowercases so the number of possible favorable password is $62^8 - 36^8$
+
+(b)
+
+Let $A_l$ be the event that there is at least one lowercase letter in the password, $A_u$ is the event that there is at least one uppercase letter in the password. By (a), we have $|A_l| = |A_u| = 62^8 - 36^8$.
+
+Because
+$$
+|A_l \cup A_u| = |A_l| + |A_u| - |A_l \cap A_u|
+$$
+
+And $|A_l \cup A_u|$ is complementory to $|A_n|$, where $A_n$ is the event that the password only contains numbers, which is $10^8$.
+
+So we have
+$$
+|A_l \cap A_u| = 62^8 - 2 \cdot 36^8 + 10^8
+$$
+
+(c)
+
+Let $A_d$ be the event that there is at least one digit in the password. We need to find
+$$
+|A_l \cap A_u \cap A_d|
+$$
+
+From inclusion-exclusion rule, we know that
+$$
+|A_l \cup A_u \cup A_d| = |A_l| + |A_u| + |A_d| - |A_l \cap A_u| - |A_l \cap A_d| - |A_u \cap A_d| + |A_l \cap A_u \cap A_d|
+$$
+
+We know that
+$$
+|A_l \cup A_u \cup A_d| = 62^8 \\
+|A_l| = 62^8 - 36^8 \\
+|A_u| = 62^8 - 36^8 \\
+|A_d| = 62^8 - 52^8 \\
+|A_l \cap A_u| = 62^8 - 2 \cdot 36^8 + 10^8 \\
+|A_l \cap A_d| = |A_l| + |A_d| - |A_l \cup A_d| = 62^8 - 36^8 - 52^8 + 26^8\\
+|A_u \cap A_d| = 62^8 - 36^8 - 52^8 + 26^8
+$$
+Substituting these into the inclusion-exclusion formula, we have
+$$
+62^8 = 52^8 + 2 \cdot 36^8 - 2 \cdot 26^8 - 10^8 + |A_l \cap A_u \cap A_d|
+$$
+Rearranging gives
+$$
+|A_l \cap A_u \cap A_d| = 62^8 - 52^8 - 2 \cdot 36^8 + 2 \cdot 26^8 + 10^8
+$$
+
+**Q54**
+
+Alice attends a small college in which each class meets only once a week. She is deciding between 30 non-overlapping classes. There are 6 classes to choose from for each day of the week, Monday through Friday. Trusting in the benevolence of randomness, Alice decides to register for 7 randomly selected classes out of the 30, with all choices equally likely. What is the probability that she will have classes every day, Monday
+through Friday? (This problem can be done either directly using the naive definition of probability, or using inclusion-exclusion.)
+
+Answer:
+
+Let $M_i$ be the event that Alice chooses no class that meet on day $i$, where $i \in \{1,\ldots,5\}$. We want the the probability that none of the events $M_i$ occur.
+
+There are
+$$
+\binom{30}{7}
+$$
+equally likely ways for Alice to choose seven of the thirty classes.
+
+For a fixed $S \subseteq \{1, \ldots, 5\}$ with $|S| = k$, let
+$$
+B_S = \bigcap_{i \in S} M_i
+$$
+
+The event $B_S$ occurs when Alice chooses no classes on any of the $k$ days in $S$. Excluding those days leaves $30-6k$ available classes. Therefore,
+$$
+|B_S| = \binom{30 - 6k}{7}.
+$$
+
+There are $\binom{5}{k}$ ways to choose $k$ excluded days. By inclusion-exclusion,
+$$
+|\bigcup_{k=1}^5 M_k| = \sum_{k=1}^5 (-1)^{k+1}\binom{5}{k}\binom{30 - 6k}{7}.
+$$
+
+Hence, the number of favorable selections in which Alice has at least one class every day is
+$$
+\binom{30}{7} - |\bigcup_{k=1}^5 M_k| = \sum_{k=0}^5 (-1)^{k}\binom{5}{k}\binom{30 - 6k}{7}
+$$
+
+And the desired probability is
+$$
+\begin{aligned}
+\frac{\sum_{k=0}^5 (-1)^{k}\binom{5}{k}\binom{30 - 6k}{7}}{\binom{30}{7}}
+\end{aligned}
+$$
+
+**Q55**
+
+A club consists of 10 seniors, 12 juniors, and 15 sophomores. An organizing committee of size 5 is chosen randomly (with all subsets of size 5 equally likely).
+
+(a) Find the probability that there are exactly 3 sophomores in the committee.
+
+(b) Find the probability that the committee has at least one representative from each of the senior, junior, and sophomore classes.
+
+Answer:
+
+(a) First select the 3 sophomores, then select the rest from the seniors and juniors. The probability is
+$$
+\frac{\binom{15}{3} \binom{22}{2}}{\binom{37}{5}}
+$$
+
+(b)
+
+Let $M_s$, $M_j$ and $M_p$ be the event that no seniors, no juniors and no sophomores in the committee respectively.
+
+Obviously
+$$
+|M_s| = \binom{27}{5} \\
+|M_j| = \binom{25}{5} \\
+|M_p| = \binom{22}{5} \\
+|M_s \cap M_j| = \binom{15}{5} \\ 
+|M_s \cap M_p| = \binom{12}{5} \\ 
+|M_j \cap M_p| = \binom{10}{5} \\ 
+|M_s \cap M_j \cap M_p| = 0
+$$
+
+By inclusion-exclusion we have
+$$
+\begin{aligned}
+|M_s \cup M_j \cup M_p| &= |M_s| + |M_j| + |M_p| - |M_s \cap M_j| - |M_s \cap M_p| - |M_j \cap M_p| + |M_s \cap M_j \cap M_p| \\
+&= \binom{27}{5} + \binom{25}{5} + \binom{22}{5} - \binom{15}{5} - \binom{12}{5} - \binom{10}{5}
+\end{aligned} 
+$$
+
+Therefore the desired probability is
+$$
+1 - \frac{\binom{27}{5} + \binom{25}{5} + \binom{22}{5} - \binom{15}{5} - \binom{12}{5} - \binom{10}{5}}{\binom{37}{5}}
+$$
