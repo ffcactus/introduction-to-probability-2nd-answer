@@ -294,7 +294,7 @@ P(M_A \mid D) &= \frac{P(D \mid M_A) P(M_A)}{P(D)} \\
 \end{aligned}
 $$
 
-**Q8**
+**Q9**
 
 (a) Show that if events $A_1$ and $A_2$ have the same prior probability $P(A_1) = P(A_2)$, $A_1$ implies $B$, and $A_2$ implies $B$, then $A_1$ and $A_2$ have the same posterior probability
 $P(A_1 \mid B) = P(A_2 \mid B)$ if it is observed that $B$ occurred.
@@ -315,3 +315,120 @@ If $P(A_1) = P(A_2)$ and $P(B \mid A_1) = 1, P(B \mid A_2) = 1$, we can see that
 (b)
 
 Conditioning on $B$ removes possibilities outside of $B$, on the other hand, but $A_1$ and $A_2$ are inside $B$ and are equally likely. So nothing changed in $A_1$ and $A_2$.
+
+**Q10**
+
+Fred is working on a major project. In planning the project, two milestones are set up,
+with dates by which they should be accomplished. This serves as a way to track Fred’s
+progress. Let $A_1$ be the event that Fred completes the first milestone on time, $A_2$ be
+the event that he completes the second milestone on time, and $A_3$ be the event that he
+completes the project on time.
+
+Suppose that $P(A_j+1|A_j) = 0.8$ but $P(A_j+1|A_j^c) = 0.3$ for $j = 1,2$, since if Fred falls
+behind on his schedule it will be hard for him to get caught up. Also, assume that the second milestone supersedes the first, in the sense that once we know whether he is on time in completing the second milestone, it no longer matters what happened with the first milestone. We can express this by saying that $A_1$ and $A_3$ are conditionally independent given $A_2$ and they’re also conditionally independent given $A_2^c$.
+
+(a) Find the probability that Fred will finish the project on time, given that he completes
+the first milestone on time. Also find the probability that Fred will finish the project on
+time, given that he is late for the first milestone.
+
+(b) Suppose that $P(A_1) = 0.75$. Find the probability that Fred will finish the project
+on time.
+
+Solution:
+
+(a)
+
+Suppose that Fred completed the first milestone on time. Then we have
+$$
+P(A_2 \mid A_1) = 0.8, \qquad P(A_2^c \mid A_1) = 0.2 \tag{1}
+$$
+
+By the conditional LOTP, we have
+$$
+P(A_3 \mid A_1) = P(A_3 \mid A_2, A_1) P(A_2 \mid A_1) + P(A_3 \mid A_2^c, A_1) P(A_2^c \mid A_1) \tag{2}
+$$
+
+Because the second milestone supersedes the first, we have
+$$
+P(A_3 \mid A_2, A_1) = P(A_3 \mid A_2) = 0.8, \qquad P(A_3 \mid A_2^c, A_1) = P(A_3 \mid A_2^c) = 0.3 \tag{3}
+$$
+
+Substituting (3) and (1) into (2), we obtain
+$$
+P(A_3 \mid A_1) = 0.8 \cdot 0.8 + 0.3 \cdot 0.2 = 0.7
+$$
+
+Suppose that Fred is late for the first milestone. Then we have
+$$
+P(A_2 \mid A_1^c) = 0.3, \qquad P(A_2^c \mid A_1^c) = 0.7 \tag{4}
+$$
+
+By the conditional LOTP, we have
+$$
+P(A_3 \mid A_1^c) = P(A_3 \mid A_2, A_1^c) P(A_2 \mid A_1^c) + P(A_3 \mid A_2^c, A_1^c) P(A_2^c \mid A_1^c) \tag{5}
+$$
+
+Also, because the second milestone supersedes the first, we have
+$$
+P(A_3 \mid A_2, A_1^c) = P(A_3 \mid A_2) = 0.8, \qquad P(A_3 \mid A_2^c, A_1^c) = P(A_3 \mid A_2^c) = 0.3 \tag{6}
+$$
+
+Substituting (6) and (4) into (5), we obtain
+$$
+P(A_3 \mid A_1^c) = 0.8 \cdot 0.3 + 0.3 \cdot 0.7 = 0.45
+$$
+
+(b)
+
+By the law of total probability, we have
+$$
+\begin{aligned}
+P(A_2) &= P(A_2 \mid A_1) P(A_1) + P(A_2 \mid A_1^c) P(A_1^c) \\
+&= 0.8 \cdot 0.75 + 0.3 \cdot 0.25 \\
+&= 0.675
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(A_3) &= P(A_3 \mid A_2) P(A_2) + P(A_3 \mid A_2^c) P(A_2^c) \\
+&= 0.8 \cdot 0.675 + 0.3 \cdot 0.325 \\
+&= 0.6375
+\end{aligned}
+$$
+
+**Q11**
+
+An _exit poll_ in an election is a survey taken of voters just after they have voted. One
+major use of exit polls has been so that news organizations can try to figure out as
+soon as possible who won the election, before the votes are officially counted. This has
+been notoriously inaccurate in various elections, sometimes because of selection bias:
+the sample of people who are invited to and agree to participate in the survey may not
+be similar enough to the overall population of voters.
+
+Consider an election with two candidates, Candidate A and Candidate B. Every voter is invited to participate in an exit poll, where they are asked whom they voted for; some accept and some refuse. For a randomly selected voter, let $A$ be the event that they voted for A, and $W$ be the event that they are willing to participate in the exit poll. Suppose that $P(W \mid A) = 0.7$ but $P(W \mid A^c) = 0.3$. In the exit poll, 60% of the respondents say they voted for $A$ (assume that they are all honest), suggesting a comfortable victory for A. Find $P(A)$, the true proportion of people who voted for A.
+
+Solution:
+
+By the odds form of Bayes' rule, we have
+$$
+\frac{P(A \mid W)}{P(A^c \mid W)} = \frac{P(W \mid A)}{P(W \mid A^c)} \frac{P(A)}{P(A^c)}
+$$
+We know that
+$$
+\frac{P(A \mid W)}{P(A^c \mid W)} = \frac{0.6}{0.4} 
+$$
+and
+$$
+\frac{P(W \mid A)}{P(W \mid A^c)} = \frac{0.7}{0.3}
+$$
+
+So we have
+$$
+\operatorname{odds}(A) = \frac{P(A)}{P(A^c)} = \frac{0.6}{0.4} \cdot \frac{0.3}{0.7} \approx 0.643
+$$
+
+$$
+P(A) = \operatorname{odds}(A) / (1 + \operatorname{odds}(A)) \approx 0.391
+$$
+
