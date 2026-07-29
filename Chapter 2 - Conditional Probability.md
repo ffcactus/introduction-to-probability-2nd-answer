@@ -131,3 +131,187 @@ In the following cases we have $P(K \mid R) = p$:
 2. $p=0$ or $p=1$
 
 This makes intuitive sense because learning that Fred answered the question correctly makes it more likely that he knew the answer, compared with our prior belief $p$.
+
+**Q5**
+
+Three cards are dealt from a standard, well-shuffled deck. The first two cards are flipped over, revealing the Ace of Spades as the first card and the 8 of Clubs as the second card. Given this information, find the probability that the third card is an ace in two ways: using the definition of conditional probability, and by symmetry.
+
+Solution:
+
+* Let $A_1$ be the event that the first card is the ace of spades.
+* Let $A_2$ be the event that the second card is the 8 of clubs.
+* Let $A_3$ be the event that the third card is an ace.
+
+We need to find $P(A_3 \mid A_1 \cap A_2)$, by the definition of conditional probability we have
+$$
+\begin{aligned}
+P(A_3 \mid A_1 \cap A_2) &= \frac{P(A_3 \cap A_1 \cap A_2)}{P(A_1 \cap A_2)}.
+\end{aligned}
+$$
+
+To calculate $P(A_3 \cap A_1 \cap A_2)$, fix the first 2 cards and classify on the different aces on the third card, by the naive definition of probability we have
+$$
+P(A_3 \cap A_1 \cap A_2) = 3 \cdot \frac{49!}{52!}.
+$$
+
+Similarly we have
+$$
+P(A_1 \cap A_2) = \frac{50!}{52!}.
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(A_3 \mid A_1 \cap A_2) &= \frac{P(A_3 \cap A_1 \cap A_2)}{P(A_1 \cap A_2)} \\
+&= \frac{3 \cdot \frac{49!}{52!}}{\frac{50!}{52!}} \\
+&= \frac{3}{50}
+\end{aligned}
+$$
+
+It can also be interpreted like this. There are 50 cards remaining, and each is equally likely to be the third card. Since 3 of those 50 cards are aces, the probability that the third card is an ace is $\frac{3}{50}$.
+ 
+**Q6**
+
+A hat contains 100 coins, where 99 are fair but one is double-headed (always landing Heads). A coin is chosen uniformly at random. The chosen coin is flipped 7 times, and it lands Heads all 7 times. Given this information, what is the probability that the chosen coin is double-headed? (Of course, another approach here would be to look at both sides of the coin -- but this is a metaphorical coin.)
+
+Solution:
+
+* Let $D$ be the event that the chosen coin is double-headed.
+* Let $E$ be the event that the chosen coin lands heads all 7 times.
+
+By Bayes' rule and LOTP we have
+$$
+\begin{aligned}
+P(D \mid E) &= \frac{P(E \mid D) P(D)}{P(E)}
+&= \frac{P(E \mid D) P(D)}{P(E | D)P(D) + P(E | D^c) P(D^c)} \\
+&= \frac{1 \cdot 0.01}{1 \cdot 0.01 + 0.5^7 \cdot 0.99} \\
+&\approx 0.564
+\end{aligned}
+$$
+
+**Q7**
+
+A hat contains 100 coins, where at least 99 are fair, but there may be one that is double-headed (always landing Heads); if there is no such coin, then all 100 are fair. Let $D$ be the event that there is such a coin, and suppose that P(D) = 1/2. A coin is chosen
+uniformly at random. The chosen coin is flipped 7 times, and it lands Heads all 7 times.
+
+(a) Given this information, what is the probability that one of the coins is double-headed?
+
+(b) Given this information, what is the probability that the chosen coin is double-headed?
+
+Solution:
+
+(a)
+
+Let $E$ be the event that the chosen coin lands heads all 7 times.
+By Bayes' rule, we have
+$$
+P(D \mid E) = \frac{P(E \mid D)P(D)}{P(E)}
+$$
+
+By LOTP, we have
+$$
+P(E) = P(D)P(E \mid D) + P(D^c)P(E \mid D^c) 
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(D \mid E) &= \frac{P(E \mid D)P(D)}{P(D)P(E \mid D) + P(D^c)P(E \mid D^c) } \\
+&= \frac{(1 \cdot 0.01 + 0.5^7 \cdot 0.99) \cdot 0.5}{(1 \cdot 0.01 + 0.5^7 \cdot 0.99) \cdot 0.5 + 0.5^7 \cdot 0.5} \\
+&\approx 0.694
+\end{aligned}
+$$
+
+(b) 
+
+* Let $B$ be the event that the chosen coin is double-headed. 
+* Let $E$ be the event that the chosen coin lands heads all 7 times.
+
+By Bayes' rule we have
+$$
+\begin{aligned}
+P(B \mid E) = \frac{P(E \mid B) P(B)}{P(E)} 
+\end{aligned}
+$$
+
+$P(B)$ depends on if the double-headed coin exist, so we have
+$$
+\begin{aligned}
+P(B) &= P(B \mid D) P(D) + P(B \mid D^c) P(D^c) \\
+&= 0.01 \cdot 0.5 + 0 \cdot 0.5 \\
+&= 0.005
+\end{aligned}
+$$
+
+$P(E)$ also depends on if the double-head coin exist, so we have
+$$
+\begin{aligned}
+P(E) &= P(D)P(E \mid D) + P(D^c)P(E \mid D^c) \\
+&= (1 \cdot 0.01 + 0.5^7 \cdot 0.99) \cdot 0.5 + 0.5^7 \cdot 0.5 \\
+&\approx 0.0128
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(B \mid E) &= \frac{P(E \mid B) P(B)}{P(E)} \\
+&= \frac{1 \cdot 0.005}{0.0128} \\
+&\approx 0.391
+\end{aligned}
+$$
+
+**Q8**
+
+The screens used for a certain type of cell phone are manufactured by 3 companies, A, B, and C. The proportions of screens supplied by A, B, and C are 0.5, 0.3, and 0.2, respectively, and their screens are defective with probabilities 0.01, 0.02, and 0.03, respectively. Given that the screen on such a phone is defective, what is the probability that Company A manufactured it?
+
+Solution:
+
+Let $M_A, M_B, M_C$ be the event that the screen of such a phone is manufactured by company A, B and C, respectively.
+
+Let $D$ be the event that the screen on such a phone is defective.
+
+By Bayes' rule we have
+$$
+P(M_A \mid D) = \frac{P(D \mid M_A) P(M_A)}{P(D)}
+$$
+
+By LOTP we have
+$$
+\begin{aligned}
+P(D) &= P(D \mid M_A)P(M_A) + P(D \mid M_B)P(M_B) + P(D \mid M_C)P(M_C) \\
+&= 0.5 \cdot 0.01 + 0.3 \cdot 0.02 + 0.2 \cdot 0.03 \\
+&= 0.017
+\end{aligned}
+$$
+
+Therefore we have
+$$
+\begin{aligned}
+P(M_A \mid D) &= \frac{P(D \mid M_A) P(M_A)}{P(D)} \\
+&= \frac{0.005}{0.017} \\
+&\approx 0.294
+\end{aligned}
+$$
+
+**Q8**
+
+(a) Show that if events $A_1$ and $A_2$ have the same prior probability $P(A_1) = P(A_2)$, $A_1$ implies $B$, and $A_2$ implies $B$, then $A_1$ and $A_2$ have the same posterior probability
+$P(A_1 \mid B) = P(A_2 \mid B)$ if it is observed that $B$ occurred.
+
+(b) Explain why (a) makes sense intuitively, and give a concrete example.
+
+Solution:
+
+(a)
+By Bayes' rule, we have
+$$
+P(A_1 \mid B) = \frac{P(A_1)P(B \mid A_1)}{P(B)} \\
+P(A_2 \mid B) = \frac{P(A_2)P(B \mid A_2)}{P(B)}
+$$
+
+If $P(A_1) = P(A_2)$ and $P(B \mid A_1) = 1, P(B \mid A_2) = 1$, we can see that $P(A_1 \mid B) = P(A_2 \mid B)$.
+
+(b)
+
+Conditioning on $B$ removes possibilities outside of $B$, on the other hand, but $A_1$ and $A_2$ are inside $B$ and are equally likely. So nothing changed in $A_1$ and $A_2$.
