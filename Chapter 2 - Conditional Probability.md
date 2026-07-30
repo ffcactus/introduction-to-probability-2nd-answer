@@ -432,3 +432,211 @@ $$
 P(A) = \operatorname{odds}(A) / (1 + \operatorname{odds}(A)) \approx 0.391
 $$
 
+**Q12**
+
+Alice is trying to communicate with Bob, by sending a message (encoded in binary) across a channel.
+
+(a) Suppose for this part that she sends only one bit (a 0 or 1), with equal probabilities. If she sends a 0, there is a 5% chance of an error occurring, resulting in Bob receiving a 1; if she sends a 1, there is a 10% chance of an error occurring, resulting in Bob receiving a 0. Given that Bob receives a 1, what is the probability that Alice actually sent a 1?
+
+(b) To reduce the chance of miscommunication, Alice and Bob decide to use a repetition code. Again Alice wants to convey a 0 or a 1, but this time she repeats it two more times, so that she sends 000 to convey 0 and 111 to convey 1. Bob will decode the message by going with what the majority of the bits were. Assume that the error probabilities are as in (a), with error events for different bits independent of each other. Given that Bob receives 110, what is the probability that Alice intended to convey a 1?
+
+Solution:
+
+(a)
+
+* Let $R_1$ be the event that Bob receives a 1. 
+* Let $S_1$ be the event that Alice sends a 1.
+
+$$
+\begin{aligned}
+P(S_1 | R_1) &= \frac{P(R_1 \mid S_1) P(S_1)}{P(R_1)} \\
+&= \frac{P(R_1 \mid S_1) P(S_1)}{P(R_1 \mid S_1) P(S_1) + P(R_1 \mid S_1^c) P(S_1^c)} \\
+&= \frac{0.9 \cdot 0.5}{0.9 \cdot 0.5 + 0.05 \cdot 0.5} \\
+&\approx 0.947
+\end{aligned}
+$$
+
+(b)
+* Let $A_1$, $B_1$ and $C_1$ be the event that Bob receives a 1 for the first bit, second bit and third bit, respectively.
+* Let $S_1$ be the event that Alice convey a 1.
+
+$$
+\begin{aligned}
+P(S_1 \mid A_1, B_1, C_1^c) &= \frac{P(A_1, B_1, C_1^c \mid S_1) P(S_1)}{P(A_1, B_1, C_1^c)} \\
+&= \frac{P(A_1, B_1, C_1^c \mid S_1) P(S_1)}{P(A_1, B_1, C_1^c \mid S_1) P(S_1) + P(A_1, B_1, C_1^c \mid S_1^c) P(S_1^c)} \\
+&= \frac{(0.9 \cdot 0.9 \cdot 0.1) \cdot 0.5}{(0.9 \cdot 0.9 \cdot 0.1) \cdot 0.5 + (0.05 \cdot 0.05 \cdot 0.95) \cdot 0.5} \\
+&\approx 0.972
+\end{aligned}
+$$
+
+**Q13**
+
+Company A has just developed a diagnostic test for a certain disease. The disease afflict 1% of the population. As defined in Example 2.3.9, the sensitivity of the test is the probability of someone testing positive, given that they have the disease, and the specificity of the test is the probability that of someone testing negative, given that they don’t have the disease. Assume that, as in Example 2.3.9, the sensitivity and specificity are both 0.95.
+
+Company B, which is a rival of Company A, offers a competing test for the disease. Company B claims that their test is faster and less expensive to perform than Company A’s test, is less painful (Company A’s test requires an incision), and yet has a higher overall success rate, where overall success rate is defined as the probability that a random
+person gets diagnosed correctly.
+
+(a) It turns out that Company B’s test can be described and performed very simply: no matter who the patient is, diagnose that they do not have the disease. Check whether Company B’s claim about overall success rates is true.
+
+(b) Explain why Company A’s test may still be useful.
+
+(c) Company A wants to develop a new test such that the overall success rate is higher than that of Company B’s test. If the sensitivity and specificity are equal, how high does the sensitivity have to be to achieve their goal? If (amazingly) they can get the sensitivity equal to 1, how high does the specificity have to be to achieve their goal? If (amazingly) they can get the specificity equal to 1, how high does the sensitivity have to be to achieve their goal?
+
+Solution:
+
+(a)
+
+Let $B$ be the event that the test done by company B is successful. Let $A$ be the event that the test done by company A is successful. Let $D$ be the event that a random person has the disease.
+
+Because Company B's test always diagnose the patient has no disease, we have
+$$
+\begin{aligned}
+P(B) &= P(D) P(B \mid D) + P(D^c)P(B \mid D^c) \\
+&= 0.01 \cdot 0 + 0.99 \cdot 1 \\
+&= 0.99 
+\end{aligned}
+$$
+
+On the other hand, we have
+$$
+\begin{aligned}
+P(A) &= P(D) P(A \mid D) + P(D^c)P(A \mid D^c) \\
+&= 0.01 \cdot 0.95 + 0.99 \cdot 0.95 \\
+&= 0.95
+\end{aligned}
+$$
+
+So Company B's claim is true.
+
+(b)
+
+Company B's test can't identify any disease. To find out if a patient has the disease we need Company A's test, although it's not 100$ sensitive.
+
+(c)
+
+If Company A's new test has the same sensitivity and specificity. Suppose both value are $x$, we have
+$$
+\begin{aligned}
+P(A) &= P(D) P(A \mid D) + P(D^c)P(A \mid D^c) \\
+&= 0.01 \cdot x + 0.99 \cdot x \\
+&= x
+\end{aligned}
+$$
+So it needs to be higher than 99% so that the overall success rate is higher than Company B' test.
+
+If Company A's new test has 100% sensitivity and $x$ specificity, we have
+$$
+\begin{aligned}
+P(A) &= P(D) P(A \mid D) + P(D^c)P(A \mid D^c) \\
+&= 0.01 \cdot 1 + 0.99 \cdot x \\
+&\gt 0.99
+\end{aligned}
+$$
+$x \approx 0.989899$ The specificity needs to be higher than approximately 98.99%.
+
+If Company A's new test has x sensitivity and 100% specificity, we have
+$$
+\begin{aligned}
+P(A) &= P(D) P(A \mid D) + P(D^c)P(A \mid D^c) \\
+&= 0.01 \cdot x + 0.99 \cdot 1 \\
+&\gt 0.99
+\end{aligned}
+$$
+The sensitivity only needs to be higher than 0.
+
+**Q14**
+
+Consider the following scenario, from Tversky and Kahneman [27]:
+
+_Let $A$ be the event that before the end of next year, Peter will have installed a burglar alarm system in his home. Let $B$ denote the event that Peter’s home will be burglarized before the end of next year._
+
+(a) Intuitively, which do you think is bigger, $P(A \mid B)$ or $P(A \mid B^c)$? Explain your intuition.
+
+(b) Intuitively, which do you think is bigger, $P(B \mid A)$ or $P(B \mid A^c)$? Explain your intuition.
+
+(c) Show that for any events $A$ and $B$ (with probabilities not equal to 0 or 1), the inequality $P(A \mid B) >P(A \mid B^c)$ is equivalent to $P(B \mid A) >P(B \mid A^c)$.
+
+(d) Tversky and Kahneman report that 131 out of 162 people whom they posed (a) and (b) to said that $P(A \mid B) \gt P(A \mid B^c)$ and $P(B \mid A) \lt P(B \mid A^c)$. What is a plausible
+explanation for why this was such a popular opinion despite (c) showing that it is
+impossible for these inequalities both to hold?
+
+Solution:
+
+(a)
+
+I think $P(A \mid B) \gt (A \mid B^c)$, because if given Peter's home burglarized it's more likely he will carry out his plan.
+
+(b)
+
+I think $P(B \mid A) \lt P(B \mid A^c)$, because after Peter installed the system, it's less likely his home will be burglarized after that.
+
+(c) Out of my capability.
+
+(d) See (a) and (b).
+
+**Q15**
+
+Let $A$ and $B$ be events with $0 \lt P(A \cap B) \lt P(A) \lt P(B) \lt P(A \cup B) \lt 1$. You are
+hoping that both $A$ and $B$ occurred. Which of the following pieces of information would you be happiest to observe: that $A$ occurred, that $B$ occurred, or that $A \cup B$ occurred?
+
+Solution:
+
+$$
+P(A \cap B \mid A) = \frac{P(A \cap B \cap A)}{P(A)} = \frac{P(A \cap B)}{P(A)}
+$$
+
+$$
+P(A \cap B \mid B) = \frac{P(A \cap B \cap B)}{P(B)} = \frac{P(A \cap B)}{P(B)}
+$$
+
+$$
+P(A \cap B \mid A \cup B) = \frac{P(A \cap B \cap (A \cup B))}{P(A \cup B)} = \frac{P(A \cap B)}{P(A \cup B)}
+$$
+
+So we have $P(A \cap B \mid A) \gt P(A \cap B \mid B) \gt P(A \cap B \mid A \cup B)$. I would be happiest to observe that A occurred.
+
+**Q16**
+
+Show that $P(A \mid B) \le P(A)$ implies $P(A \mid B^c) \ge P(A)$, and give an intuitive explanation of why this makes sense.
+
+Solution:
+
+Let $a = P(A)$, $b = P(B)$, $r = P(A \cap B)$. Then
+$$
+P(A | B) = \frac{r}{b}
+$$
+
+Also, 
+$$
+P(A \cap B^c) = P(A) - P(A \cap B) = a - r
+$$
+
+$$
+P(A \mid B^c) = \frac{P(A \cap B^c)}{P(B^c)} = \frac{a-r}{1-b}
+$$
+
+Therefore
+$$
+P(A \mid B) \le P(A) \iff \frac{r}{b} \le a \iff r \le ab
+$$
+
+$$
+P(A \mid B^c) \ge P(A) \iff \frac{a-r}{1-b} \ge a \iff a - r \ge a - ab \iff r \le ab
+$$
+
+Therefore $P(A \mid B) \le P(A)$ implies $P(A \mid B^c) \ge P(A)$.
+
+Note that
+$$
+P(A)= P(A\mid B)P(B) + P(A\mid B^c)P(B^c).
+$$
+
+$P(A)$ is a weighted average of
+$$
+P(A\mid B) \quad \text{and} \quad P(A\mid B^c).
+$$
+
+If knowing $B$'s occurrence makes $A$ less likely than usual, knowing $B$ did not occur must make $A$ more likely than usual so that a weighted average of $A$ won't change.
+
+
+
