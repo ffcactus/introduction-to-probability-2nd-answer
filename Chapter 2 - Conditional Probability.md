@@ -638,5 +638,43 @@ $$
 
 If knowing $B$'s occurrence makes $A$ less likely than usual, knowing $B$ did not occur must make $A$ more likely than usual so that a weighted average of $A$ won't change.
 
+**Q17**
 
+In deterministic logic, the statement "A implies B" is equivalent to its contrapositive,
+"not B implies not A". In this problem we will consider analogous statements in probability, the logic of uncertainty. Let $A$ and $B$ be events with probabilities not equal to
+0 or 1.
 
+(a) Show that if $P(B \mid A) = 1$, then $P(A^c \mid B^c) = 1$.
+
+Hint: Apply Bayes’ rule and LOTP.
+
+(b) Show however that the result in (a) does not hold in general if $=$ is replaced by $\approx$. In particular, find an example where $P(B \mid A)$ is very close to 1 but $P(A^c \mid B^c)$ is very close to 0.
+
+Hint: What happens if A and B are independent?
+
+Solution:
+
+(a)
+
+$$
+\begin{aligned}
+P(B \mid A) = 1 &\iff \frac{P(A \mid B) P(B)}{P(A)} = 1 \\
+&\iff \frac{P(A \mid B) P(B)}{P(A \mid B) P(B) + P(A \mid B^c) P(B^c)} = 1 \\
+&\iff P(A \mid B^c)P(B^c) = 0 \\
+&\iff P(A \mid B^c) = 0 \\
+&\iff P(A^c \mid B^c) = 1
+\end{aligned}
+$$
+
+(b)
+
+Now suppose we randomly choose a cell from an $n$ by $n$ grid, each cell is equally likely to be chosen. Let $A$ be the event that the chosen cell is NOT in the top row. Let $B$ be the event that the chosen cell is NOT in the first column. We have $P(A) = \frac{n-1}{n}$, $P(B) = \frac{n-1}{n}$, $P(A \cap B) = \frac{(n-1)^2}{n^2}$.
+
+Therefore $A$ and $B$ are independent, and consequently $A^c$ and $B^c$ are also independent.
+
+So we have
+$$
+P(B \mid A) = P(B) = \frac{n-1}{n} \qquad P(A^c \mid B^c) = P(A^c) = \frac{1}{n}
+$$
+
+When $n$ is large, we have $P(B \mid A) \approx 1$ and $P(A^c \mid B^c) \approx 0$.
