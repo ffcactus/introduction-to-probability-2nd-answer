@@ -678,3 +678,224 @@ P(B \mid A) = P(B) = \frac{n-1}{n} \qquad P(A^c \mid B^c) = P(A^c) = \frac{1}{n}
 $$
 
 When $n$ is large, we have $P(B \mid A) \approx 1$ and $P(A^c \mid B^c) \approx 0$.
+
+**Q18**
+
+Show that if $P(A) = 1$, then $P(A \mid B) = 1$ for any $B$ with $P(B) \gt 0$. Intuitively, this says
+that if someone dogmatically believes something with absolute certainty, then no amount
+of evidence will change their mind. The principle of avoiding assigning probabilities of
+0 or 1 to any event (except for mathematical certainties) was named Cromwell’s rule
+by the statistician Dennis Lindley, due to Cromwell saying to the Church of Scotland,
+"Think it possible you may be mistaken."
+
+Hint: Write $P(B) = P(B \cap A) + P(B \cap A^c)$, and then show that $P(B \cap A^c) = 0$.
+
+Solution:
+
+We have
+$$
+\begin{aligned}
+P(B) &= P(B \cap A) + P(B \cap A^c)
+\end{aligned}
+$$
+
+Because $A^c \cap B \subseteq A^c$, We have $P(A^c \cap B) \le P(A^c) = 0$, so $P(A^c \cap B) = 0$. Therefore
+$$
+P(B) = P(B \cap A) + 0,
+$$
+
+and hence
+$$
+P(B) = P(B \cap A)
+$$
+
+and hence
+$$
+\begin{aligned}
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B)}{P(B)} = 1
+\end{aligned}
+$$
+
+**Q19**
+
+Explain the following Sherlock Holmes saying in terms of conditional probability, carefully distinguishing between prior and posterior probabilities: "It is an old maxim of mine that when you have excluded the impossible, whatever remains, however improbable, must be the truth."
+
+Solution: Skip
+
+**Q20**
+
+The Jack of Spades (with cider), Jack of Hearts (with tarts), Queen of Spades (with a wink), and Queen of Hearts (without tarts) are taken from a deck of cards. These four cards are shuffled, and then two are dealt. Note: Literary references to cider, tarts, and winks do not need to be considered when solving this problem.
+
+(a) Find the probability that both of these two cards are queens, given that the first card dealt is a queen.
+
+(b) Find the probability that both are queens, given that at least one is a queen.
+
+(c) Find the probability that both are queens, given that one is the Queen of Hearts.
+
+Solution:
+
+(a)
+
+Let $Q_1$ and $Q_2$ be the event that the first card is queen and the second card is queen, respectively. So we need to figure out $P(Q_1 \cap Q_2 \mid Q_1)$.
+
+$$
+\begin{aligned}
+P(Q_1 \cap Q_2 \mid Q_1) &= \frac{P(Q_1 \mid Q_1 \cap Q_2) P(Q_1 \cap Q_2)}{Q_1} \\
+
+&= \frac{1 \cdot \frac{2}{4} \cdot \frac{1}{3}}{\frac{1}{2}} \\
+
+&= \frac{1}{3}
+\end{aligned}
+$$
+
+(b)
+
+Let $Q_1$ and $Q_2$ be the event that the first card is queen and the second card is queen, respectively. So we need to figure out $P(Q_1 \cap Q_2 \mid Q_1 \cup Q_2)$.
+
+Consider $P(Q_1 \cap Q_2)$ separately, we have
+$$
+P(Q_1 \cap Q_2) = \frac{2! \cdot 2!}{4!} = \frac{1}{6}
+$$ 
+
+Now, consider $P(Q_1 \cap Q_2 \mid Q_1 \cup Q_2)$, we have
+$$
+\begin{aligned}
+P(Q_1 \cap Q_2 \mid Q_1 \cup Q_2) &= \frac{P(Q_1 \cup Q_2 | Q_1 \cap Q_2) P(Q_1 \cap Q_2)}{P(Q_1 \cup Q_2)} \\
+&= \frac{P(Q_1 \cup Q_2 | Q_1 \cap Q_2) P(Q_1 \cap Q_2)}{P(Q_1) + P(Q_2) - P(Q_1 \cap Q_2)} \\
+&= \frac{1 \cdot \frac{1}{6}}{\frac{1}{2} + \frac{1}{2} - \frac{1}{6}} \\
+&= \frac{1}{5}
+\end{aligned}
+$$
+
+(c)
+
+Let $Q_1$ and $Q_2$ be the event that the first card is queen and the second card is queen, respectively. Let $H$ be the event that one of first two card is Queen of Hearts.
+
+First consider the probability that one of the first two card is Queen of Hearts. Classifying on the position of the Queen of Hearts, we have
+$$
+P(H) = \frac{3! + 3!}{4!} = \frac{1}{2}
+$$
+
+Now, consider $P(Q_1 \cap Q_2 \mid H)$, we have
+$$
+\begin{aligned}
+P(Q_1 \cap Q_2 \mid H) &= \frac{P(H \mid Q_1 \cap Q_2) P(Q_1 \cap Q_2)}{P(H)} \\
+&= \frac{1 \cdot \frac{1}{6}}{\frac{1}{2}} \\
+&= \frac{1}{3}
+\end{aligned}
+$$
+
+**Q21**
+
+A fair coin is flipped 3 times. The toss results are recorded on separate slips of paper (writing "H" if Heads and "T" if Tails), and the 3 slips of paper are thrown into a hat.
+
+(a) Find the probability that all 3 tosses landed Heads, given that at least 2 were Heads.
+
+(b) Two of the slips of paper are randomly drawn from the hat, and both show the letter H. Given this information, what is the probability that all 3 tosses landed Heads?
+
+Solution
+
+(a)
+
+Let $H_1$, $H_2$ and $H_3$ be the event that the first, second and third toss is head, respectively. Let $E$ be the event that there are at least 2 heads. At least 2 heads is a complement of at most 1 heads. But the probability of at most 1 heads should equals to the probability of at most 1 tails, which should equals to the probability of at least 2 heads. So $P(E) = \frac{1}{2}$.
+
+$$
+\begin{aligned}
+P(H_1 \cap H_2 \cap H_3 \mid E) &= \frac{P(E \mid H_1 \cap H_2 \cap H_3) P(H_1 \cap H_2 \cap H_3)}{P(E)} \\
+&= \frac{1 \cdot \frac{1}{8}}{\frac{1}{2}} \\
+&= \frac{1}{4}
+\end{aligned}
+$$
+
+(b)
+
+* Let $H_1$, $H_2$ and $H_3$ be the event that the first, second and third toss is head, respectively. 
+* Let $E$ be the event that two of the slips of paper are randomly drawn from the hat and both show letter H.
+* Let $C_0$, $C_1$, $C_2$ and $C_3$ be the event that there are 0, 1, 2 and 3 heads, respectively.
+
+Let's first find out $P(E)$. Classifying on number of heads, we have
+$$
+P(E) = P(E \mid C_0)P(C_0) + P(E \mid C_1)P(C_1) + P(E \mid C_2) P(C_2) + P(E \mid C_3) P(C_3)
+$$
+In which $P(E | C_0) = 0$, $P(E \mid C_1) = 0$, $P(E \mid C_3) = 1$. So we obtain
+$$
+P(E) = P(E \mid C_2)P(C_2) + P(C_3) = P(E \mid C_2) \cdot \frac{3}{8} + \frac{1}{8}
+$$
+
+There are 3 undistinguishable slips, 2 heads and 1 tails, the possibility of choosing 2 slips and they are two heads is
+$$
+P(E \mid C_2) = \frac{\binom{2}{2}}{\binom{3}{2}} = \frac{1}{3}
+$$
+
+Therefore
+$$
+P(E) = \frac{1}{3} \cdot \frac{3}{8} + \frac{1}{8} = \frac{1}{4}
+$$
+
+Then
+$$
+\begin{aligned}
+P(H_1 \cap H_2 \cap H_3 \mid E) &= \frac{P(E \mid H_1 \cap H_2 \cap H_3) P(H_1 \cap H_2 \cap H_3)}{P(E)} \\
+&= \frac{1 \cdot \frac{1}{8}}{\frac{1}{4}} \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+**Q22**
+
+A bag contains one marble which is either green or blue, with equal probabilities. A green marble is put in the bag (so there are 2 marbles now), and then a random marble is taken out. The marble taken out is green. What is the probability that the remaining marble is also green?
+
+Solution
+
+* Let $G_1$ be the event that the first marble in the bag is green.
+* Let $T_G$ be the event that the taken out marble is green.
+* Let $R_G$ be the event that the remaining marble is green.
+
+Given $G_1$, we have
+$$
+\begin{aligned}
+P(R_G \mid T_G, G_1) &= \frac{P(T_G \mid R_G, G_1) P(R_G \mid G_1)}{P(T_G \mid G_1)}
+&= 1
+\end{aligned}
+$$
+
+Given $G_1^c$, we have
+$$
+\begin{aligned}
+P(R_G \mid T_G, G_1^c) &= \frac{P(T_G \mid R_G, G_1^c) P(R_G \mid G_1^c)}{P(T_G \mid G_1^c)}
+&= \frac{0 \cdot \frac{1}{2}}{\frac{1}{2}} \\
+&= 0
+\end{aligned}
+$$
+
+By the conditional LOTP, partitioning on $G_1$ and $G_1^c$, we have
+$$
+\begin{aligned}
+P(R_G | T_G) &= P(R_G \mid G_1, T_G)P(G_1 \mid T_G) + P(R_G \mid G_1^c, T_G)P(G_1^c \mid T_G) \\
+&= 1 \cdot P(G_1 | T_G) + 0 \cdot P(G_1^c \mid T_G) \\
+&= \frac{P(T_G \mid G_1) P(G_1)}{P(T_G)} \\
+&= \frac{P(T_G \mid G_1) P(G_1)}{P(T_G \mid G_1)P(G_1) + P(T_G \mid G_1^c) P(G_1^c)} \\
+&= \frac{1 \cdot \frac{1}{2}}{1 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2}} \\
+&= \frac{2}{3}
+\end{aligned}
+$$
+
+**Q23**
+
+Let $G$ be the event that a certain individual is guilty of a certain robbery. In gathering
+evidence, it is learned that an event $E_1$ occurred, and a little later it is also learned that
+another event $E_2$ also occurred. Is it possible that individually, these pieces of evidence increase the chance of guilt (so $P(G \mid E_1) \gt P(G)$ and $P(G \mid E_2) \gt P(G)$), but together
+they decrease the chance of guilt (so $P(G \mid E_1,E_2) \lt P(G)$)?
+
+Solution: Skip.
+
+**Q24**
+
+Is it possible to have events $A_1$, $A_2$, $B$, $C$ with $P(A_1 \mid B) \gt P(A_1 \mid C)$ and $P(A_2 \mid B) \gt P(A_2 \mid C)$, yet $P(A_1 \cup A_2 \mid B) \lt P(A_1 \cup A_2 \mid C)$? If so, find an example (with a “story”
+interpreting the events, as well as giving specific numbers); otherwise, show that it is
+impossible for this phenomenon to happen.
+
+
+
+
+
