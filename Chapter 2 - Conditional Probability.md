@@ -895,7 +895,154 @@ Is it possible to have events $A_1$, $A_2$, $B$, $C$ with $P(A_1 \mid B) \gt P(A
 interpreting the events, as well as giving specific numbers); otherwise, show that it is
 impossible for this phenomenon to happen.
 
+Solution:
 
+Group B has 51 boy and 49 girls, and all of boys are taller than 180cm, and all the girls are lower than 180cm. Group C has 50 boys and 50 girls, all girls are taller than 180cm, all the boys are lower than 180cm. We need to select person from them, all the boys and girls are equally likely be selected. 
 
+* Let $B$ and $C$ be the event that the selected person belongs to group B and C, respectively.
+* Let $A_1$ be the event that the selected person is a boy. 
+* Let $A_2$ br the event that the selected person is taller than 180cm.
 
+We have 
+$$
+P(A_1 \mid B) = \frac{51}{100} \gt P(A_1 \mid C) = \frac{50}{100}
+$$
+$$
+P(A_2 \mid B) = \frac{51}{100} \gt P(A_2 \mid C) = \frac{50}{100}
+$$
+
+$$
+\begin{aligned}
+P(A_1 \cup A_2 \mid B) &= P(A_1 \mid B) + P(A_2 \mid B) - P(A_1 \cap A_2 \mid B) \\
+&= \frac{51}{100} + \frac{51}{100} - \frac{51}{100} \\
+&= \frac{51}{100}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(A_1 \cup A_2 \mid C) &= P(A_1 \mid C) + P(A_2 \mid C) - P(A_1 \cap A_2 \mid C) \\
+&= \frac{50}{100} + \frac{50}{100} - 0 \\
+&= \frac{100}{100}
+\end{aligned}
+$$
+
+**Q25**
+
+A crime is committed by one of two suspects, A and B. Initially, there is equal evidence against both of them. In further investigation at the crime scene, it is found that the guilty party had a blood type found in 10% of the population. Suspect A does match this blood type, whereas the blood type of Suspect B is unknown.
+
+(a) Given this new information, what is the probability that A is the guilty party?
+
+(b) Given this new information, what is the probability that B’s blood type matches that found at the crime scene?
+
+Solution
+
+(a)
+
+* Let $G_A$ be the event that suspect A is guilty.
+* Let $E_A$ be the event that suspect A's blood type matches the guilty party.
+
+$$
+\begin{aligned}
+P(G_A \mid E_A) &= \frac{P(E_A \mid G_A) P(G_A)}{P(E_A | G_A)P(G_A) + P(E_A \mid G_A^c)P(G_A^c)} \\
+&= \frac{0.5}{0.5 + 0.1 \cdot 0.5} \\
+&\approx 0.9091
+\end{aligned}
+$$
+
+(b)
+
+* Let $G_A$ be the event that suspect A is guilty.
+* Let $E_A$ be the event that suspect A's blood type matches the guilty party.
+
+$$
+\begin{aligned}
+P(E_B \mid E_A) &= P(E_B \mid G_A, E_A) P(G_A \mid E_A) + P(E_B \mid G_A^c, E_A) P(G_A^c \mid E_A) \\
+&\approx 0.1 \cdot 0.9091 + 1 \cdot (1-0.9091) \\
+&\approx 0.1818
+\end{aligned}
+$$
+
+**Q26**
+
+To battle against spam, Bob installs two anti-spam programs. An email arrives, which is either legitimate (event $L$) or spam (event $L^c$), and which program $j$ marks as legitimate (event $M_j$) or marks as spam (event $M_j^c$) for $j \in \{1,2\}$. Assume that 10% of Bob’s email is legitimate and that the two programs are each "90% accurate" in the sense that $P(M_j \mid L) = P(M_j^c \mid L^c) = 9/10$. Also assume that given whether an email is spam, the two programs' outputs are conditionally independent.
+
+(a) Find the probability that the email is legitimate, given that the 1st program marks
+it as legitimate (simplify).
+
+(b) Find the probability that the email is legitimate, given that both programs mark it
+as legitimate (simplify).
+
+(c) Bob runs the 1st program and $M_1$ occurs. He updates his probabilities and then runs the 2nd program. Let $P(A) = P(A \mid M_1)$ be the updated probability function after running the 1st program. Explain briefly in words whether or not $P(L \mid M_2) = P(L \mid M_1 \cap M_2)$: is conditioning on $M_1 \cap M_2$ in one step equivalent to first conditioning on $M_1$, then updating probabilities, and then conditioning on $M_2$?
+
+Solution:
+
+(a)
+$$
+\begin{aligned}
+P(L \mid M_1) &= \frac{P(M_1 \mid L)P(L)}{P(M_1)} \\
+&= \frac{P(M_1 \mid L)P(L)}{P(M_1 \mid L)P(L) + P(M_1 \mid L^c)P(L^c)} \\
+&= \frac{0.9 \cdot 0.1}{0.9 \cdot 0.1  + 0.1 \cdot 0.9} \\
+&= 0.5
+\end{aligned}
+$$
+
+(b)
+$$
+\begin{aligned}
+P(L \mid M_1 \cap M_2) &= \frac{P(M_1 \cap M_2 \mid L) P(L)}{P(M_1 \cap M_2)} \\
+&= \frac{P(M_1 \cap M_2 \mid L) P(L)}{P(M_1 \cap M_2 \mid L)P(L) + P(M_1 \cap M_2 \mid L^c)P(L^c)} \\
+&= \frac{0.9^2 \cdot 0.1}{0.9^2 \cdot 0.1 + 0.1^2 \cdot 0.9} \\
+&= 0.9
+\end{aligned}
+$$
+
+(c)
+Yes, they are the same.
+
+**Q27**
+
+Suppose that there are 5 blood types in the population, named type 1 through type 5,
+with probabilities $p_1,p_2,\ldots,p_5$. A crime was committed by two individuals. A suspect,
+who has blood type 1, has prior probability $p$ of being guilty. At the crime scene, blood
+evidence is collected, which shows that one of the criminals has type 1 and the other
+has type 2.
+Find the posterior probability that the suspect is guilty, given the evidence. Does the
+evidence make it more likely or less likely that the suspect is guilty, or does this depend
+on the values of the parameters $p$, $p_1,\ldots,p_5$? If it depends on these values, give a simple criterion for when the evidence makes it more likely that the suspect is guilty.
+
+Solution:
+
+* Let $A$ be the event that the suspect is guilty.
+* Let $B_1$ and $B_2$ be the event that blood type 1 and type 2 is collected at the crime scene, respectively.
+
+$$
+\begin{aligned}
+P(A \mid B_1, B_2) &= \frac{P(B_1, B_2 \mid A) P(A)}{P(B_1, B_2 \mid A) P(A) + P(B_1, B_2 \mid A^c) P(A^c)} \\
+&= \frac{p_2 p}{p_2 p + 2p_1p_2(1-p)}
+\end{aligned}
+$$
+
+Whether the value is great or less than $p$ depends on $p_1$, $p_2$ and $p$.
+$$
+\operatorname{odds}(A \mid E) = \frac{P(A \mid E)}{P(A^c \mid E)} = \frac{P(E \mid A)}{P(E \mid A^c)} \frac{P(A)}{P(A^c)}
+$$
+
+**Q28**
+
+Fred has just tested positive for a certain disease.
+
+(a) Given this information, find the posterior odds that he has the disease, in terms of
+the prior odds, the sensitivity of the test, and the specificity of the test.
+
+(b) Not surprisingly, Fred is much more interested in P(have disease|test positive),
+known as the positive predictive value, than in the sensitivity P(test positive|have disease).
+A handy rule of thumb in biostatistics and epidemiology is as follows:
+
+_For a rare disease and a reasonably good test, specificity matters much more than sensitivity in determining the positive predictive value._
+
+Explain intuitively why this rule of thumb works. For this part you can make up some
+specific numbers and interpret probabilities in a frequentist way as proportions in a
+large population, e.g., assume the disease afflicts 1% of a population of 10000 people
+and then consider various possibilities for the sensitivity and specificity.
 
