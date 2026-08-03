@@ -1046,3 +1046,227 @@ specific numbers and interpret probabilities in a frequentist way as proportions
 large population, e.g., assume the disease afflicts 1% of a population of 10000 people
 and then consider various possibilities for the sensitivity and specificity.
 
+Solution:
+
+(a)
+
+* Let $s$ and $p$ be the sensitivity and specificity of the test, respectively. 
+* Let $D$ be the event that Fred has disease.
+* Let $T^{+}$ and $T^{-}$ be the event that the test is positive and negative, respectively.
+
+We have
+$$
+\begin{aligned}
+\frac{P(D \mid T^{+})}{P(D^c \mid T^{+})} &= \frac{P(T^{+} \mid D)}{P(T^{+} \mid D^c)} \frac{P(D)}{P(D^c)} \\
+&= \frac{s}{1-p} \frac{P(D)}{P(D^c)}
+\end{aligned}
+$$
+
+(b)
+
+* Let $s$ and $p$ be the sensitivity and specificity of the test, respectively. 
+* Let $D$ be the event that Fred has disease.
+* Let $T_p$ be the event that the test is positive.
+
+Suppose the disease afflicts $d=0.0001$ of the population. We have
+$$
+\begin{aligned}
+P(D \mid T_p) &= \frac{P(T_p \mid D)P(D)}{P(T_p \mid D)P(D) + P(T_p \mid D^c) P(D^c)} \\
+&= \frac{sd}{sd + (1-p)(1-d)}
+\end{aligned}
+$$
+
+Suppose $p = s = 0.99$, we have $P(D \mid S) = 0.00980392$
+
+Suppose $s = 0.999$, $p = 0.99$, we have $P(D \mid S) = 0.00989217$
+
+Suppose $p = 0.999$, $s = 0.99$, we have $P(D \mid S) = 0.09009009$
+
+Suppose $p = 0.9999$, $s = 0.99$, we have $P(D \mid S) = 0.49751244$
+
+The increase performance on the specificity has a higher impact on the positive predictive value. This is because $1-d$ is much larger than $d$, and $1-p$ has a higher impact.
+
+**Q29**
+
+A family has two children. Let $C$ be a characteristic that a child can have, and assume that each child has characteristic $C$ with probability $p$, independently of each other and of gender. For example, $C$ could be the characteristic "born in winter" as in Example 2.2.7. Under the assumptions of Example 2.2.5, show that the probability that both children are girls given that at least one is a girl with characteristic $C$ is $\frac{2−p}{4-p}$. Note that this is $\frac{1}{3}$ if $p=1$ (agreeing with the first part of Example 2.2.5) and approaches $\frac{1}{2}$ from below as p→0 (agreeing with Example 2.2.7).
+
+Solution:
+
+* Let $G_1$ and $G_2$ be the event that the first and the second child is girl, respectively.
+* Let $E$ be the event that at least one is a girl with characteristic $C$.
+
+First, we have 
+$$
+P(E) = \frac{1}{2} p + \frac{1}{2} p - (\frac{1}{2} p)^2 = \frac{4p - p^2}{4}
+$$
+
+
+Therefore
+$$
+\begin{aligned}
+P(G_1 \cap G_2 \mid E) &= \frac{P(E \mid G_1 \cap G_2) P(G_1 \cap G_2)}{P(E)} \\
+&= \frac{(p + p - p^2) \cdot \frac{1}{4}}{\frac{4p - p^2}{4}} \\
+&= \frac{2-p}{4-p}
+\end{aligned}
+$$
+
+# Independence and conditional independence
+
+**Q30**
+
+A family has 3 children, creatively named A, B, and C.
+
+(a) Discuss intuitively (but clearly) whether the event "A is older than B" is independent of the event "A is older than C".
+
+(b) Find the probability that A is older than B, given that A is older than C.
+
+Solution:
+
+(a) Knowing that "A is older than B" gives us the information that A is older than usual which makes "A is older than C" more likely to happen, so this two event should be dependent.
+
+(b)
+
+Think of A, B, C are equally likely ordered sequence, there are 3! possibilities.
+
+For "A is older than C", the number of possible outcomes is (A is oldest, or A is the second oldest)
+$$
+2! + 1
+$$
+
+For "A is older than B and C", the number of possible outcomes is (A must be oldest)
+$$
+2!
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(\text{A is older than B} | \text{A is older than C}) &= \frac{P(\text{A is older than B, A is older than C})}{P(\text{A is older than C})} \\
+&= \frac{2!}{2!+1} = \frac{2}{3}
+\end{aligned}
+$$
+
+**Q31**
+
+Is it possible that an event is independent of itself? If so, when is this the case?
+
+Solution:
+
+Let $A$ be an event. If $A$ is independent of itself, then $P(A) = P(A \cap A) = P(A)^2$, so $P(A)$ is $0$ or $1$. So this is only possible in the extreme cases that the event has probability $0$ or $1$.
+
+**Q32**
+
+Consider four nonstandard dice (the Efron dice), whose sides are labeled as follows
+(the 6 sides on each die are equally likely).
+
+* A: 4,4,4,4,0,0
+* B: 3,3,3,3,3,3
+* C: 6,6,2,2,2,2
+* D: 5,5,5,1,1,1
+
+These four dice are each rolled once. Let $A$ be the result for die A, $B$ be the result for die B, etc.
+
+(a) Find $P(A > B)$, $P(B > C)$, $P(C > D)$, and $P(D > A)$.
+
+(b) Is the event $A>B$ independent of the event $B>C$? Is the event $B>C$ independent of the event $C>D$? Explain.
+
+Solution:
+
+(a)
+$$
+\begin{aligned}
+P(A > B) &= P(A > B \mid A = 4)P(A=4) + P(A > B \mid A=0)P(A=0) \\
+&=1 \cdot \frac{4}{6} + 0 \cdot \frac{2}{6} = \frac{4}{6}
+\end{aligned}
+$$
+
+Similarly, we have
+$$
+P(B > C) = \frac{4}{6}
+$$
+
+$$
+P(C > D) = \frac{2}{3}
+$$
+
+$$
+P(D > A) = \frac{2}{3}
+$$
+
+(b)
+
+Consider all the possibility of A,B,C. In order to fulfill A > B, A must be 4, so 4/6 possible outcome remains, In the remaining outcomes, C must be 2, so only 4/6 of C remains. Therefore 
+$$
+P(A > B, B > C) = (\frac{4}{6})^2
+$$
+
+On the other hand
+$$
+P(A > B) P(B > C) = \frac{4}{6} \frac{4}{6}
+$$
+
+Therefore A > B and B > C are independent. A > B only tells us the possible value of A, but it doesn't help on knowing B > C.
+
+Similarly
+$$
+P(B > C, C > D) = \frac{4}{6} \cdot \frac{1}{2} = \frac{1}{3}
+$$
+
+$$
+P(B > C) P(C > D) = \frac{4}{9}
+$$
+
+So B > C and C > D are dependent. Knowing B > C determined the possible values of C, and hence determined the possible values of D.
+
+**Q33**
+
+Alice, Bob, and 100 other people live in a small town. Let $C$ be the set consisting of the
+100 other people, let $A$ be the set of people in $C$ who are friends with Alice, and let $B$ be the set of people in C who are friends with Bob. Suppose that for each person in C, Alice is friends with that person with probability 1/2, and likewise for Bob, with all of
+these friendship statuses independent.
+
+(a) Let $D \subseteq C$. Find $P(A=D)$.
+
+(b) Find $P(A \subseteq B)$.
+
+(c) Find $P(A \cup B= C)$.
+
+Solution:
+
+(a) 
+
+Suppose $k= | D |$
+$$
+P(A = D) = (\frac{1}{2})^k (\frac{1}{2})^{100-k} = (\frac{1}{2})^{100}
+$$
+
+(b)
+
+Suppose $F_1, \ldots F_n$ are the event that person $i$ is Alice's friend, then is also Bob's friend.
+$$
+P(A \subseteq B) = \prod_{i=1}^{100} P(F_i) = (\frac{3}{4})^{100}
+$$
+
+(c)
+
+Suppose $F_1, \ldots F_n$ are the event that the people $i$ is a friend of Alice or Bob. 
+$$
+P(A \cup B = C) = \prod_{i=i}^{100} P(F_i) = \prod_{i=i}^{100} (\frac{1}{2} + \frac{1}{2} - (\frac{1}{2})^2) = (\frac{3}{4})^{100}
+$$
+
+**Q34**
+
+Suppose that there are two types of drivers: good drivers and bad drivers. Let $G$ be the event that a certain man is a good driver, $A$ be the event that he gets into a car accident next year, and $B$ be the event that he gets into a car accident the following year. Let $P(G) = g$ and $P(A \mid G) = P(B \mid G) = p_1$, $P(A \mid G^c) = P(B \mid G^c) = p_2$, with $p1 \lt p2$. Suppose that given the information of whether or not the man is a good driver, A and B are independent (for simplicity and to avoid being morbid, assume that the accidents being considered are minor and wouldn’t make the man unable to drive).
+
+(a) Explain intuitively whether or not A and B are independent.
+
+(b) Find $P(G \mid A^c)$.
+
+(c) Find $P(B \mid A^c)$.
+
+Solution:
+
+(a)
+
+Without knowing if the driver is a good driver, if he has accident in the next year, generally, he's more likely to have an accident in the next year because he's driving skill keeps the same. Or you can say he's less likely to have an accident in the next year because he will be more careful. Anyway, knowing if he has an accident next year will impact our believe about he will have an accident in the following year.
+
+
