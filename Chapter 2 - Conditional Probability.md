@@ -1269,4 +1269,69 @@ Solution:
 
 Without knowing if the driver is a good driver, if he has accident in the next year, generally, he's more likely to have an accident in the next year because he's driving skill keeps the same. Or you can say he's less likely to have an accident in the next year because he will be more careful. Anyway, knowing if he has an accident next year will impact our believe about he will have an accident in the following year.
 
+(b)
 
+$$
+\begin{aligned}
+P(G \mid A^c) &= \frac{P(A^c \mid G)P(G)}{P(A^c \mid G)P(G) + P(A^c \mid G^c)P(G^c)} \\
+&= \frac{(1-p_1)g}{(1-p_1)g + (1-p_2)(1-g)}
+\end{aligned}
+$$
+
+(c)
+
+Suppose
+$$
+v = P(G \mid A^c) = \frac{(1-p_1)g}{(1-p_1)g + (1-p_2)(1-g)}
+$$
+
+We have
+$$
+\begin{aligned}
+P(B \mid A^c) &= P(B \mid A^c, G) P(G \mid A^c) + P(B \mid A^c, G^c)P(G^c \mid A^c) \\
+&= P(B \mid G) P(G \mid A^c) + P(B \mid G^c) P(G^c \mid A^c) \\
+&= p_1 v + p_2 (1-v)
+\end{aligned}
+$$
+
+**Q35**
+
+You are going to play 2 games of chess with an opponent whom you have never played against before (for the sake of this problem). Your opponent is equally likely to be a beginner, intermediate, or a master. Depending on which, your chances of winning an individual game are 90%, 50%, or 30%, respectively.
+
+(a) What is your probability of winning the first game?
+
+(b) Congratulations: you won the first game! Given this information, what is the probability that you will also win the second game (assume that, given the skill level of your opponent, the outcomes of the games are independent)?
+
+(c) Explain the distinction between assuming that the outcomes of the games are independent and assuming that they are conditionally independent given the opponent’s skill level. Which of these assumptions seems more reasonable, and why?
+
+Solution:
+
+(a)
+
+$$
+P(\text{win the first game}) = 0.9 \frac{1}{3} + 0.5 \frac{1}{3} + 0.3 \frac{1}{3} \approx 0.5667
+$$
+
+(b)
+
+* Let $W_1$ and $W_2$ be the events that you win the first and second games, respectively.
+* Let $O_1, O_2, O_3$ be the events that your opponent is a beginner, an intermediate and master player, respectively.
+
+First, we should have
+$$
+P(O_1 \mid W_1) = \frac{P(W_1 \mid O_1) P(O_1)}{P(W_1)} \approx \frac{0.9 \cdot 0.3333}{0.5667} \approx 0.5293 \\
+
+P(O_2 \mid W_1) = \frac{P(W_1 \mid O_2) P(O_2)}{P(W_1)} \approx \frac{0.5 \cdot 0.3333}{0.5667} \approx 0.2941 \\
+
+P(O_3 \mid W_1) = \frac{P(W_1 \mid O_3) P(O_3)}{P(W_1)} \approx \frac{0.3 \cdot 0.3333}{0.5667} \approx 0.1764 \\
+$$
+
+Using the conditional form of LOTP, we have
+$$
+\begin{aligned}
+P(W_2 \mid W_1) &= P(W_2 \mid O_1, W_1)P(O_1 \mid W_1) + P(W_2 \mid O_2, W_1)P(O_2 \mid W_1) + P(W_2 \mid O_3, W_1)P(O_3 \mid W_1) \\
+&= P(W_2 \mid O_1)P(O_1 \mid W_1) + P(W_2 \mid O_2)P(O_2 \mid W_1) + P(W_2 \mid O_3)P(O_3 \mid W_1) \\
+&\approx 0.9 \cdot 0.5293 + 0.5 \cdot 0.2941 + 0.3 \cdot 0.1764 \\
+&\approx 0.6763
+\end{aligned}
+$$
