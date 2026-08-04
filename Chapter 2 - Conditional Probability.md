@@ -1493,9 +1493,81 @@ Without the naive Bayes assumption, there would be vastly more statistical and c
 form $A_1 \cap A_2 \ldots \cap A_{100}$ with each $A_j$ equal to either $W_j$ or $W_
 j^c$. A new email has just arrived, and it includes the 23rd, 64th, and 65th words or phrases on the list (but not the other 97). So we want to compute
 $$
-P(spam|W_1^c ,\ldots,W_{22}^2,W_{23},W_{24}^c,\ldots,W_{63}^c,W_{64},W_{65},W_{66}^c,\ldots,W_{100}^c).
+P(spam|W_1^c ,\ldots,W_{22}^c,W_{23},W_{24}^c,\ldots,W_{63}^c,W_{64},W_{65},W_{66}^c,\ldots,W_{100}^c).
 $$
 
 Note that we need to condition on all the evidence, not just the fact that $W_{23} \cap W_{64} \cap W_{65}$
 occurred. Find the conditional probability that the new email is spam (in terms of p
 and the $p_j$ and $r_j$).
+
+Solution
+
+Let $S$ be the event that the email is spam.
+
+Suppose
+$$
+E = W_1^c \cap \ldots W_{22}^c \cap W_{23} \cap W_{24}^c \cap \ldots \cap W_{63}^c \cap W_{64} \cap W_{65} \cap W_{66}^c \cap \ldots \cap W_{100}^c
+$$
+
+We have
+$$
+\begin{aligned}
+P(S \mid E) &= \frac{P(E \mid S) P(S)}{P(E \mid S) P(S) + P(E \mid S^c) P(S^c)} \\
+&=\frac{a p}{ap + b(1-p)}
+\end{aligned}
+$$
+In which
+$$
+a = (1-p_1)(1-p_2) \ldots (1-p_{22}) p_{23} (1-p_{24}) \ldots (1-p_{63}) p_{64} p_{65} (1-p_{66}) \ldots (1-p_{100}) \\
+b = (1-r_1)(1-r_2) \ldots (1-r_{22}) r_{23} (1-r_{24}) \ldots (1-r_{63}) r_{64} r_{65} (1-r_{66}) \ldots (1-r_{100})
+$$
+
+# Monty Hall
+
+**Q39**
+
+(a) Consider the following 7-door version of the Monty Hall problem. There are 7 doors, behind one of which there is a car (which you want), and behind the rest of which there are goats (which you don’t want). Initially, all possibilities are equally likely for where the car is. You choose a door. Monty Hall then opens 3 goat doors, and offers you the option of switching to any of the remaining 3 doors. Assume that Monty Hall knows which door has the car, will always open 3 goat doors and offer the option of switching, and that Monty chooses with equal probabilities from all his choices of which goat doors to open. Should you switch? What is your probability of success if you switch to one of the remaining 3 doors?
+
+(b) Generalize the above to a Monty Hall problem where there are $n \ge 3$ doors, of which
+Monty opens $m$ goat doors, with $1 \le m \le n - 2$.
+
+Solution
+
+(a)
+
+* Let $W$ be the event that the contestant win the game.
+* Let $D_1,\ldots,D_7$ be the events that the car is behind the door from 1 to 7, respectively.
+* Let S be the event that the contestant switched the door.
+
+Suppose the contestant choose door 1 (if he didn’t pick door 1, we could simply relabel the
+doors, or rewrite this solution with the door numbers permuted). Obviously the prior $P(W) = 1/7$.
+
+Now
+$$
+P(W \mid S) = \sum_{i=1}^7 P(W \mid S, D_i) P(D_i \mid S)
+$$
+
+$P(D_i \mid S) = 1/7$ for $i \in \{1,\ldots,7\}$, this is because switching won't change the car's physical location, it just change the game's result.
+
+Given the car is behind the door 1, and the contestant choose to switch the door, he will lose the game, so
+$$
+P(W \mid S, D_1) = 0
+$$
+
+The host always chooses the goat doors to open, suppose he choose door 2, 3 and 4. Then
+$$
+P(W \mid S, D_2) = P(W \mid S, D_4) = P(W \mid S, D_4) = 0
+$$
+
+Because the contestant randomly choose one of the 3 remaining doors, we have
+$$
+P(W \mid S, D_5) = P(W \mid S, D_6) = P(W \mid S, D_7) = \frac{1}{3}
+$$
+
+Therefore
+$$
+P(W \mid S) = 0 + 0 + 0 + 0 + 3 \cdot (\frac{1}{3} \cdot \frac{1}{7}) = \frac{1}{7}
+$$
+
+So switch or not, the probability of win is $1/7$.
+
