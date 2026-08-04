@@ -1335,3 +1335,167 @@ P(W_2 \mid W_1) &= P(W_2 \mid O_1, W_1)P(O_1 \mid W_1) + P(W_2 \mid O_2, W_1)P(O
 &\approx 0.6763
 \end{aligned}
 $$
+
+**Q36**
+
+(a) Suppose that in the population of college applicants, being good at baseball is independent of having a good math score on a certain standardized test (with respect
+to some measure of "good"). A certain college has a simple admissions procedure: admit
+an applicant if and only if the applicant is good at baseball or has a good math score
+on the test.
+
+Give an intuitive explanation of why it makes sense that among students that the college admits, having a good math score is negatively associated with being good at baseball, i.e., conditioning on having a good math score decreases the chance of being good at baseball.
+
+(b) Show that if $A$ and $B$ are independent and $C= A \cup B$, then $A$ and $B$ are conditionally dependent given $C$ (as long as $P(A \cap B) \gt 0$ and $P(A \cup B) \lt 1$), with
+$$
+P(A \mid B,C) \lt P(A \mid C).
+$$
+This phenomenon is known as Berkson's paradox, especially in the context of admissions
+to a school, hospital, etc.
+
+(a)
+
+* Let $B$ be the event that the applicant is good at baseball.
+* Let $M$ be the event that the applicant is good at math.
+
+So an applicant has these possibilities:
+$$
+BM \qquad BM^c \qquad B^cM \qquad B^c M^c
+$$
+
+Knowing the applicant is good a baseball, gives no information about whether the applicant is good at math, and vice versa. However, $B^cM^c$ is excluded from the admitted applicants, so the possibilities of the admitted applicants reduced to:
+$$
+BM \qquad BM^c \qquad B^cM
+$$
+As you can see, the applicants maybe good at both baseball and math, but if we know a applicant is only good a baseball, the applicant must be not good at math, and vice versa. That is the negative association.
+
+(b)
+First we have
+$$
+\begin{aligned}
+P(A \mid B, C) &= P(A \mid B)
+&& \text{$B \subseteq C$} \\
+
+&= P(A)
+&& \text{$A$ and $B$ are independent}
+\end{aligned}
+$$
+
+And we also have
+$$
+\begin{aligned}
+P(A \mid C) &= \frac{P(A \cap C)}{P(C)} \\
+
+&= \frac{P(A)}{P(C)}
+&& \text{$A \subseteq C$} \\
+
+&= \frac{P(A)}{P(A \cup B)} \\
+
+&> P(A)&& \text{$P(A \cap B) \gt 0$}
+\end{aligned}
+$$
+
+Therefore
+$$
+P(A \mid C) \gt P(A \mid B, C)
+$$
+
+**Q37**
+
+Two different diseases cause a certain weird symptom; anyone who has either or both
+of these diseases will experience the symptom. Let $D_1$ be the event of having the first disease, $D_2$ be the event of having the second disease, and $W$ be the event of having the weird symptom. Suppose that $D_1$ and $D_2$ are independent with $P(D_j) = p_j$, and that a person with neither of these diseases will have the weird symptom with probability $w_0$. Let $q_j = 1−p_j$, and assume that $0 \lt p_j \lt 1$.
+
+(a) Find $P(W)$.
+
+(b) Find $P(D_1 \mid W)$, $P(D_2 \mid W)$, and $P(D_1, D_2 \mid W)$.
+
+(c) Determine algebraically whether or not $D_1$ and $D_2$ are conditionally independent given $W$.
+
+(d) Suppose for this part only that $w_0 = 0$. Give a clear, convincing intuitive explanation in words of whether $D_1$ and $D_2$ are conditionally independent given $W$.
+
+Solution:
+
+(a)
+
+$$
+\begin{aligned}
+P(W) &= P(W \mid D_1, D_2) P(D_1, D_2) + P(W \mid D_1, D_2^c) P(D_1, D_2^c) + P(W \mid D_1^c, D_2) P(D_1^c, D_2) + P(W \mid D_1^c, D_2^c) P(D_1^c, D_2^c) \\
+&= p_1 p_2 + p_1 q_2 + q_1 p_2 + w_0 q_1 q_2
+\end{aligned}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+P(D_1 \mid W) &= \frac{P(W \mid D_1) P(D_1)}{P(W)}
+&= \frac{p_1}{p_1 p_2 + p_1 q_2 + q_1 p_2 + w_0 q_1 q_2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(D_2 \mid W) &= \frac{P(W \mid D_2) P(D_2)}{P(W)}
+&= \frac{p_2}{p_1 p_2 + p_1 q_2 + q_1 p_2 + w_0 q_1 q_2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(D_1, D_2 \mid W) &= \frac{P(W \mid D_1, D_2) P(D_1, D_2)}{P(W)}
+&= \frac{p_1 p_2}{p_1 p_2 + p_1 q_2 + q_1 p_2 + w_0 q_1 q_2}
+\end{aligned}
+$$
+
+(c)
+
+Suppose $Z = p_1 p_2 + p_1 q_2 + q_1 p_2 + w_0 q_1 q_2$
+
+If $Z=1$ we have
+$$
+P(D_1 \mid W) P(D_2 \mid W) = P(D_1, D_2 \mid W) = \frac{p_1 p_2}{Z}
+$$
+
+Otherwise
+$$
+P(D_1 \mid W) P(D_2 \mid W) \ne P(D_1, D_2 \mid W)
+$$
+
+(d)
+
+When $w_0 = 0$, a person has the weird symptom if and only if they have at least one disease:
+$$
+W = D_1 \cup D_2
+$$
+
+So among people known to have the symptom:
+* If they do not have $D_1$, they must have $D_2$.
+* If they do not have $D_2$, they must have $D_1$.
+
+So in this case, $D_1$ and $D_2$ are dependent.
+
+**Q38**
+
+We want to design a spam filter for email. As described in Exercise 1, a major strategy is to find phrases that are much more likely to appear in a spam email than in a non-spam email. In that exercise, we only consider one such phrase: "free money". More realistically, suppose that we have created a list of 100 words or phrases that are much more likely to be used in spam than in non-spam.
+Let $W_j$ be the event that an email contains the $j$-th word or phrase on the list. Let
+$$
+p = P(\text{spam}), \qquad p_j = P(W_j \mid \text{spam}), \qquad r_j = P(W_j \mid \text{not spam}),
+$$
+where "spam" is shorthand for the event that the email is spam.
+
+Assume that $W_1,\ldots,W_{100}$ are conditionally independent given that the email is spam, and conditionally independent given that it is not spam. A method for classifying emails (or other objects) based on this kind of assumption is called a naive Bayes classifier. (Here “naive” refers to the fact that the conditional independence is a strong assumption, not to Bayes being naive. The assumption may or may not be realistic, but naive Bayes classifiers sometimes work well in practice even if the assumption is not realistic.) 
+
+Under this assumption we know, for example, that
+$$
+P(W_1,W_2,W_3^c ,W_4^c ,\ldots,W_{100}^c \mid \text{spam}) = p_1 p_2(1−p_3)(1−p_4)...(1−p_{100}).
+$$
+
+Without the naive Bayes assumption, there would be vastly more statistical and computational difficulties since we would need to consider $2^{100} \approx 1.3 \cdot 10^{30}$ events of the
+form $A_1 \cap A_2 \ldots \cap A_{100}$ with each $A_j$ equal to either $W_j$ or $W_
+j^c$. A new email has just arrived, and it includes the 23rd, 64th, and 65th words or phrases on the list (but not the other 97). So we want to compute
+$$
+P(spam|W_1^c ,\ldots,W_{22}^2,W_{23},W_{24}^c,\ldots,W_{63}^c,W_{64},W_{65},W_{66}^c,\ldots,W_{100}^c).
+$$
+
+Note that we need to condition on all the evidence, not just the fact that $W_{23} \cap W_{64} \cap W_{65}$
+occurred. Find the conditional probability that the new email is spam (in terms of p
+and the $p_j$ and $r_j$).
