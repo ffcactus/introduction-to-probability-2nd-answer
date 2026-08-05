@@ -1535,39 +1535,205 @@ Solution
 
 (a)
 
-* Let $W$ be the event that the contestant win the game.
+* Let $W$ be the event that the contestant switches to one of the three available doors and wins.
 * Let $D_1,\ldots,D_7$ be the events that the car is behind the door from 1 to 7, respectively.
-* Let S be the event that the contestant switched the door.
 
-Suppose the contestant choose door 1 (if he didn’t pick door 1, we could simply relabel the
-doors, or rewrite this solution with the door numbers permuted). Obviously the prior $P(W) = 1/7$.
+Without lose the generality, we can assume the contestant choose door 1 (if he didn’t pick door 1, we could simply relabel the doors, or rewrite this solution with the door numbers permuted).
 
-Now
+However
 $$
-P(W \mid S) = \sum_{i=1}^7 P(W \mid S, D_i) P(D_i \mid S)
+P(W) = \sum_{i=1}^7 P(W \mid D_i) P(D_i)
 $$
 
-$P(D_i \mid S) = 1/7$ for $i \in \{1,\ldots,7\}$, this is because switching won't change the car's physical location, it just change the game's result.
+And we have $P(D_i) = 1/7$ for $i \in \{1,\ldots,7\}$.
 
-Given the car is behind the door 1, and the contestant choose to switch the door, he will lose the game, so
-$$
-P(W \mid S, D_1) = 0
-$$
+Given the car is behind door 1, switch will lose the game, so we have $P(W \mid D_1) = 0$.
 
-The host always chooses the goat doors to open, suppose he choose door 2, 3 and 4. Then
+For the $D_2$ to $D_7$, Monty won't open the door with that car, because there are 3 doors remains, if the contestant choose the remaining doors randomly, we have
 $$
-P(W \mid S, D_2) = P(W \mid S, D_4) = P(W \mid S, D_4) = 0
-$$
-
-Because the contestant randomly choose one of the 3 remaining doors, we have
-$$
-P(W \mid S, D_5) = P(W \mid S, D_6) = P(W \mid S, D_7) = \frac{1}{3}
+P(W \mid D_i) = \frac{1}{3} \qquad \text{For $i \in \{2,\ldots,7\}$}
 $$
 
 Therefore
 $$
-P(W \mid S) = 0 + 0 + 0 + 0 + 3 \cdot (\frac{1}{3} \cdot \frac{1}{7}) = \frac{1}{7}
+P(W) = 0 \cdot \frac{1}{7} + 6 \cdot \frac{1}{3} \cdot \frac{1}{7} = \frac{2}{7}
 $$
 
-So switch or not, the probability of win is $1/7$.
+On the other hand, if the contestant doesn't switch the door, the probability of win is $1/7$, So the contestant should switch the door.
+
+(b)
+
+$$
+P(W) = \frac{(n-1)}{n (n-m-1)} \gt \frac{1}{n}
+$$
+
+**Q40**
+
+Consider the Monty Hall problem, except that Monty enjoys opening door 2 more
+than he enjoys opening door 3, and if he has a choice between opening these two doors,
+he opens door 2 with probability $p$, where $\frac{1}{2} \le p \le 1$.
+To recap: there are three doors, behind one of which there is a car (which you want),
+and behind the other two of which there are goats (which you don’t want). Initially,
+all possibilities are equally likely for where the car is. You choose a door, which for concreteness we assume is door 1. Monty Hall then opens a door to reveal a goat, and offers you the option of switching. Assume that Monty Hall knows which door has the car, will always open a goat door and offer the option of switching, and as above assume that if Monty Hall has a choice between opening door 2 and door 3, he chooses door 2 with probability $p$ (with $\frac{1}{2} \le p \le 1$).
+
+(a) Find the unconditional probability that the strategy of always switching succeeds
+(unconditional in the sense that we do not condition on which of doors 2 or 3 Monty
+opens).
+
+(b) Find the probability that the strategy of always switching succeeds, given that Monty opens door 2.
+
+(c) Find the probability that the strategy of always switching succeeds, given that Monty opens door 3.
+
+Solution:
+
+(a) 
+
+* Let $W$ be the event that the contestant chooses to switch and wins.
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the door 1, 2 and 3, respectively.
+
+$$
+\begin{aligned}
+P(W) &= P(W \mid C_1) P(C_1) + P(W \mid C_2) P(C_2) + P(W \mid C_3) P(C_3) \\
+&= 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} \\
+&= \frac{2}{3}
+\end{aligned}
+$$
+
+(b)
+
+* Let $W$ be the event that the contestant chooses to switch and wins.
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the door 1, 2 and 3, respectively.
+* Let $D_2$ be the event that Monty opens door 2.
+
+In case Monty opens door 2, the car can only be at door 1 or 3. 
+
+* If the car is at door 1, Monty choose door 2 at $p$ probability. 
+* If the car is at door 2, Monty choose door 2 at 0 probability.
+* If the car is at door 3, Monty choose door 2 at 1 probability.
+
+$$
+\begin{aligned}
+
+P(C_3 \mid D_2) &= \frac
+{P(D_2 \mid C_3) P(C_3)}
+{P(D_2)} \\
+
+&= 
+\frac
+{P(D_2 \mid C_3) P(C_3)}
+{P(D_2 \mid C_1) P(C_1) + P(D_2 \mid C_2) P(C_2) + P(D_2 \mid C_3) P(C_3)} \\
+
+&= 
+\frac
+{1 \cdot \frac{1}{3}}
+{p \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3}} \\
+
+&= \frac{1}{p + 1}
+
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(W \mid D_2) &= P(W \mid C_1, D_2) P(C_1 \mid D_2) + P(W \mid C_3, D_2) P(C_3 \mid D_2) \\
+&= 0 + 1 \cdot \frac{1}{p+1} \\
+&= \frac{1}{p+1}
+\end{aligned}
+$$
+
+(c)
+
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the door 1, 2 and 3, respectively.
+* Let $D_3$ be the event that Monty opens door 3.
+
+Equivalently, what we need to find is the probability that the car is at door 2, given Monty open door 3.
+$$
+\begin{aligned}
+P(C_2 \mid D_3) &= \frac{P(D_3 \mid C_2) P(C_2)}{P(D_3)}
+\end{aligned}
+$$
+
+Consider $P(D_3)$ separately.
+
+* If the car is behind door 1, Monty choose $D_3$ at probability $1-p$.
+* If the car is behind door 2, Monty choose $D_3$ at probability 1.
+* If the car is behind door 3, Monty can't choose $D_3$ at all.
+
+Hence
+$$
+\begin{aligned}
+P(D_3) &= P(D_3 \mid C_1) P(C_1) + P(D_3 \mid C_2) P(C_2) \\
+&= (1 - p) \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} \\
+&= \frac{2 - p}{3}
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(C_2 \mid D_3) &= \frac{P(D_3 \mid C_2) P(C_2)}{P(D_3)} \\
+&= \frac{1 \cdot \frac{1}{3}}{\frac{2 - p}{3}} \\
+&= \frac{1}{2 - p}
+\end{aligned}
+$$
+
+**Q41**
+
+The ratings of Monty Hall’s show have dropped slightly, and a panicking executive
+producer complains to Monty that the part of the show where he opens a door lacks
+suspense: Monty always opens a door with a goat. Monty replies that the reason is so
+that the game is never spoiled by him revealing the car, but he agrees to update the
+game as follows.
+
+Before each show, Monty secretly flips a coin with probability $p$ of Heads. If the coin lands Heads, Monty resolves to open a door with a goat (with equal probabilities if there is a choice). Otherwise, Monty resolves to open a random door, with equal probabilities. Of course, Monty will not open the door that the contestant initially chooses. The contestant knows $p$ but does not know the outcome of the coin flip. When the show starts, the contestant chooses a door. Monty (who knows where the car is) then opens a door. If the car is revealed, the game is over; if a goat is revealed, the contestant is offered the option of switching. Now suppose it turns out that the contestant chooses door 1 and then Monty opens door 2, revealing a goat. What is the contestant’s probability of success if they switch to door 3?
+
+Solution:
+
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the door 1, 2 and 3, respectively.
+* Let $D_2$ be the event that Monty opens door 2 and reveals a goat.
+* Let $H$ be the event that the coin is head.
+
+Equivalently, what we need to find is the probability that the car is behind door 3 given Monty opens door 2, we have
+$$
+P(C_3 \mid D_2) = \frac{P(D_2 \mid C_3) P(C_3)}{P(D_2)}
+$$
+
+Consider $P(D_2)$ separately. Because the game did not end with Monty opened a door with a car, the car is not behind door 2. So we have
+$$
+P(D_2) = P(D_2 \mid C_1) P(C_1) + P(D_2 \mid C_3) P(C_3)
+$$
+
+Monty opens the door depends on the state of the coin. 
+$$
+\begin{aligned}
+P(D_2 \mid C_1) &= P(D_2 \mid C_1, H)P(H) + P(D_2 \mid C_1, H^c)P(H^c) \\
+&= \frac{1}{2} \cdot p + \frac{1}{2} \cdot (1 - p) = \frac{1}{2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(D_2 \mid C_3) &= P(D_2 \mid C_3, H)P(H) + P(D_2 \mid C_3, H^c)P(H^c) \\
+&= 1 \cdot p + \frac{1}{2} \cdot (1 - p) = \frac{p + 1}{2}
+\end{aligned}
+$$
+
+Hence
+$$
+\begin{aligned}
+P(D_2) &= P(D_2 \mid C_1) P(C_1) + P(D_2 \mid C_3) P(C_3) \\
+&= \frac{1}{2} \cdot \frac{1}{3} + \frac{p+1}{2} \cdot \frac{1}{3} \\
+&= \frac{p+2}{6}
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(C_3 \mid D_2) &= \frac{P(D_2 \mid C_3) P(C_3)}{P(D_2)} \\
+&= \frac{\frac{p + 1}{2} \cdot \frac{1}{3}}{\frac{p+2}{6}} \\
+&= \frac{p+1}{p+2}
+\end{aligned}
+$$
 
