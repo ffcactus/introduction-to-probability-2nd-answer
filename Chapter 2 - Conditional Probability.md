@@ -1737,3 +1737,128 @@ P(C_3 \mid D_2) &= \frac{P(D_2 \mid C_3) P(C_3)}{P(D_2)} \\
 \end{aligned}
 $$
 
+**Q42**
+
+Consider the following variation of the Monty Hall problem, where in some situations Monty may not open a door and give the contestant the choice of whether to switch doors. Specifically, there are 3 doors, with 2 containing goats and 1 containing a car. The car is equally likely to be anywhere, and Monty knows where the car is. Let $0 \le p \le 1$. The contestant chooses a door. If this initial choice has the car, Monty will open another door, revealing a goat (choosing with equal probabilities among his two choices of door),
+and then offer the contestant the choice of whether to switch to the other unopened door. If the contestant’s initial choice has a goat, then with probability $p$ Monty will open another door, revealing a goat, and then offer the contestant the choice of whether to switch to the other unopened door; but with probability $1−p$, Monty will not open a door, and the contestant must stick with their initial choice.
+The contestant decides in advance to use the following strategy: initially choose door 1. Then, if Monty opens a door and offers the choice of whether to switch, do switch.
+
+(a) Find the unconditional probability that the contestant will get the car. Also, check what your answer reduces to in the extreme cases $p=0$ and $p=1$, and briefly explain why your answer makes sense in these two cases.
+
+(b) Monty now opens door 2, revealing a goat. So the contestant switches to door 3. Given this information, find the conditional probability that the contestant will get the car.
+
+Solution:
+
+(a)
+
+* Let $W$ be the event that the contestant follows the switching strategy and wins.
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the doors 1, 2 and 3, respectively.
+* Let $A$ be the event that Monty allow the contestant to switch.
+
+We have
+$$
+P(W) = P(W \mid C_1) P(C_1) + P(W \mid C_2) P(C_2) + P(W \mid C_3) P(C_3)
+$$
+
+Depends on if Monty allow the contestant to choose, We have
+$$
+\begin{aligned}
+P(W \mid C_1) &= 0
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(W \mid C_2) &= P(W \mid C_2, A) P(A \mid C_2) + P(W \mid C_2, A^c) P(A^c \mid C_2) \\
+&= 1 \cdot p + 0 \cdot (1 - p)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(W \mid C_3) &= P(W \mid C_3, A) P(A \mid C_3) + P(W \mid C_3, A^c) P(A^c \mid C_3) \\
+&= 1 \cdot p + 0 \cdot (1 - p)
+\end{aligned}
+$$
+
+Hence
+$$
+\begin{aligned}
+P(W) &= P(W \mid C_1) P(C_1) + P(W \mid C_2) P(C_2) + P(W \mid C_3) P(C_3) \\
+&= 0 \cdot \frac{1}{3} + p \cdot \frac{1}{3} + p \cdot \frac{1}{3} \\
+&= \frac{2p}{3}
+\end{aligned}
+$$
+
+* If $p=0$, then when the initial choice contains a goat, Monty does not offer a switch, so the contestant remains with the goat. When the initial choice contains the car, Monty offers a switch, and the contestant switches away from the car. Thus, the contestant loses in every case.
+* If $p=1$, Monty always allow the contestant to switch, and the result agrees with our previous calculation.
+
+(b)
+
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the doors 1, 2 and 3, respectively.
+* Let $O_2$ be the event that Monty opened door 2 and revealed a goat.
+* Let $A$ be the event that Monty allow the contestant to switch.
+
+Equivalently, this is to find
+$$
+\begin{aligned}
+P(C_3 \mid O_2) &= \frac{P(O_2 \mid C_3) P(C_3)}{P(O_2)} \\
+&= \frac{P(O_2 \mid C_3) P(C_3)}{P(O_2 \mid C_1) P(C_1) + P(O_2 \mid C_3) P(C_3)}
+\end{aligned}
+$$
+
+We know that
+$$
+P(O_2 \mid C_1) = \frac{1}{2}
+$$
+
+If the contestant did choose the door initially, depends on if Monty allows the switching, we have
+$$
+\begin{aligned}
+P(O_2 \mid C_3) &= P(O_2 \mid C_3, A) P(A \mid C_3) + P(O_2 \mid C_3, A^c) P(A^c \mid C_3) \\
+&= 1 \cdot p + 0 \\
+&= p
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(C_3 \mid O_2)
+&= \frac{P(O_2 \mid C_3) P(C_3)}{P(O_2 \mid C_1) P(C_1) + P(O_2 \mid C_3) P(C_3)} \\
+&= \frac
+{p \cdot \frac{1}{3}}
+{\frac{1}{2} \cdot \frac{1}{3} + 0 + p \cdot \frac{1}{3}} \\
+&= \frac{2p}{1+2p}
+\end{aligned}
+$$
+
+**Q43**
+
+You are the contestant on the Monty Hall show. Monty is trying out a new version of his game, with rules as follows. You get to choose one of three doors. One door has a car behind it, another has a computer, and the other door has a goat (with all permutations equally likely). Monty, who knows which prize is behind each door, will open a door (but not the one you chose) and then let you choose whether to switch from your current choice to the other unopened door.
+
+Assume that you prefer the car to the computer, the computer to the goat, and (by transitivity) the car to the goat.
+
+(a) Suppose for this part only that Monty always opens the door that reveals your less preferred prize out of the two alternatives, e.g., if he is faced with the choice between revealing the goat or the computer, he will reveal the goat. Monty opens a door, revealing a goat (this is again for this part only). Given this information, should you switch? If you do switch, what is your probability of success in getting the car?
+
+(b) Now suppose that Monty reveals your less preferred prize with probability $p$, and your more preferred prize with probability $q = 1−p$. Monty opens a door, revealing a computer. Given this information, should you switch (your answer can depend on $p$)? If you do switch, what is your probability of success in getting the car (in terms of $p$)?
+
+Solution:
+
+(a)
+
+* Let $W$ be the event that the contestant uses the switch strategy and wins.
+* Let $C_1$, $C_2$ and $C_3$ be the events that the car behind the doors 1, 2 and 3, respectively.
+
+Without lose the generality, suppose the contestant choose door 1. We have
+$$
+\begin{aligned}
+P(W) &= P(W \mid C_1) P(C_1) + P(W \mid C_2) P(C_2) + P(W \mid C_3)(C_3) \\
+&= 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} \\
+&= \frac{2}{3}
+\end{aligned}
+$$
+
+Compare with using the do-not-switch strategy, of which $P(W) = P(C_1) = \frac{1}{3}$, using the switch strategy increase the probability of winning to $\frac{2}{3}$.
+
+
