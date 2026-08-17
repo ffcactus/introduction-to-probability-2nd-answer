@@ -2219,7 +2219,66 @@ Answer:
 
 (a)
 
-Obviously, the unconditional probability that the contestant will get a car is the prior probability that a car is behind door 3, which is $p$.
+Because the contestant will switch to door 3, for the contestant to win the car, Monty must open the door 2. The table below shows the possible outcomes of door 2 and 3, and the behavior of Monty:
+$$
+\begin{array}{c|c|c}
+
+\text{Case}&\text{Door 2}&\text{Door 3}&\text{Monty's behavior}\\
+
+\hline
+
+1&\text{Car}&\text{Car}&\text{Random}\\
+
+2&\text{Car}&\text{Goat}&\text{Open door 3}\\
+
+3&\text{Goat}&\text{Car}&\text{Open door 2}\\
+
+4&\text{Goat}&\text{Goat}&\text{Random}\\
+
+\end{array}
+$$
+
+* Let $C_1$, $C_2$ and $C_3$ be the events that a car is behind door 1, 2 and 3, respectively.
+* Let $O_2$ be the event that Monty opens door 2.
+
+So
+$$
+\begin{aligned}
+P(O_2)
+&= P(O_2 \mid C_2, C_3)P(C_2, C_3) + P(O_2 \mid C_2^c, C_3) P(C_2^c, C_3) + P(O_2 \mid C_2^c, C_3^c)P(C_2^c, C_3^c) \\
+&= 0.5 \cdot p^2 + 1 \cdot qp + 0.5 \cdot q^2
+\end{aligned}
+$$
+
+From Bayesian we know
+$$
+\begin{aligned}
+P(C_3 \mid O_2) = \frac{P(O_2 \mid C_3)P(C_3)}{P(O_2)}
+\end{aligned}
+$$
+
+Now we need to figure out $P(O_2 \mid C_3)$. It involves the cases of 1 and 3, and considering the independency of the prize behind the door, we have
+$$
+\begin{aligned}
+P(O_2 \mid C_3)
+&= P(O_2 \mid C_2, C_3) P(C_2 \mid C_3) + P(O_2 \mid C_2^c, C_3) P(C_2^c \mid C_3) \\
+&= P(O_2 \mid C_2, C_3) P(C_2) + P(O_2 \mid C_2^c, C_3) P(C_2^c) \\
+&= 0.5 \cdot p + 1 \cdot q
+\end{aligned}
+$$
+
+Therefore, we have
+$$
+\begin{aligned}
+P(C_3 \mid O_2)
+&= \frac{P(O_2 \mid C_3)P(C_3)}{P(O_2)} \\
+&=\frac{(0.5 \cdot p + 1 \cdot q) q}{0.5 \cdot p^2 + 1 \cdot qp + 0.5 \cdot q^2} \\
+&= \frac{pq + 2q^2}{p^2 + 2pq + q^2} \\
+&= \frac{pq + 2q^2}{(p + q)^2} \\
+&= pq + 2q^2
+\end{aligned}
+$$
+
 
 (b)
 
