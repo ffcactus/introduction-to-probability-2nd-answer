@@ -2219,51 +2219,69 @@ Answer:
 
 (a)
 
-Because the contestant will switch to door 3, for the contestant to win the car, Monty must open the door 2. The table below shows the possible outcomes of door 2 and 3, and the behavior of Monty:
+The table below shows the possible outcomes of door 2 and 3, and the behavior of Monty:
 $$
-\begin{array}{c|c|c}
+\begin{array}{c|c|c|c|c}
 
-\text{Case}&\text{Door 2}&\text{Door 3}&\text{Monty's behavior}\\
+\text{Case}&\text{Door 2}&\text{Door 3}&\text{Monty's behavior}&\text{Result}\\
 
 \hline
 
-1&\text{Car}&\text{Car}&\text{Random}\\
+1&\text{Car}&\text{Car}&\text{Random}&\text{Win}\\
 
-2&\text{Car}&\text{Goat}&\text{Open door 3}\\
+2&\text{Car}&\text{Goat}&\text{Open door 3}&\text{Win}\\
 
-3&\text{Goat}&\text{Car}&\text{Open door 2}\\
+3&\text{Goat}&\text{Car}&\text{Open door 2}&\text{Win}\\
 
-4&\text{Goat}&\text{Goat}&\text{Random}\\
+4&\text{Goat}&\text{Goat}&\text{Random}&\text{Lose}\\
 
 \end{array}
 $$
 
 * Let $C_1$, $C_2$ and $C_3$ be the events that a car is behind door 1, 2 and 3, respectively.
-* Let $O_2$ be the event that Monty opens door 2.
+* Let $W$ be the event that the contestant win a car.
 
-So
+By LOTP we have:
 $$
 \begin{aligned}
-P(O_2)
-&= P(O_2 \mid C_2, C_3)P(C_2, C_3) + P(O_2 \mid C_2^c, C_3) P(C_2^c, C_3) + P(O_2 \mid C_2^c, C_3^c)P(C_2^c, C_3^c) \\
-&= 0.5 \cdot p^2 + 1 \cdot qp + 0.5 \cdot q^2
+P(W)
+&= P(W \mid C_2, C_3) P(C_3, C_3) + P(W \mid C_2, C_3^c) P(C_2, C_3^c) + P(W \mid C_2^c, C_3) P(C_2^c, C_3) + P(W \mid C_2^c, C_3^c) P(C_2^c, C_3^c) \\
+&= 1 \cdot p^2 + 1 \cdot pq + 1 \cdot qp + 0 \cdot q^2 \\
+&= p^2 + 2pq
 \end{aligned}
 $$
 
-From Bayesian we know
+(b)
+
+The observed information is that Monty opens door 2 and reveals a goat. Only cases 3 and 4 are compatible with this observation.
+
+* Let $C_1$, $C_2$ and $C_3$ be the events that a car is behind door 1, 2 and 3, respectively.
+* Let $O_2$ be the event that Monty opens door 2 and reveals a goat.
+
+By Bayes' rule, we have
 $$
 \begin{aligned}
 P(C_3 \mid O_2) = \frac{P(O_2 \mid C_3)P(C_3)}{P(O_2)}
 \end{aligned}
 $$
 
-Now we need to figure out $P(O_2 \mid C_3)$. It involves the cases of 1 and 3, and considering the independency of the prize behind the door, we have
+By LOTP we have
+$$
+\begin{aligned}
+P(O_2)
+&= P(O_2 \mid C_2^c, C_3) P(C_2^c, C_3) + P(O_2 \mid C_2^c, C_3^c)P(C_2^c, C_3^c) \\
+&= 1 \cdot qp + 0.5 \cdot q^2
+\end{aligned}
+$$
+
+To find the likelihood, we can condition on the contents of door \(2\).
 $$
 \begin{aligned}
 P(O_2 \mid C_3)
 &= P(O_2 \mid C_2, C_3) P(C_2 \mid C_3) + P(O_2 \mid C_2^c, C_3) P(C_2^c \mid C_3) \\
 &= P(O_2 \mid C_2, C_3) P(C_2) + P(O_2 \mid C_2^c, C_3) P(C_2^c) \\
-&= 0.5 \cdot p + 1 \cdot q
+&= 0 \cdot p + 1 \cdot q \\
+&= q
 \end{aligned}
 $$
 
@@ -2272,48 +2290,86 @@ $$
 \begin{aligned}
 P(C_3 \mid O_2)
 &= \frac{P(O_2 \mid C_3)P(C_3)}{P(O_2)} \\
-&=\frac{(0.5 \cdot p + 1 \cdot q) q}{0.5 \cdot p^2 + 1 \cdot qp + 0.5 \cdot q^2} \\
-&= \frac{pq + 2q^2}{p^2 + 2pq + q^2} \\
-&= \frac{pq + 2q^2}{(p + q)^2} \\
-&= pq + 2q^2
+&=\frac{q \cdot p}{1 \cdot qp + 0.5 \cdot q^2} \\
+&=\frac{2pq}{2pq + q^2} \\
 \end{aligned}
 $$
 
+### Q46
+
+Monty Hall is trying out a new version of his game, with rules as follows. The contestant gets to choose one of four doors. One door has a car behind it, another has an apple, another has a book, and another has a goat. All 24 permutations for which door has which prize are equally likely. In order from least preferred to most preferred, the contestant’s preferences are: goat, apple, book, car.
+
+Monty, who knows which prize is behind each door, will open a door (other than the contestant’s initial choice) and then let the contestant choose whether to switch to another unopened door. Monty will reveal the least preferred prize (among the 3 doors other than the contestant’s initial choice) with probability $p$, the intermediately preferred prize with probability $1−p$, and the most preferred prize never.
+
+The contestant decides in advance to use the following strategy: Initially choose door 1. After Monty opens a door, switch to one of the other two unopened doors, randomly choosing between them (with probability 1/2 each).
+
+(a) Find the unconditional probability that the contestant will get the car.
+
+Hint: Condition on where the car is.
+
+(b) Find the unconditional probability that Monty will reveal the apple.
+
+Hint: Condition on what is behind door 1.
+
+(c) Monty now opens a door, revealing the apple. Given this information, find the conditional probability that the contestant will get the car.
+
+Answer:
+
+(a)
+
+There are $4!$ possible permutations of the prizes. But for the contestant to win the car must initially be behind the door 2, 3 or 4, and by symmetry, there are $\frac{3}{4} 4! = 18$ such kinds of permutations. Monty never reveals the car, and the contestant chooses uniformly the two remaining doors, exactly one of which contains the car. So the probability for the contestant to win is
+$$
+\frac{9}{4!} = \frac{3}{8}
+$$
 
 (b)
 
-* Let $C_1$, $C_2$ and $C_3$ be the events that a car is behind door 1, 2 and 3, respectively.
-* Let $O_2$ be the event that Monty opens door 2 and revealing a goat.
+* Let $G_1,\ldots,G_4$ be the events that the goat is behind door 1, 2, 3 and 4, respectively.
+* Let $A_1,\ldots,A_4$ be the events that the apple is behind door 1, 2, 3 and 4, respectively.
+* Let $B_1,\ldots,B_4$ be the events that the book is behind door 1, 2, 3 and 4, respectively.
+* Let $C_1,\ldots,C_4$ be the events that the car is behind door 1, 2, 3 and 4, respectively.
+* Let $R_A$ be the event that Monty reveals the apple.
 
-There are 2 possibility for Monty to open door 2 and reveals a goat.
-
-* Both door 2 and 3 are goals. Let's call it event $E_1$.
-* Door 2 is goal and door 3 is car. Let's call it event $E_2$.
-
-By LOTP we have
+Conditioned on the prize behind the door 1, we have
 $$
 \begin{aligned}
-P(O_2)
-&= P(O_2 \mid E_1) P(E_1) + P(O_2 \mid E_2) P(E_2) \\
-&= \frac{1}{2} \cdot q^2 + 1 \cdot q \cdot p \\
-&= q^2 + qp
-
+P(R_A)
+&= P(R_A \mid G_1)P(G_1) + P(R_A \mid A_1)P(A_1) + P(R_A \mid B_1)P(B_1) + P(R_A \mid C_1)P(C_1) \\
+&= p \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + (1 - p) \cdot \frac{1}{4} + (1 - p) \cdot \frac{1}{4} \\
+&= \frac{2 - p}{4}
 \end{aligned}
 $$
 
-So the conditional probability that the contestant will get a car is
+(c)
+
+Based on (b), and
+
+* Let $W$ be the event that the contestant wins a car.
+
 $$
 \begin{aligned}
-P(C_3 \mid O_2)
-&= \frac{P(O_2 \mid C_3) P(C_3)}{P(O_2)}
+P(W \mid R_A)
+&= \frac{P(W \cap R_A)}{P(R_A)}
 \end{aligned}
 $$
 
-Because prizes behind the doors are generated independently. Knowing the a car is behind the door 3 doesn't change the Monty's choice and result. So $P(O_2 \mid C_3) = P(O_2)$. Therefore
+And because
 $$
 \begin{aligned}
-P(C_3 \mid O_2)
-&= \frac{P(O_2 \mid C_3) P(C_3)}{P(O_2)} \\
-&= p
+P(W \cap R_A)
+&= P(W \cap R_A \mid G_1)P(G_1) + P(W \cap R_A \mid A_1)P(A_1) + P(W \cap R_A \mid B_1)P(B_1) + P(W \cap R_A \mid C_1)P(C_1) \\
+&= \frac{1}{2} \cdot p \cdot \frac{1}{4} + 0 + \frac{1}{2} \cdot (1 - p) \cdot \frac{1}{4} + 0 \\
+&= \frac{p}{8} + \frac{1 - p}{8} \\
+&= \frac{1}{8}
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(W \mid R_A)
+&= \frac{P(W \cap R_A)}{P(R_A)} \\
+&= \frac{\frac{1}{8}}{\frac{2-p}{4}} \\
+&= \frac{1}{4-2p}
 \end{aligned}
 $$
