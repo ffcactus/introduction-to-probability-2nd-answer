@@ -2446,3 +2446,46 @@ $$
 (e)
 
 So switch-switch is the best strategy.
+
+## First-step analysis and gambler’s ruin
+
+### Q48
+
+A fair die is rolled repeatedly, and a running total is kept (which is, at each time, the total of all the rolls up until that time). Let $p_n$ be the probability that the running
+total is ever exactly $n$ (assume the die will always be rolled enough times so that the
+running total will eventually exceed $n$, but it may or may not ever equal $n$).
+
+(a) Write down a recursive equation for $p_n$ (relating $p_n$ to earlier terms $p_k$ in a simple
+way). Your equation should be true for all positive integers $n$, so give a definition of $p_0$
+and $p_k$ for $k \lt 0$ so that the recursive equation is true for small values of $n$.
+
+(b) Find $p_7$.
+
+(c) Give an intuitive explanation for the fact that $p_n \to \frac{1}{3.5} = \frac{2}{7}$ as $n \to \infty$.
+
+Answer:
+
+(a)
+
+Define $p_0=1$, since the running total is initially 0, and define $p_i=0$ for $i \lt 0$, since a running total cannot be negative. For every positive integer $n$,
+
+$$
+p_n = \frac{1}{6} \sum_{j=1}^{6} p_{n-j}
+$$
+
+(b)
+
+Skipped.
+
+(c)
+
+Consider a large number \(m\) of rolls:
+
+* The running total is approximately $3.5m$, because the average roll is $3.5$.
+* During those $m$ rolls, the running total visits approximately $m$ positive integers.
+* Thus, among approximately $3.5m$ possible integers, approximately $m$ are visited.
+
+The approximate proportion visited is therefore
+$$
+\frac{m}{3.5m} = \frac{2}{7}
+$$
