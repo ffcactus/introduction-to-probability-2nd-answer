@@ -2373,3 +2373,76 @@ P(W \mid R_A)
 &= \frac{1}{4-2p}
 \end{aligned}
 $$
+
+### Q47
+
+You are the contestant on Monty Hall’s game show. Hoping to double the excitement of the game, Monty will offer you two opportunities to switch to another door. Specifically, the new rules are as follows. There are four doors. Behind one door there is a car (which you want); behind the other three doors there are goats (which you don’t want). Initially, all possibilities are equally likely for where the car is. Monty knows where the car is,
+and when he has a choice of which door to open, he chooses with equal probabilities.
+You choose a door, which for concreteness we assume is door 1. Monty opens a door (other than door 1), revealing a goat, and then offers you the option to switch to
+another door. Monty then opens another door (other than your currently selected door),
+revealing another goat. So now there are two open doors (with goats) and two unopened
+doors. Again Monty offers you the option to switch.
+
+You decide in advance to use one of the following four strategies: stay-stay, stay-switch,
+switch-stay, switch-switch, where, for example, “stay-switch” means that the first time
+Monty offers you the choice of switching, you stay with your current selection, but then
+the second time Monty offers you the choice, you do switch doors. In each part below the goal is to find or compare unconditional probabilities, i.e., from a vantage point of
+before the game has started.
+
+(a) Find the probability of winning the car if you follow the stay-stay strategy.
+
+(b) Find the probability of winning the car if you follow the stay-switch strategy.
+
+(c) Find the probability of winning the car if you follow the switch-stay strategy.
+
+(d) Find the probability of winning the car if you follow the switch-switch strategy.
+
+(e) Which of these four strategies is the best?
+
+Answer:
+
+(a)
+
+If the contestant follow stay-stay strategy, the probability of winning the car is the prior probability that there is a car behind the door, which is $\frac{1}{4}$.
+
+(b)
+
+* Let $W$ be the event that contestant wins by using stay-switch strategy.
+* Let $C_1$ be the event that the car is behind door 1.
+
+If the car is not behind the door, using stay-switch strategy will win the game. So we have
+$$
+P(W) = P(W \mid C_1)P(C_1) + P(W \mid C_1^c) P(C_1^c) = \frac{3}{4}
+$$
+
+(c)
+
+* Let $W$ be the event that contestant wins by using switch-stay strategy.
+* Let $C_1$ be the event that the car is behind door 1.
+
+If the car is behind the door 1. Monty opens the first door. The contestant switch to one of the two doors in which both contains a goat. Monty opens another door, the contestant stays, so he will lose.
+
+If the car is not behind the door 1. Monty opens the first door, leaving one of the remaining door contains a car. The contestant switch to one of the two doors, and it has $\frac{1}{2}$ chance to stay on the door with car. Monty opens another door, but the contestant stays, so the chance to win keeps $\frac{1}{2}$.
+
+Therefore we have:
+$$
+P(W) = P(W \mid C_1)P(C_1) + P(W \mid C_1^c) P(C_1^c) = 0 + \frac{1}{2} \frac{3}{4} = \frac{1}{8}
+$$
+
+(d)
+
+* Let $W$ be the event that contestant wins by using switch-switch strategy.
+* Let $C_1$ be the event that the car is behind door 1.
+
+If the car is behind the door 1. Monty opens the first door, The contestant switch to one of the two doors in which both contains a goat. Monty opens another door other than door 1, leaving door 1 open and the contestant not stay on door 1. If the contestant switch the door, he will win.
+
+If the car is not behind the door 1. Suppose the car is behind door 4. Monty opens door 2 or 3. The contestant has $\frac{1}{2}$ chance to switch to the door with car. Monty opens another door, because the contestant will switch again, he will lose. If the contestant's first switch is a goat, Monty opens another goat, contestant switch again, then he wins.
+
+Therefore we have:
+$$
+P(W) = P(W \mid C_1)P(C_1) + P(W \mid C_1^c) P(C_1^c) = 1 \frac{1}{4} + \frac{1}{2} \frac{3}{4} = \frac{5}{8}
+$$
+
+(e)
+
+So switch-switch is the best strategy.
