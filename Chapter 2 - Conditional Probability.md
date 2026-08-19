@@ -2534,7 +2534,7 @@ After $n$ trails, for the $n+1$ trails to contain even number of success, we nee
 So we have
 $$
 \begin{aligned}
-P(A_{n+1}) 
+P(A_{n+1})
 &= P(A_n) q_{n+1} + P(A_n^c) p_{n+1} \\
 &= P(A_n) q_{n+1} + (1 - P(A_n))(1-q_{n+1}) \\
 &= P(A_n) (b_{n+1} + \frac{1}{2}) + (1 - P(A_n)) (1 - b_{n+1} - \frac{1}{2}) \\
@@ -2552,7 +2552,7 @@ $$
 For $n = 1$,
 $$
 \begin{aligned}
-P(A_1) 
+P(A_1)
 &= \frac{1}{2} + b_1 \\
 &= \frac{1}{2} + (q_1 - \frac{1}{2}) \\
 &= q_1
@@ -2563,7 +2563,7 @@ If the first trail ends a failure, the total number of success is 0, a even numb
 Assume the hypothesis is true.
 $$
 \begin{aligned}
-P(A_{n+1}) 
+P(A_{n+1})
 &= 2 b_{n+1}P(A_n) + \frac{1}{2} - b_{n+1} \\
 &= 2 b_{n+1} (\frac{1}{2} + 2^{n-1}\prod_{i=1}^n b_i) + \frac{1}{2} - b_{n+1} \\
 &= b_{n+1} + 2^n \prod_{i=1}^{n+1} b_i + \frac{1}{2} - b_{n+1} \\
@@ -2587,9 +2587,9 @@ $$
 This make sense because the number of success trails is 0.
 
 If $p_i = 1$ for all $i$, then $b_i = - \frac{1}{2}$,
-When 
+When
 $$
-P(A_n) = 
+P(A_n) =
 \begin{cases}
 \frac{1}{2} + 2^{2k}(-\frac{1}{2})^{2k+1} = \frac{1}{2} - \frac{1}{2} = 0, & \text{if }n= 2k+1 \\
 \frac{1}{2} + 2^{2k-1}(-\frac{1}{2})^{2k-1}(-\frac{1}{2}) = \frac{1}{2} + \frac{1}{2} = 1, & \text{if }n= 2k
@@ -2630,7 +2630,7 @@ P(W) &= P(W \mid \text{Calvin wins both}) P(\text{Calvin wins both}) + P(W \mid 
 &= p^2 + 2p(1-p)P(W)
 \end{aligned}
 $$
-Therefore 
+Therefore
 $$
 P(W) = \frac{p^2}{1 - 2p + 2p^2}
 $$
@@ -2678,3 +2678,104 @@ p_{ki} = \frac{1-(\frac{q}{p})^{ki}}{1-(\frac{q}{p})^{kN}}
 $$
 
 Because $\frac{q}{p} \gt 1$, when $k \to \infty$, $(\frac{q}{p})^k \to +\infty$, that means the chance for A to win become smaller and smaller.
+
+### Q53
+
+There are 100 equally spaced points around a circle. At 99 of the points, there are
+sheep, and at 1 point, there is a wolf. At each time step, the wolf randomly moves either
+clockwise or counterclockwise by 1 point. If there is a sheep at that point, he eats it.
+The sheep don’t move. What is the probability that the sheep who is initially opposite
+the wolf is the last one remaining?
+
+Answer:
+
+Skipped.
+
+<https://math.stackexchange.com/questions/2451826/probability-of-ending-on-a-certain-point-of-a-circle-after-randomly-moving-clock/2706032#2706032>
+
+### Q54
+
+An immortal drunk man wanders around randomly on the integers. He starts at the origin, and at each step he moves 1 unit to the right or 1 unit to the left, with probabilities $p$ and $q=1−p$ respectively, independently of all his previous steps. Let $S_n$ be his position after $n$ steps.
+
+(a) Let $p_k$ be the probability that the drunk ever reaches the value $k$, for all $k \ge 0$.
+Write down a difference equation for $p_k$ (you do not need to solve it for this part).
+
+(b) Find $p_k$, fully simplified; be sure to consider all 3 cases: $p < 1/2$, $p = 1/2$, and
+$p > 1/2$. Feel free to assume that if $A_1, A_2, \ldots$ are events with $A_j \subseteq A_{j+1}$ for all $j$, then $P(A_n) \to P(\bigcup_{j=1}^{\infty} A_j)$ as $n \to \infty$ (because it is true; this is known as continuity of probability).
+
+Answer:
+
+(a)
+
+At step $0$, the drunk is at origin, we have
+$$
+p_k = P(\text{the drunk ever reaches $k$} \mid S_0 = 0)
+$$
+
+For $k \ge 1$, condition on the first step:
+
+* With probability $p$, he moves to $1$. From there, reaching $k$ is equivalent to starting from $0$ and reaching $k-1$.
+* With probability $q$, he moves to $-1$. From there, reaching $k$ is equivalent to starting from $0$ and reaching $k+1$.
+
+By the law of total probability,
+$$
+p_k = p p_{k-1} + q p_{k+1}, \qquad k \ge 1
+$$
+
+with boundary condition
+$$
+p_0 = 1
+$$
+
+(b)
+
+Equivalently,
+$$
+q p_{k+1} - p_k + p p_{k-1} = 0
+$$
+
+Try a solution of the form $p_k = x^k$,
+$$
+q x^{k+1} -x^k + p x^{k-1} = 0
+$$
+
+Divide both sides by $x^{k-1}$,
+$$
+q x^2 - x + p = 0
+$$
+
+The roots are
+$$
+\frac{1 \pm \sqrt{1-4pq}}{2q} = \frac{1 \pm \sqrt{(p+q)^2 - 4pq}}{2q} = \frac{1 \pm |p-q|}{2q}
+$$
+
+* If $p=q$, there is a single distinct root 1.
+* If $p > \frac{1}{2}$, there are two distinct roots $r_1 = \frac{p}{q}$, $r_2 = 1$.
+* If $p < \frac{1}{2}$, there are two distinct roots $r_1 = 1$, $r_2 = \frac{p}{q}$
+
+So we have
+$$
+p_k =
+\begin{cases}
+a r_1^k + b r_2^k = a(\frac{p}{q})^k + b,& p > \frac{1}{2} \\
+a r_1^k + b r_2^k = a + b(\frac{p}{q})^k,& p < \frac{1}{2} \\
+a r^k + bkr^k = a + bk, & p=q
+\end{cases}
+$$
+
+Use boundary condition $p_0 = 1$, and because $0 \le p_i \le 1$, consider three cases separately:
+
+* If $p = \frac{1}{2}$, because $p_0=1$ we have $a=1$. To keep $p_i$ bounded $b$ must be 0.
+* If $p \gt \frac{1}{2}$, then $\frac{p}{q} \gt 1$, for $p_i$ to be bounded $a$ must be 0. And because $p_0=1$, so $b = 1$.
+* If $p \lt \frac{1}{2}$, then $\frac{p}{q} \lt 1$. But because the drunk tends to go left, the probability of ever reaching a very distant positive integer should approach 0, so $a=0$, $b=1$.
+
+Therefore
+$$
+p_k =
+\begin{cases}
+1,& p \gt \frac{1}{2} \\
+(\frac{p}{q})^k, & p \lt \frac{1}{2} \\
+1, & p = \frac{1}{2}
+\end{cases}
+$$
+Also $p_0 = 1$.
