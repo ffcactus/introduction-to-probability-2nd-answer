@@ -2489,3 +2489,192 @@ The approximate proportion visited is therefore
 $$
 \frac{m}{3.5m} = \frac{2}{7}
 $$
+
+### Q49
+
+A sequence of $n \ge 1$ independent trials is performed, where each trial ends in “success”
+or “failure” (but not both). Let $p_i$ be the probability of success in the $i\text{th}$ trial, $q_i = 1−p_i$, and $b_i = q_i−1/2$, for $i = 1,2,\ldots,n$. Let $A_n$ be the event that the number of successful trials is even.
+
+(a) Show that for $n = 2$, $P(A_2) = 1/2 + 2 b_1 b_2$.
+
+(b) Show by induction that
+$$
+P(A_n) = \frac{1}{2} + 2^{n-1}\prod_{i=1}^n b_i
+$$
+
+(This result is very useful in cryptography. Also, note that it implies that if $n$ coins are flipped, then the probability of an even number of Heads is $1/2$ if and only if at least one of the coins is fair.) Hint: Group some trials into a supertrial.
+
+(c) Check directly that the result of (b) is true in the following simple cases: $p_i = 1/2$
+for some $i$; $p_i = 0$ for all $i$; $p_i = 1$ for all $i$.
+
+Answer:
+
+(a)
+
+For $n=2$, either the two trails end in both success or both failure. So
+$$
+\begin{aligned}
+P(A_2)
+&= p_1 p_2 + q_1 q_2 \\
+&= (1-q_1) (1-q_2) + q_1 q_2 \\
+&= 1 - q_1 - q_2 + 2 q_1 q_2 \\
+&= 1 - (b_1 + \frac{1}{2}) - (b_2 + \frac{1}{2}) + 2 (b_1 + \frac{1}{2}) (b_2 + \frac{1}{2}) \\
+&= - b_1 - b_2 + 2 b_1 b_2 + b_1 + b_2 + \frac{1}{2} \\
+&= \frac{1}{2} + 2 b_1 b_2
+\end{aligned}
+$$
+
+(b)
+
+After $n$ trails, for the $n+1$ trails to contain even number of success, we need:
+
+* Current number of success is odd and the next trail is success.
+* Current number of success is even and the next trail is failure.
+
+So we have
+$$
+\begin{aligned}
+P(A_{n+1}) 
+&= P(A_n) q_{n+1} + P(A_n^c) p_{n+1} \\
+&= P(A_n) q_{n+1} + (1 - P(A_n))(1-q_{n+1}) \\
+&= P(A_n) (b_{n+1} + \frac{1}{2}) + (1 - P(A_n)) (1 - b_{n+1} - \frac{1}{2}) \\
+&= P(A_n) (b_{n+1} + \frac{1}{2}) + \frac{1}{2} - b_{n+1} - \frac{1}{2}P(A_n) + b_{n+1} P(A_n) \\
+&= (b_{n+1} + \frac{1}{2} - \frac{1}{2} + b_{n+1}) P(A_n) + \frac{1}{2} - b_{n+1} \\
+&= 2 b_{n+1}P(A_n) + \frac{1}{2} - b_{n+1}
+\end{aligned}
+$$
+
+Now, proof the following hypothesis by induction.
+$$
+P(A_n) = \frac{1}{2} + 2^{n-1}\prod_{i=1}^n b_i
+$$
+
+For $n = 1$,
+$$
+\begin{aligned}
+P(A_1) 
+&= \frac{1}{2} + b_1 \\
+&= \frac{1}{2} + (q_1 - \frac{1}{2}) \\
+&= q_1
+\end{aligned}
+$$
+If the first trail ends a failure, the total number of success is 0, a even number.
+
+Assume the hypothesis is true.
+$$
+\begin{aligned}
+P(A_{n+1}) 
+&= 2 b_{n+1}P(A_n) + \frac{1}{2} - b_{n+1} \\
+&= 2 b_{n+1} (\frac{1}{2} + 2^{n-1}\prod_{i=1}^n b_i) + \frac{1}{2} - b_{n+1} \\
+&= b_{n+1} + 2^n \prod_{i=1}^{n+1} b_i + \frac{1}{2} - b_{n+1} \\
+&= \frac{1}{2} + 2^{(n+1)-1} \prod_{i=1}^{n+1} b_i
+\end{aligned}
+$$
+
+Therefore, for $n \ge 1$ we have
+$$
+P(A_n) = \frac{1}{2} + 2^{n-1}\prod_{i=1}^n b_i
+$$
+
+(c)
+
+If $p_i = \frac{1}{2}$ for some $i$, then $b_i$ = 0, so $P(A_n) = \frac{1}{2}$.
+
+If $p_i = 0$ for all $i$, then $b_i = \frac{1}{2}$,
+$$
+P(A_n) = \frac{1}{2} + 2^{n-1} (\frac{1}{2})^n = 1
+$$
+This make sense because the number of success trails is 0.
+
+If $p_i = 1$ for all $i$, then $b_i = - \frac{1}{2}$,
+When 
+$$
+P(A_n) = 
+\begin{cases}
+\frac{1}{2} + 2^{2k}(-\frac{1}{2})^{2k+1} = \frac{1}{2} - \frac{1}{2} = 0, & \text{if }n= 2k+1 \\
+\frac{1}{2} + 2^{2k-1}(-\frac{1}{2})^{2k-1}(-\frac{1}{2}) = \frac{1}{2} + \frac{1}{2} = 1, & \text{if }n= 2k
+\end{cases}
+$$
+This make sense, if all the trails are success and the number of trails is even, $P(A_n)=1$, otherwise, if the number of trails is odd, $P(A_n) = 0$.
+
+### Q50
+
+Calvin and Hobbes play a match consisting of a series of games, where Calvin has probability $p$ of winning each game (independently). They play with a “win by two” rule: the first player to win two games more than his opponent wins the match. Find the probability that Calvin wins the match (in terms of $p$), in two different ways:
+
+(a) by conditioning, using the law of total probability.
+
+(b) by interpreting the problem as a gambler’s ruin problem.
+
+Answer:
+
+(a)
+
+* Let $W$ be the event that Calvin wins the match.
+
+Condition on the result of the first two games' result we have
+$$
+\begin{array}{c|c|c}
+\text{Results}&\text{Probability}&\text{Final Result} \\
+\hline
+\text{Calvin wins both}&p^2&\text{Win} \\
+\text{Calvin loses both}&(1-p)^2&\text{Lost} \\
+\text{One each}&2p(1-p)&\text{Reset}
+\end{array}
+$$
+
+So by LOTP we have
+$$
+\begin{aligned}
+P(W) &= P(W \mid \text{Calvin wins both}) P(\text{Calvin wins both}) + P(W \mid \text{Calvin loses both}) P(\text{Calvin loses both}) + P(W \mid \text{One each}) P(\text{One each}) \\
+&= 1 \cdot p^2 + 0 \cdot (1-p)^2 + P(W) \cdot 2p(1-p) \\
+&= p^2 + 2p(1-p)P(W)
+\end{aligned}
+$$
+Therefore 
+$$
+P(W) = \frac{p^2}{1 - 2p + 2p^2}
+$$
+
+(b)
+
+Skipped
+
+### Q51
+
+A gambler repeatedly plays a game where in each round, he wins a dollar with
+probability 1/3 and loses a dollar with probability 2/3. His strategy is “quit when he is ahead by $2”. Suppose that he starts with a million dollars. Show that the probability that he’ll ever be ahead by $2 is less than 1/4.
+
+Answer:
+Based on the gambler's ruin, the probability of A winning with a starting wealth of $i$ is
+$$
+p_i =
+\begin{cases}
+\frac{1-(\frac{q}{p})^i}{1-(\frac{q}{p})^N} &\text{if $p \ne \frac{1}{2}$},\\
+\frac{i}{N} & \text{if $p = \frac{1}{2}$}.
+\end{cases}
+$$
+
+Therefore
+$$
+p_{1000000} = \frac{2^{1000000} - 1}{2^{1000002} - 1}
+$$
+
+Let $x=2^{1000000}$
+$$
+\frac{x-1}{4x-1} \lt \frac{1}{4}
+$$
+Because $4(x-1) \lt 4x - 1$.
+
+### Q52
+
+As in the gambler’s ruin problem, two gamblers, A and B, make a series of bets, until one of the gamblers goes bankrupt. Let A start out with $i$ dollars and B start out with $N−i$ dollars, and let $p$ be the probability of A winning a bet, with $0 \lt p \lt \frac{1}{2}$. Each bet is for $\frac{1}{k}$ dollars, with $k$ a positive integer, e.g., $k = 1$ is the original gambler’s ruin problem and $k=20$ means they’re betting nickels. Find the probability that A wins the game, and determine what happens to this as $k \to \infty$
+
+Answer
+
+To convert it a typical gambler's ruin problem, we can assume A start with $ki$ dollars, B start out with $k(N-i)$ dollars, and again each bet is 1 is 1 dollars. Therefore
+
+$$
+p_{ki} = \frac{1-(\frac{q}{p})^{ki}}{1-(\frac{q}{p})^{kN}}
+$$
+
+Because $\frac{q}{p} \gt 1$, when $k \to \infty$, $(\frac{q}{p})^k \to +\infty$, that means the chance for A to win become smaller and smaller.
