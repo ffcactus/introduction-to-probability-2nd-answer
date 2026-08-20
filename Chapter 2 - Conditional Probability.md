@@ -2779,3 +2779,128 @@ p_k =
 \end{cases}
 $$
 Also $p_0 = 1$.
+
+## Simpson’s paradox
+
+### Q55
+
+(a) Is it possible to have events $A$, $B$, $C$ such that $P(A \mid C) \lt P(B \mid C)$ and $P(A \mid C^c) \lt P(B \mid C^c)$, yet $P(A) \gt P(B)$? That is, $A$ is less likely than $B$ given that $C$ is true, and also less likely than $B$ given that $C$ is false, yet $A$ is more likely than $B$ if we’re given no information about $C$. Show this is impossible (with a short proof) or find a counterexample (with a story interpreting $A$, $B$, $C$).
+
+(b) If the scenario in (a) is possible, is it a special case of Simpson’s paradox, equivalent to Simpson’s paradox, or neither? If it is impossible, explain intuitively why it is impossible even though Simpson’s paradox is possible.
+
+Answer:
+
+(a)
+
+It's impossible. This is because when using the law of total probability on calculating $P(A)$ and $P(B)$, the weight $P(C)$ and $P(C^c)$ is the same.
+
+(b)
+
+In Simpson's paradox, the weights are conditional, for example $P(C \mid \text{Hibbert})$ and $P(C \mid \text{Nick})$, this makes different weights possible.
+
+### Q56
+
+Consider the following conversation from an episode of The Simpsons:
+
+    Lisa: Dad, I think he’s an ivory dealer! His boots are ivory, his hat is ivory, and I’m pretty sure that check is ivory.
+
+    Homer: Lisa, a guy who has lots of ivory is less likely to hurt Stampy
+    than a guy whose ivory supplies are low.
+
+Here Homer and Lisa are debating the question of whether or not the man (named Blackheart) is likely to hurt Stampy the Elephant if they sell Stampy to him. They clearly disagree about how to use their observations about Blackheart to learn about the probability (conditional on the evidence) that Blackheart will hurt Stampy.
+
+(a) Define clear notation for the various events of interest here.
+
+(b) Express Lisa’s and Homer’s arguments (Lisa’s is partly implicit) as conditional probability statements in terms of your notation from (a).
+
+(c) Assume it is true that someone who has a lot of a commodity will have less desire to acquire more of the commodity. Explain what is wrong with Homer’s reasoning that the evidence about Blackheart makes it less likely that he will harm Stampy.
+
+Answer:
+
+(a)
+
+* Let $D$ be the event that Blackheart is a ivory dealer.
+* Let $H$ be the event that Blackheart hurt Stampy.
+* Let $E$ be the event that a person has lots of ivory commodity.
+
+(b)
+
+Lisa's argument is
+$$
+P(D \mid E) \gt P(D)
+$$
+And implicitly believe 
+$$
+P(H \mid D) > P(H \mid D^c)
+$$
+
+Homer's argument is directly
+$$
+P(H \mid E) \lt P(H \mid E^c)
+$$
+
+(c)
+
+Whether Blackheart is a ivory dealer is the key aspect that impact if he will hurt Stampy.
+
+$$
+P(H) = P(H \mid D)P(D) + P(H \mid D^c) P(D^c)
+$$
+
+If we conditioned on $E$,
+$$
+P(H \mid E) = P(H \mid D, E) P(D \mid E) + P(H \mid D^c, E) P(D^c \mid E)
+$$
+
+$$
+P(H \mid E^c) = P(H \mid D, E^c) P(D \mid E^c) + P(H \mid D^c, E^c) P(D^c \mid E^c)
+$$
+
+A ivory dealer with lots of ivory commodity has less desire to acquire more commodity, and is less likely to hurt the Stampy compare a ivory dealer with less ivory commodity, that is
+$$
+P(H \mid D, E) \lt P(H \mid D, E^c)
+$$
+
+However, $P(H \mid E)$ and $P(H \mid E^c)$ have different weights. Given a person with lots of ivory commodity is more likely be a ivory dealer, that is
+$$
+P(D \mid E) \gt P(D \mid E^c)
+$$
+
+Therefore Homer's argument
+$$
+P(H \mid E) \lt P(H \mid E^c)
+$$
+does not follow from his premise.
+
+### Q57
+
+(a) There are two crimson jars (labeled $C_1$ and $C_2$) and two mauve jars (labeled $M_1$ and $M_2$). Each jar contains a mixture of green gummi bears and red gummi bears. Show by example that it is possible that $C_1$ has a much higher percentage of green gummi bears than $M_1$, and $C_2$ has a much higher percentage of green gummi bears than $M_2$, yet if the contents of $C_1$ and $C_2$ are merged into a new jar and likewise for $M_1$ and $M_2$, then the combination of $C_1$ and $C_2$ has a lower percentage of green gummi bears than the combination of $M_1$ and $M_2$.
+
+(b) Explain how (a) relates to Simpson’s paradox, both intuitively and by explicitly
+defining events $A$, $B$, $C$ as in the statement of Simpson’s paradox.
+
+Answer:
+
+(a)
+
+Suppose 
+
+* There are 70 green and 20 red gummi bears in $C_1$.
+* There are 2 green and 8 red gummi bears in $M_1$.
+* There are 10 green and 0 red gummi bears in $C_2$.
+* There are 81 green and 9 red gummi bears in $M_2$.
+
+Therefore the percentage of green gummi bears are $\frac{70}{90}$, $\frac{2}{10}$, $\frac{10}{10}$ and $\frac{81}{90}$ for $C_1$, $M_1$, $C_2$ and $M_2$, respectively. These fulfill the statement in the question.
+
+If we merge $C_1$ and $C_2$ into a new jar $C_3$, and likewise merge $M_1$ and $M_2$ into new jar $M_3$. the percentage of green gummi are
+$$
+\frac{80}{100} \qquad \text{for $C_3$}
+$$
+$$
+\frac{83}{100} \qquad \text{for $M_3$}
+$$
+
+These also fulfill the statement in the question.
+
+(b)
+
