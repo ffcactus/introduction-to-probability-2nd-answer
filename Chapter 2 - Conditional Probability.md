@@ -2904,3 +2904,131 @@ These also fulfill the statement in the question.
 
 (b)
 
+It is related to Simpson's paradox, if we conditioned on the labels marked as 1, and calculate the percentage of green gummi bears, the weights are different. When we merge the jars, crimson and mauve use different weights for jars 1 and 2 and the percentage may flip.
+
+More explicitly, it related to Simpson's paradox as if crimson jar is Dr. Hibbert and mauve jar is Dr. Nick. The green gummi bears are successful surgery. Jars labeled as 1 is a kind of surgery, for example 1 represents the heart surgery, 2 represents the Aid-Band removal surgery.
+
+* Let $A$ be the event that the picked gummi bear is green.
+* Let $B$ be the event that the picked gummi comes from the crimson jar.
+* Let $C$ be the event that the picked gummi comes from the jar labeled 1.
+
+### Q58
+
+As explained in this chapter, Simpson’s paradox says that it is possible to have events $A$, $B$ ,$C$ such that $P(A \mid B,C) < P(A \mid B^c,C)$ and $P(A \mid B,C^c) < P(A \mid B^c,C^c)$, yet $P(A \mid B) >P(A \mid B^c)$.
+
+(a) Can Simpson’s paradox occur if A and B are independent? If so, give a concrete
+example (with both numbers and an interpretation); if not, prove that it is impossible.
+
+(b) Can Simpson’s paradox occur if A and C are independent? If so, give a concrete
+example (with both numbers and an interpretation); if not, prove that it is impossible.
+
+(c) Can Simpson’s paradox occur if B and C are independent? If so, give a concrete
+example (with both numbers and an interpretation); if not, prove that it is impossible.
+
+Answer:
+
+(a)
+
+Impossible.
+
+If $A$ and $B$ are independent we have $P(A \mid B) = P(A \mid B^c) = P(A)$.
+
+(b)
+
+Impossible.
+
+If $A$ is independent of $C$, we have
+$$
+P(A \mid C) = P(A)
+$$
+
+Suppose $P(A) = r$ and jump in the world of $C$, by the LOTP we have
+$$
+r = P(A \mid C) = P(A \mid B, C)P(B \mid C) + P(A \mid B^c, C)P(B^c \mid C)
+$$
+
+Because $P(B \mid C) + P(B^c \mid C) = 1$, and $P(A \mid B,C) < P(A \mid B^c,C)$, we have
+$$
+P(A \mid B, C) \lt r \lt P(A \mid B^c, C)
+$$
+
+Similarly, from
+$$
+r = P(A \mid C^c) = P(A \mid B, C^c)P(B \mid C^c) + P(A \mid B^c, C^c)P(B^c \mid C^c)
+$$
+
+We have
+$$
+P(A \mid B, C^c) \lt r \lt P(A \mid B^c, C^c)
+$$
+
+However
+$$
+P(A \mid B) = P(A \mid B, C) P(C \mid B) + P(A \mid B, C^c) P(C^c \mid B)
+$$
+And because both $P(A \mid B, C) \lt r$ and $P(A \mid B, C^c) \lt r$, their average must also less than $r$, so
+$$
+P(A \mid B) \lt r
+$$
+
+Similarly
+$$
+P(A \mid B^c) = P(A \mid B^c, C) P(C \mid B^c) + P(A \mid B^c, C^c) P(C^c \mid B^c)
+$$
+So we also have
+$$
+P(A \mid B^c) \gt r
+$$
+
+Therefore
+$$
+P(A \mid B) \lt r \lt P(A \mid B^c)
+$$
+
+The flip can't happen.
+
+(c)
+
+Give $B$ and $C$ are independent, we have
+
+$$
+\begin{aligned}
+P(A \mid B)
+&= P(A \mid B, C)P(C \mid B) + P(A \mid B, C^c) P(C^c \mid B) \\
+&= P(A \mid B, C)P(C) + P(A \mid B, C^c)P(C^c)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(A \mid B^c)
+&= P(A \mid B^c, C)P(C \mid B^c) + P(A \mid B^c, C^c) P(C^c \mid B^c) \\
+&= P(A \mid B^c, C)P(C) + P(A \mid B^c, C^c)P(C^c)
+\end{aligned}
+$$
+
+Suppose
+$$
+P(A \mid B, C)P(C) = a_1 \\
+P(A \mid B^c, C)P(C) = a_2 \\
+P(A \mid B, C^c)P(C^c) = b_1 \\
+P(A \mid B^c, C^c)P(C^c) = b_2
+$$
+
+We have $a_1 \lt a_2$, and $b_1 \lt b_2$, therefore
+$$
+P(A \mid B) = a_1 + b_1 \lt a_2 + b_2 = P(A \mid B^c)
+$$
+
+Flip can't happen.
+
+From (a), (b) and (c) we know that
+$$
+\begin{array}{c|c}
+\text{Independency}&\text{Why Simpson fails}\\
+\hline
+\text{$A \perp B$}&\text{$P(A \mid B)=P(A \mid B^c)$ directly} \\
+\text{$A \perp C$}&\text{$C$, $C^c$ have the same baseline $A$-rate} \\
+\text{$B \perp C$}&\text{$B$, $B^c$ use the same weights over $C$ $C^c$}
+\end{array}
+$$
