@@ -3032,3 +3032,16 @@ $$
 \text{$B \perp C$}&\text{$B$, $B^c$ use the same weights over $C$ $C^c$}
 \end{array}
 $$
+
+### Q59
+
+The book Red State, Blue State, Rich State, Poor State by Andrew Gelman discusses the following election phenomenon: within any U.S. state, a wealthy voter is more likely to vote for a Republican than a poor voter, yet the wealthier states tend to favor Democratic candidates!
+
+(a) Assume for simplicity that there are only 2 states (called Red and Blue), each of which has $100$ people, and that each person is either rich or poor, and either a Democrat or a Republican. Make up numbers consistent with the above, showing how this phenomenon is possible, by giving a 2 by 2 table for each state (listing how many people in each state are rich Democrats, etc.). So within each state, a rich voter is more likely to vote for a Republican than a poor voter, but the percentage of Democrats is higher in the state with the higher percentage of rich people than in the state with the
+lower percentage of rich people.
+
+(b) In the setup of (a) (not necessarily with the numbers you made up there), let $D$ be the event that a randomly chosen person is a Democrat (with all $200$ people equally likely), and $B$ be the event that the person lives in the Blue State. Suppose that $10$ people move from the Blue State to the Red State. Write $P_{old}$ and $P_{new}$ for probabilities before and after they move. Assume that people do not change parties, so we have $P_{new}(D) = P_{old}(D)$. Is it possible that both $P_{new}(D \mid B) \gt P_{old}(D \mid B)$ and $P_{new}(D \mid B^c) \gt P_{old}(D \mid B^cc)$ are true? If so, explain how it is possible and why it does not contradict the law of total probability $P(D) = P(D \mid B)P(B) + P(D \mid B^c)P(B^c)$; if not, show that it is impossible.
+
+Solution:
+
+Skipped.
