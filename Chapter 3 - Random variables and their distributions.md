@@ -213,3 +213,63 @@ $$
 $$
 
 Therefore, it's a valid PMF.
+
+### Q7
+
+Bob is playing a video game that has $7$ levels. He starts at level $1$, and has probability
+$p_1$ of reaching level $2$. In general, given that he reaches level $j$, he has probability $p_j$ of
+reaching level $j+1$, for $1 \le j \le 6$. Let $X$ be the highest level that he reaches. Find the
+PMF of $X$ (in terms of $p_1,\ldots,p_6$).
+
+Answer:
+
+For $k \lt 7$, we have
+$$
+\begin{aligned}
+P(X=k) 
+&= P(\text{success on level $1$ to $k-1$})P(\text{failed on level $k$} \mid \text{reached $k-1$}) \\
+&=(1-p_k)\prod_{i=1}^{k-1}p_i
+\end{aligned}
+$$
+
+For $k = 7$, we have
+$$
+P(X=7) = \prod_{i=1}^{7}p_i
+$$
+
+Therefore
+$$
+p_X(k) =
+\begin{cases}
+(1-p_k)\prod_{i=1}^{k-1}p_i&\text{for $1 \le k \le 6$}\\
+\prod_{i=1}^{6}p_i&\text{for $k = 7$} \\
+0&\text{otherwise}
+\end{cases}
+$$
+
+### Q8
+
+There are $100$ prizes, with one worth $\$1$, one worth $\$2,\ldots,$ and one worth $\$100$. There
+are $100$ boxes, each of which contains one of the prizes. You get $5$ prizes by picking
+random boxes one at a time, without replacement. Find the PMF of how much your
+most valuable prize is worth (as a simple expression in terms of binomial coefficients).
+
+Answer:
+
+Suppose the boxes are order in a line, from left to right the prizes inside them are increasing, and I picking the randomly.
+
+Since I pick up 5 boxes, the most valuable prize start from $\$5$ to $\$100$. The rest 4 boxes should be on the left side. Let $X$ be the r.v. of the most valuable prize, we have
+$$
+\begin{aligned}
+P(X=k) = \frac{\binom{k-1}{4}}{\binom{100}{5}} \qquad \text{for $5 \le k \le 100$}
+\end{aligned}
+$$
+Otherwise $P(X=k)=0$.
+
+### Q9
+
+Let $F_1$ and $F_2$ be CDFs, $0 \lt p \lt 1$, and $F(x) = p F_1(x) + (1−p)F_2(x)$ for all $x$.
+
+(a) Show directly that $F$ has the properties of a valid CDF (see Theorem 3.6.3). The distribution defined by $F$ is called a mixture of the distributions defined by $F_1$ and $F_2$.
+
+(b) Consider creating an r.v. in the following way. Flip a coin with probability $p$ of Heads. If the coin lands Heads, generate an r.v. according to $F_1$; if the coin lands Tails, generate an r.v. according to $F_2$. Show that the r.v. obtained in this way has CDF $F$.
