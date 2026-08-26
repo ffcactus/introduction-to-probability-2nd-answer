@@ -273,3 +273,299 @@ Let $F_1$ and $F_2$ be CDFs, $0 \lt p \lt 1$, and $F(x) = p F_1(x) + (1−p)F_2(
 (a) Show directly that $F$ has the properties of a valid CDF (see Theorem 3.6.3). The distribution defined by $F$ is called a mixture of the distributions defined by $F_1$ and $F_2$.
 
 (b) Consider creating an r.v. in the following way. Flip a coin with probability $p$ of Heads. If the coin lands Heads, generate an r.v. according to $F_1$; if the coin lands Tails, generate an r.v. according to $F_2$. Show that the r.v. obtained in this way has CDF $F$.
+
+Answer:
+
+(a)
+
+Checking the properties of CDF. 
+
+1. Because both $F_1(x)$ and $F_2(x)$ are nondecreasing, so do $F(x) = pF_1(x) + (1-p)F_2(x)$.
+
+2. Checking the limit at $-\infty$ and $+\infty$.
+$$
+\begin{aligned}
+\lim_{x \to -\infty} F(x)
+&= p \lim_{x \to -\infty} F_1(x) + (1-p) \lim_{x \to -\infty} F_2(x) \\
+&= p \cdot 0 + (1-p) \cdot 0 \\
+&= 0
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\lim_{x \to +\infty} F(x)
+&= p \lim_{x \to +\infty} F_1(x) + (1-p) \lim_{x \to +\infty} F_2(x) \\
+&= p \cdot 1 + (1-p) \cdot 1 \\
+&= 1
+\end{aligned}
+$$
+
+3. Checking right-continuous.
+
+For a particular value $a$,
+$$
+\begin{aligned}
+\lim_{x \to a^+} F(x)
+&= p \lim_{x \to a^+} F_1(x) + (1-p)\lim_{x \to a^+} F_2(x) \\
+&= p F_1(a) + (1-p) F_2(a) \\
+&= F(a)
+\end{aligned}
+$$
+
+Therefore $F(x)$ is a valid CDF.
+
+(b)
+
+Suppose the random variable is $X$. Let $H$ be the event that the coin is head.
+$$
+\begin{aligned}
+F_X(x)
+&= P(X \le x) = P(X \le x \mid H)P(H) + P(X \le x \mid H^c)P(H^c) \\
+&= p F_1(x) + (1-p) F_2(x)
+\end{aligned}
+$$
+
+### Q10
+
+(a) Is there a discrete distribution with support $1,2,3,\ldots,$ such that the value of the PMF at $n$ is proportional to $\frac{1}{n}$?
+
+Hint: See the math appendix for a review of some facts about series.
+
+(b) Is there a discrete distribution with support $1,2,3,\ldots,$ such that the value of the PMF at n is proportional to $\frac{1}{n^2}$?
+
+Answer:
+
+(a)
+
+Because every one of the support must have positive probability, so $k \gt 0$.
+
+On the other hand.
+$$
+k \sum_{n=1}^{+\infty} \frac{1}{n} = k \cdot +\infty
+$$
+Therefore, such a discrete distribution is impossible.
+
+(b)
+
+Because every one of the support must have positive probability, so $k \gt 0$.
+
+The sum of the probabilities is
+$$
+k \sum_{n=1}^{+\infty} \frac{1}{n^2} = k \frac{\pi^2}{6} 
+$$
+
+So if $k = \frac{6}{\pi^2}$, it can be a valid PMF.
+
+### Q11
+
+Let $X$ be an r.v. whose possible values are $0,1,2,\ldots,$ with CDF $F$. In some countries, rather than using a CDF, the convention is to use the function $G$ defined by $G(x) = P(X \lt x)$ to specify a distribution. Find a way to convert from $F$ to $G$, i.e., if $F$ is a known function, show how to obtain $G(x)$ for all real $x$.
+
+Answer:
+ 
+$$
+\begin{aligned}
+G(x)
+&= F(x) - p_X(x) \\
+&=
+\begin{cases}
+F(x)&\text{when x is not the support of $X$} \\
+F(x - 1)&\text{when x is the support of $X$} 
+\end{cases}
+\end{aligned}
+$$
+
+### Q12
+
+(a) Give an example of r.v.s $X$ and $Y$ such that $F_X(x)  \le F_Y(x)$ for all x, where the inequality is strict for some $x$. Here $F_X$ is the CDF of $X$ and $F_Y$ is the CDF of $Y$. For the example you gave, sketch the CDFs of both $X$ and $Y$ on the same axes. Then sketch their PMFs on a second set of axes.
+
+(b) In Part (a), you found an example of two different CDFs where the first is less than or equal to the second everywhere. Is it possible to find two different PMFs where the first is less than or equal to the second everywhere? In other words, find discrete r.v.s $X$ and $Y$ such that $P(X= x) \le P(Y= x)$ for all $x$, where the inequality is strict for some $x$, or show that it is impossible to find such r.v.s.
+
+Answer:
+
+(a)
+
+Consider the example in which the r.v.s having the support and probability in the table below
+$$
+\begin{array}{c|c|c}
+\hline
+x&X&Y \\
+1&0.25&0.25 \\
+2&0&0.25 \\
+3&0.75&0.5\\
+\end{array}
+$$
+
+Therefore, we have
+$$
+F_X(x) = F_Y(x)=0 \qquad \text{for $x \lt 1$}
+$$
+
+$$
+F_X(x) = F_Y(x)=0.25 \qquad \text{for $1 \le x \lt 2$}
+$$
+
+$$
+F_X(x) = 0.25 \lt F_Y(x) = 0.5 \qquad \text{for $2 \le x \lt 3$}
+$$
+
+$$
+F_X(x) = F_Y(x) = 1 \qquad \text{for $x \ge 3$}
+$$
+
+So this example fulfill the requirements.
+
+(b)
+
+If $P(X=x) \le P(Y=x)$ for all x, where the inequality is strict for some $x$, we have
+$$
+\sum_x P(X=x) \lt \sum_x P(Y=x)
+$$
+
+But sum should both equal to $1$, therefore it's impossible to find such r.v.s.
+
+### Q13
+
+Let $X$, $Y$, $Z$ be discrete r.v.s such that $X$ and $Y$ have the same conditional distribution given $Z$, i.e., for all $a$ and $z$ we have
+$$
+P(X = a \mid Z = z) = P(Y = a \mid Z = z)
+$$
+
+Show that $X$ and $Y$ have the same distribution (unconditionally, not just when given $Z$).
+
+Answer:
+
+By LOTP, we have
+$$
+\begin{aligned}
+P(X = a)
+&= \sum_z P(X=a \mid Z = z)P(Z = z) \\
+&= \sum_z P(Y=a \mid Z = z)P(Z = z) \\
+&= P(Y = a)
+\end{aligned}
+$$
+
+### Q14
+
+Let $X$ be the number of purchases that Fred will make on the online site for a certain
+company (in some specified time period). Suppose that the PMF of $X$ is
+$$P(X= k) =
+\frac{e^{-\lambda} \lambda^k}{k!} \qquad \text{for $k = 0,1,2,\ldots$} 
+$$
+This distribution is called the Poisson distribution with parameter $\lambda$, and it will be studied extensively in later chapters.
+
+(a) Find $P(X \ge 1)$ and $P(X \ge 2)$ without summing infinite series.
+
+(b) Suppose that the company only knows about people who have made at least one purchase on their site (a user sets up an account to make a purchase, but someone who has never made a purchase there doesn’t appear in the customer database). If the company computes the number of purchases for everyone in their database, then these data are draws from the conditional distribution of the number of purchases, given that at least one purchase is made. Find the conditional PMF of $X$ given $X \ge 1$. (This conditional distribution is called a truncated Poisson distribution.)
+
+Answer:
+
+(a)
+
+$$
+\begin{aligned}
+P(X \ge 1)
+&= 1 - P(X = 0) \\
+&= 1 - \frac{e^{-\lambda} \lambda^0}{0!} \\
+&= 1 - e^{-\lambda}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(X \ge 2)
+&= 1 - P(X = 0) - P(X = 1) \\
+&= 1 - \frac{e^{-\lambda} \lambda^0}{0!} - \frac{e^{-\lambda} \lambda^1}{1!}\\
+&= 1 - e^{-\lambda} (1+ \lambda)
+\end{aligned}
+$$
+
+(b)
+
+From the definition of conditional probability we have
+$$
+P(X=k \mid X \ge 1) = \frac{P(X = k, X \ge 1)}{P(X \ge 1)} 
+$$
+
+For $k \ge 1$, we have $P(X=k, X \ge 1) = P(X=k)$, therefore
+$$
+\begin{aligned}
+P(X=k \mid X \ge 1) 
+&= \frac{P(X = k, X \ge 1)}{P(X \ge 1)} \\
+&= \frac{P(X = k)}{P(X \ge 1)} \\
+&= \frac{\frac{e^{-\lambda} \lambda^k}{k!}}{1 - e^{-\lambda}} \\
+&= \frac{e^{-\lambda} \lambda^k}{k!(1 - e^{-\lambda})}
+\end{aligned}
+$$
+for $k = 1,2,3,\ldots$, and equals $0$ otherwise.
+
+## Named distributions
+
+### Q15
+
+Find the CDF of an r.v. $X \sim \operatorname{DUnif}(1,2,\ldots,n)$.
+
+Answer
+
+Because
+$$
+p_X(k) = \frac{1}{|C|} \qquad \text{for $k=1,2,\ldots,n$}
+$$
+
+Therefore
+$$
+F_X(x) = 
+\begin{cases}
+\frac{\lfloor x \rfloor}{|C|},&1 \le x \le n \\
+0,&x\lt 1 \\
+1,&x \gt n \\
+\end{cases}
+$$
+
+### Q16
+
+Let $X \sim \operatorname{DUnif}(C)$, and $B$ be a nonempty subset of $C$. Find the conditional distribution of $X$, given that $X$ is in $B$.
+
+Answer:
+
+Given $k \in B$, we have $\{X=k\} \subseteq \{X \in B\}$, so $P(X=k, X \in B) = P(X = k)$, and we have
+$$
+\begin{aligned}
+P(X=k \mid X \in B)
+&= \frac{P(X = k, X \in B)}{P(X \in B)} \\
+&= \frac{P(X = k)}{P(X \in B)} \\
+&= \frac{\frac{1}{|C|}}{\frac{|B|}{|C|}} = \frac{1}{|B|}
+\end{aligned}
+$$
+For $k \notin B$, $P(X=k \mid X \in B) = 0$.
+
+### Q17
+
+An airline overbooks a flight, selling more tickets for the flight than there are seats on
+the plane (figuring that it’s likely that some people won’t show up). The plane has $100$
+seats, and $110$ people have booked the flight. Each person will show up for the flight
+with probability $0.9$, independently. Find the probability that there will be enough seats for everyone who shows up for the flight.
+
+Answer:
+
+Let $X$ be the number of people that will show up.
+$$
+X \sim \operatorname{Bin}(110, 0.9)
+$$
+
+Therefore
+$$
+P(X \le 100) = F_X(100) = \sum_{k=0}^{100} \binom{110}{k} 0.9^k 0.1^{110-k}
+$$
+
+### Q18
+
+(a) In the World Series of baseball, two teams (call them $A$ and $B$) play a sequence
+of games against each other, and the first team to win four games wins the series. Let
+$p$ be the probability that $A$ wins an individual game, and assume that the games are
+independent. What is the probability that team $A$ wins the series?
+
+(b) Give a clear intuitive explanation of whether the answer to (a) depends on whether
+the teams always play $7$ games (and whoever wins the majority wins the series), or the
+teams stop playing more games as soon as one team has won $4$ games (as is actually the case in practice: once the match is decided, the two teams do not keep playing more
+games).
