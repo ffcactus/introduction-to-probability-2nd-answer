@@ -569,3 +569,51 @@ independent. What is the probability that team $A$ wins the series?
 the teams always play $7$ games (and whoever wins the majority wins the series), or the
 teams stop playing more games as soon as one team has won $4$ games (as is actually the case in practice: once the match is decided, the two teams do not keep playing more
 games).
+
+Answer:
+
+(a)
+
+Let $N$ be the number of games played, and let $A$ be the event that team A wins the series.
+
+The series can end after $4$, $5$, $6$, or $7$ games, and the cases are disjoint, therefore
+$$
+P(A) = \sum_{n=4}^7 P(A \cap \{N=n\})
+$$
+
+When the series ends with $A$ wins, $A$ must win the last game. Before the last game $A$ must have won exactly 3 games, so
+$$
+P(A \cap \{N=n\}) = p \binom{n-1}{3}p^3(1-p)^{n-4} = \binom{n-1}{3}p^4(1-p)^{n-4}
+$$
+
+Therefore
+$$
+P(A) = \sum_{n=4}^7 \binom{n-1}{3}p^4(1-p)^{n-4}
+$$
+
+(b)
+
+The answer does not depend on whether the teams play all seven games or stop as soon as one team wins four games. Once team $A$ has won four games, the outcomes of any remaining games cannot change the winner. Conversely, if $A$ wins a majority of seven games, it must obtain its fourth win at some point during those seven games and would therefore also win under the stop-early rule.
+
+### Q19
+
+In a chess tournament, $n$ games are being played, independently. Each game ends in a win for one player with probability $0.4$ and ends in a draw (tie) with probability $0.6$. Find the PMFs of the number of games ending in a draw, and of the number of players whose games end in draws.
+
+Answer:
+
+Let $D$ be the number of games ending in a draw, $D \sim \operatorname{Bin}(n, 0.6)$, so
+$$
+p_D(k) = \binom{n}{k}0.6^k0.4^{n-k} \qquad \text{for $k = 0,1,2,\ldots$}
+$$
+And $p_D(k) = 0$ otherwise.
+
+Let $N$ be the number of players whose games end in draws. $N = 2D$.
+$$
+\begin{aligned}
+p_N(k) = P(N=k)
+&= P(2D = k) \\
+&= P(D= \frac{k}{2}) \\
+&= \binom{n}{\frac{k}{2}}0.6^{\frac{k}{2}}0.4^{n - \frac{k}{2}} \qquad \text{for $k = 0,2,4,6,\ldots$}\\
+\end{aligned}
+$$
+And $p_N(k) = 0$ otherwise.
