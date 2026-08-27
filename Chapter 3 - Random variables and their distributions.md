@@ -617,3 +617,279 @@ p_N(k) = P(N=k)
 \end{aligned}
 $$
 And $p_N(k) = 0$ otherwise.
+
+### Q20
+
+Suppose that a lottery ticket has probability $p$ of being a winning ticket, independently of other tickets. A gambler buys $3$ tickets, hoping this will triple the chance of having at least one winning ticket.
+
+(a) What is the distribution of how many of the 3 tickets are winning tickets?
+
+(b) Show that the probability that at least 1 of the 3 tickets is winning is $3p−3p^2 + p^3$, in two different ways: by using inclusion-exclusion, and by taking the complement of the desired event and then using the PMF of a certain named distribution.
+
+(c) Show that the gambler’s chances of having at least one winning ticket do not quite triple (compared with buying only one ticket), but that they do _approximately_ triple if $p$ is small.
+
+Answer:
+
+(a)
+
+Let $N$ be the number of winning tickets, we have $N \sim \operatorname{Bin}(3, p)$.
+
+(b)
+
+Let $W_1$, $W_2$ and $W_3$ be the events that the first, second and third tickets are winning tickets respectively.
+
+By inclusion-exclusion we have
+$$
+\begin{aligned}
+P(W_1 \cup W_2 \cup W_3)
+&= P(W_1) + P(W_2) + P(W_3) - P(W1 \cap W_2) - P(W1 \cap W_3) - P(W2 \cap W_3) + P(W_1 \cap W_2 \cap W_3) \\
+&= 3p - 3p^2 + p^3
+\end{aligned}
+$$
+
+By taking the complement, we can check the event that none of the tickets is a winning ticket. Let $X$ be the number of tickets that is not a winning ticket, we have $X \sim \operatorname{Bin}(3, (1-p))$, therefore the probability of having at least one winning ticket is
+$$
+1 - P(X=3)=1 - \binom{3}{3}(1-p)^3p^0 = 1 - (1-p)^3 = 3p - 3p^2 + p^3 
+$$
+
+(c)
+
+What gambler expect is $3p$, but actually it is $3p - 3p^2 + p^3$, and
+$$
+3p - 3p^2 + p^3 = 3p - p^2(3- p) \lt 3p \qquad \text{when $0 \lt p \le 1$}
+$$
+
+But the ratio approaching to $1$ when $p$ approaching to $0$.
+$$
+\lim_{p \to 0} \frac{3p - 3p^2 + p^3}{3p} = 1
+$$
+
+### Q21
+
+Let $X \sim \operatorname{Bin}(n,p)$ and $Y \sim \operatorname{Bin}(m,p)$, independent of $X$. Show that $X−Y$ is not Binomial.
+
+Answer:
+
+The support of a Binomial PMF is $0,1,2,\ldots,n$.
+
+Let's consider the probability of
+$$
+P(X - Y = -1) \gt 0
+$$
+
+This can happen when
+$$
+P(X = Y - 1) \gt 0
+$$
+
+Because
+$$
+\{X=0, Y=1\} \subseteq \{X = Y - 1\}
+$$
+We have 
+$$
+P(X=0, Y=1) \le P(X = Y - 1)
+$$
+
+Because $X$ and $Y$ are independent
+$$
+P(X=0, Y=1) = P(X=0)P(Y=1)
+$$
+
+When $0 \lt p \lt 1$ we have $P(X=0)P(Y=1) \gt 0$, therefore
+$$
+P(X - Y = -1) = P(X = Y - 1) \ge P(X=0)P(Y=1) \gt 0
+$$
+but every Binomial random variable is nonnegative; therefore $X−Y$ cannot be Binomial.
+
+### Q22
+
+There are two coins, one with probability $p_1$ of Heads and the other with probability $p_2$ of Heads. One of the coins is randomly chosen (with equal probabilities for the two coins). It is then flipped $n \ge 2$ times. Let $X$ be the number of times it lands Heads.
+
+(a) Find the PMF of $X$.
+
+(b) What is the distribution of $X$ if $p_1 = p_2$?
+
+(c) Give an intuitive explanation of why $X$ is not Binomial for $p_1 \ne p_2$ (its distribution is called a mixture of two Binomials). You can assume that $n$ is large for your explanation, so that the frequentist interpretation of probability can be applied.
+
+Answer:
+
+(a)
+
+Let $C_1$ and $C_2$ be the events that the coin 1 and 2 be chosen respectively.
+
+$$
+\begin{aligned}
+P(X=k)
+&= P(X=k \mid C_1) P(C_1) + P(X=k \mid C_2) P(C_2) \\
+&= \frac{1}{2} \binom{n}{k}p_1^k(1-p_1)^{n-k} + \frac{1}{2} \binom{n}{k}p_2^k(1-p_2)^{n-k} \\
+&= \frac{1}{2} \binom{n}{k}(p_1^k(1-p_1)^{n-k} + p_2^k(1-p_2)^{n-k}) \qquad \text{for $k=0,1,2,\ldots,n$.}
+\end{aligned}
+$$
+
+(b)
+
+Suppose $p_1 = p_2 = p$
+
+$$
+\begin{aligned}
+P(X=k)
+&= \frac{1}{2} \binom{n}{k}(p_1^k(1-p_1)^{n-k} + p_2^k(1-p_2)^{n-k}) \\
+&= \frac{1}{2} \binom{n}{k}(2p^k(1-p)^{n-k}) \\
+&= \binom{n}{k}(p^k(1-p)^{n-k})
+\end{aligned}
+$$
+
+Therefore
+$$
+X \sim \operatorname{Bin}(n, p)
+$$
+
+(c)
+
+Suppose $n$ is huge, if coin 1 is chosen the number of head will be concentrated near $p_1 n$; similarly if coin 2 is chosen the number of head will be concentrated near $p_2 n$. So the PMF of $X$ is expected to have two peak, at $p_1 n$ and $p_2 n$ respectively. However, a typical Binomial distribution has only one peak.
+
+### Q23
+
+There are $n$ people eligible to vote in a certain election. Voting requires registration.
+Decisions are made independently. Each of the $n$ people will register with probability
+$p_1$. Given that a person registers, they will vote with probability $p_2$. Given that a person votes, they will vote for Kodos (who is one of the candidates) with probability $p_3$. What is the distribution of the number of votes for Kodos (give the PMF, fully simplified, or the name of the distribution, including its parameters)?
+
+Answer:
+
+A people vote for Kodos with probability $p_1 p_2 p_3$. Let $X$ be the number of people vote for Kodos, $X \sim \operatorname{Bin}(n, p_1 p_2 p_3)$
+
+### Q24
+
+Let $X$ be the number of Heads in $10$ fair coin tosses.
+
+(a) Find the conditional PMF of $X$, given that the first two tosses both land Heads.
+
+(b) Find the conditional PMF of $X$, given that at least two tosses land Heads.
+
+Answer:
+
+Suppose the coin lands head with probability $p = \frac{1}{2}$. Let $E$ be the event that the first two tosses land heads.
+
+$$
+P(X = k \mid E) = \frac{P(E \mid X = k) P(X=k)}{P(E)}
+$$
+
+All the outcomes that having $k$ heads are equally likely. To find the number of the ones that the first two tosses are heads, we can just count the possible outcomes to the rest of the $k-2$ tosses, therefore
+$$
+P(E \mid X=k) = \frac{\binom{n-2}{k-2}}{\binom{n}{k}}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(X = k \mid E) 
+&= \frac{P(E \mid X = k) P(X=k)}{P(E)} \\
+&= \frac{\frac{\binom{n-2}{k-2}}{\binom{n}{k}} \binom{n}{k}p^k (1-p)^{n-k}}{p^2} \\
+&= \binom{n-2}{k-2} p^{k-2} (1-p)^{n-k} \\
+&= \frac{\binom{8}{k-2} }{2^8} \qquad \text{for $k=2,3,\ldots,n$.}
+\end{aligned} \\
+$$
+
+(b)
+
+Suppose the coin lands head with probability $p = \frac{1}{2}$. Let $E$ be the event that the at least two tosses land heads.
+
+By Bayes' rule, we have
+$$
+P(X = k \mid E) = \frac{P(E \mid X = k) P(X=k)}{P(E)}
+$$
+
+To find $P(E)$, we check the probability that there is $0$ head and the probability that there is $1$ head.
+
+$$
+\begin{aligned}
+P(E)
+&= 1 - P(X=1) - P(X=0) \\
+&= 1 - \binom{n}{1}p^1(1-p)^{n-1} -  \binom{n}{0}p^0(1-p)^{n-0} \\
+&= 1 - 10 \cdot (\frac{1}{2})^{10} - 1 \cdot 1 \cdot (\frac{1}{2})^{10} \\
+&= 1 - 11 \cdot (\frac{1}{2})^{10}
+\end{aligned}
+$$
+
+Depends on the value of $k$, we have
+$$
+P(E \mid X=k) = 
+\begin{cases}
+1&\text{when $k=2,3,\ldots,n$} \\
+0&\text{when $k=0,1$}
+\end{cases}
+$$
+
+When $k=2,3,\ldots,10$, we have
+$$
+\begin{aligned}
+P(X = k \mid E)
+&= \frac{P(E \mid X = k) P(X=k)}{P(E)} \\
+&= \frac{P(X=k)}{P(E)} \\
+&=\frac{\binom{10}{k} (\frac{1}{2})^{10}}{1 - 11 \cdot (\frac{1}{2})^{10}} \\
+&= \frac{\binom{10}{k}}{2^{10} - 11}
+\end{aligned}
+$$
+
+Therefore
+$$
+P(X =k \mid E) =
+\begin{cases}
+\frac{\binom{10}{k}}{2^{10} - 11}&\text{when $k=2,3,\ldots,10$} \\
+0&\text{when $k=0,1$}
+\end{cases}
+$$
+
+### Q25
+
+Alice flips a fair coin $n$ times and Bob flips another fair coin $n+1$ times, resulting
+in independent $X \sim \operatorname{Bin}(n, \frac{1}{2})$ and $Y \sim \operatorname{Bin}(n + 1, \frac{1}{2})$.
+
+(a) Show that $P(X \lt Y) = P(n − X \lt n + 1 − Y)$.
+
+(b) Compute $P(X \lt Y)$.
+
+Hint: Use (a) and the fact that $X$ and $Y$ are integer-valued.
+
+Answer:
+
+(a)
+
+Because the coins are both fair, the checking on the heads has the same meaning of checking on the tails. So
+$$
+P(X \lt Y) \quad \text{and} \quad P(n − X \lt n + 1 − Y)
+$$
+have the same distribution by heads/tails symmetry, so they are equal.
+
+(b)
+
+Because $P(X \lt Y) = P(n − X \lt n + 1 − Y) = P(X+1 \gt Y)$
+
+Because $X$ and $Y$ are both integers. The event $\{X \lt Y\}$ is complement to $\{X \ge Y\}$, and $\{X \ge Y\}$ is the same as $\{X + 1 \gt Y\}$. Therefore
+$$
+P(X \lt Y) = 1 - P(X \lt Y)
+$$
+Hence 
+$$
+P(X \lt Y) = \frac{1}{2}
+$$
+
+### Q26
+
+If $X \sim \operatorname{HGeom}(w,b,n)$, what is the distribution of $n−X$? Give a short proof.
+
+Answer:
+
+$$
+P(n-X = k) = P(X = n-k) = \frac{\binom{w}{n-k} \binom{b}{k}}{\binom{w+b}{n}}
+$$
+
+Compare with
+$$
+P(X=k) = \frac{\binom{w}{k} \binom{b}{n-k}}{\binom{w+b}{n}}
+$$
+we can find that $w$ and $b$ swapped, therefore
+$$
+(n-X) \sim \operatorname{HGeom}(b, w, n)
+$$
