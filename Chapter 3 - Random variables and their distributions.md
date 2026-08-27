@@ -893,3 +893,33 @@ we can find that $w$ and $b$ swapped, therefore
 $$
 (n-X) \sim \operatorname{HGeom}(b, w, n)
 $$
+
+### Q27
+
+Recall de Montmort’s matching problem from Chapter 1: in a deck of $n$ cards labeled $1$
+through $n$, a match occurs when the number on the card matches the card’s position in
+the deck. Let $X$ be the number of matching cards. Is $X$ Binomial? Is X Hypergeometric?
+
+Answer:
+
+Suppose the cards are randomly placed to the positions one at a time, this doesn't change anything to the problem.
+
+For the first card, there are $n$ positions to which it to be assigned. The probability to be assigned to the matching position is $\frac{1}{n}$.
+
+For the second card, we can condition on whether its matching position has already been occupied. It's matching position has $\frac{n-1}{n}$ probability of being unoccupied, and in this situation it has $\frac{1}{n-1}$ probability of been assigned to the matching position. Therefore, it has $\frac{1}{n-1} \frac{n-1}{n} = \frac{1}{n}$ probability of been assigned to the matching position.
+
+Similarly, for the third card, its matching position has $\frac{n-2}{n}$ probability of being unoccupied, and in this situation, it has $\frac{1}{n-2}$ probability of been assigned to the matching position. Therefore, it has $\frac{1}{n-2} \frac{n-2}{n} = \frac{1}{n}$ probability of been assigned to the matching position.
+
+So each card has $\frac{1}{n}$ probability of been assigned to the matching position.
+
+However, in the Binomial distribution trials are independent. Here if we know the first card is in the matching position, the probability for second card to be as the matching position is $\frac{1}{n-1}$. Therefore, the matching is not independent, $X$ is not Binomial.
+
+In a Hypergeometric experiment, the objects have fixed types before sampling—for example, every ball is already labeled white or black. Here, a card is not inherently a "matching card" or a "nonmatching card"; its status depends on the position to which it is assigned.
+
+For a more rigorous argument, consider the support of $X$:
+$X=n$ is possible: every card is in its correct position.
+$X=n-2$ is possible: swap two cards and leave all others fixed.
+$X=n-1$ is impossible: if $n-1$ cards are in their correct positions, the only remaining card must also occupy its correct position.
+
+Thus, the support contains $n-2$ and $n$, but not $n-1$. A Hypergeometric distribution always has a consecutive range of possible integer values. It cannot have a gap like this. Therefore, $X$ is not Hypergeometric.
+
