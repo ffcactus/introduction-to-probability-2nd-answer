@@ -923,3 +923,300 @@ $X=n-1$ is impossible: if $n-1$ cards are in their correct positions, the only r
 
 Thus, the support contains $n-2$ and $n$, but not $n-1$. A Hypergeometric distribution always has a consecutive range of possible integer values. It cannot have a gap like this. Therefore, $X$ is not Hypergeometric.
 
+### Q28
+
+There are $n$ eggs, each of which hatches a chick with probability $p$ (independently).
+Each of these chicks survives with probability $r$, independently. What is the distribution
+of the number of chicks that hatch? What is the distribution of the number of chicks that
+survive? (Give the PMFs; also give the names of the distributions and their parameters,
+if applicable.)
+
+Answer:
+
+Because eggs hatch independently, with the same probability $p$, this is Binomial. Let $H$ be the number of eggs hatch, we have
+$$
+H \sim \operatorname{Bin}(n, p)
+$$
+$$
+p_H(k)=\binom{n}{k}p^k(1-p)^{n-k} \qquad \text{for $k=0,1,2,\ldots,n$.}
+$$
+
+From an egg to a chick survive, the probability is
+$$
+P(\text{survive and hatch}) = P(\text{hatch}) P(\text{survive} \mid \text{hatch}) = pr
+$$
+
+The chicks survive independently, so it's Binomial. Let $S$ be the number of chicks that survive, we have
+$$
+S \sim \operatorname{Bin}(n, pr)
+$$
+$$
+p_S(k)=\binom{n}{k} (pr)^k(1-pr)^{n-k} \text{for $k=0,1,2,\ldots,n$.}
+$$
+
+### Q29
+
+A sequence of $n$ independent experiments is performed. Each experiment is a success
+with probability $p$ and a failure with probability $q=1−p$. Show that conditional on
+the number of successes, all valid possibilities for the list of outcomes of the experiment
+are equally likely.
+
+Answer:
+
+* Let $X$ be the number of successes.
+* Let $X_i$ be the indicator of the success of the $i$-th experiment.
+* Let $X = X_1 + X_2 + \ldots + X_n$ be the number of successes.
+
+Given that the number of successes is $k$, the probability of a sequence
+$$
+X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n
+$$
+in which $a_1, a_2, \ldots a_n \in \{0, 1\}$ and $a_1 + a_2 + \ldots + a_n = k$, is 
+$$
+\begin{aligned}
+P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n \mid X=k) = \frac{P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n, X=k)}{P(X=k)}
+\end{aligned}
+$$
+
+From 
+$$
+\{X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n\} \subseteq \{X = k\}
+$$
+we have
+$$
+P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n, X=k) = P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n \mid X=k) 
+&= \frac{P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n, X=k)}{P(X=k)} \\
+&= \frac{p^k q^{n-k}}{\binom{n}{k} p^k q^{n-k}} \\
+&= \frac{1}{\binom{n}{k}}
+\end{aligned}
+$$
+
+That means the sequence with number of successes $k$ are equally likely.
+
+### Q30
+
+A certain company has $n+m$ employees, consisting of $n$ women and $m$ men. The
+company is deciding which employees to promote.
+
+(a) Suppose for this part that the company decides to promote $t$ employees, where
+$1 \le t \le n+ m$, by choosing $t$ random employees (with equal probabilities for each set
+of $t$ employees). What is the distribution of the number of women who get promoted?
+
+(b) Now suppose that instead of having a predetermined number of promotions to
+give, the company decides independently for each employee, promoting the employee
+with probability $p$. Find the distributions of the number of women who are promoted,
+the number of women who are not promoted, and the number of employees who are promoted.
+
+(c) In the set-up from (b), find the conditional distribution of the number of women
+who are promoted, given that exactly $t$ employees are promoted.
+
+Answer:
+
+(a)
+All the employees are labelled with woman or man before promotion, the promotion is without replacement, so the number of women $N$ in the promotion has a Hypergeometric distribution.
+$$
+p_N(k) = \frac{\binom{n}{k} \binom{m}{t-k}}{\binom{m+n}{t}}
+$$
+
+(b)
+
+* Let $N$ be the number of women who are promoted.
+* $M$ be the number of men who are not promoted, then $M=n-N$.
+* $X$ be the number of employees who are promoted.
+
+Because the promotion are independent for all employees, and the probability is the same $p$, from Binomial distribution we have
+$$
+p_N(k) = \binom{n}{k}p^k (1-p)^{n-k} \qquad \text{for $k=0, 1, \ldots, n$.}
+$$
+
+$$
+\begin{aligned}
+p_M(k)
+&= P(n-N=k) \\
+&= P(N=n-k) \\
+&= \binom{n}{n-k}p^{n-k} (1-p)^k
+\end{aligned}
+$$
+
+$$
+p_X(k) = \binom{m+n}{k}p^k (1-p)^{m+n-k}
+$$
+
+(c)
+
+* Let $W$ be the number of women who are promoted.
+* Let $X$ be the number of employees who are promoted.
+$$
+P(W=k \mid X=t) = \frac{\binom{n}{k} \binom{m}{t-k}}{\binom{m+n}{t}} \qquad \text{for $k \le n$ and $t-k \le m$.}
+$$
+Otherwise, $P(W=k, X=t) = 0$.
+
+### Q31
+
+Once upon a time, a famous statistician offered tea to a lady. The lady claimed that
+she could tell whether milk had been added to the cup before or after the tea. The
+statistician decided to run some experiments to test her claim.
+
+(a) The lady is given $6$ cups of tea, where it is known in advance that $3$ will be milk-
+first and $3$ will be tea-first, in a completely random order. The lady gets to taste each
+and then guess which $3$ were milk-first. Assume for this part that she has no ability
+whatsoever to distinguish milk-first from tea-first cups of tea. Find the probability that
+at least $2$ of her $3$ guesses are correct.
+
+(b) Now the lady is given one cup of tea, with probability $1/2$ of it being milk-first.
+She needs to say whether she thinks it was milk-first. Let $p_1$ be the lady’s probability
+of being correct given that it was milk-first, and $p_2$ be her probability of being correct given that it was tea-first. She claims that the cup was milk-first. Find the _posterior odds_ that the cup is milk-first, given this information.
+
+Answer:
+
+(a)
+
+The teas are labelled as tea-first or milk-first. Because the the lady has no ability whatsoever to distinguish the teas, so the three cup of tea is sampled at random. The number of milk-first teas in the sample is the number of correct guesses. Let $X$ be the number of correct guesses, $X$ follows a Hypergemetric distribution.
+
+$$
+\begin{aligned}
+P(\{X=2\} \cup \{X=3\}) 
+&= P(X=2) + P(X=3) - (\{X=2\} \cap \{X=3\}) \\
+&= P(X=2) + P(X=3) \\
+&=\frac{\binom{3}{2} \binom{3}{1}}{\binom{6}{3}} + \frac{\binom{3}{3} \binom{3}{0}}{\binom{6}{3}} \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+(b)
+
+Let $M$ be the event that the given cup of tea is milk-first.
+Let $C$ be the event that the lady claim the tea is milk-first.
+
+From the conditional odds, we have
+$$
+\frac{P(M \mid C)}{P(M^c \mid C)} = \frac{P(M)}{P(M^c)} \frac{P(C \mid M)}{P(C \mid M^c)}
+$$
+
+Let $S$ be the event that the lady's guess is correct, and conditioned on it, we have
+$$
+\begin{aligned}
+P(C \mid M) 
+&= P(C \mid S, M) P(S \mid M) + P(C \mid S^c, M) P(S^c \mid M) \\
+&= 1 \cdot p_1 + 0 \cdot (1-p_1) \\
+&= p_1
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(C \mid M^c) 
+&= P(C \mid S, M^c) P(S \mid M^c) + P(C \mid S^c, M^c) P(S^c \mid M^c) \\
+&= 0 \cdot p_2 + 1 \cdot (1-p_2) \\
+&= 1 - p_2
+\end{aligned}
+$$
+
+Therefore 
+$$
+\begin{aligned}
+\frac{P(M \mid C)}{P(M^c \mid C)} 
+&= \frac{P(M)}{P(M^c)} \frac{P(C \mid M)}{P(C \mid M^c)} \\
+&=\frac{\frac{1}{2}}{\frac{1}{2}}\frac{p_1}{1-p_2} \\
+&= \frac{p_1}{1-p_2}
+\end{aligned}
+$$
+
+### Q32
+
+In Evan’s history class, $10$ out of $100$ key terms will be randomly selected to appear
+on the final exam; Evan must then choose $7$ of those $10$ to define. Since he knows the
+format of the exam in advance, Evan is trying to decide how many key terms he should
+study.
+
+(a) Suppose that Evan decides to study $s$ key terms, where $s$ is an integer between $0$
+and $100$. Let $X$ be the number of key terms appearing on the exam that he has studied.
+What is the distribution of $X$? Give the name and parameters, in terms of $s$.
+
+(b) Using R or other software, calculate the probability that Evan knows at least $7$ of
+the $10$ key terms that appear on the exam, assuming that he studies $s= 75$ key terms.
+
+Answer:
+
+(a)
+
+Before the exam, the key terms are marked as been studied by Evan or not. A sample of size 10 is collected as the exam and all the sample are equally likely. We need to check probability that $X$ number of key terms in the exam have already been studied by Evan. Therefore
+$$
+X \sim \operatorname{HGeom}(s, 100-s,10)
+$$
+
+(b)
+
+Skip.
+
+### Q33
+
+A book has $n$ typos. Two proofreaders, Prue and Frida, independently read the book. Prue catches each typo with probability $p_1$ and misses it with probability $q_1 = 1−p_1$,
+independently, and likewise for Frida, who has probabilities $p_2$ of catching and $q_2 = 1−p_2$ of missing each typo. Let $X_1$ be the number of typos caught by Prue, $X_2$ be the number caught by Frida, and $X$ be the number caught by at least one of the two proofreaders.
+
+(a) Find the distribution of $X$.
+
+(b) For this part only, assume that $p_1 = p_2$. Find the conditional distribution of $X_1$
+given that $X_1 + X_2 = t$.
+
+Answer:
+
+(a)
+
+The event that a typo is caught by at least one of the two proofreaders is complement to the event the it is not caught by either of them. Let $X_n$ be the number typos that is not been caught by either of the proofreaders.
+$$
+X_n \sim \operatorname{Bin}(n, q_1 q_2)
+$$
+
+And $X = n - X_n$, therefore
+$$
+\begin{aligned}
+P(X = k) 
+&= P(n-X_n = k) \\
+&= P(X_n = n-k) \\
+&= \binom{n}{n-k} (q_1 q_2)^{n-k} (1-q_1 q_2)^k \qquad \text{for $k=0,1,2,\ldots,n$.}
+\end{aligned}
+$$
+
+And $P(X=k) = 0$ otherwise.
+
+(b)
+
+for $k = 0,1,\ldots,t$, we have
+$$
+\begin{aligned}
+P(X_1 = k \mid X_1 + X_2 = t)
+&= \frac{P(X_1 = k, X_1 + X_2 = t)}{P(X_1 + X_2 = t)} \\
+&= \frac{P(X_1 = k, X_2 = t-k)}{P(X_1 + X_2 = t)} \\
+&= \frac{P(X_1 = k) P(X_2 = t-k)}{P(X_1 + X_2 = t)} \qquad \text{Independent check}\\
+\end{aligned}
+$$
+
+Suppose $p = p_1 = p_2$ and $q=q_1=q_2$, because probability is the same for them to find a typos, $X_1 + X_2 = t$ can be taken as one find $t$ typos in among the $2n$ typos.
+
+Therefore
+for $k = 0,1,\ldots,t$, we have
+$$
+\begin{aligned}
+P(X_1 = k \mid X_1 + X_2 = t)
+&= \frac{P(X_1 = k) P(X_2 = t-k)}{P(X_1 + X_2 = t)} \\
+&= \frac{\binom{n}{k} p^k q^{n-k} \binom{n}{t-k} p^{t-k} q^{n-t+k}}{\binom{2n}{t} p^t q^{2n-t}} \\
+&= \frac{\binom{n}{k} \binom{n}{t-k}}{\binom{2n}{t}}
+\end{aligned}
+$$
+
+Otherwise $P(X_1 = k \mid X_1 + X_2 = t) = 0$.
+
+Hence 
+$$
+X_1 = k \mid (X_1 + X_2 = t) \sim \operatorname{HGeom(n, n, t)}
+$$
+
+
+
