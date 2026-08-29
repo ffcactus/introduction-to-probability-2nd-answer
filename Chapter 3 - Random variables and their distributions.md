@@ -1218,5 +1218,556 @@ $$
 X_1 = k \mid (X_1 + X_2 = t) \sim \operatorname{HGeom(n, n, t)}
 $$
 
+### Q34
+
+There are $n$ students at a certain school, of whom $X \sim \operatorname{Bin}(n,p)$ are Statistics majors. A simple random sample of size $m$ is drawn (“simple random sample” means sampling without replacement, with all subsets of the given size equally likely).
+
+(a) Find the PMF of the number of Statistics majors in the sample, using the law of total
+probability (don’t forget to say what the support is). You can leave your answer as a
+sum (though with some algebra it can be simplified, by writing the binomial coefficients
+in terms of factorials and using the binomial theorem).
+
+(b) Give a story proof derivation of the distribution of the number of Statistics majors
+in the sample; simplify fully.
+
+Hint: Does it matter whether the students declare their majors before or after the
+random sample is drawn?
+
+Answer:
+
+(a)
+
+* Let $M$ be Statistic majors in the sample.
+
+By LOTP, we have
+$$
+\begin{aligned}
+P(M=k)
+&= \sum_{i=k}^n P(M=k \mid X=i) P(X=i) \\
+&= \sum_{i=k}^n \frac{\binom{i}{k} \binom{n-i}{m-k}}{\binom{n}{m}} \binom{n}{i} p^i (1-p)^{n-i}
+\quad \text{for $k=0,1,\ldots,m.$}
+\end{aligned}
+$$
+
+(b)
+
+The experiment can be interpreted as follows, without loss of generality. Make a simple random sample of $m$ from $n$ students. Then let all the student to choose their major. Each student has probability $p$ of choosing Statistic as their major. Find the distribution of the number of student who choose Statistic as major in the sample.
+
+Let $M$ be Statistic majors in the sample.
+$$
+M \sim \operatorname{Bin}(m, p)
+$$
+
+$$
+P(M=k) = \binom{m}{k} p^k (1-p)^{m-k} \quad \text{for $k=0,1,\ldots,m$.}
+$$
+
+And $P(M=k) = 0$ otherwise.
+
+### Q35
+
+Players A and B take turns in answering trivia questions, starting with player A
+answering the first question. Each time A answers a question, she has probability $p_1$ of getting it right. Each time B plays, he has probability $p_2$ of getting it right.
+
+(a) If A answers $m$ questions, what is the PMF of the number of questions she gets
+right?
+
+(b) If A answers $m$ times and B answers $n$ times, what is the PMF of the total number of questions they get right (you can leave your answer as a sum)? Describe exactly when/whether this is a Binomial distribution.
+
+(c) Suppose that the first player to answer correctly wins the game (with no predetermined maximum number of questions that can be asked). Find the probability that A wins the game.
+
+Answer:
+
+(a)
+
+Let $A$ be the number of questions she gets rights.
+
+$$
+p_A(k) = \binom{m}{k} p_1^k (1-p_1)^{m-k} \qquad \text{for $k=0,1,\ldots,m$.}
+$$
+
+Otherwise $p_A(k) = 0$.
+
+(b)
+
+* Let $A$ be the number of questions she gets rights.
+* Let $B$ be the number of questions she gets rights.
+* Let $X=A+B$.
 
 
+$$
+\begin{aligned}
+P(X = k)
+&= \sum_{i=0}^{k} P(A=i) P(B=k-i) \\
+&= \sum_{i=0}^{k} \binom{m}{i} p_1^i (1-p_1)^{m-i} \binom{n}{k-i} p_2^{k-i} (1-p_2)^{n-k+i}
+\end{aligned}
+$$
+
+This is not Binomial A and B have different probability of answering correct.
+
+Suppose $p_1=p_2=p$ and $(1-p_1) = (1-p_2) = q$, we have
+$$
+\begin{aligned}
+P(X = k)
+&= \sum_{i=0}^{k} \binom{m}{i} p^i q^{m-i} \binom{n}{k-i} p^{k-i} q^{n-k+i} \\
+&= \sum_{i=0}^{k} \binom{m}{i} \binom{n}{k-i} p^k q^{m+n-k} \qquad \text{for $k=0,1,\ldots,m+n$.}
+\end{aligned}
+$$
+Otherwise $P(X = k) = 0$.
+
+Because A and B have the same probability of answering correct, this can be taken as A answering $m+n$ questions. And we group the possible outcomes by the number of correct answers in the first $m$ questions. We can also have
+$$
+P(X=k) = \sum_{i=0}^{k} \binom{m}{i} \binom{n}{k-i} p^k q^{m+n-k}
+$$
+
+So
+$$
+P(X=k) = \binom{m+n}{k} p^k (1-p)^{m+n-k} \qquad \text{for $k=0,1,\ldots,m+n$.}
+$$
+Otherwise $P(X=k) = 0$
+
+(c)
+
+* Let $q_1 = (1-p_1)$, $q_2 = (1-p_2)$.
+* Let $S_A$ be the event the this time A answers correct.
+* Let $F_A$ and $F_B$ be the events that this time A answers incorrect and B answers incorrect respectively.
+* Let $A$ be the event that A wins.
+
+For A to win, the possible event are
+$$
+S_A \\
+F_A F_B S_A \\
+F_A F_B F_A F_B S_A \\
+\ldots 
+$$
+
+Sum up the probabilities of all the possible events, we have
+$$
+P(A) = p_1 \sum_{i=0}^{+\infty}(q_1 q_2)^i = \frac{p_1}{1 - q_1 q_2}
+$$
+
+### Q36
+
+There are $n$ voters in an upcoming election in a certain country, where $n$ is a large, even number. There are two candidates: Candidate A (from the Unite Party) and Candidate B (from the Untie Party). Let $X$ be the number of people who vote for Candidate A. Suppose that each voter chooses randomly whom to vote for, independently and with equal probabilities.
+
+(a) Find an exact expression for the probability of a tie in the election (so the candidates end up with the same number of votes).
+
+(b) Use Stirling’s approximation, which approximates the factorial function as
+$$
+n! \approx \sqrt{2 \pi n} (\frac{n}{e})^n
+$$
+to find a simple approximation to the probability of a tie. Your answer should be of the form $1/\sqrt{cn}$, with $c$ a constant (which you should specify).
+
+Answer:
+
+(a)
+
+$$
+P(X=\frac{n}{2}) = \binom{n}{\frac{n}{2}} (\frac{1}{2})^n
+$$
+
+(b)
+
+$$
+\begin{aligned}
+P(X=\frac{n}{2}) 
+&= \binom{n}{\frac{n}{2}} (\frac{1}{2})^n \\
+&=\frac{n!}{(\frac{n}{2})! (\frac{n}{2})!} (\frac{1}{2})^n \\
+&\approx \frac{\sqrt{2 \pi n} (\frac{n}{e})^n}{\sqrt{\pi n} (\frac{n}{2e})^{\frac{n}{2}} \sqrt{\pi n} (\frac{n}{2e})^{\frac{n}{2}}} (\frac{1}{2})^n \\
+&= \frac{\sqrt{2 \pi n} (\frac{n}{e})^n}{\pi n (\frac{n}{2 e})^n} (\frac{1}{2})^n \\
+&= \frac{\sqrt{2 \pi n} 2^n}{\pi n} (\frac{1}{2})^n \\
+&= \frac{1}{\sqrt{c n}} \qquad \text{where $c = \frac{\pi}{2}$}
+\end{aligned}
+$$
+
+### Q37
+
+A message is sent over a noisy channel. The message is a sequence $x_1,x_2,\ldots,x_n$ of $n$ bits ($x_i \in \{0,1\}$). Since the channel is noisy, there is a chance that any bit might be corrupted, resulting in an error (a 0 becomes a 1 or vice versa). Assume that the error events are independent. Let $p$ be the probability that an individual bit has an error
+$(0 \lt p \lt 1/2)$. Let $y_1,y_2,\ldots,y_n$ be the received message (so $y_i = x_i$ if there is no error in that bit, but $y_i = 1−x_i$ if there is an error there).
+
+To help detect errors, the $n$-th bit is reserved for a parity check: $x_n$ is defined to be $0$ if $x_1 + x_2 + \ldots + x_{n−1}$ is even, and $1$ if $x_1 + x_2 + \ldots + x_{n−1}$ is odd. When the message is received, the recipient checks whether $y_n$ has the same parity as $y_1 + y_2 + \ldots + y_{n−1}$. If the parity is wrong, the recipient knows that at least one error occurred; otherwise, the
+recipient assumes that there were no errors.
+
+(a) For $n = 5$, $p = 0.1$, what is the probability that the received message has errors which go undetected?
+
+(b) For general $n$ and $p$, write down an expression (as a sum) for the probability that the received message has errors which go undetected.
+
+(c) Give a simplified expression, not involving a sum of a large number of terms, for the probability that the received message has errors which go undetected.
+
+Hint for (c): Letting
+$$
+a = \sum_{\text{$k$ even, $k \ge 0$}} \binom{n}{k} p^k (1-p)^{n-k} \\
+
+b = \sum_{\text{$k$ odd, $k \ge 1$}} \binom{n}{k} p^k (1-p)^{n-k}
+$$
+
+the binomial theorem makes it possible to find simple expressions for $a+b$ and $a−b$, which then makes it possible to obtain $a$ and $b$.
+
+Answer:
+
+(a)
+
+For the received message has errors which go undetected, it must meet only one of the following cases:
+
+1. The no error happen on the parity bit. Other bits have even number of errors.
+2. The error happen on the parity bit. Other bits have odd number of errors.
+
+* Let $U$ be the event that the errors go undetected.
+* Let $G$ be the event that the parity bit has no error.
+* Let $X$ be the number of errors in non parity bit.
+
+For $n=5$, $p=0.1$, and conditioned on whether there is an error on the parity bit, we have
+
+$$
+\begin{aligned}
+P(X = 2 \mid G) P(G)
+&= (1-p) \binom{4}{2} p^2 (1-p)^{2}
+&= 0.9 \cdot 6 \cdot 0.1^2 \cdot 0.9^2
+&= 0.04374
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(X = 4 \mid G) P(G)
+&= (1-p) \binom{4}{4} p^4 (1-p)^{0}
+&= 0.9 \cdot 1 \cdot 0.1^4 \cdot 0.9^0
+&= 0.00009
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(X = 1 \mid G^c) P(G^c)
+&= p \binom{4}{1} p^1 (1-p)^{3}
+&= 0.1 \cdot 4 \cdot 0.1^1 * 0.9^3
+&= 0.02916
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(X = 1 \mid G^c) P(G^c)
+&= p \binom{4}{3} p^3 (1-p)^{1}
+&= 0.1 \cdot 4 \cdot 0.1^3 * 0.9^1
+&= 0.00036
+\end{aligned}
+$$
+
+Therefore
+$$
+P(U) = 0.04374 + 0.00009 + 0.02916 + 0.00036 = 0.07335
+$$
+
+(b)
+$$
+P(U) = \sum_{\text{$k$ even, $k \ge 2$}} \binom{n}{k} p^k (1-p)^{n-k}
+$$
+
+(c)
+Let $q = 1-p$
+
+And let
+$$
+a = \sum_{\text{$k$ even, $k \ge 0$}} \binom{n}{k} p^k q^{n-k} \\
+
+b = \sum_{\text{$k$ odd, $k \ge 1$}} \binom{n}{k} p^k q^{n-k}
+$$
+
+We know that
+$$
+a + b = \sum_{k \ge 0}^n \binom{n}{k} p^k q^{n-k} = 1
+$$
+
+Because
+$$
+\begin{aligned}
+(p - q)^n 
+&= \sum_{k=0}^n \binom{n}{k} (-p)^k q^{n-k} \\
+&= \sum_{\text{$k$ is even, $k \ge 0$}}^n \binom{n}{k} p^k q^{n-k} - \sum_{\text{$k$ is odd, $k \ge 1$}}^n \binom{n}{k} p^k q^{n-k} \\
+&= a - b
+\end{aligned}
+$$
+
+So we have
+$$
+\begin{cases}
+a + b = 1 \\
+a - b = (p - q)^n
+\end{cases}
+$$
+So
+$$
+a = \frac{1 + (p-q)^n}{2}
+$$
+
+So
+$$
+\begin{aligned}
+P(U)
+&= a - \binom{n}{0}p^0 q^n \\
+&= a - q^n \\
+&= \frac{1 + (p - q)^n - 2q^n}{2}
+\end{aligned}
+$$
+
+## Independence of r.v.s
+
+### Q38
+
+(a) Give an example of dependent r.v.s $X$ and $Y$ such that $P(X \lt Y) = 1$.
+
+(b) Give an example of independent r.v.s $X$ and $Y$ such that $P(X \lt Y) = 1$.
+
+Answer:
+
+Skip.
+
+### Q39
+
+Give an example of two discrete random variables $X$ and $Y$ on the same sample space such that $X$ and $Y$ have the same distribution, with support $\{1,2,\ldots,10\}$, but the event $X=Y$ never occurs. If $X$ and $Y$ are independent, is it still possible to construct such an example?
+
+Answer:
+
+Arrange $1,2,\ldots,10$ in a circle, randomly pick up value and take the one on immediately to its right. Let $X$ be the randomly picked up value, $Y$ be the one on it's right. $X$ and $Y$ have the same distribution, but the event $X=Y$ never occurs.
+
+If they are independent
+$$
+P(X = k, Y=k) = P(X=k)P(Y=k) \gt 0
+$$
+So if they are independent it's impossible.
+
+### Q40
+
+Suppose $X$ and $Y$ are discrete r.v.s such that $P(X=Y) = 1$. This means that X and Y always take on the same value.
+
+(a) Do X and Y have the same PMF?
+
+(b) Is it possible for X and Y to be independent?
+
+Answer:
+
+(a)
+
+From $P(X = Y) = 1$ we have $P(X \ne Y) = 0$.
+
+$$
+\begin{aligned}
+P(X = k)
+&= P(\{X = k\} \cap \{X=Y\}) + P(\{X = k\} \cap \{X \ne Y\}) \\
+&= P(\{X = k\} \cap \{X=Y\}) \qquad \text{because $ P(X \ne Y) = 0$} \\
+&= P(\{Y = k\} \cap \{X=Y\}) \qquad \text{bacause $X = Y$}\\
+&= P(Y=k)
+\end{aligned}
+$$
+
+Thus,
+$$
+P(X = k) = P(Y = k) \qquad \text{for every $k$.}
+$$
+
+Therefore $X$ and $Y$ have the same PMF.
+
+(b)
+
+From (a) we have
+$$
+P(X=k) = P(Y=k) = P(X=k, Y=k) = p_k
+$$
+
+If $X$ and $Y$ are independent, we have
+$$
+P(X=k, Y=k) = P(X=k)P(Y=k) = p_k^2 = p_k
+$$
+
+So we have $p_k = 0$ or $p_k = 1$. But because we must also have 
+$$
+\sum_k P(X=k) = \sum_k p_k = 1
+$$
+
+That means $p_k = 1$ and there is exact one possible $k$. That means $X$ and $Y$ both equals to the same constant value. Only this case fulfill the requirement. 
+
+### Q41
+
+If $X$,$Y$,$Z$ are r.v.s such that $X$ and $Y$ are independent and $Y$ and $Z$ are independent, does it follow that X and Z are independent?
+
+Hint: Think about simple and extreme examples.
+
+Answer:
+
+Let $X=Z$ and $Y$ has exactly one constant value $c_0$.
+
+In this case $X$ and $Y$ are independent. $Z$ and $Y$ are independent. But $X$ and $Z$ are not independent.
+
+### Q42
+
+Let $X$ be a random day of the week, coded so that Monday is $1$, Tuesday is $2$, etc. (so $X$ takes values $1,2,\ldots,7$, with equal probabilities). Let $Y$ be the next day after $X$ (again represented as an integer between $1$ and $7$). Do $X$ and $Y$ have the same distribution? What is $P(X \lt Y)$?
+
+Answer:
+
+Yes they have the same distribution $\operatorname{DUnif}(7)$.
+
+$$
+P(X \lt Y) = \frac{6}{7}
+$$
+
+### Q43
+
+(a) Is it possible to have two r.v.s $X$ and $Y$ such that $X$ and $Y$ have the same distribution
+but $P(X \lt Y) \ge p$, where:
+
+* $p= 0.9$?
+* $p= 0.99$?
+* $p= 0.9999999999999$?
+* $p= 1$?
+
+For each, give an example showing it is possible, or prove it is impossible.
+Hint: Do the previous question first.
+
+(b) Consider the same question as in Part (a), but now assume that $X$ and $Y$ are
+independent. Do your answers change?
+
+Answer:
+
+(a)
+
+Arrange $1,2,\ldots,n$ in to a cycle. Let $X$ be the number of a randomly picked up value in the cycle. Let $Y$ be the number immediately to the right of $X$.
+
+In this example, $X$ and $Y$ have the same distribution $\operatorname{DUnif}(n)$. And
+$$
+P(X \lt Y) = \frac{n-1}{n} \ge p
+$$
+
+so $p$ can be any value in the range of $(0,1)$.
+
+But if $p = 1$, $X \lt Y$ in any cases, that means there exists a support of $Y$ that is not the support of $X$. So $X$ and $Y$ can't have the same distribution.
+
+(b)
+
+If $X$ and $Y$ are independent and have the same distribution, we can swap the their name and does not change their joint distribution. Therefore we have
+$$
+P(X \lt Y) + P(Y \lt X) + P(X=Y) = 1 \\
+P(X \lt Y) = P(Y \lt X)
+$$
+
+Therefore the maximum value of $P(X \lt Y)$ is $0.5$.
+
+### Q44
+
+For $x$ and $y$ binary digits ($0$ or $1$), let $x \oplus y$ be $0$ if $x = y$ and $1$ if $x \ne y$ (this operation is called exclusive or (often abbreviated to XOR), or _addition mod 2_).
+
+(a) Let $X \sim \operatorname{Bern}(p)$ and $Y \sim \operatorname{Bern}(1/2)$, independently. What is the distribution of $X \oplus Y$?
+
+(b) With notation as in (a), is $X \oplus Y$ independent of $X$? Is $X \oplus Y$ independent of $Y$? Be sure to consider both the case $p = 1/2$ and the case $p \ne 1/2$.
+
+(c) Let $X_1,\ldots,X_n$ be i.i.d. $\operatorname{Bern}(1/2)$. For each nonempty subset $J$ of $\{1,2,\ldots,n\}$, let
+$$
+Y_J = \bigoplus_{j \in J} X_j
+$$
+
+where the notation means to “add” in the $\oplus$ sense all the elements of $J$; the order in which this is done doesn’t matter since $x \oplus y= y \oplus x$ and $(x \oplus y) \oplus z = x \oplus (y \oplus z)$. Show that $Y_J \sim \operatorname{Bern}(1/2)$ and that these $2^n−1$ r.v.s are pairwise independent, but not independent. For example, we can use this to simulate $1023$ pairwise independent
+fair coin tosses using only $10$ independent fair coin tosses.
+
+Hint: Apply the previous parts with $p = 1/2$. Show that if $J$ and $K$ are two different nonempty subsets of $\{1,2,\ldots,n\}$, then we can write $Y_J = A \oplus B, Y_K = A \oplus C$, where $A$ consists of the $X_i$ with $i \in J \cap K$, $B$ consists of the $X_i$ with $i \in J \cap K^c$, and $C$ consists of
+the $X_i$ with $i \in J^c \cap K$. Then $A$, $B$, $C$ are independent since they are based on disjoint sets of $X_i$. Also, at most one of these sets of $X_i$ can be empty. If $J \cap K= \empty$, then $Y_J = B$, $Y_K = C$. Otherwise, compute $P(Y_J = y,Y_K = z)$ by conditioning on whether $A=1$.
+
+(a)
+For the support of $X \oplus Y$ we have
+$$
+\begin{aligned}
+P(X \oplus Y = 1)
+&= P(X=1, Y=0) + P(X=0, Y=1) \\
+&= P(X=1)P(Y=0) + P(X=0)P(Y=1) \\
+&= p \cdot \frac{1}{2} + (1-p) \cdot \frac{1}{2} \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(X \oplus Y = 0)
+&= P(X=0, Y=0) + P(X=1, Y=1) \\
+&= P(X=0)P(Y=0) + P(X=1)P(Y=1) \\
+&= (1-p) \cdot \frac{1}{2} + p \cdot \frac{1}{2} \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+(b)
+
+Because
+$$
+P(X \oplus Y = 0, X=0) = P(X \oplus Y = 0 \mid X=0) P(X=0) = \frac{1}{2} (1-p) \\
+P(X \oplus Y = 0) P(X=0) = \frac{1}{2} (1-p)
+$$
+So we have $P(X \oplus Y = 0, X=0) = P(X \oplus Y = 0) P(X=0)$
+
+Because
+$$
+P(X \oplus Y = 0, X=1) = P(X \oplus Y = 0 \mid X=1) P(X=1) = \frac{1}{2} p \\
+P(X \oplus Y = 0) P(X=1) = \frac{1}{2} p
+$$
+So we have $P(X \oplus Y = 0, X=1) = P(X \oplus Y = 0) P(X=1)$
+
+Because
+$$
+P(X \oplus Y = 1, X=0) = P(X \oplus Y = 1 \mid X=0) P(X=0) = \frac{1}{2} (1-p) \\
+P(X \oplus Y = 1) P(X=0) = \frac{1}{2} (1-p)
+$$
+So we have $P(X \oplus Y = 1, X=0) = P(X \oplus Y = 1) P(X=0)$
+
+Because
+$$
+P(X \oplus Y = 1, X=1) = P(X \oplus Y = 1 \mid X=1) P(X=1) = \frac{1}{2} p \\
+P(X \oplus Y = 1) P(X=1) = \frac{1}{2} p
+$$
+So we have $P(X \oplus Y = 1, X=1) = P(X \oplus Y = 1) P(X=1)$
+
+Therefore $X \oplus Y$ and $X$ are independent.
+
+Because
+$$
+P(X \oplus Y = 0, Y=0) = P(X \oplus Y = 0 \mid Y=0) P(Y=0) = (1-p) \frac{1}{2} \\
+P(X \oplus Y = 0) P(Y=0) = \frac{1}{2} \frac{1}{2}
+$$
+So we have $P(X \oplus Y = 0, Y=0) = P(X \oplus Y = 0) P(Y=0)$ only when $p=1/2$.
+
+Because
+$$
+P(X \oplus Y = 0, Y=1) = P(X \oplus Y = 0 \mid Y=1) P(Y=1) = p \frac{1}{2} \\
+P(X \oplus Y = 0) P(Y=1) = \frac{1}{2} \frac{1}{2}
+$$
+So we have $P(X \oplus Y = 0, Y=1) = P(X \oplus Y = 0) P(Y=1)$ only when $p=1/2$.
+
+Because
+$$
+P(X \oplus Y = 1, Y=0) = P(X \oplus Y = 1 \mid Y=0) P(Y=0) = p \frac{1}{2} \\
+P(X \oplus Y = 1) P(Y=0) = \frac{1}{2} \frac{1}{2}
+$$
+So we have $P(X \oplus Y = 1, Y=0) = P(X \oplus Y = 1) P(Y=0)$ only when $p=1/2$.
+
+Because
+$$
+P(X \oplus Y = 1, Y=1) = P(X \oplus Y = 1 \mid Y=1) P(Y=1) = (1-p) \frac{1}{2} \\
+P(X \oplus Y = 1) P(Y=1) = \frac{1}{2} \frac{1}{2}
+$$
+So we have $P(X \oplus Y = 1, Y=1) = P(X \oplus Y = 1) P(Y=1)$ only when $p=1/2$.
+
+Therefore $X \oplus Y$ and $Y$ are independent only when $p=\frac{1}{2}$.
+
+(c)
+
+Suppose $X = \sum_j X_j$
+$$
+Y_J = \bigoplus_{j \in J} X_j = 
+\begin{cases}
+1 & \text{when $X$ is odd,} \\
+0 & \text{when $X$ is even.}
+\end{cases}
+$$
+
+Because each possible $X$ are equally likely, we have $Y_J \sim \operatorname{Bern}(1/2)$.
+
+Consider $X_1$, $X_2$ and $X_3$. From (b) we know that $\{X_1 \oplus X_2\}$ and $\{X_1 \oplus X_3\}$ are independent. But knowing the value of $X_1 \oplus X_2$ and $X_1 \oplus X_3$ determines the value of $X_2 \oplus X_3$.
+
+Note: The answer to part (c) is not good.
