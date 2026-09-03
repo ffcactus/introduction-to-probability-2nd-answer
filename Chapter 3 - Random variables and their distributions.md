@@ -8,12 +8,12 @@ People are arriving at a party one at a time. While waiting for more people to a
 
 Answer:
 
-The event $\{X=k\}$ can taken as before $k-$ person there is no birthday match, and at exactly $k$ person there is a match, 
+The event $\{X=k\}$ can taken as before $k-$ person there is no birthday match, and at exactly $k$ person there is a match,
 
 Therefore
 $$
 \begin{aligned}
-p_X(k) = P(X=k) 
+p_X(k) = P(X=k)
 &= P(\text{no match among first $k-1$ person}) P(\text{person $k$ matches} \mid \text{no match before $k$}) \\
 
 &=\frac{\prod_{i=1}^{k-1} (365-i+1)}{365^{k-1}} \frac{k-1}{365} \\
@@ -62,7 +62,7 @@ Answer:
 
 Because
 $$
-Y = u + \sigma X, \qquad \text{and $\sigma \gt 0$} 
+Y = u + \sigma X, \qquad \text{and $\sigma \gt 0$}
 $$
 The event $\{Y \le y\}$ is exactly the same set of outcomes as
 $$
@@ -108,14 +108,16 @@ If $x_1 \le x_2$, we also have $F(x_1) \le F(x_2)$.
 
 Therefore property 1 fulfilled.
 
-2. Convergence to $0$ and $1$ in the limits:
+1. Convergence to $0$ and $1$ in the limits:
+
 $$
 \lim_{x \to -\infty} F(x) = 0, \quad \text{and} \quad \lim_{x \to +\infty} F(x) = 1
 $$
 
 Because $F(x) = 0$ for $x \lt 0$, and $F(x) = 1$ for $x \gt n$, so property 2 fulfilled.
 
-3. Right-continuous:
+1. Right-continuous:
+
 $$
 F(a) = \lim_{x \to a^+} F(x)
 $$
@@ -140,7 +142,7 @@ $$
 F(a) = \frac{n}{n} = 1,
 $$
 
-And immediately to its right we have 
+And immediately to its right we have
 $$
 F(x) = 1,
 $$
@@ -185,7 +187,7 @@ Therefore $(\frac{1}{2})^{n+1}$ for $n= 0,1,2,\ldots$ is a valid PMF for a discr
 
 Suppose the r.v. is $X$, for $k \ge 0$
 $$
-F_X(k) = P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} (\frac{1}{2})^{i+1} = 1 - \frac{1}{2^{\lfloor k \rfloor+1}} 
+F_X(k) = P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} (\frac{1}{2})^{i+1} = 1 - \frac{1}{2^{\lfloor k \rfloor+1}}
 $$
 
 And for $k \lt 0$, $F_X(k) = 0$.
@@ -226,7 +228,7 @@ Answer:
 For $k \lt 7$, we have
 $$
 \begin{aligned}
-P(X=k) 
+P(X=k)
 &= P(\text{success on level $1$ to $k-1$})P(\text{failed on level $k$} \mid \text{reached $k-1$}) \\
 &=(1-p_k)\prod_{i=1}^{k-1}p_i
 \end{aligned}
@@ -278,11 +280,12 @@ Answer:
 
 (a)
 
-Checking the properties of CDF. 
+Checking the properties of CDF.
 
 1. Because both $F_1(x)$ and $F_2(x)$ are nondecreasing, so do $F(x) = pF_1(x) + (1-p)F_2(x)$.
 
 2. Checking the limit at $-\infty$ and $+\infty$.
+
 $$
 \begin{aligned}
 \lim_{x \to -\infty} F(x)
@@ -301,7 +304,7 @@ $$
 \end{aligned}
 $$
 
-3. Checking right-continuous.
+1. Checking right-continuous.
 
 For a particular value $a$,
 $$
@@ -352,7 +355,7 @@ Because every one of the support must have positive probability, so $k \gt 0$.
 
 The sum of the probabilities is
 $$
-k \sum_{n=1}^{+\infty} \frac{1}{n^2} = k \frac{\pi^2}{6} 
+k \sum_{n=1}^{+\infty} \frac{1}{n^2} = k \frac{\pi^2}{6}
 $$
 
 So if $k = \frac{6}{\pi^2}$, it can be a valid PMF.
@@ -362,7 +365,7 @@ So if $k = \frac{6}{\pi^2}$, it can be a valid PMF.
 Let $X$ be an r.v. whose possible values are $0,1,2,\ldots,$ with CDF $F$. In some countries, rather than using a CDF, the convention is to use the function $G$ defined by $G(x) = P(X \lt x)$ to specify a distribution. Find a way to convert from $F$ to $G$, i.e., if $F$ is a known function, show how to obtain $G(x)$ for all real $x$.
 
 Answer:
- 
+
 $$
 \begin{aligned}
 G(x)
@@ -370,7 +373,7 @@ G(x)
 &=
 \begin{cases}
 F(x)&\text{when x is not the support of $X$} \\
-F(x - 1)&\text{when x is the support of $X$} 
+F(x - 1)&\text{when x is the support of $X$}
 \end{cases}
 \end{aligned}
 $$
@@ -450,7 +453,7 @@ $$
 Let $X$ be the number of purchases that Fred will make on the online site for a certain
 company (in some specified time period). Suppose that the PMF of $X$ is
 $$P(X= k) =
-\frac{e^{-\lambda} \lambda^k}{k!} \qquad \text{for $k = 0,1,2,\ldots$} 
+\frac{e^{-\lambda} \lambda^k}{k!} \qquad \text{for $k = 0,1,2,\ldots$}
 $$
 This distribution is called the Poisson distribution with parameter $\lambda$, and it will be studied extensively in later chapters.
 
@@ -484,13 +487,13 @@ $$
 
 From the definition of conditional probability we have
 $$
-P(X=k \mid X \ge 1) = \frac{P(X = k, X \ge 1)}{P(X \ge 1)} 
+P(X=k \mid X \ge 1) = \frac{P(X = k, X \ge 1)}{P(X \ge 1)}
 $$
 
 For $k \ge 1$, we have $P(X=k, X \ge 1) = P(X=k)$, therefore
 $$
 \begin{aligned}
-P(X=k \mid X \ge 1) 
+P(X=k \mid X \ge 1)
 &= \frac{P(X = k, X \ge 1)}{P(X \ge 1)} \\
 &= \frac{P(X = k)}{P(X \ge 1)} \\
 &= \frac{\frac{e^{-\lambda} \lambda^k}{k!}}{1 - e^{-\lambda}} \\
@@ -514,7 +517,7 @@ $$
 
 Therefore
 $$
-F_X(x) = 
+F_X(x) =
 \begin{cases}
 \frac{\lfloor x \rfloor}{|C|},&1 \le x \le n \\
 0,&x\lt 1 \\
@@ -649,7 +652,7 @@ $$
 
 By taking the complement, we can check the event that none of the tickets is a winning ticket. Let $X$ be the number of tickets that is not a winning ticket, we have $X \sim \operatorname{Bin}(3, (1-p))$, therefore the probability of having at least one winning ticket is
 $$
-1 - P(X=3)=1 - \binom{3}{3}(1-p)^3p^0 = 1 - (1-p)^3 = 3p - 3p^2 + p^3 
+1 - P(X=3)=1 - \binom{3}{3}(1-p)^3p^0 = 1 - (1-p)^3 = 3p - 3p^2 + p^3
 $$
 
 (c)
@@ -686,7 +689,7 @@ Because
 $$
 \{X=0, Y=1\} \subseteq \{X = Y - 1\}
 $$
-We have 
+We have
 $$
 P(X=0, Y=1) \le P(X = Y - 1)
 $$
@@ -783,7 +786,7 @@ $$
 Therefore
 $$
 \begin{aligned}
-P(X = k \mid E) 
+P(X = k \mid E)
 &= \frac{P(E \mid X = k) P(X=k)}{P(E)} \\
 &= \frac{\frac{\binom{n-2}{k-2}}{\binom{n}{k}} \binom{n}{k}p^k (1-p)^{n-k}}{p^2} \\
 &= \binom{n-2}{k-2} p^{k-2} (1-p)^{n-k} \\
@@ -814,7 +817,7 @@ $$
 
 Depends on the value of $k$, we have
 $$
-P(E \mid X=k) = 
+P(E \mid X=k) =
 \begin{cases}
 1&\text{when $k=2,3,\ldots,n$} \\
 0&\text{when $k=0,1$}
@@ -870,7 +873,7 @@ Because $X$ and $Y$ are both integers. The event $\{X \lt Y\}$ is complement to 
 $$
 P(X \lt Y) = 1 - P(X \lt Y)
 $$
-Hence 
+Hence
 $$
 P(X \lt Y) = \frac{1}{2}
 $$
@@ -971,14 +974,14 @@ Given that the number of successes is $k$, the probability of a sequence
 $$
 X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n
 $$
-in which $a_1, a_2, \ldots a_n \in \{0, 1\}$ and $a_1 + a_2 + \ldots + a_n = k$, is 
+in which $a_1, a_2, \ldots a_n \in \{0, 1\}$ and $a_1 + a_2 + \ldots + a_n = k$, is
 $$
 \begin{aligned}
 P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n \mid X=k) = \frac{P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n, X=k)}{P(X=k)}
 \end{aligned}
 $$
 
-From 
+From
 $$
 \{X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n\} \subseteq \{X = k\}
 $$
@@ -990,7 +993,7 @@ $$
 Therefore
 $$
 \begin{aligned}
-P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n \mid X=k) 
+P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n \mid X=k)
 &= \frac{P(X_1 = a_1, X_2 = a_2, \ldots, X_n=a_n, X=k)}{P(X=k)} \\
 &= \frac{p^k q^{n-k}}{\binom{n}{k} p^k q^{n-k}} \\
 &= \frac{1}{\binom{n}{k}}
@@ -1052,6 +1055,7 @@ $$
 
 * Let $W$ be the number of women who are promoted.
 * Let $X$ be the number of employees who are promoted.
+
 $$
 P(W=k \mid X=t) = \frac{\binom{n}{k} \binom{m}{t-k}}{\binom{m+n}{t}} \qquad \text{for $k \le n$ and $t-k \le m$.}
 $$
@@ -1081,7 +1085,7 @@ The teas are labelled as tea-first or milk-first. Because the the lady has no ab
 
 $$
 \begin{aligned}
-P(\{X=2\} \cup \{X=3\}) 
+P(\{X=2\} \cup \{X=3\})
 &= P(X=2) + P(X=3) - (\{X=2\} \cap \{X=3\}) \\
 &= P(X=2) + P(X=3) \\
 &=\frac{\binom{3}{2} \binom{3}{1}}{\binom{6}{3}} + \frac{\binom{3}{3} \binom{3}{0}}{\binom{6}{3}} \\
@@ -1102,7 +1106,7 @@ $$
 Let $S$ be the event that the lady's guess is correct, and conditioned on it, we have
 $$
 \begin{aligned}
-P(C \mid M) 
+P(C \mid M)
 &= P(C \mid S, M) P(S \mid M) + P(C \mid S^c, M) P(S^c \mid M) \\
 &= 1 \cdot p_1 + 0 \cdot (1-p_1) \\
 &= p_1
@@ -1111,17 +1115,17 @@ $$
 
 $$
 \begin{aligned}
-P(C \mid M^c) 
+P(C \mid M^c)
 &= P(C \mid S, M^c) P(S \mid M^c) + P(C \mid S^c, M^c) P(S^c \mid M^c) \\
 &= 0 \cdot p_2 + 1 \cdot (1-p_2) \\
 &= 1 - p_2
 \end{aligned}
 $$
 
-Therefore 
+Therefore
 $$
 \begin{aligned}
-\frac{P(M \mid C)}{P(M^c \mid C)} 
+\frac{P(M \mid C)}{P(M^c \mid C)}
 &= \frac{P(M)}{P(M^c)} \frac{P(C \mid M)}{P(C \mid M^c)} \\
 &=\frac{\frac{1}{2}}{\frac{1}{2}}\frac{p_1}{1-p_2} \\
 &= \frac{p_1}{1-p_2}
@@ -1177,7 +1181,7 @@ $$
 And $X = n - X_n$, therefore
 $$
 \begin{aligned}
-P(X = k) 
+P(X = k)
 &= P(n-X_n = k) \\
 &= P(X_n = n-k) \\
 &= \binom{n}{n-k} (q_1 q_2)^{n-k} (1-q_1 q_2)^k \qquad \text{for $k=0,1,2,\ldots,n$.}
@@ -1213,7 +1217,7 @@ $$
 
 Otherwise $P(X_1 = k \mid X_1 + X_2 = t) = 0$.
 
-Hence 
+Hence
 $$
 X_1 = k \mid (X_1 + X_2 = t) \sim \operatorname{HGeom(n, n, t)}
 $$
@@ -1294,7 +1298,6 @@ Otherwise $p_A(k) = 0$.
 * Let $B$ be the number of questions she gets rights.
 * Let $X=A+B$.
 
-
 $$
 \begin{aligned}
 P(X = k)
@@ -1338,7 +1341,7 @@ $$
 S_A \\
 F_A F_B S_A \\
 F_A F_B F_A F_B S_A \\
-\ldots 
+\ldots
 $$
 
 Sum up the probabilities of all the possible events, we have
@@ -1370,7 +1373,7 @@ $$
 
 $$
 \begin{aligned}
-P(X=\frac{n}{2}) 
+P(X=\frac{n}{2})
 &= \binom{n}{\frac{n}{2}} (\frac{1}{2})^n \\
 &=\frac{n!}{(\frac{n}{2})! (\frac{n}{2})!} (\frac{1}{2})^n \\
 &\approx \frac{\sqrt{2 \pi n} (\frac{n}{e})^n}{\sqrt{\pi n} (\frac{n}{2e})^{\frac{n}{2}} \sqrt{\pi n} (\frac{n}{2e})^{\frac{n}{2}}} (\frac{1}{2})^n \\
@@ -1482,7 +1485,7 @@ $$
 Because
 $$
 \begin{aligned}
-(p - q)^n 
+(p - q)^n
 &= \sum_{k=0}^n \binom{n}{k} (-p)^k q^{n-k} \\
 &= \sum_{\text{$k$ is even, $k \ge 0$}}^n \binom{n}{k} p^k q^{n-k} - \sum_{\text{$k$ is odd, $k \ge 1$}}^n \binom{n}{k} p^k q^{n-k} \\
 &= a - b
@@ -1580,12 +1583,12 @@ $$
 P(X=k, Y=k) = P(X=k)P(Y=k) = p_k^2 = p_k
 $$
 
-So we have $p_k = 0$ or $p_k = 1$. But because we must also have 
+So we have $p_k = 0$ or $p_k = 1$. But because we must also have
 $$
 \sum_k P(X=k) = \sum_k p_k = 1
 $$
 
-That means $p_k = 1$ and there is exact one possible $k$. That means $X$ and $Y$ both equals to the same constant value. Only this case fulfill the requirement. 
+That means $p_k = 1$ and there is exact one possible $k$. That means $X$ and $Y$ both equals to the same constant value. Only this case fulfill the requirement.
 
 ### Q41
 
@@ -1759,7 +1762,7 @@ Therefore $X \oplus Y$ and $Y$ are independent only when $p=\frac{1}{2}$.
 
 Suppose $X = \sum_j X_j$
 $$
-Y_J = \bigoplus_{j \in J} X_j = 
+Y_J = \bigoplus_{j \in J} X_j =
 \begin{cases}
 1 & \text{when $X$ is odd,} \\
 0 & \text{when $X$ is even.}

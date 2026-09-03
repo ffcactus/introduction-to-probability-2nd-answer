@@ -183,3 +183,50 @@ By the definition of expectation we have:
 $$
 \mathbb{E}[X] = \sum_{x=1}^n x P(X=x) = \frac {1}{n} \sum_{x=1}^n x = \frac{1}{n} \frac{(1+n)n}{2} = \frac{1+n}{2}
 $$
+
+### Q6
+
+Two teams are going to play a best-of-7 match (the match will end as soon as either
+team has won 4 games). Each game ends in a win for one team and a loss for the other
+team. Assume that each team is equally likely to win each game, and that the games
+played are independent. Find the mean and variance of the number of games played.
+
+Answer:
+
+By the definition of expectation we have:
+$$
+\mathbb{E}[X] = 4 P(X=4) + 5 P(X=5) + 6 P(X=6) +7 P(X=7)
+$$
+
+Let $p$ be the probability that team A wins an individual game., and $q = 1-p$. Suppose the game ends team A wins after $X$ matches. Team A must win the last match, and in the previous $X-1$ matches A must win 3 times. The same pattern can happen at team B. Suppose team A has $p = 1/2$ probability to win and $q = 1 - p$ probability to lose. We have
+$$
+P(X=k) = 2 p \binom{k-1}{3} p^3 q^{k-1-3} = \binom{k-1}{3} (\frac{1}{2})^{k-1}\qquad \text{for $k=4,5,6,7$.}
+$$
+
+$$
+P(X=4) = \frac{1}{8}
+$$
+
+$$
+P(X=5) = \frac{1}{4}
+$$
+
+$$
+P(X=6) = \frac{5}{16}
+$$
+
+$$
+P(X=7) = \frac{5}{16}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X] = 4 \frac{1}{8} + 5 \frac{1}{4} + 6 \frac{5}{16} +7 \frac{5}{16} = \lceil \frac{93}{16} \rceil = 6
+\end{aligned}
+$$
+
+For variance we have
+$$
+\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = 16 \frac{1}{8} + 25 \frac{1}{4} + 36 \frac{5}{16} + 49 \frac{5}{16} - (\frac{93}{16})^2 \approx 1.03
+$$
