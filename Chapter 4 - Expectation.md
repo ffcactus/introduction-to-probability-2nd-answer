@@ -25,7 +25,7 @@ $$
 For variance, we have:
 $$
 \begin{aligned}
-\operatorname{Var}(X) 
+\operatorname{Var}(X)
 &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
 \end{aligned}
 $$
@@ -57,7 +57,7 @@ $$
 And
 $$
 \begin{aligned}
-\operatorname{Var}(X) 
+\operatorname{Var}(X)
 &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
 &= 365^2 \cdot \frac{3}{4} + 366^2 \frac{1}{4} - (\frac{1461}{4})^2 \\
 &= \frac{3}{16}
@@ -77,7 +77,7 @@ Answer:
 Let $X$ be the value of the roll.
 
 $$
-\mathbb{E}[X] = \sum_x x P(X=x) = \sum_{x=1}^6 x \cdot \frac{1}{6} = 3.5 
+\mathbb{E}[X] = \sum_x x P(X=x) = \sum_{x=1}^6 x \cdot \frac{1}{6} = 3.5
 $$
 
 (b)
@@ -100,7 +100,7 @@ Suppose there are at most 2 rolls, since the expected value of a single roll is 
 
 Let $X$ be the final amount received, and let $X_1$ and $X_2$ be the values of the first and second rolls, respectively.
 $$
-P(X=k) = P(X_2=k \mid X_1 \lt 4) P(X_1 \lt 4) + P(X_1=k \mid X_1 \ge 4) P(X_1 \ge 4) 
+P(X=k) = P(X_2=k \mid X_1 \lt 4) P(X_1 \lt 4) + P(X_1=k \mid X_1 \ge 4) P(X_1 \ge 4)
 $$
 
 $$
@@ -140,7 +140,7 @@ Now suppose there are at most $3$ rolls. As we showed previously, with at most t
 Let $X$ be the final amount received, let $X_1$ be the value of the first roll, and let $B$ be the final amount obtained by playing the remaining two-roll game optimally..
 
 $$
-P(X=k) = P(B=k \mid X_1 \lt 5) P(X_1 \lt 5) + P(X_1=k \mid X_1 \ge 5) P(X_1 \ge 5) 
+P(X=k) = P(B=k \mid X_1 \lt 5) P(X_1 \lt 5) + P(X_1=k \mid X_1 \ge 5) P(X_1 \ge 5)
 $$
 
 Based on our previous calculation, we have
@@ -188,7 +188,7 @@ $$
 For variance we have:
 $$
 \begin{aligned}
-\operatorname{Var}(X) 
+\operatorname{Var}(X)
 &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
 &= \frac{1}{n} \sum_{x=1}^n x^2 - (\frac{1+n}{2})^2 \\
 &= \frac{1}{n} \frac{n (n+1)(2n+1)}{6} - (\frac{1+n}{2})^2 \\
@@ -257,7 +257,7 @@ Answer:
 
 (A)
 
-Let $C$ be the number of children in the chosen family, and let $X$ be the birth rank of the chosen child. 
+Let $C$ be the number of children in the chosen family, and let $X$ be the birth rank of the chosen child.
 
 Conditioning on the number of children in the chosen family, we have
 $$
@@ -295,7 +295,7 @@ $$
 \mathbb{E}[X^2] = \sum_x x^2 P(X=x) = 1 \frac{37}{60} + 4 \frac{19}{60} + 9 \frac{4}{60} = \frac{149}{60}
 $$
 
-Therefore 
+Therefore
 $$
 \operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{149}{60} - 1.45^2 \approx 0.38
 $$
@@ -307,7 +307,7 @@ $$
 P(X=1) = \frac{100}{190}, \quad P(X=2) = \frac{70}{190}, \quad P(X=3) = \frac{20}{190}.
 $$
 
-Therefore 
+Therefore
 $$
 \mathbb{E}[X] = 1 \frac{100}{190} + 2 \frac{70}{190} + 3 \frac{20}{190} \approx 1.58
 $$
@@ -343,7 +343,7 @@ $$
 
 (b)
 
-The definition of variance is 
+The definition of variance is
 $$
 \operatorname{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2]
 $$
@@ -421,7 +421,7 @@ $$
 P(X=64000) = \frac{1}{2} \frac{1}{4} = \frac{1}{8}
 $$
 
-This is a valid PMF as the sum is $1$. 
+This is a valid PMF as the sum is $1$.
 
 By the definition of expectation we have
 $$
@@ -587,3 +587,577 @@ Answer:
 Yes.
 
 Suppose $X$ has support $\{1,2,\ldots,99,10^{10}\}$ and each support is equally likely; and $Y$ has support $\{100\}$ also each support is equally likely.
+
+### Q14
+
+Let $X$ have PMF
+$$
+P(X=k) = \frac{c p^k}{k} \quad \text{for $k=1,2,\ldots$,}
+$$
+where $p$ is a parameter with $0 \lt p \lt 1$ and $c$ is a normalizing constant. We have
+$$
+c=\frac{−1}{\log(1−p)}
+$$, as seen from the Taylor series
+$$
+-\log(1-p) = p + \frac{p^2}{2} + \frac{p^3}{3} + \ldots
+$$
+
+This distribution is called the _Logarithmic distribution_ (because of the log in the above
+Taylor series), and has often been used in ecology. Find the mean and variance of $X$.
+
+Answer:
+
+By the definition of expectation we have:
+$$
+\mathbb{E}[X] = \sum_{k=1}^\infty k \frac{c p^k}{k} = \sum_{k=1}^\infty c p^k = c (\frac{1}{1-p} - 1) = \frac{cp}{1-p}
+$$
+
+By LOTUS we have:
+$$
+\begin{aligned}
+\mathbb{E}[X^2]
+&= \sum_{k=1}^\infty k^2 \frac{c p^k}{k} \\
+&= c \sum_{k=1}^\infty k p^k \\
+&= \frac{cp}{(1-p)^2}
+\end{aligned}
+$$
+
+By the variance formula, we have:
+$$
+\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{cp}{(1-p)^2} - \frac{c^2 p^2}{(1-p)^2} = \frac{cp - c^2 p^2}{(1-p)^2}
+$$
+
+### Q15
+
+Player $A$ chooses a random integer between $1$ and $100$, with probability $p_j$ of choosing $j$ (for $j = 1,2,\ldots,100$). Player $B$ guesses the number that player $A$ picked, and receives from player $A$ that amount in dollars if the guess is correct (and $0$ otherwise).
+
+(a) Suppose for this part that player $B$ knows the values of $p_j$. What is player $B$’s
+optimal strategy (to maximize expected earnings)?
+
+(b) Show that if both players choose their numbers so that the probability of picking $j$ is
+proportional to $1/j$, then neither player has an incentive to change strategies, assuming
+the opponent’s strategy is fixed. (In game theory terminology, this says that we have found a Nash equilibrium.)
+
+(c) Find the expected earnings of player $B$ when following the strategy from (b). Express your answer both as a sum of simple terms and as a numerical approximation. Does the value depend on what strategy player $A$ uses?
+
+Answer:
+
+(a)
+
+$B$ can only choose a single number, $B$'s expected earning is $x p_x$, where $x$ is the number he choose. Since he knows $p_x$, and $A$ chooses the number randomly, B should choose the number which makes $x p_x$ the largest.
+
+(b)
+
+1. From A's perspective
+
+Using this strategy, the expected lose of $A$ is
+$$
+j \frac{c}{j} = c
+$$
+no matter which number B chooses.
+
+2. From B's perspective
+
+Suppose $A$ uses
+$$
+P(\text{$A$ choose $j$}) = \frac{c}{j}
+$$
+
+If $B$ always guesses $j$, then
+$$
+\mathbb{E}[\text{$B$'s earnings}] = j \cdot P(\text{$A$ choose $j$}) = j \cdot \frac{c}{j} = c
+$$
+And this is true for every guesses.
+
+So using this strategy, both $A$ and $B$ have no willing to change.
+
+(c)
+
+Let $A$ use any distribution $p_1, p_2, \ldots, p_100$. Then
+$$
+\begin{aligned}
+\mathbb{E}[\text{$B$'s earnings}]
+&= \sum_{j=1}^{100} j P(\text{$A$ choose $j$}) P(\text{$B$ choose $j$}) \\
+&= \sum_{j=1}^{100} j P(\text{$A$ choose $j$}) \frac{c}{j} \\
+&= j \cdot \frac{c}{j} \sum_{j=1}^{100} P(\text{$A$ choose $j$}) \\
+&= c
+\end{aligned}
+$$
+
+So no matter what strategy $A$ use, $B$'s expected value keeps the same.
+
+### Q16
+
+The dean of Blotchville University boasts that the average class size there is $20$. But the reality experienced by the majority of students there is quite different: they find themselves in huge courses, held in huge lecture halls, with hardly enough seats or Haribo gummi bears for everyone. The purpose of this problem is to shed light on the situation. For simplicity, suppose that every student at Blotchville University takes only one course per semester.
+
+(a) Suppose that there are $16$ seminar courses, which have $10$ students each, and $2$ large lecture courses, which have $100$ students each. Find the dean’s-eye-view average class size (the simple average of the class sizes) and the student’s-eye-view average class size (the average class size experienced by students, as it would be reflected by surveying students and asking them how big their classes are). Explain the discrepancy intuitively.
+
+(b) Give a short proof that for any set of class sizes (not just those given above), the dean’s-eye-view average class size will be strictly less than the student’s-eye-view average class size, unless all classes have exactly the same size.
+
+Hint: Relate this to the fact that variances are nonnegative.
+
+Answer:
+
+(a)
+
+In the dean's-eye-view, the average class size is
+$$
+\frac{16 \cdot 10 + 2 \cdot 100}{16 + 2} = 20
+$$
+
+Let $X$ be the class size from a surveying student, and let $S$, $L$ be the events that the surveying student comes from the small and large lecture course respectively.
+
+We have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= 10 \cdot P(S) + 100 \cdot P(L)
+&= 10 \cdot \frac{16 \cdot 10}{16 \cdot 10 + 2 \cdot 100} + 100 \cdot \frac{2 \cdot 100}{16 \cdot 10 + 2 \cdot 100} \\
+&= 60
+\end{aligned}
+$$
+
+Because the students take one course in a semester, in the student in the survey has higher probability coming from a large course, which gives higher weight to the class size with larger size.
+
+(b)
+
+Suppose there are $x$ students, and $y$ classes. The class sizes are $c_1, c_2, \ldots, c_y$, and $c_1 + c_2 + \ldots + c_y = x$.
+
+From dean's-eye-view the mean of class size is $x/y$.
+
+Let $C$ be the class size of a randomly selected student. The expected class size in student's-eye-view is
+$$
+\begin{aligned}
+\mathbb{E}[C]
+&= \sum_{i=1}^y c_i P(\text{student from $i$}) \\
+&= \sum_{i=1}^y c_i \frac{c_i}{x} \\
+&= \frac{1}{x} \sum_{i=1}^y c_i^2 \\
+&\ge \frac{1}{x} \frac{x^2}{y}  \qquad \text{equality holds when $c_1, c_2, \ldots, c_y$ equals.}\\
+&= \frac{x}{y}
+\end{aligned}
+$$
+
+Alternatively, let $D$ be the size of a randomly selected class,
+$$
+\mathbb{E}[D] = \sum_{i=1}^y c_i \frac{1}{y} = \frac{1}{y} \sum_{i=1}^y c_i = \frac{x}{y}
+$$
+
+So we have
+$$
+\mathbb{E}[D^2] = \sum_{i=1}^y c_i^2 \frac{1}{y} = \frac{1}{y} \sum_{i=1}^y c_i^2
+$$
+
+Relating $\mathbb{E}[D^2]$ to $\mathbb{E}[C]$ we have
+$$
+\frac{y}{x} \mathbb{E}[D^2] = \mathbb{E}[C] = \frac{\mathbb{E}[D^2]}{\mathbb{E}[D]}
+$$
+
+Because
+$$
+\operatorname{Var}(D) = \mathbb{E}[D^2] - (\mathbb{E}[D])^2 \ge 0
+$$
+
+We have
+$$
+\begin{aligned}
+\mathbb{E}[C]
+&= \frac{\mathbb{E}[D^2]}{\mathbb{E}[D]} \\
+&= \frac{\operatorname{Var}(D) + (\mathbb{E}[D])^2}{\mathbb{E}[D]} \\
+&= \frac{\operatorname{Var}(D)}{\mathbb{E}[D]} + \mathbb{E}[D] \\
+&\ge \mathbb{E}[D]
+\end{aligned}
+$$
+
+Equality holds when $\operatorname{Var}(D)$ which means the class size must be equal.
+
+### Q17
+
+The sociologist Elizabeth Wrigley-Field posed the following puzzle [29]:
+
+    American fertility fluctuated dramatically in the decades surrounding the Second World War. Parents created the smallest families during the Great Depression, and the largest families during the postwar Baby Boom. Yet children born during the Great Depression came from larger families than those born during the Baby Boom. How can this be?
+
+(a) For a particular era, let $n_k$ be the number of American families with exactly $k$ children, for each $k \ge 0$. (Assume for simplicity that American history has cleanly been separated into eras, where each era has a well-defined set of families, and each family has a well-defined set of children; we are ignoring the fact that a particular family’s size may change over time, that children grow up, etc.) For each $j \ge 0$, let
+$$
+m_j = \sum_{k=0}^\infty k^j n_k
+$$
+For a family selected randomly in that era (with all families equally likely), find the expected number of children in the family. Express your answer only in terms of the $m_j$’s.
+
+(b) For a child selected randomly in that era (with all children equally likely), find the expected number of children in the child’s family, only in terms of the $m_j$’s.
+
+(c) Give an intuitive explanation in words for which of the answers to (a) and (b) is larger, or whether they are equal. Explain how this relates to the Wrigley-Field puzzle.
+
+Answer:
+
+(a)
+
+Let $X$ be the number of children in a randomly selected family.
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=0}^k i P(\text{randomly selected family has $i$ children})
+\end{aligned}
+$$
+
+The total number of families is $n_0 + n_1 + \ldots + n_k$, which is
+$$
+m_0 = \sum_{k=0}^\infty k^0 n_k = \sum_{k=0}^\infty n_k
+$$
+
+So
+$$
+P(\text{randomly selected family has $i$ children}) = \frac{n_i}{m_0}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=0}^k i \frac{n_i}{m_0} = \frac{1}{m_0} \sum_{i=0}^k i n_i = \frac{m_1}{m_0}
+\end{aligned}
+$$
+
+(b)
+
+Let $Y$ be the number of children in the randomly selected child's family.
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= \sum_{i=0}^k i P(\text{randomly selected child has a family with $i$ children})
+\end{aligned}
+$$
+
+The total number of children is $0 n_0 + 1 n_1 + \ldots + k n_k$, which is
+$$
+m_1 = \sum_{k=0}^\infty k n_k
+$$
+
+So
+$$
+P(\text{randomly selected child has a family with $i$ children}) = \frac{i n_i}{m_1}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= \sum_{i=0}^k \frac{i^2 n_i}{m_1} = \frac{1}{m_1} \sum_{i=0}^k i^2 n_i = \frac{m_2}{m_1}
+\end{aligned}
+$$
+
+(c)
+
+The answer to (a) should be smaller than the answer to (b).
+
+The number of families with less children is much greater than the number of families with more children. If we choose the family first equally likely, the chosen family has a much higher probability of few children. This means that those $i$ with small values are assigned with higher weight in
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=0}^k i P(\text{randomly selected family has $i$ children})
+\end{aligned}
+$$
+
+If we choose children randomly, the chosen children is more likely comes from a family with more children. This means that those $i$ with large values are assigned with higher weight in
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= \sum_{i=0}^k i P(\text{randomly selected child has a family with $i$ children})
+\end{aligned}
+$$
+
+So intuitively $\mathbb{E}[X] \lt \mathbb{E}[Y]$.
+
+In Wrigley-Field puzzle, children are sampled randomly, so they are more likely be born in families with more children.
+
+*NOTE my answer to (c) is not accurate*
+
+## Named distributions
+
+### Binomial
+
+Perform $n$ independent Bernoulli trials, each with the same success probability $p$. Count the number of successes.
+
+$$
+X \sim \operatorname{Bin}(n, p)
+$$
+
+$$
+P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
+$$
+
+$$
+\mathbb{E}[X] = np
+$$
+
+$$
+\operatorname{Var}
+$$
+
+### Hypergeometric
+
+Suppose a population contains:
+- $w$ white objects,
+- $b$ black objects,
+
+and you randomly choose $n$ objects without replacement.
+Let $X$ be the number of white objects selected.
+
+$$
+X \sim \operatorname{HGeom}(w, b, n)
+$$
+
+$$
+P(X=k) = \frac{\binom{w}{k} \binom{b}{n-k}}{\binom{w+b}{k}}
+$$
+
+$$
+\mathbb{E}[X] = np
+$$
+
+$$
+\operatorname{Var} = np(1-p)\frac{N-n}{N-1}
+$$
+
+### Discreted Uniform
+
+$$
+X\sim \operatorname{DUnif}(1,n)
+$$
+
+$$
+P(X=k)=\frac{1}{n}
+$$
+
+$$
+\mathbb{E}[X] = \frac{n+1}{2}
+$$
+
+$$
+\operatorname{Var} = \frac{n^2-1}{12}
+$$
+
+### Geometric
+
+Number of failures before the first success.
+
+$$
+X \sim \operatorname{Geom}(p)
+$$
+
+$$
+P(X=k) = q^k p
+$$
+
+$$
+\mathbb{E}[X] = \frac{q}{p}
+$$
+
+$$
+\operatorname{Var} = \frac{q}{p^2}
+$$
+
+### Negative Binomial
+
+Instead of waiting for the first success, wait until the $r$-th success.
+
+$$
+X \sim \operatorname{NBin}(r, p)
+$$
+
+$$
+P(X=k) = \binom{k+r-1}{r-1}p^r q^k
+$$
+
+$$
+\mathbb{E}[X] = \frac{rq}{p}
+$$
+
+$$
+\operatorname{Var} = \frac{rq}{p^2}
+$$
+
+### Poisson
+
+Count how many relatively rare events occur in some interval.
+
+$$
+X \sim \operatorname{Pois}(\lambda)
+$$
+
+$$
+P(X=k) = e^{-\lambda} \frac{\lambda^k}{k!}
+$$
+
+$$
+\mathbb{E}[X] = \lambda
+$$
+
+$$
+\operatorname{Var} = \lambda
+$$
+
+### Q18
+
+A fair coin is tossed repeatedly, until it has landed Heads at least once and has landed Tails at least once. Find the expected number of tosses.
+
+Answer:
+
+Let $X$ be number of tosses at which it has landed Heads at least once and has landed Tails at least once. Suppose $X=k$, this can happen in two disjointed event that the $k$-th toss is Head others are Tails, or the $k$-th toss is Tail and others are Heads. That is
+$$
+P(X=k) = p q^{k-1} + q p^{k-1} = \frac{1}{2^{k-1}}, \qquad \text{for $k \gt 1$.}
+$$
+
+Therefore
+$$
+\mathbb{E}[X] = \sum_{k=2}^\infty \frac{k}{2^{k-1}}
+$$
+
+Let $r=1/2$, we have
+$$
+\mathbb{E}[X] = \sum_{k=2}^\infty k r^{k-1}
+$$
+
+Multiply both side by $r$:
+$$
+\begin{aligned}
+r \mathbb{E}[X]
+&= \sum_{k=2}^\infty k r^k \\
+&= \sum_{k=1}^\infty k r^k - r \\
+&= \frac{r}{(1-r)^2} -r
+\end{aligned}
+$$
+
+Divide both side by $r$, and substitute $r$, we have 
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \frac{1}{(1-r)^2} - 1 \\
+&= 3
+\end{aligned}
+$$
+
+### Q19
+
+A coin is tossed repeatedly until it lands Heads for the first time. Let $X$ be the number of tosses that are required (including the toss that landed Heads), and let $p$ be the probability of Heads, so that $X \sim \operatorname{FS}(p)$. Find the CDF of $X$, and for $p = 1/2$ sketch its graph.
+
+Answer:
+
+Let $q=1-p$, we have the PMF as:
+$$
+P(X=k) = p q^{k-1} \qquad \text{for $k \ge 1$}
+$$
+
+So the CDF is
+$$
+P(X \le x) = \sum_{k=1}^{\lfloor x \rfloor} p q^{k-1} = p \sum_{k=1}^{\lfloor x \rfloor} q^{k-1}  \qquad \text{for $x \ge 1$}
+$$
+
+To simplify the expression, consider that
+$$
+\sum_{k=0}^n q^k = \frac{1-q^{n+1}}{1-q}
+$$
+
+$$
+\sum_{k=0}^n q^{k-1} = \frac{1-q^{n+1}}{q (1-q)}
+$$
+
+$$
+\sum_{k=1}^n q^{k-1} = \frac{1-q^{n+1}}{q (1-q)} - \frac{1}{q} = \frac{1-q^{n+1} -(1-q)}{pq} = \frac{q - q^{n+1}}{pq} = \frac{1-q^n}{p}
+$$
+
+Using it, we have
+$$
+\begin{aligned}
+P(X \le x)
+&= p \sum_{k=1}^{\lfloor x \rfloor} q^{k-1} \\
+&= p \frac{1-q^{\lfloor x \rfloor}}{p} \\
+&= 1 - q^{\lfloor x \rfloor}  \qquad \text{for $x \ge 1$} \\
+\end{aligned}
+$$
+
+For $x \lt 1$, we have $P(X \le x) = 0$.
+
+### Q20
+
+Let $X \sim \operatorname{Bin}(100,0.9)$. For each of the following parts, construct an example showing that it is possible, or explain clearly why it is impossible. In this problem, $Y$ is a random variable on the same probability space as $X$; note that $X$ and $Y$ are not necessarily independent.
+
+(a) Is it possible to have $Y \sim \operatorname{Pois}(0.01)$ with $P(X \ge Y) = 1$?
+
+(b) Is it possible to have $Y \sim \operatorname{Bin}(100,0.5)$ with $P(X \ge Y) = 1$?
+
+(c) Is it possible to have $Y \sim \operatorname{Bin}(100,0.5)$ with $P(X \le Y) = 1$?
+
+Answer:
+
+(a)
+
+Impossible.
+
+Because $X \sim \operatorname{Bin}(100, 0.9)$, the support of $X$ is $\{0,1,\ldots,100\}$, because $P(X \ge Y) = 1$, we have $Y \le 100$. However, if $Y \sim \operatorname{Pois}(0.01)$, the support of $Y$ is $\{0,1,\ldots,\infty\}$.
+
+(b)
+
+Possible.
+
+Consider an example, in which $100$ people shipping from a website, each person has $0.9$ probability to buy something, after they buy something, it has $0.5 / 0.9$ probability to call for customer support later.
+
+Let $X$ be the number of person that willing to buy something. Let $Y$ be the number of customer support they call.
+
+(c)
+
+Impossible.
+
+Let $Z = Y - X$, If we have $P(X \le Y) = 1$, we have $\mathbb{E}[Z] \ge 0$. So we have
+$$
+\mathbb{E}[Z] = \mathbb{E}[Y] - \mathbb{E}[X] \ge 0
+$$
+
+But $\mathbb{E}[Y] = 100 \cdot 0.5 < \mathbb{E}[X] = 100 \cdot 0.9$.
+
+### Q21
+
+Let 
+$$
+X \sim \operatorname{Bin}(n,\frac{1}{2}) \quad \text{and} \quad Y \sim \operatorname{Bin}(n+1, \frac{1}{2}),
+$$
+independently.
+
+(a) Let $V = \min(X,Y)$ be the smaller of $X$ and $Y$, and let $W = \max(X,Y)$ be the
+larger of $X$ and $Y$. So if $X$ crystallizes to $x$ and $Y$ crystallizes to $y$, then $V$ crystallizes to $\min(x,y)$ and $W$ crystallizes to $\max(x,y)$. Find $E(V) + E(W)$.
+
+(b) Show that $\mathbb{E}[|X−Y|]= \mathbb{E}[W]−\mathbb{E}[V]$, with notation as in (a).
+
+Answer:
+
+(a)
+
+Note that, for any $x$ and $y$, we have
+$$
+\max(x, y) + \min(x, y) = x + y
+$$
+
+So, no matter what $X$ and $Y$ crystallize to, we have
+$$
+V + W = X + Y
+$$
+
+Therefore
+$$
+\mathbb{E}[V] + \mathbb{E}[W] = \mathbb{E}[X] + \mathbb{E}[Y] = \frac{2n + 1}{2}
+$$
+
+(b)
+
+Note that, for any $x$ and $y$, we have
+$$
+\max(x, y) - \min(x, y) = |x - y|
+$$
+
+So, no matter what $X$ and $Y$ crystallize to, we have
+$$
+W - V = |X - Y|
+$$
+
+Therefore
+$$
+\mathbb{E}[|X−Y|]= \mathbb{E}[W]−\mathbb{E}[V]
+$$
