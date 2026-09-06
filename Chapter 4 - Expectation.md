@@ -957,7 +957,7 @@ $$
 
 ### Negative Binomial
 
-Instead of waiting for the first success, wait until the $r$-th success.
+Number of failures before the $r$-th success.
 
 $$
 X \sim \operatorname{NBin}(r, p)
@@ -973,6 +973,26 @@ $$
 
 $$
 \operatorname{Var} = \frac{rq}{p^2}
+$$
+
+### First Success
+
+Number of trials that the first success appears.
+
+$$
+X \sim \operatorname{FS}(p)
+$$
+
+$$
+P(X=k) = q^{k-1}p
+$$
+
+$$
+\mathbb{E}[X] = \frac{1}{p}
+$$
+
+$$
+\operatorname{Var}(X) = \frac{q}{p^2}
 $$
 
 ### Poisson
@@ -1161,3 +1181,188 @@ Therefore
 $$
 \mathbb{E}[|X−Y|]= \mathbb{E}[W]−\mathbb{E}[V]
 $$
+
+### Q22
+
+Raindrops are falling at an average rate of $20$ drops per square inch per minute. What
+would be a reasonable distribution to use for the number of raindrops hitting a particular region measuring $5$ square inches in $t$ minutes? Why? Using your chosen distribution, compute the probability that the region has no rain drops in a given $3$-second time interval.
+
+Answer:
+
+It's reasonable to use Poisson distribution, because:
+
+1. We only knows the average rate in a interval.
+2. Each raindrops can drop at any time.
+3. Sum of Poisson is Poisson.
+
+Let $X$ be the number of raindrops per square inch per minute. We have
+$$
+X \sim \operatorname{Pois}(20)
+$$
+
+Let $Y$ be the number of raindrops in $5$ square inches in $3$ seconds. We have
+$$
+Y \sim \operatorname{Pois}(20 \cdot 5 \cdot \frac{3}{60})
+$$
+
+Therefore
+$$
+p_Y(5) = e^{-5}\frac{5^0}{0!} = e^{-5}
+$$
+
+### Q23
+
+Alice and Bob have just met, and wonder whether they have a mutual friend. Each
+has $50$ friends, out of $1000$ other people who live in their town. They think that it’s unlikely that they have a friend in common, saying "each of us is only friends with $5\%$ of the people here, so it would be very unlikely that our two $5\%$’s overlap.”
+
+Assume that Alice’s $50$ friends are a random sample of the $1000$ people (equally likely to be any $50$ of the $1000$), and similarly for Bob. Also assume that knowing who Alice’s friends are gives no information about who Bob’s friends are.
+
+(a) Compute the expected number of mutual friends Alice and Bob have.
+
+(b) Let $X$ be the number of mutual friends they have. Find the PMF of $X$.
+
+(c) Is the distribution of $X$ one of the important distributions we have looked at? If so, which?
+
+Answer:
+
+Without lost generality, we can describe the story like this. Let Bob choose $50$ friends randomly in the $1000$ people, mark them. Then Alice sample $50$ people from the $1000$ as friend. We'd like to see how many marked people in Alice's sample. This is a Hypergeometric distribution.
+
+Let $X$ be the number of mutual friends Alice and Bob have.
+$$
+X \sim \operatorname{HGeom}(50, 950, 50)
+$$
+
+(a)
+
+$$
+\mathbb{E}[X] = 50 \frac{50}{1000} = 2.5
+$$
+
+(b)
+$$
+P(X=k) = \frac{\binom{50}{k} \binom{950}{50-k}}{\binom{1000}{50}} \qquad \text{for $k = 0, 1, \ldots, 50$.}
+$$
+
+(c)
+
+As stated above, it is Hypergeometric distribution.
+
+### Q24
+
+Let $X \sim \operatorname{Bin}(n,p)$ and $Y \sim \operatorname{NBin}(r,p)$. Using a story about a sequence of Bernoulli trials, prove that $P(X \lt r) = P(Y \gt n−r)$.
+
+Answer:
+
+In the negative binomial, $Y$ is the number of failures before the $r$-th success.
+$$
+P(Y \gt n - r) = P(Y + r \gt n)
+$$
+
+That is we are count the probability that fewer than $r$ successes occur in the first $n$ independent Bernoulli trials. That is $P(X \lt r)$.
+
+### Q25
+
+Calvin and Hobbes play a match consisting of a series of games, where Calvin has probability $p$ of winning each game (independently). They play with a "win by two" rule: the first player to win two games more than his opponent wins the match. Find the expected number of games played.
+
+Hint: Consider the first two games as a pair, then the next two as a pair, etc.
+
+Answer:
+
+From Calvin's perspective, if the first two games are "win-win" or "lost-lost", the match ends. So we can take two games as a trail, the trial has $p^2 + (1-p)^2$ probability of success. We are trying to find the number of trials that the first success appears. This is First Success distribution.
+
+Let $X$ be number of trials that the first success appears.
+$$
+\mathbb{E}[X] = \frac{1}{p^2 + (1-p)^2}
+$$
+
+The number of games is $2X$, so expected number of games is
+$$
+\mathbb{E}[2X] = \frac{2}{p^2 + (1-p)^2}
+$$
+
+### Q26
+
+Nick and Penny are independently performing independent Bernoulli trials. For concreteness, assume that Nick is flipping a nickel with probability $p_1$ of Heads and Penny is flipping a penny with probability $p_2$ of Heads. Let $X_1,X_2,\ldots$ be Nick’s results and $Y_1,Y_2,\ldots$ be Penny’s results, with $X_i \sim \operatorname{Bern}(p_1)$ and $Y_j \sim \operatorname{Bern}(p_2)$.
+
+(a) Find the distribution and expected value of the first time at which they are simultaneously successful, i.e., the smallest $n$ such that $X_n = Y_n = 1$.
+
+Hint: Define a new sequence of Bernoulli trials and use the story of the Geometric.
+
+(b) Find the expected time until at least one has a success (including the success).
+
+Hint: Define a new sequence of Bernoulli trials and use the story of the Geometric.
+
+(c) For $p_1 = p_2$, find the probability that their first successes are simultaneous, and use this to find the probability that Nick’s first success precedes Penny’s.
+
+Answer:
+
+(a)
+
+They both success with probability $p_1 p_2$. Let $B$ be the turns that they both success, this turn to a First Success distribution:
+$$
+B \sim \operatorname{FS}(p_1 p_2)
+$$
+
+The PMF is:
+$$
+P(B=k) = (1-p_2 p_2)^{k-1}(p_1 p_2) \qquad \text{for $k=1,2,\ldots,\infty$.}
+$$
+
+The expectation is:
+$$
+\mathbb{E}[X] = \frac{1}{p_1 p_2}
+$$
+
+(b)
+
+Let $q_1 = 1-p_1$ and $q_2 = 1 - p_2$, and let $B$ be the number of trials until at least one has a success. Same as First Success distribution but with different probability:
+$$
+B \sim \operatorname{FS}(1-q_1 q_2)
+$$
+
+$$
+\mathbb{E}[B] = \frac{1}{1 - q_1 q_2}
+$$
+
+(c)
+
+Let $p = p_1 = p_2$, and $q = (1-p_1) = (1-p_2)$
+
+Their first successes can occur simultaneously at trial $1,2,\ldots$. Summing these probabilities is the the probability is the probability that their first successes are simultaneous.
+
+Let $B_i$ be the event that their first successes occurs simultaneously at trial $i$.
+$$
+P(B_i) = (q^{i-1} p)^2 \qquad \text{for $i=1,2,\ldots$.}
+$$
+
+Summing $B_i$, we have
+$$
+\begin{aligned}
+\sum_{i=1}^\infty (q^{i-1} p)^2
+&= p^2 \sum_{i=1}^\infty q^{2i-2} \\
+&= \frac{p^2}{q^2} \sum_{i=1}^\infty (q^2)^i \\
+&= \frac{p^2}{q^2} (\frac{1}{1-q^2} -1) \\
+&= \frac{p^2}{q^2} \frac{q^2}{1-q^2} \\
+&= \frac{p^2}{1-q^2} \\
+&= \frac{p}{2-p}
+\end{aligned}
+$$
+
+So, the probability that their first success do not appear simultaneously is
+$$
+1- \frac{p}{2-p} = \frac{2-2p}{2-p}
+$$
+
+Because they have the same probability of success, by symmetry, the Nick’s first success precedes Penny’s is
+$$
+\frac{1-p}{2-p}
+$$
+
+### Q27
+
+Let $X$ and $Y$ be $\operatorname{Pois}(\lambda)$ r.v.s, and $T = X + Y$. Suppose that $X$ and $Y$ are not independent, and in fact $X = Y$. Prove or disprove the claim that $T \sim \operatorname{Pois}(2 \lambda)$ in this
+scenario.
+
+Answer:
+
+The support of $T$ is $0, 2, 4, \ldots$, which is not the support of Poisson.
