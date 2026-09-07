@@ -1366,3 +1366,192 @@ scenario.
 Answer:
 
 The support of $T$ is $0, 2, 4, \ldots$, which is not the support of Poisson.
+
+### Q28
+
+William is on a treasure hunt. There are $t$ pieces of treasure, each of which is hidden in one of $n$ locations. William searches these locations one by one, without replacement, until he has found all the treasure. (Assume that no location contains more than one piece of treasure, and that William will find the treasure piece when he searches a location that does have treasure.) Let $X$ be the number of locations that William searches during his treasure hunt. Find the distribution of $X$, and find $\mathbb{E}(X)$.
+
+Answer:
+
+In the $X$-th location there must be a treasure, and in the previous $X-1$ locations there must be $t-1$ treasures. Because the hunter searches the location without replacement, the probability of treasure in a location is dependent. Instead, we can think of assigning the treasure to the locations randomly and each assignment is equally likely. So there are
+$$
+\binom{n}{t}
+$$
+possible assignments.
+Let $L_k$ be the event that the location $k$ contains a treasure and all the other treasures are located on the, say left. By the naive definition of probability we have
+$$
+P(L_k) = \frac{\binom{k-1}{t-1}}{\binom{n}{t}} \qquad \text{for $t \le k \le n$.}
+$$
+
+By the definition expectation we have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{k=t}^n k P(X=k) \\
+&= \sum_{k=t}^n k P(L_k) \\
+&= \sum_{k=t}^n k \frac{\binom{k-1}{t-1}}{\binom{n}{t}} \\
+&= t \sum_{k=t}^n \frac{\binom{k}{t}}{\binom{n}{t}} \\
+&= \frac{t} {\binom{n}{t}} \sum_{k=t}^n \binom{k}{t} \\
+&= \frac{t \binom{n+1}{t+1}}{\binom{n}{t}} \\
+&= t \frac{(n+1)!}{(n-t)! (t+1)!} \frac{(n-t)! t!}{n!} \\
+&= t \frac{(n+1)!}{(t+1)!} \frac{t!}{n!} \\
+&= t \frac{n+1}{t+1}
+\end{aligned}
+$$
+
+### Q29
+
+Let $X \sim \operatorname{Geom}(p)$, and define the function $f$ by $f(x) = P(X=x)$, for all real x. Find $\mathbb{E}[f(X)]$. (The notation $f(X)$ means first evaluate $f(x)$ in terms of $p$ and $x$, and then plug in $X$ for $x$; it is not correct to say "$f(X) = P(X= X) = 1$".)
+
+Answer:
+
+Because X is a r.v. so does $f(X)$.
+Because the notation $f(X)$ means first evaluate $f(x)$ in terms of $p$ and $x$, and then plug in $X$ for $x$, we have:
+$$
+f(X) = pq^X
+$$
+
+By LOTUS, suppose $k$ is a value in the support of $X$, that means the transformation in LOTUS is $pq^k$, so we have
+$$
+\begin{aligned}
+\mathbb{E}[f(X)]
+&= \sum_{k=0}^{\infty} pq^k P(X=k) \\
+&= p^2 \sum_{k=0}^{\infty} (q^2)^k \\
+&= \frac{p^2}{1-q^2}
+\end{aligned}
+$$
+
+### Q30
+
+(a) Use LOTUS to show that for $X \sim \operatorname{Pois}(\lambda)$ and any function $g$,
+$$
+\mathbb{E}[X g(X)] = \lambda \mathbb{E}[g(X+ 1)],
+$$
+assuming that both sides exist. This is called the Stein-Chen identity for the Poisson.
+
+(b) Find the third moment $\mathbb{E}[X^3]$ for $X \sim \operatorname{Pois}(\lambda)$ by using the identity from (a) and a bit of algebra to reduce the calculation to the fact that $X$ has mean $\lambda$ and variance $\lambda$.
+
+Answer:
+
+(a)
+
+By LOTUS we have
+$$
+\begin{aligned}
+\mathbb{E}[X g(X)]
+&= \sum_{k=0}^\infty k g(k) P(X=k) = \sum_{k=1}^\infty k g(k) P(X=k)\\
+&= \sum_{k=1}^\infty k g(k) e^{-\lambda} \frac{\lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=1}^\infty g(k) \frac{\lambda^k}{(k-1)!} \\
+&= e^{-\lambda} \sum_{j=0}^\infty g(j+1) \frac{\lambda^{j+1}}{j!} & \text
+{reindex $k=j+1$} \\
+&= \lambda e^{-\lambda} \sum_{j=0}^\infty g(j+1) \frac{\lambda^j}{j!} & \text{move a $\lambda$ out}
+
+\end{aligned}
+$$
+
+By LOTUS we also have
+$$
+\begin{aligned}
+\lambda \mathbb{E}[g(X+ 1)]
+&= \lambda \sum_{k=0}^\infty g(k+1) P(X=k) \\
+&= \lambda e^{-\lambda} \sum_{k=0}^\infty g(k+1) \frac{\lambda^k}{k!}
+\end{aligned}
+$$
+
+Therefore
+$$
+\mathbb{E}[X g(X)] = \lambda \mathbb{E}[g(X+ 1)],
+$$
+
+(b)
+
+First, Let $g(X) = X^2$, we have
+
+$$
+\begin{aligned}
+\mathbb{E}[X^3]
+&= \mathbb{E}[X g(X)] \\
+&= \lambda \mathbb{E}[g(X+ 1)] \\
+&= \lambda \mathbb{E}[(X+1)^2] \\
+&= \lambda \mathbb{E}[X^2 + 2X + 1] \\
+&= \lambda (\mathbb{E}[X^2] + 2\mathbb{E}[X] + 1) \\
+&= \lambda (\mathbb{E}[X^2] + 2\lambda + 1)
+\end{aligned}
+$$
+
+Because
+$$
+\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \mathbb{E}[X^2] - \lambda^2 = \lambda
+$$
+We have $\mathbb{E}[X^2] = \lambda + \lambda^2$.
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X^3]
+&= \lambda (\mathbb{E}[X^2] + 2\lambda + 1) \\
+&= \lambda (\lambda + \lambda^2 + 2\lambda +1) \\
+&= \lambda^3 + 3 \lambda^2 + \lambda
+\end{aligned}
+$$
+
+### Q31
+
+In many problems about modeling count data, it is found that values of zero in the data are far more common than can be explained well using a Poisson model (we can make
+$P(X = 0)$ large for $X \sim \operatorname{Pois}(\lambda)$ by making $\lambda$ small, but that also constrains the mean and variance of $X$ to be small since both are $\lambda$). The _Zero-Inflated Poisson_ distribution is a modification of the Poisson to address this issue, making it easier to handle frequent zero values gracefully.
+
+A Zero-Inflated Poisson r.v. $X$ with parameters $p$ and $\lambda$ can be generated as follows. First flip a coin with probability of $p$ of Heads. Given that the coin lands Heads, $X = 0$. Given that the coin lands Tails, $X$ is distributed $\operatorname{Pois}(\lambda)$. Note that if $X = 0$ occurs, there are two possible explanations: the coin could have landed Heads (in which case the zero is called a structural zero), or the coin could have landed Tails but the Poisson r.v. turned out to be zero anyway. For example, if $X$ is the number of chicken sandwiches consumed by a random person in a week, then $X = 0$ for vegetarians (this is a structural zero), but a chicken-eater could still have $X = 0$ occur by chance (since they might happen not to eat any chicken sandwiches that week).
+
+(a) Find the PMF of a Zero-Inflated Poisson r.v. $X$.
+
+(b) Explain why $X$ has the same distribution as $(1−I)Y$, where $I \sim \operatorname{Bern}(p)$ is independent of $Y \sim \operatorname{Pois}(\lambda)$.
+
+(c) Find the mean of $X$ in two different ways: directly using the PMF of $X$, and using the representation from (b). For the latter, you can use the fact (which we prove in Chapter 7) that if r.v.s $Z$ and $W$ are independent, then $\mathbb{E}[ZW] = \mathbb{E}[Z] \mathbb{E}[W]$.
+
+(d) Find the variance of $X$.
+
+Answer:
+
+Let $q=1-p$, and let $H$ be the event that the first independent Bernoulli trial is success. Conditon on $H$ we have
+
+$$
+\begin{aligned}
+P(X=k)
+&= P(X=k \mid H) P(H) + P(X=k \mid H^c) P(H^c) \\
+&=
+\begin{cases}
+q e^{-\lambda} \frac{\lambda^k}{k!} & \text{for $k = 1, 2, \ldots,$} \\
+p + qe^{-\lambda} & \text{$k=0$}
+\end{cases}
+\end{aligned}
+$$
+
+(b)
+
+Checking $k=0$:
+$$
+\begin{aligned}
+P((1-I)Y = 0)
+&= P(\{Y=0\} \cup \{1-I = 0\}) \\
+&= P(Y=0) + P(1-I=0) - P(\{Y=0\} \cap \{1-I = 0\}) \\
+&= P(Y=0) + P(1-I=0) - P(Y=0) P(1-I = 0) \\
+
+&= e^{-\lambda} + p - pe^{-\lambda} \\
+&= p + q e^{-\lambda}
+\end{aligned}
+$$
+
+Checking $k=1,2,\ldots$.
+$$
+\begin{aligned}
+P((1-I)Y = k)
+&= P(\{Y=k\} \cap \{I = 0\}) \\
+&= P(Y=k)P(I=0) \\
+&= q e^{-\lambda} \frac{\lambda^k}{k!} \\
+\end{aligned}
+$$
+
+So they have the same PMF.
+
+
+
