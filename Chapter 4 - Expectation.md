@@ -1512,7 +1512,7 @@ A Zero-Inflated Poisson r.v. $X$ with parameters $p$ and $\lambda$ can be genera
 
 Answer:
 
-Let $q=1-p$, and let $H$ be the event that the first independent Bernoulli trial is success. Conditon on $H$ we have
+Let $q=1-p$, and let $H$ be the event that the coin lands Head. Conditon on $H$ we have
 
 $$
 \begin{aligned}
@@ -1553,5 +1553,256 @@ $$
 
 So they have the same PMF.
 
+(c)
 
+By the PMF of $X$ we have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{k=1}^\infty k q e^{-\lambda} \frac{\lambda^k}{k!} \\
+&= q e^{-\lambda} \sum_{k=1}^\infty k \frac{\lambda^k}{k!} \\
+&= q e^{-\lambda} \sum_{k=1}^\infty \frac{\lambda^k}{(k-1)!} \\
+&= q e^{-\lambda} \sum_{j=0}^\infty \frac{\lambda^{j+1}}{j!} & \text{reindex as $j=k-1$.} \\
+&= q e^{-\lambda} \lambda e^{\lambda} & \text{by Taylor series.} \\
+&= q \lambda
+\end{aligned}
+$$
 
+By linearity and independent of r.v. we have:
+$$
+\begin{aligned}
+\mathbb{E}[(1−I)Y]
+&= \mathbb{E}[Y] - \mathbb{E}[I] \mathbb{E}[Y] \\
+&= \lambda - p \lambda \\
+&= q \lambda
+\end{aligned}
+$$
+
+(d)
+
+By linearity, we have
+$$
+\begin{aligned}
+\mathbb{E}[X^2] 
+&= \mathbb{E}[(1-I)^2 Y^2] \\
+&= \mathbb{E}[1-2I+I^2] \mathbb{E}[Y^2] \\
+&= \mathbb{E}[1-I] \mathbb{E}[Y^2] \\
+&= q \lambda(1+\lambda)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\operatorname{Var}[X] 
+&= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+&= q \lambda(1+\lambda) - (q \lambda)^2 \\
+&= q \lambda (1 + \lambda - q \lambda) \\
+&= q \lambda (1+p \lambda) \\
+&= q \lambda + pq \lambda^2
+\end{aligned}
+$$
+
+### Q32
+
+A discrete distribution has the _memoryless property_ if for $X$ a random variable with that distribution, $P(X \ge j+ k \mid X \ge j) = P(X \ge k)$ for all nonnegative integers $j$, $k$.
+
+(a) If $X$ has a memoryless distribution with CDF $F$ and PMF $p_i = P(X = i)$, find an expression for $P(X \ge j+ k)$ in terms of $F(j)$, $F(k)$, $p_j$, $p_k$.
+
+(b) Name a discrete distribution which has the memoryless property. Justify your answer with a clear interpretation in words or with a computation.
+
+Answer:
+
+$$
+\begin{aligned}
+P(X \ge j+k)
+&= P(X \ge j+k \mid X \ge j) P(X \ge j) + P(X \ge j+k \mid X \lt j) P(X \lt j) \\
+&= P(X \ge k) P(X \ge j)\\\
+&= (1 - F(k) + p_k) (1 - F(j) + p_j)
+\end{aligned} 
+$$
+
+(b)
+
+Geometric distribution is memoryless. The each trial is independent, whenever you get a Tail, the game just reset to it's initial state.
+
+### Q33
+
+Find values of $w$,$b$,$r$ such that the Negative Hypergeometric distribution with parameters $w$,$b$,$r$ reduces to a Discrete Uniform on $\{0,1,\ldots,n\}$. Justify your answer both in terms of the story of the Negative Hypergeometric and in terms of its PMF.
+
+Answer:
+
+Suppose there are $n$ black balls and $1$ white ball in urn. Drawing the balls from the urn randomly and without replacement. Let $X$ be the number of black balls before the drawing the white ball. In this case, we have $w=1$, $b=n$ and $r=1$.
+
+Alternatively, we can think that we keep drawing the balls untill the urn is empty, it doesn't change $X$. Think of the balls lined up in the random order, the order in which they will be drawn. The single white ball can be at any location, assume the location start from $1$ to $n+1$, the number of black balls on the left of white balls is $0,\ldots,n$, they are equally likely, so it's also a Discrete Uniform on $\{0,1,\ldots,n\}$.
+
+$$
+X \sim \operatorname{NHGeom}(1, n, 1)
+$$
+
+$$
+\begin{aligned}
+P(X=k)
+&= \frac{\binom{1+k-1}{1-1} \binom{1+n-1-k}{1-1}}{\binom{1+n}{1}} \\
+&= \frac{\binom{k}{0} \binom{n-k}{0}}{\binom{n+1}{n}} \\
+&= \frac{1}{n+1}
+\end{aligned}
+$$
+for $k=0,\ldots,n$, otherwise $P(X=k) = 0$.
+
+Also
+$$
+X \sim \operatorname{DUnif}(C) \qquad \text{where $C = \{0,1,2,\ldots,n\}$}
+$$
+
+In this case
+$$
+P(X=k) = \frac{1}{|C|} = \frac{1}{n+1}
+$$
+for $k=0,\ldots,n$, otherwise $P(X=k) = 0$.
+
+## Indicator r.v.s
+
+### Q34
+
+Randomly, $k$ distinguishable balls are placed into $n$ distinguishable boxes, with all possibilities equally likely. Find the expected number of empty boxes.
+
+Answer:
+
+Let $X$ be number of the empty boxes. Let $E_i$ be the indicator that the $i$-th box is empty. So we have
+$$
+X=\sum_{i=1}^n E_i
+$$
+
+For each of the balls, a box only have $1/n$ chance to get it. The probability that the box keeps empty is
+$$
+(\frac{n-1}{n})^k
+$$
+
+By the fundamental bridge and linearity of expectation we have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=1}^n (\frac{n-1}{n})^k \\
+&= n (\frac{n-1}{n})^k
+\end{aligned}
+$$
+
+### Q35
+
+A group of $50$ people are comparing their birthdays (as usual, assume their birthdays
+are independent, are not February 29, etc.). Find the expected number of pairs of people with the same birthday, and the expected number of days in the year on which at least two of these people were born.
+
+Answer:
+
+Let $X$ be the number of pairs of people with the same birthday. There are 
+$$
+\binom{50}{2}
+$$
+different pairs. Let $S_i$ be the indicator that the $i$-th pair has the same birthday, we have
+$$
+X= S_1 + S_2 + \ldots + S_k \qquad \text{for $k=\binom{50}{2}$.}
+$$
+
+In a particular pair, fixing the birthday of one person, the other person only has $1/356$ chance to have the same birthday.
+$$
+P(S_i) = \frac{1}{365} \qquad \text{for all $i$.}
+$$
+
+By the foundamential bridge and linearity of expectation, we have
+$$
+\mathbb{E}[X] = \binom{50}{2} \frac{1}{365}
+$$
+
+Let $Y$ be the number of days in the year on which at least two of these people were born. Let $E_i$ be indicator that the $i$-th day be the birthday to at least two people. We have
+$$
+Y = \sum_{i=1}^{365} E_i
+$$
+
+Randomly assign the people to the 365 days, for a particular day the probability that nobody been assigned to it is
+$$
+(\frac{364}{365})^{50}
+$$
+
+The probability that a person, say Bob, is assigned to it and the other 49 people are not been assigned to it is
+$$
+\frac{1}{365}(\frac{364}{365})^{49}
+$$
+And we to consider all the 50 person, so the probability that exactly one person was born on this day is
+$$
+\frac{50}{365}(\frac{364}{365})^{49}
+$$
+
+These two cases are disjoint, so we have
+$$
+\begin{aligned}
+P(E_i)
+&= 1 - (\frac{364}{365})^{50} - \frac{50}{365}(\frac{364}{365})^{49} \\
+&= \frac{365^{50} - 364^{50} - 50 \cdot 364^{49}}{365^{50}} & \text{for all $i$.}
+\end{aligned}
+$$
+
+By the fundamental bridge and linearity of expectation, we have
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= 365 \frac{365^{50} - 364^{50} - 50 \cdot 364^{49}}{365^{50}} \\
+&= \frac{365^{50} - 364^{50} - 50 \cdot 364^{49}}{365^{49}}
+\end{aligned}
+$$
+
+### Q36
+
+A group of $n \ge 4$ people are comparing their birthdays (as usual, assume their
+birthdays are independent, are not February 29, etc.). Let $I_{ij}$ be the indicator r.v. of $i$ and $j$ having the same birthday (for $i \lt j$). Is $I_{12}$ independent of $I_{34}$? Is $I_{12}$ independent of $I_{13}$? Are the $I_{ij}$ independent?
+
+Answer:
+
+First checking if $I_{12}$ is independent of $I_{34}$.
+$$
+P(I_{12} = 1 \mid I_{34} = 1) = \frac{P(\{I_{12} = 1\} \cap \{I_{34} = 1\})}{P(I_{34} =1)}
+$$
+
+$I_{12}$ depends only on the birthdays of persons 1 and 2, while $I_{34}$ depends only on the birthdays of persons 3 and 4, and those two groups of birthdays are independent by the model. Therefore the two events are independent.
+$$
+P(\{I_{12} = 1\} \cap \{I_{34} = 1\}) = P(I_{12} = 1) P(I_{34} = 1)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(I_{12} = 1 \mid I_{34} = 1)
+&= \frac{P(I_{12} = 1) P(I_{34} = 1)}{P(I_{34} =1)} \\
+&= P(I_{12} = 1)
+\end{aligned}
+$$
+
+Therefore $I_{12}$ and $I_{34}$ are independent.
+
+Next checking if $I_{12}$ is independent of $I_{13}$.
+$$
+P(I_{12} = 1 \mid I_{13} = 1) = \frac{P(\{I_{12} = 1\} \cap \{I_{13} = 1\})}{P(I_{13} =1)}
+$$
+
+The event $\{I_{12} = 1\} \cap \{I_{13} = 1\}$ means that the three people have the same birthday. The probability of this event is
+$$
+(\frac{1}{365})^2
+$$
+
+We also have
+$$
+P(I_{12} = 1) = P(I_{13} = 1) = \frac{1}{365}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(I_{12} = 1 \mid I_{13} = 1)
+&= \frac{(\frac{1}{365})^2}{\frac{1}{365}} \\
+&= \frac{1}{365} \\
+&= P(I_{12} = 1)
+\end{aligned}
+$$
+
+So $I_{12}$ and $I_{13}$ are independent.
+
+But $I_{ij}$ are not independent. Because if we know $I_{12}=1$ and $I_{13}=1$, we must have $I_{23} = 1$.
