@@ -1806,3 +1806,203 @@ $$
 So $I_{12}$ and $I_{13}$ are independent.
 
 But $I_{ij}$ are not independent. Because if we know $I_{12}=1$ and $I_{13}=1$, we must have $I_{23} = 1$.
+
+### Q37
+
+A total of $20$ bags of Haribo gummi bears are randomly distributed to $20$ students.
+Each bag is obtained by a random student, and the outcomes of who gets which bag
+are independent. Find the average number of bags of gummi bears that the first three
+students get in total, and find the average number of students who get at least one bag.
+
+Answer:
+
+Let $O_i$ be the indicator that the $i$-th bag of Haribo gummi bear is obtained by the first three students. By symmetry we have
+$$
+P(O_i = 1) = \frac{3}{20} \qquad \text{for $i=1,2,\ldots,20$.} 
+$$
+
+Let $X$ be the number of bags of gummi bears that the first three students get in total. By linearity of expectation and fundamental bridge we have
+$$
+\begin{aligned}
+\mathbb{E}[X] = \sum_{i=1}^{20} \mathbb{E}[O_i] = 20 \cdot \frac{3}{20} = 3
+\end{aligned}
+$$
+
+To find the average number of students who get at least one bag, we can find the complement that the number of students that do obtain any bags. Let $E_i$ be the indicator that student $i$ doesn't obtain any bags.
+$$
+P(E_i = 1) = (\frac{19}{20})^{20}
+$$
+
+By the linearity of expectation and fundamental bridge, the average number of students who get at least one bag is
+$$
+20- 20 \mathbb{E}[E_i] = 20 - 20 (\frac{19}{20})^{20}
+$$
+
+### Q38
+
+Each of $n \ge 2$ people puts their name on a slip of paper (no two have the same name).
+The slips of paper are shuffled in a hat, and then each person draws one (uniformly at
+random at each stage, without replacement). Find the average number of people who
+draw their own names.
+
+Answer:
+
+Each person has $1/n$ to draw his name. By linearity and fundamental bridge, the average number of people who draw their own names is
+$$
+n \cdot \frac{1}{n} = 1
+$$
+
+### Q39
+
+Two researchers independently select simple random samples from a population of size
+$N$, with sample sizes $m$ and $n$ (for each researcher, the sampling is done without replacement, with all samples of the prescribed size equally likely). Find the expected size of the overlap of the two samples.
+
+Answer:
+
+Let $I_i$ be the indicator that the population member $i$ was sampled by both researchers.
+$$
+P(I_i = 1) = \frac{m}{N} \frac{n}{N} = \frac{m n}{N^2}
+$$
+
+Let $X$ be the number of overlapped samples.
+$$
+\mathbb{E}[X] = \sum_{i=1}^N\mathbb{E}[I_i] = \sum_{i=1}^N P(I_i = 1) = \frac{mn}{N}
+$$
+
+### Q40
+
+In a sequence of n independent fair coin tosses, what is the expected number of occurrences of the pattern "HTH" (consecutively)? Note that overlap is allowed, e.g., $HTHTH$ contains two overlapping occurrences of the pattern.
+
+Answer:
+
+Let $I_i$ be the indicator that the pattern occurs at location $i$. Although $I_i$ are independent but we can still use the linearity of expectation. Let $X$ be the number of the patterns, we have
+$$
+\mathbb{E}[X] = \sum_{i=1}^{n-2} \mathbb{E}[I_i] = \sum_{i=1}^{n-2} P(I_i = 1) = \frac{n-2}{8}
+$$
+
+### Q41
+
+You have a well-shuffled 52-card deck. On average, how many pairs of adjacent cards are there such that both cards are red?
+
+Answer:
+
+Let $I_i$ be the indicator that the $i$-th card and $i+1$-th card are both red. For $1 \le i \le 51$, we have
+$$
+P(I_i = 1) = \frac{26}{52} \frac{25}{51}
+$$
+
+Let $X$ be the number of pairs of adjacent cards that both cards are red.
+$$
+\mathbb{E}[X] = \sum_{i=1}^{51} \mathbb{E}[I_i] = \sum_{i=1}^{51} P(I_i=1) = 51 \frac{26}{52} \frac{25}{51} = \frac{25}{2}
+$$
+
+### Q42
+
+Suppose there are $n$ types of toys, which you are collecting one by one. Each time you
+collect a toy, it is equally likely to be any of the $n$ types. What is the expected number
+of distinct toy types that you have after you have collected $t$ toys? (Assume that you
+will definitely collect $t$ toys, whether or not you obtain a complete set before then.)
+
+Answer:
+
+Let $I_i$ be the indicator that type $i$ is collected. $X$ be the total collected types. For each type we have
+$$
+P(I_i = 1) = 1 - (\frac{n-1}{n})^t \qquad \text{for $i=1,2,\ldots,n$.}
+$$
+
+By the linearity of expecation and fundamental bridge we have
+$$
+\mathbb{E}[X] = \sum_{i=1}^n \mathbb{E}[I_i] = n (1 - (\frac{n-1}{n})^t) = n - \frac{(n-1)^t}{n^{t-1}}
+$$
+
+### Q43
+
+A building has $n$ floors, labeled $1,2,\ldots,n$. At the first floor, $k$ people enter the elevator, which is going up and is empty before they enter. Independently, each decides which of floors $2,3,\ldots,n$ to go to and presses that button (unless someone has already pressed it).
+
+(a) Assume for this part only that the probabilities for floors $2,3,\ldots,n$ are equal. Find the expected number of stops the elevator makes on floors $2,3,\ldots,n$.
+
+(b) Generalize (a) to the case that floors $2,3,\ldots,n$ have probabilities $p_2,\ldots,p_n$ (respectively); you can leave your answer as a finite sum.
+
+Answer:
+
+(a)
+
+Let $I_i$ be the indicator that the elevator will stop at floor $i$. Let $X$ be the total number of stops, so
+$$
+X=\sum_{i=2}^n I_i
+$$
+
+The probability that the elevator stop at floor $i$ is, is complement of the probability that nobody go to the $i$-th floor.
+$$
+P(I_i = 1) = 1-(\frac{n-2}{n-1})^k
+$$
+
+Therefore, we have
+$$
+\mathbb{E}[X]=\sum_{i=2}^n \mathbb{E}[I_i] = (n-1)(1-(\frac{n-2}{n-1})^k) = n-1-\frac{(n-2)^k}{(n-1)^{k-1}}
+$$
+
+(b)
+
+For the $i$-th floor, the probability that nobody choose it is
+$$
+(1-p_i)^k
+$$
+So we have
+$$
+P(I_i = 1) = 1-(1-p_i)^k
+$$
+
+Therefore, we have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&=\sum_{i=2}^n \mathbb{E}[I_i] \\
+&= \sum_{i=2}^n 1-(1-p_i)^k \\
+&= n-1 - \sum_{i=2}^n (1-p_i)^k \\
+\end{aligned}
+$$
+
+### Q44
+
+There are $100$ shoelaces in a box. At each stage, you pick two random ends and
+tie them together. Either this results in a longer shoelace (if the two ends came from
+diﬀerent pieces), or it results in a loop (if the two ends came from the same piece).
+What are the expected number of steps until everything is in loops, and the expected
+number of loops after everything is in loops? (This is a famous interview problem; leave
+the latter answer as a sum.)
+
+Hint: For each step, create an indicator r.v. for whether a loop was created then, and
+note that the number of free ends goes down by 2 after each step.
+
+Answer:
+
+It's impossible for you to end up with two free ends after all the steps, and each step reduce two free ends, so the number of steps to make everything in loops is
+$$
+\frac{2 \cdot 100}{2} = 100
+$$
+
+Let $I_i$ be the indicator that step $i$ creates the loop ($i$ starts from $1$). And before the step $i$ is performed, there are 
+$$
+200 - 2(i-1) = 202 - 2i
+$$
+free ends. That means there are
+$$
+\frac{202-2i}{2} = 101 - i
+$$
+lines. There are
+$$
+\binom{202-2i}{2}
+$$
+possible choices to choose two free ends, and only $99-i$ of the choices create a loop. Therefore
+$$
+P(I_i) = \frac{101-i}{\binom{202-2i}{2}}
+$$
+
+Let $X$ be the number of loops in the end, we have
+$$
+\begin{aligned}
+\mathbb{E}[X] = \sum_{i=1}^{100} \mathbb{E}[I_i] = \sum_{i=1}^{100} \frac{101-i}{\binom{202-2i}{2}}
+\end{aligned}
+$$
+
