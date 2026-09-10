@@ -1996,13 +1996,285 @@ $$
 $$
 possible choices to choose two free ends, and only $99-i$ of the choices create a loop. Therefore
 $$
-P(I_i) = \frac{101-i}{\binom{202-2i}{2}}
+\begin{aligned}
+P(I_i)
+&= \frac{101-i}{\binom{202-2i}{2}} \\
+&= \frac{2(101-i)}{2(101-i) (201-2i)} \\
+&= \frac{1}{201-2i}
+\end{aligned}
 $$
 
 Let $X$ be the number of loops in the end, we have
 $$
 \begin{aligned}
-\mathbb{E}[X] = \sum_{i=1}^{100} \mathbb{E}[I_i] = \sum_{i=1}^{100} \frac{101-i}{\binom{202-2i}{2}}
+\mathbb{E}[X] = \sum_{i=1}^{100} \mathbb{E}[I_i] = \sum_{i=1}^{100} \frac{1}{201-2i}
 \end{aligned}
 $$
+
+### Q45
+
+Show that for any events $A_1,\ldots,A_n$,
+$$
+P(A_1 \cap A_2 \ldots \cap A_n) \ge \sum_{j=1}^n P(A_j) - n + 1.
+$$
+
+Hint: First prove a similar-looking statement about indicator r.v.s, by interpreting what
+the events $I(A_1 \cap A_2 \ldots \cap A_n) = 1$ and $I(A_1 \cap A_2 \ldots \cap A_n) = 0$ mean.
+
+Answer:
+
+Let $I_1, I_2, \ldots I_n$ be the indicators of event $A_1,\ldots,A_n$. 
+
+Consider the statement
+$$
+I(A_1 \cap A_2 \ldots \cap A_n) \ge \sum_{j=1}^n I(A_j) - n + 1.
+$$
+
+For the outcome that $A_1,\ldots,A_n$ all happened, we have
+$$
+1 \ge n-n+1
+$$
+
+Suppose only $k$ of them happened, for $0 \le k \lt n$, we have
+$$
+0 \ge k - n + 1
+$$
+
+That means 
+$$
+I(A_1 \cap A_2 \ldots \cap A_n) \ge \sum_{j=1}^n I(A_j) - n + 1
+$$
+holds for all the possible outcomes. Then if we take expectation we have
+$$
+\mathbb{E}[I(A_1 \cap A_2 \ldots \cap A_n)] \ge \sum_{j=1}^n \mathbb{E}[I(A_j)] - n + 1
+$$
+
+So we have
+$$
+P(A_1 \cap A_2 \ldots \cap A_n) \ge \sum_{j=1}^n P(A_j) - n + 1
+$$
+
+### Q46
+
+You have a well-shuffled 52-card deck. You turn the cards face up one by one, without
+replacement. What is the expected number of non-aces that appear before the first ace?
+What is the expected number between the first ace and the second ace?
+
+Answer:
+
+Let $X$ be the number of non-aces appear before the first ace. We have
+$$
+X \sim \operatorname{NHGeom}(4, 48, 1)
+$$
+
+And we have
+$$
+\mathbb{E}[X] = \frac{rb}{w+1} = \frac{48}{5}
+$$
+
+Let $Y$ be the number of non-aces appear between the first and second ace. Let $Z$ be the number of non-aces appear before the second ace. We have $Y = Z - X$.
+$$
+\mathbb{E}[Y] = \mathbb{E}[Z] - \mathbb{E}[X]
+$$
+
+Because $Z \sim \operatorname{NHGeom}(4,48,2)$, we have
+$$
+\mathbb{E}[Z] = \frac{rb}{w+1} = \frac{96}{5}
+$$
+
+Therefore
+$$
+\mathbb{E}[Y] = \mathbb{E}[Z] - \mathbb{E}[X] = \frac{96}{5} - \frac{48}{5} = \frac{48}{5}
+$$
+
+Sanity check, the aces separates the line into 5 regions, by symmetry each region should have the same expected length.
+
+### Q47
+
+You are being tested for psychic powers. Suppose that you do not have psychic powers.
+A standard deck of cards is shuffled, and the cards are dealt face down one by one. Just
+after each card is dealt, you name any card (as your prediction). Let $X$ be the number
+of cards you predict correctly. (See Diaconis [5] for much more about the statistics of
+testing for psychic powers.)
+
+(a) Suppose that you get no feedback about your predictions. Show that no matter what
+strategy you follow, the expected value of $X$ stays the same; find this value. (On the
+other hand, the variance may be very diﬀerent for diﬀerent strategies. For example, saying “Ace of Spades” every time gives variance $0$.)
+
+Hint: Indicator r.v.s.
+
+(b) Now suppose that you get partial feedback: after each prediction, you are told
+immediately whether or not it is right (but without the card being revealed). Suppose
+you use the following strategy: keep saying a specific card’s name (e.g., “Ace of Spades”)
+until you hear that you are correct. Then keep saying a diﬀerent card’s name (e.g., “Two
+of Spades”) until you hear that you are correct (if ever). Continue in this way, naming
+the same card over and over again until you are correct and then switching to a new
+card, until the deck runs out. Find the expected value of $X$, and show that it is very
+close to $e−1$.
+
+Hint: Indicator r.v.s.
+
+(c) Now suppose that you get complete feedback: just after each prediction, the card is
+revealed. Call a strategy “stupid” if it allows, e.g., saying “Ace of Spades” as a guess
+after the Ace of Spades has already been revealed. Show that any non-stupid strategy
+gives the same expected value for $X$; find this value.
+
+Hint: Indicator r.v.s.
+
+Answer:
+
+(a)
+
+Let $I_i$ be the indicator that the guess to the $i$-th card is correct. No matter which card you guess this time $P(I_i = 1) = 1/52$.
+
+Therefore the total number of success guesses is
+$$
+\sum_{i=1}^{52} = 52 \frac{1}{52} = 1
+$$
+
+(b)
+
+Suppose your strategy is first guess card 1 till success, then guess card 2 till success, keep like this, and card 52 till success (if possible).
+
+Let $C_i$ be the indicator that you guess correctly to the card $i$. Then we have
+$$
+X=\sum_{j=1}^{52} C_j
+$$
+
+Because you will always be able to guess correctly for card 1, so 
+$$
+P(C_1 = 1) = 1
+$$
+
+For the card 2 to be guessed correctly, we need card 1 be guessed correctly and card 2 must be on the right of the card 1, Card 1 divides the sequence into two region, by symmetry card 2 is equally likely to be in any of the regions,
+$$
+P(C_2 = 1) = P(C_1 = 1) \frac{1}{2} = 1 \cdot \frac{1}{2} = \frac{1}{2!}
+$$
+
+Similarly, we have
+$$
+P(C_3 = 1) = P(C_2=1) = 1 \cdot \frac{1}{2} \cdot \frac{1}{3} = \frac{1}{3!}
+$$
+
+Generally, we have
+$$
+P(C_n = 1) = \frac{1}{n!} \qquad \text{for $1 \le n \le 52$.}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=1}^{52} \mathbb{E}[C_i] \\
+&= \sum_{i=1}^{52} P(C_i = 1) \\
+&= \sum_{i=1}^{52} \frac{1}{i!}
+\end{aligned}
+$$
+
+The Taylor series for $e^x$ is
+$$
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!} \qquad \text{for all $x$.}
+$$
+
+When $x = 1$ we have
+$$
+e = \sum_{n=0}^\infty \frac{1}{n!} = 1 + \sum_{n=1}^\infty \frac{1}{n!}
+$$
+
+Therefore
+$$
+e - 1 \approx \mathbb{E}[X] = \sum_{i=1}^{52} \frac{1}{i!}
+$$
+
+(c)
+
+Let $I_i$ be the indicator that your guess to the $i$-th card is correct. At step $i$, there are $52-i+1$ cards left unrevealed, so we have
+$$
+P(I_i = 1) = \frac{1}{53-i}
+$$
+
+$$
+\mathbb{E}[X] = \sum_{i=1}^{52} \mathbb{E}[I_i] = \sum_{i=1}^{52} \frac{1}{53-i}
+$$
+
+### 48
+
+Let $X$ be Hypergeometric with parameters $w$, $b$, $n$.
+
+(a) Find $\mathbb{E}[\binom{X}{2}]$ by thinking, without any complicated calculations.
+
+(b) Use (a) to find the variance of $X$. You should get
+$$
+\operatorname{Var}(X) = \frac{N-n}{N-1} npq,
+$$
+where $N=w+b$, $p=w/N$, $q=1-p$.
+
+Answer:
+
+(a)
+
+$\binom{X}{2}$ means we sample $n$ balls, among the white balls in the sample, count the number of pairs. Let $I_i$ be the pair $i$ been in the sample. we have
+$$
+\binom{X}{2} = \sum_{i=1}^{Z} I_i \qquad \text{$Z=\binom{w}{2}$.}
+$$
+
+Now consider the probability that a pair is in the sample. The first one can be in any place of the sample, so
+$$
+P(\text{first ball of the pair in the sample}) = \frac{w}{w+b}
+$$
+When the first ball is in the sample, there are only $n-1$ places in the sample for the second ball, so
+$$
+P(\text{second ball in the sample} \mid \text{first ball in the sample}) = \frac{w-1}{w+b-1}
+$$
+
+Therefore
+$$
+P(I_i) = \frac{w}{w+b} \frac{w-1}{w+b-1}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[\binom{X}{2}]
+&= \sum_{i=1}^{\binom{n}{2}} \frac{w}{w+b} \frac{w-1}{w+b-1} \\
+&= \binom{n}{2} \frac{w}{w+b} \frac{w-1}{w+b-1}
+\end{aligned}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+\mathbb{E}[\binom{X}{2}]
+&= \mathbb{E}[\frac{X^2-X}{2}] \\
+&= \frac{1}{2} (\mathbb{E}[X^2] - \mathbb{E}[X]) \\
+&= \binom{n}{2} \frac{n}{N} \frac{n-1}{N-1}
+\end{aligned}
+$$
+
+Because
+$$
+\mathbb{E}[X] = np
+$$
+
+we have
+$$
+\begin{aligned}
+\mathbb{E}[X^2] 
+&= 2 \binom{n}{2} p \frac{w-1}{N-1} + np \\
+&= \frac{n(n-1)p(w-1)}{N-1} + np
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\operatorname{Var}[X] 
+&= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+&= \frac{n(n-1)p(w-1)}{N-1} + np - n^2p^2 \\
+&= np (\frac{(n-1)(w-1)}{N-1} + 1 - np) \\
+&= \ldots \\
+&= \frac{N-n}{N-1} npq
+\end{aligned}
+$$
+
 
