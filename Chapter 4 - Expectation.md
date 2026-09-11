@@ -2197,7 +2197,7 @@ $$
 \mathbb{E}[X] = \sum_{i=1}^{52} \mathbb{E}[I_i] = \sum_{i=1}^{52} \frac{1}{53-i}
 $$
 
-### 48
+### Q48
 
 Let $X$ be Hypergeometric with parameters $w$, $b$, $n$.
 
@@ -2277,4 +2277,212 @@ $$
 \end{aligned}
 $$
 
+### Q49
 
+There are $n$ prizes, with values $\$1,\$2,\ldots,\$n$. You get to choose $k$ random prizes,
+without replacement. What is the expected total value of the prizes you get?
+
+Hint: Express the total value in the form $a_1 I_1+\ldots+a_n I_n$, where the $a_j$ are constants and the $I_j$ are indicator r.v.s. Or find the expected value of the $j$-th prize received directly.
+
+Answer:
+
+Let $I_i$ be the indicator that prize $i$ been chosen. Let $X$ be the total values of the prizes you get, we have
+$$
+X = \sum_{i=1}^n i I_i
+$$
+
+For each prize we have
+$$
+P(I_i = 1) = \frac{k}{n}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=1}^n i \mathbb{E}[I_i] \\
+&= \sum_{i=1}^n i \frac{k}{n} \\
+&= \frac{k}{n} \frac{n(n+1)}{2} \\
+&= \frac{k(n+1)}{2}
+\end{aligned}
+$$
+
+### Q50
+
+Ten random chords of a circle are chosen, independently. To generate each of these
+chords, two independent uniformly random points are chosen on the circle (intuitively,
+“uniformly” means that the choice is completely random, with no favoritism toward
+certain angles; formally, it means that the probability of any arc is proportional to the
+length of that arc). On average, how many pairs of chords intersect?
+
+Hint: Consider two random chords. An equivalent way to generate them is to pick four
+independent uniformly random points on the circle, and then pair them up randomly.
+
+Answer:
+
+There are 
+$$
+\binom{10}{2}
+$$
+different 2 pairs chords. Let $I_i$ be the indicator that the chords intersect. Let $X$ be the number of pairs of chords intersect, we have
+$$
+X= \sum_{i=1}^{\binom{10}{2}} I_i
+$$
+For a pair of chords, there are 4 points. Consider the possible ways to generate the two chords. Fixing a point among the 4 points, choosing it's end among the other 3 points, only when the end is the middle points among the 3 points that makes the two chords intersect. Therefore
+$$
+P(I_i = 1) = \frac{1}{3}
+$$
+
+Therefore
+$$
+\mathbb{E}[X] = \sum_{i=1}^{\binom{10}{2}} \mathbb{E}[I_i] = \sum_{i=1}^{\binom{10}{2}} P(I_i = 1) = \binom{10}{2} \frac{1}{3} = 15
+$$
+
+### Q51
+
+A hash table is being used to store the phone numbers of $k$ people, storing each
+person’s phone number in a uniformly random location, represented by an integer between 1 and $n$ (see Exercise 27 from Chapter 1 for a description of hash tables). Find the expected number of locations with no phone numbers stored, the expected number with exactly one phone number, and the expected number with more than one phone number (should these quantities add up to $n$?).
+
+Answer:
+
+Let $A_i$ be the indicator that the location $i$ is empty. Let $X$ be number of empty locations, we have
+$$
+X=\sum_{i=1}^n A_i
+$$
+
+$$
+P(A_i = 1) = (\frac{n-1}{n})^k
+$$
+
+Therefore
+$$
+\mathbb{E}[X] = \sum_{i=1}^n (\frac{n-1}{n})^k = \frac{(n-1)^k}{n^{k-1}}
+$$
+
+Let $B_i$ be the indicator that the location $i$ contains exactly $1$ phone number. Let $Y$ be the number of locations that contains exactly 1 phone numbers. So we have
+$$
+Y=\sum_{i=1}^n B_i
+$$
+
+The number of possible assignments for $k$ numbers to $n$ locations is
+$$
+n^k
+$$
+
+For exactly one phone number been assigned to a particular location, other phone numbers must be assigned to the rest of the locations, so we have:
+$$
+\begin{aligned}
+P(B_i = 1)
+&= k \frac{(n-1)^{k-1}}{n^k} \\
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= \sum_{i=1}^n P(B_i = 1) \\
+&= k \frac{(n-1)^{k-1}}{n^{k-1}} \\
+\end{aligned}
+$$
+
+Let $Z$ be number of locations that contain more than one phone number, we have
+$$
+Z = n-X-Y
+$$
+
+$$
+\begin{aligned}
+\mathbb{E}[Z] 
+&= n - \mathbb{E}[X] - \mathbb{E}[Y] \\
+&= n - \frac{(n-1)^k}{n^{k-1}} - k \frac{(n-1)^{k-1}}{n^{k-1}} \\
+&= \frac{n^k - (n-1)^k - k(n-1)^{k-1}}{n^{k-1}}
+\end{aligned}
+$$
+
+### Q52
+
+A coin with probability $p$ of Heads is flipped $n$ times. The sequence of outcomes can be divided into runs (blocks of H’s or blocks of T’s), e.g.,
+$\text{HHHTTHTTTH}$ becomes $\text{HHH}$, $\text{TT}$, $\text{H}$, $\text{TTT}$, and $\text{H}$, which has 5 runs. Find the expected number of runs.
+
+Hint: Start by finding the expected number of tosses (other than the first) where the outcome is diﬀerent from the previous one.
+
+Answer:
+
+Let $H_i$ be the event that location $i$ is Head. Let $I_i$ be the indicator that location $i$ is different from location $i-1$. For $2 \le i \le n$, we have
+$$
+\begin{aligned}
+P(I_i = 1) 
+&= P(H_i^c \mid H_{i-1}) P(H_{i-1}) + P(H_i \mid H_{i-1}^c) P(H_{i-1}^c) \\
+&= (1-p)p + p(1-p) \\
+&= 2p (1- p)
+\end{aligned}
+$$
+
+Let $X$ be the number of runs, we have
+$$
+\mathbb{E}[X] = 1 + \sum_2^n \mathbb{E}[I_i] = \sum_2^n P(I_i = 1) = 1 + 2(n-1) p (1-p)
+$$
+
+### Q53
+
+A coin with probability $p$ of Heads is flipped $4$ times. Let $X$ be the number of occurrences of $\text{HH}$ (for example, $\text{THHT}$ has $1$ occurrence and $\text{HHHH}$ has 3 occurrences). Find $\mathbb{E}[X]$ and $\operatorname{Var}(X)$.
+
+Answer:
+
+Let $q=1-p$. Let $I_i$ be the indicator that location $i$ and $i-1$ forms a $\text{HH}$, for $2 \le i \le 4$. Let $H_i$ be the event that location $i$ is Head. Conditioned on previous location we have
+$$
+\begin{aligned}
+P(I_i = 1) 
+&= P(I_i = 1 \mid H_{i-1}) P(H_{i-1}) + P(I_i = 1 \mid H_{i-1}) P(H_{i-1}) \\
+&= pp + o \\
+&= p^2
+\end{aligned}
+$$
+
+Let $X$ be the number of $\text{HH}$, we have
+$$
+X=\sum_{2}^4 I_i
+$$
+
+So we have
+$$
+\mathbb{E}[X] =\sum_{2}^4 \mathbb{E}[I_i] =\sum_{2}^4 P(I_i = 1) = 3p^2
+$$
+
+Let $Y=\binom{X}{2}$. For $Y \ne 0$, the result must be $THHH$, $HHHT$, or $HHHH$.
+$$
+P(Y=1) = P(\text{THHH}) + P(\text{HHHT}) = 2qp^3
+$$
+$$
+P(Y=3) = P(\text{HHHH}) = p^4
+$$
+
+Therefore
+$$
+\mathbb{E}[\binom{X}{2}] = 1P(Y=1) + 3P(Y=3) = 2qp^3 + 3 p^4
+$$
+
+We also have
+$$
+\mathbb{E}[\binom{X}{2}] = \frac{\mathbb{E}[X^2 - X]}{2}
+$$
+
+So we have
+$$
+\begin{aligned}
+\mathbb{E}[X^2]
+&= 2(2qp^3 + 3 p^4) + \mathbb{E}[X] \\
+&= 4qp^3 + 6p^4 + 3p^2
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+\operatorname{Var}(X)
+&= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+&= 4qp^3 + 6p^4 + 3p^2 - 9p^4 \\
+&= 4qp^3 + 3p^2 - 3p^4
+\end{aligned}
+$$
