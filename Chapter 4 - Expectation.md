@@ -995,6 +995,27 @@ $$
 \operatorname{Var}(X) = \frac{q}{p^2}
 $$
 
+### Negative Hypergeometric
+
+An urn contains $w$ white balls and $b$ black balls, which are randomly drawn one by one without replacement, until $r$ white balls have been obtained. The number of black balls drawn before drawing the $r$-th white ball has a Negative Hypergeometric distribution with parameters $w,b,r$.
+
+$$
+X \sim \operatorname{NHGeom}(w,b,r)
+$$
+
+$$
+P(X=k) = \frac{\binom{w}{r-1} \binom{b}{k}}{\binom{w+b}{r+k-1}} \cdot \frac{w-r+1}{w+b-r-k+1}
+$$
+
+Alternatively
+$$
+P(X=k) = \frac{\binom{r+k-1}{r-1} \binom{w+b-r-k}{w-r}}{\binom{w+b}{w}}
+$$
+
+$$
+\mathbb{E}[X] = \frac{rb}{w+1}
+$$
+
 ### Poisson
 
 Count how many relatively rare events occur in some interval.
@@ -1046,7 +1067,7 @@ r \mathbb{E}[X]
 \end{aligned}
 $$
 
-Divide both side by $r$, and substitute $r$, we have 
+Divide both side by $r$, and substitute $r$, we have
 $$
 \begin{aligned}
 \mathbb{E}[X]
@@ -1135,7 +1156,7 @@ But $\mathbb{E}[Y] = 100 \cdot 0.5 < \mathbb{E}[X] = 100 \cdot 0.9$.
 
 ### Q21
 
-Let 
+Let
 $$
 X \sim \operatorname{Bin}(n,\frac{1}{2}) \quad \text{and} \quad Y \sim \operatorname{Bin}(n+1, \frac{1}{2}),
 $$
@@ -1583,7 +1604,7 @@ $$
 By linearity, we have
 $$
 \begin{aligned}
-\mathbb{E}[X^2] 
+\mathbb{E}[X^2]
 &= \mathbb{E}[(1-I)^2 Y^2] \\
 &= \mathbb{E}[1-2I+I^2] \mathbb{E}[Y^2] \\
 &= \mathbb{E}[1-I] \mathbb{E}[Y^2] \\
@@ -1593,7 +1614,7 @@ $$
 
 $$
 \begin{aligned}
-\operatorname{Var}[X] 
+\operatorname{Var}[X]
 &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
 &= q \lambda(1+\lambda) - (q \lambda)^2 \\
 &= q \lambda (1 + \lambda - q \lambda) \\
@@ -1618,7 +1639,7 @@ P(X \ge j+k)
 &= P(X \ge j+k \mid X \ge j) P(X \ge j) + P(X \ge j+k \mid X \lt j) P(X \lt j) \\
 &= P(X \ge k) P(X \ge j)\\\
 &= (1 - F(k) + p_k) (1 - F(j) + p_j)
-\end{aligned} 
+\end{aligned}
 $$
 
 (b)
@@ -1694,7 +1715,7 @@ are independent, are not February 29, etc.). Find the expected number of pairs o
 
 Answer:
 
-Let $X$ be the number of pairs of people with the same birthday. There are 
+Let $X$ be the number of pairs of people with the same birthday. There are
 $$
 \binom{50}{2}
 $$
@@ -1818,7 +1839,7 @@ Answer:
 
 Let $O_i$ be the indicator that the $i$-th bag of Haribo gummi bear is obtained by the first three students. By symmetry we have
 $$
-P(O_i = 1) = \frac{3}{20} \qquad \text{for $i=1,2,\ldots,20$.} 
+P(O_i = 1) = \frac{3}{20} \qquad \text{for $i=1,2,\ldots,20$.}
 $$
 
 Let $X$ be the number of bags of gummi bears that the first three students get in total. By linearity of expectation and fundamental bridge we have
@@ -1982,7 +2003,7 @@ $$
 \frac{2 \cdot 100}{2} = 100
 $$
 
-Let $I_i$ be the indicator that step $i$ creates the loop ($i$ starts from $1$). And before the step $i$ is performed, there are 
+Let $I_i$ be the indicator that step $i$ creates the loop ($i$ starts from $1$). And before the step $i$ is performed, there are
 $$
 200 - 2(i-1) = 202 - 2i
 $$
@@ -2023,7 +2044,7 @@ the events $I(A_1 \cap A_2 \ldots \cap A_n) = 1$ and $I(A_1 \cap A_2 \ldots \cap
 
 Answer:
 
-Let $I_1, I_2, \ldots I_n$ be the indicators of event $A_1,\ldots,A_n$. 
+Let $I_1, I_2, \ldots I_n$ be the indicators of event $A_1,\ldots,A_n$.
 
 Consider the statement
 $$
@@ -2040,7 +2061,7 @@ $$
 0 \ge k - n + 1
 $$
 
-That means 
+That means
 $$
 I(A_1 \cap A_2 \ldots \cap A_n) \ge \sum_{j=1}^n I(A_j) - n + 1
 $$
@@ -2141,7 +2162,7 @@ $$
 X=\sum_{j=1}^{52} C_j
 $$
 
-Because you will always be able to guess correctly for card 1, so 
+Because you will always be able to guess correctly for card 1, so
 $$
 P(C_1 = 1) = 1
 $$
@@ -2260,7 +2281,7 @@ $$
 we have
 $$
 \begin{aligned}
-\mathbb{E}[X^2] 
+\mathbb{E}[X^2]
 &= 2 \binom{n}{2} p \frac{w-1}{N-1} + np \\
 &= \frac{n(n-1)p(w-1)}{N-1} + np
 \end{aligned}
@@ -2268,7 +2289,7 @@ $$
 
 $$
 \begin{aligned}
-\operatorname{Var}[X] 
+\operatorname{Var}[X]
 &= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
 &= \frac{n(n-1)p(w-1)}{N-1} + np - n^2p^2 \\
 &= np (\frac{(n-1)(w-1)}{N-1} + 1 - np) \\
@@ -2320,7 +2341,7 @@ independent uniformly random points on the circle, and then pair them up randoml
 
 Answer:
 
-There are 
+There are
 $$
 \binom{10}{2}
 $$
@@ -2393,7 +2414,7 @@ $$
 
 $$
 \begin{aligned}
-\mathbb{E}[Z] 
+\mathbb{E}[Z]
 &= n - \mathbb{E}[X] - \mathbb{E}[Y] \\
 &= n - \frac{(n-1)^k}{n^{k-1}} - k \frac{(n-1)^{k-1}}{n^{k-1}} \\
 &= \frac{n^k - (n-1)^k - k(n-1)^{k-1}}{n^{k-1}}
@@ -2412,7 +2433,7 @@ Answer:
 Let $H_i$ be the event that location $i$ is Head. Let $I_i$ be the indicator that location $i$ is different from location $i-1$. For $2 \le i \le n$, we have
 $$
 \begin{aligned}
-P(I_i = 1) 
+P(I_i = 1)
 &= P(H_i^c \mid H_{i-1}) P(H_{i-1}) + P(H_i \mid H_{i-1}^c) P(H_{i-1}^c) \\
 &= (1-p)p + p(1-p) \\
 &= 2p (1- p)
@@ -2433,7 +2454,7 @@ Answer:
 Let $q=1-p$. Let $I_i$ be the indicator that location $i$ and $i-1$ forms a $\text{HH}$, for $2 \le i \le 4$. Let $H_i$ be the event that location $i$ is Head. Conditioned on previous location we have
 $$
 \begin{aligned}
-P(I_i = 1) 
+P(I_i = 1)
 &= P(I_i = 1 \mid H_{i-1}) P(H_{i-1}) + P(I_i = 1 \mid H_{i-1}) P(H_{i-1}) \\
 &= pp + o \\
 &= p^2
@@ -2486,3 +2507,267 @@ $$
 &= 4qp^3 + 3p^2 - 3p^4
 \end{aligned}
 $$
+
+### Q54
+
+A population has $N$ people, with ID numbers from $1$ to $N$. Let $y_j$ be the value of some
+numerical variable for person $j$, and
+$$
+\bar{y} = \frac{1}{N} \sum_{j=1}^N y_j
+$$
+
+be the population average of the quantity. For example, if $y_j$ is the height of person $j$ then $y^{}$ is the average height in the population, and if $y_j$ is $1$ if person $j$ holds a certain belief and $0$ otherwise, then $\bar{y}$ is the proportion of people in the population who hold that
+belief. In this problem, $y_1,y_2,\ldots,y_n$ are thought of as constants rather than random
+variables.
+
+A researcher is interested in learning about $\bar{y}$, but it is not feasible to measure $y_j$ for all $j$. Instead, the researcher gathers a random sample of size $n$, by choosing people one at a time, with equal probabilities at each stage and without replacement. Let $W_j$ be the value of the numerical variable (e.g., height) for the $j$-th person in the sample. Even though $y_1,\ldots,y_n$ are constants, $W_j$ is a random variable because of the random sampling. A natural way to estimate the unknown quantity $\bar{y}$ is using
+$$
+W^{} = \frac{1}{n} \sum_{j=1}^n W_j
+$$
+
+Show that $\mathbb{E}[W^{}] = \bar{y}$ in two diﬀerent ways:
+
+(a) by directly evaluating $\mathbb{E}[W_j]$ using symmetry;
+
+(b) by showing that $\bar{W}$ can be expressed as a sum over the population by writing
+$$
+\bar{W} = \frac{1}{n} \sum_{j=1}^N I_j y_j
+$$
+where $I_j$ is the indicator of person $j$ being included in the sample, and then using
+linearity and the fundamental bridge.
+
+Answer:
+
+(a)
+
+Each person in the population is equally like to be any of $W_j$, so we have
+$$
+\mathbb{E}[W_j] = \frac{1}{N} y_1 + \frac{1}{N} y_1 + \ldots + \frac{1}{N} y_N = \bar{y}
+$$
+
+Therefore
+$$
+\mathbb{E}[W] = \frac{1}{n} \sum_{j=1}^n \bar{y} = \bar{y}
+$$
+
+(b)
+
+Let $I_j$ be the indicator that person $j$ is included in the sample. So sum of the sample value is
+$$
+\sum_{j=1}^N I_j y_j
+$$
+
+Therefore
+$$
+W = \frac{1}{n} \sum_{j=1}^N I_j y_j
+$$
+
+Taking expectation to both sides
+$$
+\mathbb{E}[W] = \frac{1}{n} \sum_{j=1}^N y_j P(I_j = 1)
+$$
+
+Since $P(I_j = 1) = n/N$, we have
+$$
+\begin{aligned}
+\mathbb{E}[W] 
+&= \frac{1}{n} \sum_{j=1}^N y_j \frac{n}{N} \\
+&= \frac{1}{n} \frac{n}{N} \sum_{j=1}^N y_j \\
+&= \frac{1}{N} \sum_{j=1}^N y_j \\
+&= \bar{y}
+\end{aligned}
+$$
+
+### Q55
+
+Consider the following algorithm, known as bubble sort, for sorting a list of $n$ distinct numbers into increasing order. Initially they are in a random order, with all orders equally likely. The algorithm compares the numbers in positions 1 and 2, and swaps them if needed, then it compares the new numbers in positions 2 and 3, and swaps them if needed, etc., until it has gone through the whole list. Call this one “sweep” through the list. After the first sweep, the largest number is at the end, so the second sweep (if needed) only needs to work with the first $n−1$ positions. Similarly, the third sweep (if needed) only needs to work with the first $n−2$ positions, etc. Sweeps are performed until $n−1$ sweeps have been completed or there is a swapless sweep.
+For example, if the initial list is $53241$ (omitting commas), then the following 4 sweeps
+are performed to sort the list, with a total of 10 comparisons:
+$$
+53241 \to 35241 \to 32541 \to 32451 \to 32415. \\
+32415 \to 23415 \to 23415 \to 23145. \\
+23145 \to 23145 \to 21345. \\
+21345 \to 12345.
+$$
+
+(a) An inversion is a pair of numbers that are out of order (e.g., 12345 has no inversions, while 53241 has 8 inversions). Find the expected number of inversions in the original list.
+
+(b) Show that the expected number of comparisons is between $\frac{1}{2} \binom{n}{2}$ and $\binom{n}{2}$
+
+Hint: For one bound, think about how many comparisons are made if $n−1$ sweeps are done; for the other bound, use Part (a).
+
+Answer:
+
+(a)
+
+Let $I_i$ be the indicator that are pair of numbers are out of order. By symmetry we have
+$$
+P(I_i = 1) = \frac{1}{2}
+$$
+
+Let $X$ be the number of inversions, we have
+$$
+X = \sum_{i=1}^{\binom{n}{2}} I_i 
+$$
+
+So we have
+$$
+\mathbb{E}[X] = \sum_{i=1}^{\binom{n}{2}} \mathbb{E}[I_i] = \sum_{i=1}^{\binom{n}{2}} P(I_i = 1) = \binom{n}{2} \frac{1}{2} = \frac{n(n-1)}{4}
+$$
+
+(b)
+
+Let $X$ be the number of comparsions.
+
+The largest number will be removed from a sweep, and all the other numbers keeps in the same order, that means the remaining numbers doesn't become more ordered or less ordered, they keeps the random order as before.
+
+If the sequence is in reverse order the comparisons is
+$$
+(n-1) + (n-2) + \ldots + 1 = \binom{n}{2},
+$$
+so we have
+$$
+X \le \binom{n}{2}
+$$
+
+The expected inversions is
+$$
+\frac{n(n-1)}{4} = \frac{1}{2} \binom{n}{2}
+$$
+
+Each inversion requires a swap, and each swap requires a comparsions. but a comparsion may not result a swap, so we have
+$$
+X \ge \frac{1}{2} \binom{n}{2}
+$$
+
+Take expectation we have
+$$
+\frac{1}{2} \binom{n}{2} \le \mathbb{E}[X] \le \binom{n}{2}
+$$
+
+### Q56
+
+A certain basketball player practices shooting free throws over and over again. The shots
+are independent, with probability $p$ of success.
+
+(a) In $n$ shots, what is the expected number of streaks of $7$ consecutive successful shots?
+(Note that, for example, 9 in a row counts as 3 streaks.)
+
+(b) Now suppose that the player keeps shooting until making 7 shots in a row for the first time. Let $X$ be the number of shots taken. Show that $\mathbb{E}[X] \le 7/p^7$.
+
+Hint: Consider the first 7 trials as a block, then the next 7 as a block, etc.
+
+Answer:
+
+(a)
+
+Let $I_i$ be the indicator that it forms a $7$ consecutive shots at the $i$-th shot, for $7 \le i \le n$. Let $X$ be the number of $7$ consecutive shots in $n$ shots, we have
+$$
+X = \sum_{i = 7}^n I_i
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i = 7}^n \mathbb{E}[I_i]
+&= \sum_{i = 7}^n P(I_i = 1) \\
+&= \sum_{i = 7}^n p^7 \\
+&= (n-6) p^7
+\end{aligned} 
+$$
+
+(b)
+
+Consider to put 7 trials as a block, and let $I_i$ be the indicator that the block $i$ is a 7 consecutive successful shots. Let $Y$ be the number of blocks until making a block which is a 7 consecutive successful shots. We have
+$$
+Y \sim \operatorname{FS}(p^7)
+$$
+
+and
+$$
+\mathbb{E}[Y] = \frac{1}{p^7}
+$$
+
+Let $X$ be the number of shots untill 7 consecutive successful shots. Obviously, we have
+$$
+X \le 7Y
+$$
+
+Therefore
+$$
+\mathbb{E}[X] \le 7\mathbb{E}[Y] = \frac{7}{p^7}
+$$
+
+### Q57
+
+An urn contains red, green, and blue balls. Balls are chosen randomly with replacement (each time, the color is noted and then the ball is put back). Let $r,g,b$ be the probabilities of drawing a red, green, blue ball, respectively ($r + g + b= 1$).
+
+(a) Find the expected number of balls chosen before obtaining the first red ball, not including the red ball itself.
+
+(b) Find the expected number of diﬀerent colors of balls obtained before getting the first red ball.
+
+(c) Find the probability that at least $2$ of $n$ balls drawn are red, given that at least $1$ is red.
+
+Answer:
+
+(a)
+
+Let $X$ be the number of balls chosen before obtaining the first red ball, we have
+$$
+X \sim \operatorname{Geom}(r)
+$$
+
+Therefore
+$$
+\mathbb{E}[X] = \frac{1-r}{r}
+$$
+
+(b)
+
+Let $I_g$ and $I_b$ be the indicator that the green ball and blue ball occurs before the first red ball respectively.
+
+Suppose the red ball occurs at location $i$, for $i \ge 1$ and the previous $i-1$ locations, the probability that it contains blue balls is complemented to the probability that it contains all the green balls. Therefore the probability is
+$$
+\begin{aligned}
+P(I_b = 1)
+&= 1-\sum_{i=1}^\infty g^{i-1} r \\
+&= 1-r (\sum_{j=0}^\infty g^j) \\
+&= 1-\frac{r}{1-g} \\
+&= \frac{b}{1-g} \\
+&= \frac{b}{r+b}
+\end{aligned}
+$$
+
+Similarly
+$$
+P(I_g = 1) = \frac{g}{r+g}
+$$
+
+Let $X$ be the number of different colors of the balls before the first red ball. We have
+$$
+X=I_g + I_b
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X] 
+&= \mathbb{E}[I_g] + \mathbb{E}[I_b] \\
+&= P(I_g = 1) + P(I_b = 1) \\
+&= \frac{b}{r+b} + \frac{g}{r+g}
+\end{aligned}
+$$
+
+(c)
+
+$$
+\begin{aligned}
+P(\text{at least $2$ red} \mid \text{at least 1 red})
+&=\frac{P(\{\text{at least $2$ red}\} \cap \{\text{at least $1$ red}\})}{P(\text{at least 1 red})} \\
+&= \frac{P(\text{at least $2$ red})}{P(\text{at least 1 red})} \\
+&= \frac{1 - P(\text{no red}) - P(\text{only 1 red})}{1 - P(\text{no red})} \\
+&= \frac{1 - (1-r)^n - nr(1-r)^{n-1}}{1-(1-r)^n}
+\end{aligned}
+$$
+
