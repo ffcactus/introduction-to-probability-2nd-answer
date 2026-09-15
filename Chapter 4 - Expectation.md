@@ -2570,7 +2570,7 @@ $$
 Since $P(I_j = 1) = n/N$, we have
 $$
 \begin{aligned}
-\mathbb{E}[W] 
+\mathbb{E}[W]
 &= \frac{1}{n} \sum_{j=1}^N y_j \frac{n}{N} \\
 &= \frac{1}{n} \frac{n}{N} \sum_{j=1}^N y_j \\
 &= \frac{1}{N} \sum_{j=1}^N y_j \\
@@ -2607,7 +2607,7 @@ $$
 
 Let $X$ be the number of inversions, we have
 $$
-X = \sum_{i=1}^{\binom{n}{2}} I_i 
+X = \sum_{i=1}^{\binom{n}{2}} I_i
 $$
 
 So we have
@@ -2674,7 +2674,7 @@ $$
 &= \sum_{i = 7}^n P(I_i = 1) \\
 &= \sum_{i = 7}^n p^7 \\
 &= (n-6) p^7
-\end{aligned} 
+\end{aligned}
 $$
 
 (b)
@@ -2752,7 +2752,7 @@ $$
 Therefore
 $$
 \begin{aligned}
-\mathbb{E}[X] 
+\mathbb{E}[X]
 &= \mathbb{E}[I_g] + \mathbb{E}[I_b] \\
 &= P(I_g = 1) + P(I_b = 1) \\
 &= \frac{b}{r+b} + \frac{g}{r+g}
@@ -2785,7 +2785,7 @@ Answer:
 
 Note that $X=n$ means the $n$-th candidate is better than $C_1$ and $C_1$ is better than the rest
 $$
-C_n \gt C_1 \gt \text{everybody else}. 
+C_n \gt C_1 \gt \text{everybody else}.
 $$
 It is not simpliy that
 $$
@@ -2802,7 +2802,7 @@ $$
 P(X \gt n) = \frac{1}{n} \qquad \text{for $n \gt 0$.}
 $$
 
-To win $C_1$, we need $X > 1$, so $P(X > 0) = 1$. Therefore 
+To win $C_1$, we need $X > 1$, so $P(X > 0) = 1$. Therefore
 $$
 \mathbb{E}[X] = 1+ \sum_{n=1}^\infty \frac{1}{n}
 $$
@@ -2851,47 +2851,90 @@ $$
 
 So we have
 $$
-P(X \le 23) \approx 0.507 \ge 0.5 \qquad \text{and} \qquad P(X \le 23) \ge 0.5
+P(X \le 23) \approx 0.507 \ge 0.5 \qquad \text{and} \qquad P(X \ge 23) \ge 0.5
 $$
 
 Therefore, 23 is the unique median of $X$.
 
+(b), (c) and (d)
+
+Skip
+
+### Q60
+
+Elk dwell in a certain forest. There are $N$ elk, of which a simple random sample of size $n$ is captured and tagged (so all $\binom{N}{n}$ sets of $n$ elk are equally likely). The captured elk
+are returned to the population, and then a new sample is drawn. This is an important method that is widely used in ecology, known as capture-recapture. If the new sample is also a simple random sample, with some fixed size, then the number of tagged elk in the new sample is Hypergeometric.
+
+For this problem, assume that instead of having a fixed sample size, elk are sampled one by one without replacement until $m$ tagged elk have been recaptured, where $m$ is specified in advance (of course, assume that $1 \le m \le n \le N$). An advantage of this sampling method is that it can be used to avoid ending up with a very small number of tagged elk (maybe even zero), which would be problematic in many applications of capture-recapture. A disadvantage is not knowing how large the sample will be.
+
+(a) Find the PMFs of the number of untagged elk in the new sample (call this $X$) and of the total number of elk in the new sample (call this $Y$).
+
+(b) Find the expected sample size $\mathbb{E}[Y]$ using symmetry, linearity, and indicator r.v.s.
+
+(c) Suppose that $m,n,N$ are such that $\mathbb{E}[Y]$ is an integer. If the sampling is done with
+a fixed sample size equal to $\mathbb{E}[Y]$ rather than sampling until exactly $m$ tagged elk are
+obtained, find the expected number of tagged elk in the sample. Is it less than $m$, equal
+to $m$, or greater than $m$ (for $n \lt N$)?
+
+Answer:
+
+(a)
+
+We have
+$$
+X \sim \operatorname{NHGeom}(n, N-n, m)
+$$
+
+Therefore
+$$
+P(X=k) = \frac{\binom{n}{m-1} \binom{N-n}{k}}{\binom{N}{m+k-1}} \cdot \frac{n-m+1}{N-m-k+1}
+$$
+
+for $0 \le k \le N-n$
+
+Because $Y=m+X$, that means $\{X=k\}$ and $\{Y=m+k\}$ has the same probability, $\{X=k-m\}$ and $\{Y=k\}$ has the same probability
+$$
+\begin{aligned}
+P(Y=k)
+&= P(X=k-m) \\
+&=\frac{\binom{n}{m-1} \binom{N-n}{k-m}}{\binom{N}{k-1}} \cdot \frac{n-m+1}{N-k+1}
+\end{aligned}
+$$
+
 (b)
 
-By using survival function, we have
+Because
 $$
-\mathbb{E}[X] = \sum_{n=0}^\infty P(X \gt n) = \sum_{n=1}^{366} P(X \ge n) = \sum_{n=1}^{366} I_i
+\mathbb{E}[X] = \frac{m(N-n)}{n+1}
+$$
+and $Y=m+X$, we have
+$$
+\mathbb{E}[Y] = \mathbb{E}[m] + \mathbb{E}[X] = m+\frac{m(N-n)}{n+1}
 $$
 
-Obviously, $P(X \gt 0) = P(X \gt 1) = 1$. For $P(X \gt n)$, it can be interpreted as before the person $n$ there is no match, therefore
+(c)
+
+Let $Z$ is the expected number of tagged elk.
+$$
+Z \sim \operatorname{HGeom}(n, N-n, m+\frac{m(N-n)}{n+1})
+$$
+
 $$
 \begin{aligned}
-P(X \gt n)
-&= \frac{365 \cdots (365-n+1)}{365^n} \\
-&= (1-\frac{1}{365})(1-\frac{2}{365})
+\mathbb{E}[Z]
+&= (m+\frac{m(N-n)}{n+1}) \frac{n}{n+N-n} \\
+&= \frac{mn+m +mN -mn}{n+1} \frac{n}{N} \\
+&= \frac{m(1+N)}{n+1} \frac{n}{N} \\
+&= m \frac{n}{n+1} \frac{1+N}{N}
 \end{aligned}
 $$
 
-
-
-
-
-
-
-
-
-
-For $k$ people, where $1 \lt k \lt 365$, the probability that there is at least one birthday match is
-$$
-P(X=k) = 1- \frac{365 \cdot 364 \cdots (365 - k + 1)}{365^k}
-$$
-
-So we have
 $$
 \begin{aligned}
-P(X \le 23)
-&= \sum_{k=2}^{23} P(X=k) \\
-&= 22 - (\frac{365 \cdot 364}{365^2} \cdot \frac{365 \cdot 364 \cdot 363 }{365^3} \cdots \frac{365 \cdots 343}{365^{23}})
+\frac{\mathbb{E}[Z]}{m}
+&= \frac{n(1+N)}{N(1+n)} \\
+&\lt 1 & \text{when $n\lt N$}
 \end{aligned}
 $$
 
+Therefore it's less than $m$.
