@@ -2771,3 +2771,127 @@ P(\text{at least $2$ red} \mid \text{at least 1 red})
 \end{aligned}
 $$
 
+### Q58
+
+Job candidates $C_1,C_2,\ldots$ are interviewed one by one, and the interviewer compares them and keeps an updated list of rankings (if $n$ candidates have been interviewed so far, this is a list of the $n$ candidates, from best to worst). Assume that there is no limit on the number of candidates available, that for any $n$ the candidates $C_1,C_2,\ldots,C_n$ are equally likely to arrive in any order, and that there are no ties in the rankings given by the interview.
+
+Let $X$ be the index of the first candidate to come along who ranks as better than the very first candidate $C_1$ (so $C_X$ is better than $C_1$, but the candidates after $1$ but prior to $X$ (if any) are worse than $C_1$.) For example, if $C_2$ and $C_3$ are worse than $C_1$ but $C_4$ is better than $C_1$, then $X = 4$. All $4!$ orderings of the first $4$ candidates are equally likely, so it could have happened that the first candidate was the best out of the first $4$ candidates, in which case $X \gt 4$.
+
+What is $\mathbb{E}[X]$ (which is a measure of how long, on average, the interviewer needs to wait to find someone better than the very first candidate)?
+
+Hint: Find $P(X \gt n)$ by interpreting what $X \gt n$ says about how $C_1$ compares with other candidates, and then apply the result of Theorem 4.4.8.
+
+Answer:
+
+Note that $X=n$ means the $n$-th candidate is better than $C_1$ and $C_1$ is better than the rest
+$$
+C_n \gt C_1 \gt \text{everybody else}. 
+$$
+It is not simpliy that
+$$
+C_n \gt \text{everybody else}
+$$.
+
+By using survival function, we have
+$$
+\mathbb{E}[X] = \sum_{n=0}^\infty P(X \gt n)
+$$
+
+For $P(X \gt n)$ we can interpret it as $C_1$ is still the best among the first $n$ candidate. So we have
+$$
+P(X \gt n) = \frac{1}{n} \qquad \text{for $n \gt 0$.}
+$$
+
+To win $C_1$, we need $X > 1$, so $P(X > 0) = 1$. Therefore 
+$$
+\mathbb{E}[X] = 1+ \sum_{n=1}^\infty \frac{1}{n}
+$$
+
+### Q59
+
+People are arriving at a party one at a time. While waiting for more people to arrive they entertain themselves by comparing their birthdays. Let $X$ be the number of people needed to obtain a birthday match, i.e., before person $X$ arrives there are no two people with the same birthday, but when person $X$ arrives there is a match.
+
+Assume for this problem that there are 365 days in a year, all equally likely. By the result of the birthday problem from Chapter 1, for 23 people there is a 50.7% chance of a birthday match (and for 22 people there is a less than 50% chance). But this has to do with the median of $X$ (defined below); we also want to know the mean of X, and in this problem we will find it, and see how it compares with 23.
+
+(a) A median of a random variable $Y$ is a value $m$ for which $P(Y \le m) \ge 1/2$ and $P(Y \ge m) \ge 1/2$ (this is also called a median of the distribution of $Y$; note that the notion is completely determined by the CDF of $Y$). Every distribution has a median, but for some distributions it is not unique. Show that 23 is the unique median of $X$.
+
+(b) Show that $X= I_1 +I_2 +\ldots+I_{366}$, where $I_j$ is the indicator r.v. for the event $X \ge j$. Then find $\mathbb{E}[X]$ in terms of $p_j$’s defined by $p_1 = p_2 = 1$ and for $3 \le j \le 366$,
+$$
+p_j = (1-\frac{1}{366}) (1-\frac{2}{366}) \ldots (1-\frac{j-2}{366})
+$$
+
+(c) Compute E(X) numerically. In R, the pithy command cumprod(1-(0:364)/365)
+produces the vector $(p_2,\ldots,p_{366})$.
+
+(d) Find the variance of $X$, both in terms of the $p_j$’s and numerically.
+
+Hint: What is $I_i^2$, and what is $I_i I_j$ for $i \lt j$? Use this to simplify the expansion
+$$
+X^2 = I_1^2 + \ldots + I_{365}^2 + 2 \sum_{j=2}^{366} \sum_{i=1}^{j-1} I_i I_j
+$$
+
+Note: In addition to being an entertaining game for parties, the birthday problem has many applications in computer science, such as in a method called the birthday attack in cryptography. It can be shown that if there are $n$ days in a year and $n$ is large, then
+$$
+\mathbb{E}[X] \approx \sqrt{\frac{\pi n}{2}} + \frac{2}{3}.
+$$
+
+Answer:
+
+(a)
+
+As stated in the problem
+$$
+P(X \le 22) \lt 0.5
+$$
+
+We have
+$$
+1 - P(X \le 22) = P(X \ge 23) \gt 0.5
+$$
+
+So we have
+$$
+P(X \le 23) \approx 0.507 \ge 0.5 \qquad \text{and} \qquad P(X \le 23) \ge 0.5
+$$
+
+Therefore, 23 is the unique median of $X$.
+
+(b)
+
+By using survival function, we have
+$$
+\mathbb{E}[X] = \sum_{n=0}^\infty P(X \gt n) = \sum_{n=1}^{366} P(X \ge n) = \sum_{n=1}^{366} I_i
+$$
+
+Obviously, $P(X \gt 0) = P(X \gt 1) = 1$. For $P(X \gt n)$, it can be interpreted as before the person $n$ there is no match, therefore
+$$
+\begin{aligned}
+P(X \gt n)
+&= \frac{365 \cdots (365-n+1)}{365^n} \\
+&= (1-\frac{1}{365})(1-\frac{2}{365})
+\end{aligned}
+$$
+
+
+
+
+
+
+
+
+
+
+For $k$ people, where $1 \lt k \lt 365$, the probability that there is at least one birthday match is
+$$
+P(X=k) = 1- \frac{365 \cdot 364 \cdots (365 - k + 1)}{365^k}
+$$
+
+So we have
+$$
+\begin{aligned}
+P(X \le 23)
+&= \sum_{k=2}^{23} P(X=k) \\
+&= 22 - (\frac{365 \cdot 364}{365^2} \cdot \frac{365 \cdot 364 \cdot 363 }{365^3} \cdots \frac{365 \cdots 343}{365^{23}})
+\end{aligned}
+$$
+
