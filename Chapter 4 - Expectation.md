@@ -3141,3 +3141,48 @@ $$
 $$
 
 Obviously, it's not always $0$, so $T$ is a biased estimator.
+
+(b)
+
+$$
+\begin{aligned}
+\mathbb{E}[g(X)]
+&= \sum_{k=0}^\infty (-2)^k \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^\infty \frac{(-2\lambda)^k}{k!} \\
+&= e^{-\lambda} e^{-2\lambda} \\
+&= e^{-3\lambda} \\
+&= \theta
+\end{aligned}
+$$
+
+Therefore $g(X) = (-2)^X$ is an unbias estimator.
+
+(c)
+
+Because $\theta = e^{-3\lambda}$, and $\lambda \ge 0$, we have
+$$
+0 \lt \theta \le 1
+$$
+
+However, because $X=0,1,2,\ldots$, we have $g(X)$ equals to
+$$
+1, -2, 4, -6, 16, \ldots ,
+$$
+Obviously, given an observation of $X$, the estimate to the $\theta$ is very wrong.
+
+Skip the other part.
+
+## Poisson approximation
+
+### Q67
+
+Law school courses often have assigned seating to facilitate the Socratic method. Suppose that there are $100$ first-year law students, and each takes the same two courses: Torts and Contracts. Both are held in the same lecture hall (which has $100$ seats), and the seating is uniformly random and independent for the two courses.
+
+(a) Find the probability that no one has the same seat for both courses (exactly; you
+should leave your answer as a sum).
+
+(b) Find a simple but accurate approximation to the probability that no one has the
+same seat for both courses.
+
+(c) Find a simple but accurate approximation to the probability that at least two stu-
+dents have the same seat for both courses.
