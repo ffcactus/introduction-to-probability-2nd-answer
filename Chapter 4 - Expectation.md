@@ -2938,3 +2938,206 @@ $$
 $$
 
 Therefore it's less than $m$.
+
+## LOTUS
+
+### Q61
+
+For $X \sim \operatorname{Pois}(\lambda)$, find $\mathbb{E}[X!]$ (the average factorial of $X$), if it is finite.
+
+Answer:
+
+By LOTUS we have
+$$
+\begin{aligned}
+\mathbb{E}[X!]
+&= \sum_{k=0}^\infty k! \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^\infty \lambda^{k} 
+\end{aligned}
+$$
+
+Therefore, we have
+$$
+\mathbb{E}[X!] =
+\begin{cases}
+\frac{e^{-\lambda}}{1-\lambda} & \text{$0 \le \lambda \lt 1$,} \\
+\infty & \text{$\lambda \ge 1$.} \\
+\end{cases}
+$$
+
+### Q62
+
+For $X \sim \operatorname{Pois}(\lambda)$, find $\mathbb{E}[2^X]$, if it is finite.
+
+Answer:
+
+By LOTUS, we have
+$$
+\begin{aligned}
+\mathbb{E}[2^X]
+&= \sum_{k=0}^\infty 2^k \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^\infty \frac{(2 \lambda)^k}{k!} \\
+&= e^{-\lambda} e^{2\lambda} \\
+&= e^\lambda
+\end{aligned}
+$$
+
+And it is valid for valid Poisson parameter.
+
+### Q63
+
+For $X \sim \operatorname{Geom}(p)$, find $\mathbb{E}[2^X]$ (if it is finite) and $\mathbb{E}[2^{−X}]$ (if it is finite). For each, make sure to clearly state what the values of $p$ are for which it is finite.
+
+Answer:
+
+Let $q=1-p$.
+First let's see $\mathbb{E}[2^X]$
+$$
+\begin{aligned}
+\mathbb{E}[2^X]
+&= \sum_{k=0}^\infty 2^k q^k p \\
+&= p \sum_{k=0}^\infty (2q)^k \\
+&=
+\begin{cases}
+\frac{p}{1-2q} & \text{when $p \gt 0.5$,} \\
+\infty & \text{otherwise.}
+\end{cases}
+\end{aligned}
+$$
+
+
+
+Second, let's see $\mathbb{E}[2^{-X}]$
+$$
+\begin{aligned}
+\mathbb{E}[2^{-X}]
+&= \sum_{k=0}^\infty 2^{-k} q^k p \\
+&= p \sum_{k=0}^\infty (\frac{q}{2})^k \\
+&= p \frac{1}{1-\frac{q}{2}} \\
+&= \frac{2p}{1+p}
+\end{aligned}
+$$
+And it is valid for any $p$.
+
+### Q64
+
+Let $X \sim \operatorname{Geom}(p)$ and let $t$ be a constant. Find $\mathbb{E}[e^{tX}]$, as a function of $t$ (this is known as the moment generating function; we will see in Chapter 6 how this function is useful).
+
+Answer:
+
+Let $q=1-p$, we have
+$$
+\begin{aligned}
+\mathbb{E}[e^{tX}]
+&= \sum_{k=0}^\infty e^{kt} q^k p \\
+&= p \sum_{k=0}^\infty (e^tq)^k \\
+&=
+\begin{cases}
+\frac{p}{1-e^t q} & \text{when $0 \le e^t q \lt 1$,} \\
+\infty & \text{otherwise.}
+\end{cases}
+\end{aligned}
+$$
+
+### Q65
+
+The number of fish in a certain lake is a $\operatorname{Pois}(\lambda)$ random variable. Worried that there might be no fish at all, a statistician adds one fish to the lake. Let $Y$ be the resulting number of fish (so $Y$ is $1$ plus a $\operatorname{Pois}(\lambda)$ random variable).
+
+(a) Find $\mathbb{E}[Y^2]$.
+
+(b) Find $\mathbb{E}(1/Y)$.
+
+Answer:
+
+(a)
+
+Suppose before the statistican adds a fish to the lake, the number of fish in that lake is $X \sim \operatorname{Pois}(\lambda)$. So $Y=X+1$, and
+$$
+\begin{aligned}
+\mathbb{E}[Y^2]
+&= \mathbb{E}[(X+1)^2] \\
+&= \mathbb{E}[X^2] + 2\mathbb{E}[X] + 1 \\
+&= \operatorname{Var}(X) + (\mathbb{E}[X])^2 + 2\mathbb{E}[X] + 1 \\
+&= \lambda^2 + 3\lambda + 1
+\end{aligned}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+\mathbb{E}(1/Y)
+&= \mathbb{E}(1/(X+1)) \\
+&= \sum_{k=0}^\infty \frac{1}{k+1} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^\infty \frac{\lambda^k}{(k+1)!}
+\end{aligned}
+$$
+
+Multiply $\lambda$ to both side and we have
+$$
+\begin{aligned}
+\lambda \mathbb{E}(1/Y)
+&= e^{-\lambda} \sum_{k=0}^\infty \frac{\lambda^{k+1}}{(k+1)!} \\
+&= e^{-\lambda} \sum_{j=1}^\infty \frac{\lambda^{j}}{j!} \\
+&= e^{-\lambda} (e^\lambda - 1) \\
+&= 1 - e^{-\lambda}
+\end{aligned}
+$$
+
+Therefore
+$$
+\mathbb{E}(1/Y) = \frac{1 - e^{-\lambda}}{\lambda}
+$$
+
+When $\lambda = 0$ we have
+$$
+\mathbb{E}(1/Y) = \frac{0}{0}
+$$. 
+
+But when $\lambda = 0$, we have $P(X=0) = 1$, and $P(Y=1) = 1$, therefore
+$$
+\mathbb{E}(1/Y) = 
+\begin{cases}
+1 & \text{$\lambda = 0$,} \\
+\frac{1 - e^{-\lambda}}{\lambda} & \text{otherwise}
+\end{cases}
+$$
+
+### Q66
+
+Let $X$ be a $\operatorname{Pois}(\lambda)$ random variable, where $\lambda$ is fixed but unknown. Let $\theta= e^{−3 \lambda}$, and suppose that we are interested in estimating $\theta$ based on the data. Since $X$ is what we observe, our estimator is a function of $X$, call it $g(X)$. The _bias_ of the estimator $g(X)$ is defined to be $\mathbb{E}[g(X)]−\theta$, i.e., how far off the estimate is on average; the estimator is _unbiased_ if its bias is $0$.
+
+(a) For estimating $\lambda$, the r.v. $X$ itself is an unbiased estimator. Compute the bias of the estimator $T= e^{−3X}$. Is it unbiased for estimating $\theta$?
+
+(b) Show that $g(X) = (−2)^X$ is an unbiased estimator for $\theta$. (In fact, it turns out to be the only unbiased estimator for $\theta$.)
+
+(c) Explain intuitively why $g(X)$ is a silly choice for estimating $\theta$, despite (b), and show how to improve it by finding an estimator $h(X)$ for $\theta$ that is always at least as good as $g(X)$ and sometimes strictly better than $g(X)$. That is,
+$$
+|h(X)−\theta| \le |g(X)−\theta|,
+$$
+with the inequality sometimes strict.
+
+Answer:
+
+(a)
+
+First, we compute the expecation of $T$.
+$$
+\begin{aligned}
+\mathbb{E}[T]
+&= \sum_{k=0}^\infty e^{-3k} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^\infty \frac{ (e^{-3}\lambda)^k}{k!} \\
+&= e^{-\lambda} e^{e^{-3} \lambda} \\
+&= e^{\lambda(e^{-3} - 1)}
+\end{aligned}
+$$
+
+The bias is
+$$
+\begin{aligned}
+\mathbb{E}[T] - \theta
+&= e^{\lambda(e^{-3} - 1)} - e^{-3 \lambda}
+\end{aligned}
+$$
+
+Obviously, it's not always $0$, so $T$ is a biased estimator.
