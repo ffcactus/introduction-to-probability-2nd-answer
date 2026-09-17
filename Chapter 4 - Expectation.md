@@ -2952,7 +2952,7 @@ $$
 \begin{aligned}
 \mathbb{E}[X!]
 &= \sum_{k=0}^\infty k! \frac{e^{-\lambda} \lambda^k}{k!} \\
-&= e^{-\lambda} \sum_{k=0}^\infty \lambda^{k} 
+&= e^{-\lambda} \sum_{k=0}^\infty \lambda^{k}
 \end{aligned}
 $$
 
@@ -3004,8 +3004,6 @@ $$
 \end{cases}
 \end{aligned}
 $$
-
-
 
 Second, let's see $\mathbb{E}[2^{-X}]$
 $$
@@ -3092,11 +3090,11 @@ $$
 When $\lambda = 0$ we have
 $$
 \mathbb{E}(1/Y) = \frac{0}{0}
-$$. 
+$$.
 
 But when $\lambda = 0$, we have $P(X=0) = 1$, and $P(Y=1) = 1$, therefore
 $$
-\mathbb{E}(1/Y) = 
+\mathbb{E}(1/Y) =
 \begin{cases}
 1 & \text{$\lambda = 0$,} \\
 \frac{1 - e^{-\lambda}}{\lambda} & \text{otherwise}
@@ -3184,5 +3182,325 @@ should leave your answer as a sum).
 (b) Find a simple but accurate approximation to the probability that no one has the
 same seat for both courses.
 
-(c) Find a simple but accurate approximation to the probability that at least two stu-
-dents have the same seat for both courses.
+(c) Find a simple but accurate approximation to the probability that at least two students have the same seat for both courses.
+
+Answer:
+
+(a)
+
+Let $N$ be the number of students set in the same seat. Let $E_i$ be the event that student $i$ sets in the same seat. We have
+$$
+P(N=0) = 1 - P(\bigcup_{i=1}^{100} E_i)
+$$
+
+By inclusion-exclusion and symmetry we have
+$$
+\begin{aligned}
+P(\bigcup_{i=1}^{100} E_i)
+&= \sum_{i} P(E_i) - \sum_{i \lt j} P(E_i \cap E_j) + \sum_{i \lt j \lt k} P(E_i \cap E_j \cap E_k) - \ldots + (-1)^{101} P(E_1 \cap \ldots \cap E_n) \\
+&= \binom{100}{1} \frac{1}{100} - \binom{100}{2} \frac{1}{100}\frac{1}{99} + \binom{100}{3} \frac{1}{100} \frac{1}{99} \frac{1}{98} - \ldots + (-1)^{101} \frac{1}{100} \frac{1}{99} \frac{1}{98} \cdots \frac{1}{1} \\
+&= \sum_{i=1}^{100} (-1)^{i+1} \binom{100}{i} \frac{(100-i)!}{100!} \\
+&= \sum_{i=1}^{100} (-1)^{i+1} \frac{100!}{(100-i)! i!} \frac{(100-i)!}{100!} \\
+&= \sum_{i=1}^{100} (-1)^{i+1} \frac{1}{i!}
+\end{aligned}
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(N=0)
+&= 1 - \sum_{i=1}^{100} (-1)^{i+1} \frac{1}{i!} \\
+&= 1 + \sum_{i=1}^{100} (-1)^{i} \frac{1}{i!} \\
+&= \sum_{i=0}^{100} (-1)^{i} \frac{1}{i!} \\
+\end{aligned}
+$$
+
+(b)
+
+Let $E_i$ be the event that student $i$ sets in the same sets.
+
+$$
+P(E_i) = \frac{1}{100}
+$$
+
+With poisson approximation, let the number of students set in the same seat be
+$$
+\lambda = 100 \frac{1}{100} = 1
+$$
+
+Let $X$ be the number of studends who sets in the same seat.
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(1)
+$$
+
+The approximation is
+$$
+P(X=0) = \frac{e^{-1} 1^0}{0!} \approx 0.368
+$$
+
+(c)
+
+Continue from (b) we have
+
+$$
+P(X > 1) = 1 - P(X=0) - P(X=1) = 1 - \frac{e^{-1} 1^0}{0!} - \frac{e^{-1} 1^1}{1!} \approx 0.264
+$$
+
+### Q68
+
+A group of $n$ people play “Secret Santa” as follows: each puts their name on a slip of paper in a hat, picks a name randomly from the hat (without replacement), and then buys a gift for that person. Unfortunately, they overlook the possibility of drawing one’s own name, so some may have to buy gifts for themselves (on the bright side, some may like self-selected gifts better). Assume $n \ge 2$.
+
+(a) Find the expected value of the number $X$ of people who pick their own names.
+
+(b) Find the expected number of pairs of people, $A$ and $B$, such that $A$ picks $B$’s name
+and $B$ picks $A$’s name (where $A \ne B$ and order doesn’t matter).
+
+(c) What is the _approximate_ distribution of $X$ if $n$ is large (specify the parameter value
+or values)? What does $P(X = 0)$ converge to as $n \to \infty$?
+
+Answer
+
+(a)
+
+Let $I_i$ be the indicator that person $i$ pick his own name. Let $X$ be the number of people who ick their own names. Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=1}^n \mathbb{E}[I_i] \\
+&= \sum_{i=1}^n \frac{1}{n} \\
+&= 1
+\end{aligned}
+$$
+
+(b)
+
+For each pair $\{a, b\}$, let $J_{ab}$ be the indicator that the pairs pick names each other. Let $X$ be the number of such pairs.
+
+For a fixed pair,
+$$
+P(J_{ab} = 1) = \frac{1}{n} \cdot \frac{1}{n-1}
+$$
+Since there are $\binom{n}{2}$ unordered pairs,
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{1 \le a \lt b \le n} \mathbb{E}[J_{ab}] \\
+&= \binom{n}{2} \frac{1}{n(n-1)} \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+(c)
+
+When $n$ is large, the probability that a person pick up his own name is very small. Given the information that a person picked up his own name changes the probability that another person picks his own name, but the change is from $1/n$ to $1/(n-1)$, and the difference is very small when $n$ is large. It's a typical situation to use poisson approximation.
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(1)
+$$
+
+Therefore, when $n \to \infty$, we have
+$$
+\lim_{n \to \infty}P(X=0) = \frac{e^{-1} 1^0}{0!} = e^{-1}
+$$
+
+### Q69
+
+A survey is being conducted in a city with a million ($10^6$) people. A sample of size $1000$ is collected by choosing people in the city at random, with replacement and with equal probabilities for everyone in the city. Find a simple, accurate approximation to the probability that at least one person will get chosen more than once (in contrast, Exercise 26 from Chapter 1 asks for an exact answer).
+
+Hint: Indicator r.v.s are useful here, but creating $1$ indicator for each of the million people is not recommended since it leads to a messy calculation. Feel free to use the
+fact that $999 \approx 1000$.
+
+Answer:
+
+Let $I_i$ be the indicator that a pair in the sample are the same person. Let $Y$ be the number of such pairs.
+$$
+\begin{aligned}
+\mathbb{E}[Y]
+&= \binom{1000}{2} \frac{1}{10^6} \\
+&\approx \frac{1000 \cdot 1000}{2} \frac{1}{10^6} \\
+&=\frac{1}{2}
+\end{aligned}
+$$
+
+By Poisson approximation we have
+$$
+Y \overset{\text{approx}}{\sim} \operatorname{Pois}(0.5)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(Y > 0)
+&= 1 - P(X=0) \\
+&= 1 - \frac{e^{-0.5} 0.5^{0}}{0!} \\
+&= 1- e^{-0.5} \\
+&\approx 0.393
+\end{aligned}
+$$
+
+### Q70
+
+Ten million people enter a certain lottery. For each person, the chance of winning is
+one in ten million, independently.
+
+(a) Find a simple, good approximation for the PMF of the number of people who win the lottery.
+
+(b) Congratulations! You won the lottery. However, there may be other winners. Assume now that the number of winners other than you is $W \sim \operatorname{Pois}(1)$, and that if there is more than one winner, then the prize is awarded to one randomly chosen winner. Given this information, find the probability that you win the prize (simplify).
+
+Answer:
+
+(a)
+
+Let $X$ be the number of person win the lottery.
+$$
+X \sim \operatorname{Pois}(1)
+$$
+
+(b)
+
+Let $Y$ be the r.v. that the probability you win the prize.
+$$
+\begin{aligned}
+Y
+&= \sum_{i=0}^\infty \frac{1}{i+1} P(W=i) \\
+&= \sum_{i=0}^\infty \frac{1}{i+1} \frac{e^{-1} 1^i}{i!} \\
+&= e^{-1} \sum_{i=0}^\infty \frac{1}{(i+1)!} \\
+&= e^{-1} \sum_{j=1}^\infty \frac{1}{j!} \\
+&= e^{-1} (e - 1) \\
+&= 1 - e^{-1} \\
+&\approx 0.632.
+\end{aligned}
+$$
+
+### Q71
+
+In a group of $90$ people, find a simple, good approximation for the probability that there is at least one pair of people such that they share a birthday and their biological mothers share a birthday. Assume that no one among the $90$ people is the biological mother of another one of the 90 people, nor do two of the $90$ people have the same biological mother. Express your answer as a fully simplified fraction in the form $a/b$, where $a$ and $b$ are positive integers and $b \le 100$.
+Make the usual assumptions as in the birthday problem. To simplify the calculation, you can use the approximations $365 \approx 360$ and $89 \approx 90$, and the fact that $e^x \approx 1 + x$ for $x \approx 0$.
+
+Answer:
+
+Let $J_{ab}$ be the indicator that person $a$ and $b$ in the group share a birthday and their biological mothers share a birthday. Let $X$ be the number of such pairs. By symmetry, for any $J_{ab}$ we have
+$$
+P(J_{ab} = 1) = (\frac{1}{365})^2
+$$
+
+Therefore, we have
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \binom{90}{2} (\frac{1}{365})^2 \\
+&= \frac{90 \cdot 89}{2} \frac{1}{365^2} \\
+&\approx \frac{90^2}{2} \frac{1}{360^2} \\
+&= \frac{1}{32}
+\end{aligned}
+$$
+
+Using Poisson approximation we have
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(1/32)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(\text{at least one pair})
+&= 1 - P(X=0) \\
+&= 1 - \frac{e^{-\frac{1}{32}} (\frac{1}{32})^0}{0!} \\
+&= 1- e^{-\frac{1}{32}} \\
+&\approx 1 - (1 - \frac{1}{32}) \\
+&= \frac{1}{32}
+\end{aligned}
+$$
+
+### Q72
+
+Use Poisson approximations to investigate the following types of coincidences. The usual assumptions of the birthday problem apply.
+
+(a) How many people are needed to have a $50\%$ chance that at least one of them has the same birthday as you?
+
+(b) How many people are needed to have a $50\%$ chance that there is at least one pair of people who not only were born on the same day of the year, but also were born at the same hour (e.g., two people born between 2 pm and 3 pm are considered to have been born at the same hour)?
+
+(c) Considering that only $1/24$ of pairs of people born on the same day were born at the same hour, why isn’t the answer to (b) approximately $24·23$?
+
+(d) With $100$ people, there is a $64\%$ chance that there is at least one set of 3 people with the same birthday (according to R, using **pbirthday(100, classes=365,coincident=3) to compute it)**. Provide two different Poisson approximations for this value, one based on creating an indicator r.v. for each triplet of people, and the other based on creating an indicator r.v. for each day of the year. Which is more accurate?
+
+Answer:
+
+(a)
+
+Let $n$ be number of other person, Let $I_i$ be the indicator that person $i$ have the same birthday with you. Let $X$ be the number of person that have the same birthday with you, we have
+$$
+X \sim \operatorname{Bin}(n, \frac{1}{365})
+$$
+
+Because $p = 1/365$ is rare, with Poisson approximation we have
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(\frac{n}{365})
+$$
+
+So we have the equation
+$$
+\begin{aligned}
+1 - P(X=0) &\ge 0.5 \\
+
+1 - e^{-\frac{n}{365}} &\ge 0.5 \\
+
+0.5 &\ge e^{-\frac{n}{365}} \\
+
+-\frac{n}{365} &\le \log 0.5 \\
+
+n &> 252
+\end{aligned}
+$$
+
+Therefore 253 people are needed approximately.
+
+(b)
+
+Let $n$ be the number of person we have. Let $J_{ab}$ be the indicator that person $a$ and $b$ born at the same day same hour. For a particular pair we have
+$$
+P(J_{ab} = 1) = \frac{1}{365 \cdot 24}
+$$
+
+Let $X$ be the number of such pairs, we have
+$$
+\mathbb{E}[X] = \binom{n}{2} \frac{1}{365 \cdot 24}
+$$
+
+Using Poisson approximation we have
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(\binom{n}{2} \frac{1}{365 \cdot 24})
+$$
+
+Solving the equation
+$$
+\begin{aligned}
+1- P(X=0) &\ge 0.5 \\
+0.5 &\ge e^{-\binom{n}{2} \frac{1}{365 \cdot 24}} \\
+-\binom{n}{2} \frac{1}{365 \cdot 24} &\le \ln(0.5) \\
+-(n(n-1)) &\le 2 \cdot 365 \cdot 24 \cdot \ln(0.5) \\
+\end{aligned}
+$$
+
+We have $n \approx 110.7$, therefore we need $111$ person.
+
+(c)
+
+The probability of a match for any particular pair is reduced by a factor of $24$. However, the number of pairs among $n$ people is approximately $n^2/2$. Therefore, increasing the number of people by a factor of $\sqrt{24}$, rather than $24$, produces approximately $24$ times as many pairs.
+$$
+23 \sqrt{24} \approx 113
+$$
+
+(d)
+
+Let $X$ be number of the triple match. Consider each individule triple, and using Poisson approximation, we have
+$$
+\lambda = \binom{100}{3} \frac{1}{365^2} \approx 1.214
+$$
+
+So we have
+$$
+\begin{aligned}
+1 - P(X=0)
+&= 1 - e^{-1.214} \approx 0.703
+\end{aligned}
+$$
