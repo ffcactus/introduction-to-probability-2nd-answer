@@ -3504,3 +3504,99 @@ $$
 &= 1 - e^{-1.214} \approx 0.703
 \end{aligned}
 $$
+
+On the other hand, we can consider the days. Let $I_i$ be the indicator that there are at least 3 person born on day $i$.
+
+Let $Y$ be the number of person born on a particular day. We have
+$$
+Y \sim \operatorname{Bin}(100, \frac{1}{365})
+$$
+
+So we have
+$$
+\begin{aligned}
+P(I_i = 1)
+&= 1 - P(Y=0) - P(Y=1) - P(Y=2) \\
+&= 1 - (\frac{364}{365})^{100} - 100 \cdot \frac{1}{365} \cdot (\frac{364}{365})^{99} - \binom{100}{2} (\frac{1}{365})^2 (\frac{364}{365})^{98} \\
+&\approx 1 - 0.7600 - 0.2088 - 0.0284 \\
+&= 0.0028
+\end{aligned}
+$$
+
+So in this case we have
+$$
+X \overset{\text{approx}}{\sim} \operatorname{Pois}(365 \cdot 0.0028)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(\text{at least one triple})
+&= 1 - P(X=0) \\
+&= 1 - e^{-365 \cdot 0.0028} \\
+&\approx 0.64
+\end{aligned}
+$$
+
+Obviously, the second way is better.
+
+## *Existence
+
+### Q73
+
+Each of $111$ people names their $5$ favorite movies out of a list of $11$ movies.
+
+(a) Alice and Bob are $2$ of the $111$ people. Assume for this part only that Alice’s $5$ favorite movies out of the $11$ are random, with all sets of $5$ equally likely, and likewise for Bob, independently. Find the expected number of movies in common to Alice’s and Bob’s lists of favorite movies.
+
+(b) Show that there are $2$ movies such that at least $21$ of the people name both of these movies as favorites.
+
+Answer:
+
+(a)
+
+Let $I_i$ be the indicator that movie $i$ is favorate by both Alice and Bob. Let $X$ be the number of movies that both Alice and Bob vavorate.
+
+For a particular movie we have
+$$
+P(I_i = 1) = (\frac{5}{11})^2
+$$
+
+Therefore
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \sum_{i=1}^{11} \mathbb{E}[I_i] \\
+&= \sum_{i=1}^{11} (\frac{5}{11})^2 \\
+&= \frac{25}{11}
+\end{aligned}
+$$
+
+(b)
+
+We can proof that randomly select 2 from the 11 movies, the expected number of people that favor it is equal or above 21.
+
+Let $I_i$ be the indicator that person $i$ favor the 2 movies. Let $A$ be the number of movies that matching the 2 movies in the 5 favorate movies. We have
+$$
+A \sim \operatorname{HGemo}(2, 9, 5)
+$$
+
+Therefore
+$$
+\begin{aligned}
+P(I_i = 1)
+&= P(A = 2) \\
+&= \frac{\binom{2}{2} \binom{9}{3}}{\binom{11}{5}} \\
+&= \frac{2}{11}
+\end{aligned}
+$$
+
+Let $X$ be the number of person that favor these two movies.
+$$
+\mathbb{E}[X] = \sum_{i=1}^{111} \mathbb{E}[I_i] = 111 \cdot \frac{2}{11} \approx 20.18
+$$
+
+Therefore $P(X=21) \gt 0$.
+
+### Others
+
+Skip the others showing that I'm fool.
