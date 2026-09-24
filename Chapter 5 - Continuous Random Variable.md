@@ -149,6 +149,23 @@ $$
 \operatorname{Var}(X) = \frac{1}{\lambda^2}
 $$
 
+### Derivatives
+
+| Function $f(x)$ | Derivative $f'(x)$ |
+|---|---|
+| $\sin x$ | $\cos x$ |
+| $\cos x$ | $-\sin x$ |
+| $\tan x$ | $\sec^2 x$ |
+| $\cot x$ | $-\csc^2 x$ |
+| $\sec x$ | $\sec x\tan x$ |
+| $\csc x$ | $-\csc x\cot x$ |
+| $\sin^2 x$ | $2\sin x\cos x$ |
+| $\cos^2 x$ | $-2\sin x\cos x$ |
+| $\tan^2 x$ | $2\tan x\sec^2 x$ |
+| $\sin^{-1}x=\arcsin x$ | $\displaystyle \frac{1}{\sqrt{1-x^2}}$ |
+| $\cos^{-1}x=\arccos x$ | $\displaystyle -\frac{1}{\sqrt{1-x^2}}$ |
+| $\tan^{-1}x=\arctan x$ | $\displaystyle \frac{1}{1+x^2}$ |
+
 ## PDFs and CDFs
 
 ### Q1
@@ -432,6 +449,337 @@ $1$, $2$, and $3$ standard deviations of its mean. Derive analogous rules for th
 
 Answer:
 
+(a)
+
+For $U \sim \operatorname{Unif}(0, 1)$, we have the mean and standard deviation below:
+
+$$
+\mathbb{E}[U] = \frac{1}{2}
+$$
+
+$$
+\sigma = \sqrt{\operatorname{Var}(U)} = \sqrt{\frac{1}{12}} = \frac{\sqrt{3}}{6} 
+$$
+
+However, $\mu + 2 \sigma \gt 1$ and $\mu - 2 \sigma \lt 0$
+
+So the r.v. will always within $2$ and $3$ standard deviations of its mean.
+
+(b)
+
+For $X \sim \operatorname{Expo}(1)$, we have
+$$
+\mathbb{E}[X] = \frac{1}{\lambda} = 1, \qquad \sigma=\sqrt{\frac{1}{\lambda^2}} = 1
+$$
+
+The support of Exponential is $x \gt 0$.
+
+For $1$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(1+1) - F_X(0)
+&= 1 - e^{-2} - (1 - e^{0}) \\
+&\approx 0.865
+\end{aligned}
+$$
+
+For $2$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(1+2) - F_X(0)
+&= 1 - e^{-3} - (1 - e^{0}) \\
+&\approx 0.95
+\end{aligned}
+$$
+
+For $3$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(1+3) - F_X(0)
+&= 1 - e^{-4} - (1 - e^{0}) \\
+&\approx 0.982
+\end{aligned}
+$$
+
+(c)
+
+For $X \sim \operatorname{Expo}(\frac{1}{2})$, we have
+$$
+\mathbb{E}[X] = \frac{1}{\lambda} = 2, \qquad \sigma=\sqrt{\frac{1}{\lambda^2}} = 2
+$$
+
+The support of Exponential is $x \gt 0$.
+
+For $1$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(2+2) - F_X(0)
+&= 1 - e^{-2} - (1 - e^{0}) \\
+&\approx 0.865
+\end{aligned}
+$$
+
+For $2$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(2+4) - F_X(0)
+&= 1 - e^{-3} - (1 - e^{0}) \\
+&\approx 0.95
+\end{aligned}
+$$
+
+For $3$ standard deviations of its mean, we have
+$$
+\begin{aligned}
+F_X(2+6) - F_X(0)
+&= 1 - e^{-4} - (1 - e^{0}) \\
+&\approx 0.982
+\end{aligned}
+$$
+
+The rule requires that all the distributions in the family have the same shape and differ only by location/scale transformations. As a counterexample, for $X \sim \operatorname{Gamma}(\alpha, \theta)$, changing $\alpha$ changes the shape.
+
+### Q7
+
+Let
+$$
+F(x) = \frac{2}{\pi} \sin^{-1}(\sqrt{x}), \quad \text{for $0 \lt x \lt 1$},
+$$
+$F(x) = 0$ for $x \le 0$, and $F(x) = 1$ for $x \ge 1$.
+
+(a) Check that $F$ is a valid CDF, and find the corresponding PDF $f$. This distribution is called the _Arcsine distribution_, though it also goes by the name $\operatorname{Beta}(1/2,1/2)$ (we will explore the Beta in depth in Chapter 8).
+
+(b) Explain how it is possible for $f$ to be a valid PDF even though $f(x)$ goes to $\infty$ as $x$ approaches $0$ from the right and as $x$ approaches $1$ from the left.
+
+Answer:
+
+(a)
+
+$$
+\frac{d}{dx} \sin^{-1}(u) = \frac{u'}{\sqrt{1 - u^2}}
+$$
+
+Let $u = \sqrt{x}$, $u'= \frac{1}{2\sqrt{x}}$, we have
+
+$$
+\frac{d}{dx}\sin^{-1}(\sqrt{x}) = \frac{\frac{1}{2\sqrt{x}}}{\sqrt{1-x}} = \frac{1}{2 \sqrt{x(1-x)}}
+$$
+
+So
+
+$$
+f = \frac{2}{\pi} \frac{1}{2 \sqrt{x(1-x)}} = \frac{1}{\pi \sqrt{x(1-x)}} \gt 0, \quad \text{for $0 \lt x \lt 1$.}
+$$
+
+Check if the integral of PDF is $1$:
+$$
+\begin{aligned}
+F = \int_0^1 \frac{1}{\pi \sqrt{x(1-x)}} dx
+&= \frac{1}{\pi} \int_0^1 \frac{1}{\sqrt{x(1-x)}} dx \\
+\end{aligned}
+$$
+
+Let $x=\sin^2(\theta)$, we have
+$$
+\begin{aligned}
+F
+&= \frac{1}{\pi} \int_0^\frac{\pi}{2} \frac{1}{\sin \theta \cos \theta} 2 \sin \theta \cos \theta d\theta \\
+&= \frac{2}{\pi} \int_0^\frac{\pi}{2} d \theta \\
+&= 1
+\end{aligned}
+$$
+
+So $F$ is a valid CDF.
+
+(b)
+
+Why? The calculus shows why.
 
 
+### Q8
+
+The Beta distribution with parameters $a=3$, $b=2$ has PDF
+$$
+f(x) = 12 x^2 (1−x), \quad \text{for $0 \lt x \lt 1$}.
+$$
+
+(We will discuss the Beta in detail in Chapter 8.) Let $X$ have this distribution.
+
+(a) Find the CDF of $X$.
+
+(b) Find $P(0 \lt X \lt 1/2)$.
+
+(c) Find the mean and variance of $X$ (without quoting results about the Beta distribution).
+
+Answer:
+
+(a)
+
+$$
+F(x) = 
+\begin{cases}
+0 & \text{$x \le 0$,} \\
+4 x^3 - 3 x^4 & \text{for $0 \lt x \lt 1$,} \\
+1 & \text{$x \ge 1$.}
+\end{cases}
+$$
+
+(b)
+
+$$
+P(0 \lt X \lt 1/2) = F(1/2) - F(0) = \frac{5}{16}
+$$
+
+(c)
+
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \int_0^1 x f(x) dx \\
+&= 12 \int_0^1 (x^3-x^4) dx \\
+&= 3 x^4 \Big|_0^1 - \frac{12}{5} x^5 \Big|_0^1 \\
+&= \frac{3}{5}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbb{E}[X^2]
+&= \int_0^1 x^2 f(x) dx \\
+&= 12 \int_0^1 (x^4-x^5) dx \\
+&= \frac{12}{5} x^5 \Big|_0^1 - 2 x^6 \Big|_0^1 \\
+&= \frac{2}{5}
+\end{aligned}
+$$
+
+$$
+\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{25}
+$$
+
+### Q9
+
+The Cauchy distribution has PDF
+$$
+f(x) = \frac{1}{\pi (1 + x^2)},
+$$
+for all real $x$. (We will introduce the Cauchy from another point of view in Chapter 7.)
+
+Find the CDF of a random variable with the Cauchy PDF.
+
+Hint: Recall that the derivative of the inverse tangent function
+$$
+\arctan(x) = \frac{1}{1+x^2}.
+$$
+
+Answer:
+
+$$
+\begin{aligned}
+F(x)
+&= \int_{-\infty}^x  \frac{1}{\pi (1 + t^2)} dt \\
+&= \frac{1}{\pi} \int_{-\infty}^x \frac{1}{1 + t^2} dt \\
+&= \frac{1}{\pi} \arctan(t) \Big|_{-\infty}^x \\
+&= \frac{1}{\pi} (\arctan(x) + \frac{\pi}{2}), & \text{for all real $x$.}
+\end{aligned}
+$$
+
+## Uniform and Universality of Uniform
+
+### Q10
+
+Let $U \sim \operatorname{Unif}(0,8)$.
+
+(a) Find $P(U \in (0,2) \cup (3,7))$ without using calculus.
+
+(b) Find the conditional distribution of $U$ given $U \in (3,7)$.
+
+Answer:
+
+(a)
+
+The length of $(0,2) \cup (3,7)$ is $6$, so the
+$$
+P(U \in (0,2) \cup (3,7)) = \frac{6}{8} = \frac{3}{4}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+F_U(x)
+&= P(U \le x \mid U \in (3,7)) \\
+&= \frac{P(U \le x, U \in (3,7))}{P(U \in (3,7))} \\
+&=
+\begin{cases}
+0 & \text{if $x \le 3$,} \\
+\frac{\frac{x-3}{8}}{\frac{7-3}{8}} = \frac{x-3}{4} & \text{if $3 \lt x \lt 7$,} \\
+1 & \text{if $x \ge 7$.} \\
+\end{cases}
+\end{aligned}
+$$
+
+### Q11
+
+Let $U$ be a Uniform r.v. on the interval $(−1,1)$ (be careful about minus signs).
+
+(a) Compute $\mathbb{E}[U]$, $\operatorname{Var}(U)$, and $\mathbb{E}[U^4]$.
+
+(b) Find the CDF and PDF of $U^2$. Is the distribution of $U^2$ Uniform on $(0,1)$?
+
+Answer:
+
+(a)
+
+Since the interval is $(-1, 1)$, we have
+$$
+f_U(u) = \frac{1}{2}, \quad -1 \lt u \lt 1.
+$$
+
+$$
+\mathbb{E}[U] = \int_{-1}^1 t \frac{1}{2} dt = 0
+$$
+
+$$
+\mathbb{E}[U^2] = \int_{-1}^1 t^2 \frac{1}{2} dt = \frac{1}{3}
+$$
+
+$$
+\operatorname{Var}(U) = \mathbb{E}[U^2] - (\mathbb{E}[U])^2 = \frac{1}{3}
+$$
+
+$$
+\mathbb{E}[U^4] = \int_{-1}^1 t^4 \frac{1}{2} dt = \frac{1}{5}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+F_{U^2}(x)
+&= P(U^2 < x) \\
+&= P(-\sqrt{x} \lt U \lt \sqrt{x}) \\
+&= F_U(\sqrt{x}) - F_U(-\sqrt{x}) \\
+&= \frac{\sqrt{x} - (-1)}{2} - \frac{-\sqrt{x} - (-1)}{2} \\
+&= 
+\begin{cases}
+0 & \text{if $x \le 0$,} \\
+\sqrt{x} & \text{if $0 \lt x \lt 1$,} \\
+1 & \text{if $x \ge 1$.}
+\end{cases}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+f_{U^2}(x)
+&= F_{U^2}'
+&= 
+\begin{cases}
+\frac{1}{2 \sqrt{x}} & \text{if $0 \lt x \lt 1$,} \\
+0 & \text{otherwise.}
+\end{cases}
+\end{aligned}
+$$
+
+So $U^2$ is not uniform.
 
