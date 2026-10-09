@@ -787,3 +787,147 @@ So $U^2$ is not uniform.
 
 A stick is broken into two pieces, at a uniformly random breakpoint. Find the CDF and average of the length of the longer piece.
 
+Answer:
+
+Without lose the generality, we can suppose the stick is of length $1$ and the breakpoint is uniformly random in range $(0.5, 1)$. To make a valid CDF, we do a normalization on the PDF that
+$$
+f_X =
+\begin{cases}
+2 & \text{for $0.5 \le x \le 1$,} \\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+Therefore, the CDF is
+$$
+F_X =
+\begin{cases}
+0 & \text{for $x \lt 0.5$,} \\
+2x-1 & \text{for $0.5 \le x \le 1$,} \\
+1 & \text{for $1 \lt x$.}
+\end{cases}
+$$
+
+For the average length, we have
+$$
+\mathbb{E}[X] = \int_{0.5}^1 2 x dx = 2 \frac{1}{2} x^2 \big|_{0.5}^1 = 1 - 0.25 = 0.75
+$$
+
+### Q13
+
+A stick of length $1$ is broken at a uniformly random point, yielding two pieces. Let $X$ and $Y$ be the lengths of the shorter and longer pieces, respectively, and let $R= X/Y$ be the ratio of the lengths $X$ and $Y$.
+
+(a) Find the CDF and PDF of $R$.
+
+(b) Find the expected value of $R$ (if it exists).
+
+(c) Find the expected value of $1/R$ (if it exists).
+
+Answer:
+
+(a)
+
+Let $U$ be the broken point, we have $U \sim \operatorname{Unif}(0, 1)$, and
+$$
+R = \frac{X}{Y} =
+\begin{cases}
+\frac{U}{1-U} & \text{for $0 \lt U \le 0.5$,} \\
+\frac{1-U}{U} & \text{for $0.5 \lt U \lt 1$.} \\
+\end{cases}
+$$
+
+Because $0 \lt U \le 0.5$ and $0.5 \lt U \lt 1$ are disjoint events, we have
+$$
+\begin{aligned}
+F_R(r) 
+&= P(\frac{U}{1-U} \le r, U \le 0.5) + P(\frac{1-U}{U} \le r, U \gt 0.5) \\
+&= P(U \le \frac{r}{1+r}, U \le 0.5) + P(U \ge \frac{1}{1+r}, U \gt 0.5) \\
+\end{aligned}
+$$
+
+Since $0 \lt r \lt 1$, we have $0 \lt \frac{r}{1+r} \lt 0.5$, and $0.5 \lt \frac{1}{1+r} \lt 1$ so
+$$
+P(U \le \frac{r}{1+r}, U \le 0.5) = \frac{r}{1+r} \\
+P(U \ge \frac{1}{1+r}, U \gt 0.5) = 1 - \frac{1}{1+r} = \frac{r}{1+r}
+$$
+
+Substitute them we have
+$$
+\begin{aligned}
+F_R(r) 
+&= P(\frac{U}{1-U} \le r, U \le 0.5) + P(\frac{1-U}{U} \le r, U \gt 0.5) \\
+&= P(U \le \frac{r}{1+r}, U \le 0.5) + P(U \ge \frac{1}{1+r}, U \gt 0.5) \\
+&= \frac{2r}{1+r}
+\end{aligned}
+$$
+
+
+Therefore, we have
+$$
+F_R(r) =
+\begin{cases}
+0 & \text{for $r \le 0$,} \\
+\frac{2r}{1+r} & \text{for $0 \lt r \lt 1$,} \\
+1 & \text{for $1 \le r$.} \\
+\end{cases}
+$$
+
+and
+$$
+f_R(r) = F_R'(r) =
+\begin{cases}
+\frac{2}{(1+r)^2} & \text{for $0 \lt r \lt 1$,} \\
+0 & \text{otherwise.}
+\end{cases}
+$$
+
+(b)
+$$
+\begin{aligned}
+\mathbb{E}[R]
+&= \int_0^1 \frac{2r}{(1+r)^2} dr
+\end{aligned} 
+$$
+
+Let $u = 1+r$, we have $du = dr$, so
+$$
+\begin{aligned}
+\int_0^1 \frac{2r}{(1+r)^2} dr
+&= \int_1^2 \frac{2(u-1)}{u^2} du \\
+&= \int_1^2 \frac{2}{u} du - \int_1^2 \frac{2}{u^2} du \\
+&= 2 \ln(u) \Big|_1^2 - 2 (-\frac{1}{u}) \Big|_1^2 \\
+&= 2 \ln(2) -1
+\end{aligned}
+$$
+
+(c)
+
+By LOTUS we have
+$$
+\mathbb{E}[g(R)] = \int_{-\infty}^{+\infty} g(r)f_R(r) dr
+$$
+
+Therefore, we have
+$$
+\begin{aligned}
+\mathbb{E}[1/R]
+&= \int_0^1 \frac{1}{r} \frac{2}{(1+r)^2} dr \\
+\end{aligned}
+$$
+
+For $0 \lt r \lt 1$, we have $0 \lt (1+r)^2 \lt 4$.
+
+Since $r > 0$,
+$$
+\frac{2}{r(1+r)^2} \ge \frac{1}{2r}
+$$
+
+$$
+\begin{aligned}
+\mathbb E\left[\frac1R\right]
+&=\int_0^1\frac{2}{r(1+r)^2}\,dr\\
+&\ge\int_0^1\frac1{2r}\,dr\\
+&=+\infty.
+\end{aligned}
+$$
+
