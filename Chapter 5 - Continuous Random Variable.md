@@ -931,3 +931,124 @@ $$
 \end{aligned}
 $$
 
+### Q14
+
+Let $U_1,\ldots,U_n$ be i.i.d. $\operatorname{Unif}(0,1)$, and $X = \max(U_1,\ldots,U_n)$. What is the PDF of $X$? What is $\mathbb{E}[X]$?
+
+Hint: Find the CDF of $X$ first, by translating the event $X \le x$ into an event involving $U_1,\ldots,U_n$.
+
+Answer:
+
+Since they are i.i.d Uniforms, we have
+$$
+\begin{aligned}
+F_X(x)
+&= P(X \le x) \\
+&= P(U_1 \le x \cap U_2 \le x \cap \ldots \cap U_n \le x) \\
+&= P(U_1 \le x) P(U_2 \le x) \dots P(U_n \le x) \\
+&= x^n
+\end{aligned}
+$$
+
+We can get the PDF
+$$
+f_X(x) = F_X'(x) = n x^{n-1}
+$$
+
+By definition the expectation of $X$ is
+$$
+\begin{aligned}
+\mathbb{E}[X]
+&= \int_0^1 n x^n dx \\
+&= \frac{n}{n+1} x^{n+1} \big|_0^1 \\
+&= \frac{n}{n+1}
+\end{aligned}
+$$
+
+### Q15
+
+Let $U \sim \operatorname{Unif}(0,1)$. Using $U$, construct $X \sim \operatorname{Expo}(\lambda)$.
+
+Answer:
+
+Let $F$ be a CDF which is a continuous function and strictly increasing on the support of the distribution. In the universality of Uniform, we have a theorem that
+
+Let $U \sim \operatorname{Unif}(0,1)$ and $X=F^{-1}(U)$. Then $X$ is an r.v. with CDF $F$.
+
+The CDF of Exponential is
+$$
+F_X(x) = 1 - e^{-\lambda x}, \qquad \text{$x \gt 0$.}
+$$
+
+From
+$$
+y = 1 - e^{-\lambda x}
+$$
+
+we have
+$$
+e^{-\lambda x} = 1-y
+$$
+
+and
+$$
+x = -\frac{\ln(1-y)}{\lambda}.
+$$
+
+So
+$$
+X = F^{-1}(U) = -\frac{\ln(1-U)}{\lambda}.
+$$
+
+### Q16
+
+Let $U \sim \operatorname{Unif}(0,1)$, and
+$$
+X = \log(\frac{U}{1-U})
+$$
+
+Then $X$ has the Logistic distribution, as defined in Example 5.1.6.
+
+(a) Write down (but do not compute) an integral giving $\mathbb{E}(X^2)$.
+
+(b) Find $\mathbb{E}[X]$ without using calculus.
+
+Hint: A useful symmetry property here is that $1−U$ has the same distribution as $U$.
+
+Answer
+
+(a)
+
+By LOTUS we have
+$$
+\mathbb{E}[X^2] = \int_0^1 \log^2(\frac{x}{1-x}) \,dx
+$$
+
+(b)
+
+$$
+X = \log(U) - \log(1-U)
+$$
+
+By symmetry $U$ and $1-U$ has the same distribution, $\mathbb{E}[X] = 0$.
+
+### Q17
+
+Let $U \sim \operatorname{Unif}(0,1)$. As a function of $U$, create an r.v. $X$ with CDF $F(x) = 1−e^{−x^3}$ for $x \gt 0$.
+
+Answer:
+
+Since $e^{−x^3}$ strictly decrease, $1−e^{−x^3}$ strictly increase. Let
+$$
+y = 1−e^{−x^3}
+$$
+
+we have
+$$
+x = \sqrt[3]{-\ln(1-y)}
+$$
+
+So 
+$$
+X = F^{-1}(U) = \sqrt[3]{-\ln(1-U)}
+$$
