@@ -1,171 +1,5 @@
 # Continuous Random Variable
 
-## Recap
-
-### Uniform
-
-PDF:
-
-$$
-f(x) =
-\begin{cases}
-\frac{1}{b-a} & \text{$a \lt x \lt b$,} \\
-0 & \text{otherwise.}
-\end{cases}
-$$
-
-CDF:
-
-$$
-F(x) =
-\begin{cases}
-0 & \text{if $x \le a$,} \\
-\frac{x-a}{b-a} & \text{if $a \lt x \lt b$,} \\
-1 & \text{if $a \ge b$.}
-\end{cases}
-$$
-
-Expectation:
-$$
-\operatorname{E}[U] = \frac{a+b}{2}
-$$
-
-Variance:
-$$
-\operatorname{Var}(U) = \frac{(b-a)^2}{12}
-$$
-
-### Logistic
-
-PDF:
-
-$$
-f(x) = \frac{e^x}{(1+e^x)^2}, \qquad \text{$x \in \mathbb{R}$}
-$$
-
-CDF:
-
-$$
-F(x) = \frac{e^x}{1+e^x}, \qquad \text{$x \in \mathbb{R}$}
-$$
-
-Expectation:
-
-$$
-\mathbb{E}[X] = 0
-$$
-
-Variance:
-
-$$
-\operatorname{Var}(X) = \frac{\pi^2}{3}
-$$
-
-
-### Rayleigh Distribution
-
-PDF:
-
-$$
-f(x) = x e^{- \frac{x^2}{2}}
-$$
-
-CDF:
-
-$$
-\begin{aligned}
-F(x)
-&= \int_0^x t e^{- \frac{t^2}{2}} dt
-& \text{Rayleigh has support $x \ge 0$} \\
-&= - \int_{0}^{- x^2/2} e^{u} du 
-& \text{let $u=-\frac{t^2}{2}$, $du = -t dt$} \\
-&= - e^u \Big|_0^{- x^2/2} \\
-&=
-\begin{cases}
-1 - e^{- x^2 / 2} & \text{$x \ge 0$}, \\
-0 & \text{$x \lt 0$}
-\end{cases}
-\end{aligned}
-$$
-
-Expectation:
-
-$$
-\mathbb{E}[X] = \sqrt{\frac{\pi}{2}}
-$$
-
-Variance:
-
-$$
-\operatorname{Var}(X) = \frac{4 - \pi}{2}
-$$
-
-### Normal
-
-If $Z \sim \mathcal{N}(0, 1)$, then
-$$
-X = \mu + \sigma Z
-$$
-
-PDF:
-
-$$
-\begin{aligned}
-f(x)
-&= \varphi \left(\frac{x - \mu}{\sigma}\right) \frac{1}{\sigma} 
-\end{aligned}
-$$
-
-CDF:
-
-$$
-\begin{aligned}
-F(x)
-&= \Phi \left(\frac{x - \mu}{\sigma}\right)
-\end{aligned}
-$$
-
-### Exponential
-
-PDF:
-
-$$
-f(x) = \lambda e^{- \lambda x}, \qquad \text{$x \gt 0$.}
-$$
-
-CDF:
-
-$$
-F(x) = 1 - e^{- \lambda x}, \qquad \text{$x \gt 0$.}
-$$
-
-Expectation:
-$$
-\mathbb{E}[X] = \frac{1}{\lambda}
-$$
-
-Variance:
-$$
-\operatorname{Var}(X) = \frac{1}{\lambda^2}
-$$
-
-### Derivatives
-
-| Function $f(x)$ | Derivative $f'(x)$ |
-|---|---|
-| $\sin x$ | $\cos x$ |
-| $\cos x$ | $-\sin x$ |
-| $\tan x$ | $\sec^2 x$ |
-| $\cot x$ | $-\csc^2 x$ |
-| $\sec x$ | $\sec x\tan x$ |
-| $\csc x$ | $-\csc x\cot x$ |
-| $\sin^2 x$ | $2\sin x\cos x$ |
-| $\cos^2 x$ | $-2\sin x\cos x$ |
-| $\tan^2 x$ | $2\tan x\sec^2 x$ |
-| $\sin^{-1}x=\arcsin x$ | $\displaystyle \frac{1}{\sqrt{1-x^2}}$ |
-| $\cos^{-1}x=\arccos x$ | $\displaystyle -\frac{1}{\sqrt{1-x^2}}$ |
-| $\tan^{-1}x=\arctan x$ | $\displaystyle \frac{1}{1+x^2}$ |
-
 ## PDFs and CDFs
 
 ### Q1
@@ -1052,3 +886,329 @@ So
 $$
 X = F^{-1}(U) = \sqrt[3]{-\ln(1-U)}
 $$
+
+### Q18
+
+The _Pareto distribution_ with parameter $a \gt 0$ has PDF $f(x) = a/x^{a+1}$ for $x \ge 1$ (and $0$ otherwise). This distribution is often used in statistical modeling.
+
+(a) Find the CDF of a Pareto r.v. with parameter $a$; check that it is a valid CDF.
+
+(b) Suppose that for a simulation you want to run, you need to generate i.i.d. Pareto(a) r.v.s. You have a computer that knows how to generate i.i.d. Unif(0,1) r.v.s but does not know how to generate Pareto r.v.s. Show how to do this.
+
+Answer:
+
+(a)
+
+The CDF of Pareto r.v. is
+$$
+\begin{aligned}
+F_X(x)
+&= \int_1^x \frac{a}{t^{a+1}} dt \\
+&= - \frac{1}{t^a} \Big|_1^x \\
+&= 1 - \frac{1}{x^a}
+\end{aligned}
+$$
+
+To check it's a valid CDF, when $x \ge 1$ and $a \gt 0$, we have $1/x^a \le 1$, so $F_X(x) \ge 0$. And
+$$
+\begin{aligned}
+F_X(t)
+&= \int_1^{+\infty} \frac{a}{t^{a+1}} \, dt \\
+&= - \frac{1}{t^a} \Big|_1^{+\infty} \\
+&= 0 + 1 \\
+&= 1
+\end{aligned}
+$$
+
+(b)
+
+Because $F_X(x)$ is strictly increasing for $a \gt 0$ and $x \ge 1$, by the universality of Uniform, we have
+$$
+X = F^{-1}_X(U) = \sqrt[a]{\frac{1}{1-U}}
+$$
+where $X$ has the Pareto distribution and $U$ is standard uniform. Since $U$ and $1-U$ has the same distribution, it can be simplified as
+$$
+X = F^{-1}_X(U) = \sqrt[a]{\frac{1}{U}}
+$$
+
+## Normal
+
+### Q19
+
+Let $Z \sim \mathcal{N}(0,1)$. Create an r.v. $Y \sim \mathcal{N}(1,4)$, as a simple-looking function of $Z$. Make sure to check that your $Y$ has the correct mean and variance.
+
+Answer:
+
+$Y$ can be considered a location-scale transformation from standard normal, it's mean moved to $\mu = 1$ and variance become $\sigma^2 = 4$
+$$
+Y = \mu + \sigma Z = 1 + 2Z.
+$$
+
+By linearity of expectation we have
+$$
+\mathbb{E}[1+2Z] = 1 + 2\mathbb{E}[Z] = 1
+$$
+
+Also by the properties of variance we have
+$$
+\operatorname{Var}(1+2Z) = \operatorname{Var}(2Z) = 4 \operatorname{Var}[Z] = 4.
+$$
+
+### Q20
+
+Engineers sometimes work with the “error function”
+$$
+\operatorname{erf}(z) = \frac{2}{\sqrt{\pi}} \int_0^z e^{-x^2} dx
+$$
+instead of standard Normal CDF $\Phi$.
+
+(a) Show that the following conversion between $\Phi$ and $\operatorname{erf}$ holds for all $z$:
+$$
+\Phi(z) = \frac{1}{2} + \frac{1}{2} \operatorname{erf}(\frac{z}{\sqrt{2}}).
+$$
+
+(b) Show that $\operatorname{erf}$ is an odd function, i.e., $\operatorname{erf}(-z) = −\operatorname{erf}(z)$.
+
+Answer:
+
+(a)
+
+Because of the symmetry of standard Normal, we have
+$$
+\begin{aligned}
+\Phi(z)
+&= \int_{-\infty}^0 \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \,dt + \int_{0}^z \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \,dt \\
+&= \frac{1}{2} + \int_{0}^z \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \,dt
+\end{aligned}
+$$
+
+Let $u = \frac{t}{\sqrt{2}}$, we have $du = \frac{1}{\sqrt{2}} dt$, so
+$$
+\begin{aligned}
+\Phi(z)
+&= \frac{1}{2} + \int_{0}^z \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \,dt \\
+&= \frac{1}{2} + \int_{0}^{\frac{z}{\sqrt{2}}} \frac{1}{\sqrt{2 \pi}} e^{-u^2} \sqrt{2}\,du \\
+&= \frac{1}{2} + \int_{0}^{\frac{z}{\sqrt{2}}} \frac{1}{\sqrt{\pi}} e^{-u^2} \,du \\
+&= \frac{1}{2} + \frac{1}{2}\operatorname{erf}(\frac{z}{\sqrt{2}})
+\end{aligned}
+$$
+
+(b)
+
+Because $e^{-x^2}$ is symmetric at $0$, we have $\operatorname{erf}(-z) = −\operatorname{erf}(z)$.
+
+### Q21
+
+(a) Find the points of inflection of the $\mathcal{N}(0,1)$ PDF $\varphi$, i.e., the points where the curve switches from convex (second derivative positive) to concave (second derivative negative) or vice versa.
+
+(b) Use the result of (a) and a location-scale transformation to find the points of inflection of the $\mathcal{N}(\mu,\sigma^2)$ PDF.
+
+Answer:
+
+For standard normal we have
+$$
+\varphi(x) = \frac{1}{\sqrt{2 \pi}} e^{-x^2/2}
+$$
+
+Take the first derivative we have
+$$
+\varphi'(x) = -\frac{x}{\sqrt{2 \pi}} e^{-x^2/2} = - \frac{1}{\sqrt{2 \pi}} x e^{-x^2/2}
+$$
+
+Take the second derivative we have
+$$
+\begin{aligned}
+\varphi''(x)
+&= - \frac{1}{\sqrt{2 \pi}} (e^{-x^2/2} + e^{-x^2/2} \cdot (-x) \cdot x) \\
+&= - \frac{1-x^2}{\sqrt{2 \pi}} e^{-x^2/2}
+\end{aligned}
+$$
+
+So when $x = \pm 1$ we have $\varphi''(x) = 0$. Since $e^a \gt 0$ for $a \in R$, 
+
+* When $x \lt -1$, we have $x^2 - 1 \gt 0$ and $\varphi''(x) > 0$.
+* When $-1 \lt x \lt 1$, we have $x^2 - 1 \lt 0$ and $\varphi''(x) \lt 0$.
+* When $x \gt -1$, we have $x^2 - 1 \gt 0$ and $\varphi''(x) > 0$.
+
+Therefore, for standard normal we have the curve is concave from $-1 \lt x \lt 1$, and convex in other regions.
+
+(b)
+
+For $\mathcal{N}(\mu, \sigma^2)$, by the location-scale transformation, the inflection points move to $\mu \pm \sigma$.
+
+### Q22
+
+The distance between two points needs to be measured, in meters. The true distance between the points is $10$ meters, but due to measurement error we can’t measure the distance exactly. Instead, we will observe a value of $10+\epsilon$, where the error $\epsilon$ is distributed $\mathcal{N}(0, 0.04)$. Find the probability that the observed distance is within $0.4$ meters of the true distance ($10$ meters). Give both an exact answer in terms of $\Phi$ and an approximate numerical answer.
+
+Answer:
+
+Let $X$ be the observed value, we have
+$$
+X \sim \mathcal{N}(10, 0.04).
+$$
+
+By the symmetry of Normal, we have
+$$
+\begin{aligned}
+P(10-0.4 \le X \le 10+0.4)
+&= 1 - 2(1 - F_X(10 + 0.4)) \\
+&= 2 F_X(10.4) - 1 \\
+&= 2 \Phi(\frac{10.4 - 10}{0.2}) - 1 \\
+&= 2 \Phi(2) -1 \\
+&\approx 2 \cdot 0.95 - 1 \\
+&= 0.9
+\end{aligned}
+$$
+
+### Q23
+
+Alice is trying to transmit to Bob the answer to a yes-no question, using a noisy channel. She encodes “yes” as $1$ and “no” as $0$, and sends the appropriate value. However, the channel adds noise; specifically, Bob receives what Alice sends plus a $\mathcal{N}(0,\sigma^2)$ noise term (the noise is independent of what Alice sends). If Bob receives a value greater than $1/2$ he interprets it as “yes”; otherwise, he interprets it as “no”.
+
+(a) Find the probability that Bob understands Alice correctly.
+
+(b) What happens to the result from (a) if $\sigma$ is very small? What about if $\sigma$ is very
+large? Explain intuitively why the results in these extreme cases make sense.
+
+Answer:
+
+(a) 
+
+When the noise is less than $0.5$, Bob understands Alice correctly. By symmetry, suppose the value Alice send is "no",
+$$
+P(X \le 0.5) = \Phi(\frac{0.5}{\sigma})
+$$
+
+(b)
+
+If the $\sigma$ is very small, they can transmit very reliably, if the $\sigma$ is very large it's hard to tell what the original information.
+
+### Q24
+
+A woman is pregnant, with a due date of January 10, 2020. Of course, the actual date on which she will give birth is not necessarily the due date. On a timeline, define time 0 to be the instant when January 10, 2020 begins. Suppose that the time $T$ when the woman gives birth has a Normal distribution, centered at 0 and with standard deviation 8 days. What is the probability that she gives birth on her due date? (Your answer should be in terms of $\Phi$, and simplified.)
+
+Answer:
+
+Suppose the women gives birth at instant $X$
+$$
+\begin{aligned}
+P(\text{give birth on due date})
+&= P(X \le 1) - P(X \le 0) \\
+&= \Phi(\frac{1}{8}) - \frac{1}{2}
+\end{aligned}
+$$
+
+### Q25
+
+We will show in the next chapter that if $X_1$ and $X_2$ are independent with $X_i \sim \mathcal{N}(\mu_i,\sigma_i^2)$, then $X_1 + X_2 \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. Use this result to find $P(X \lt Y)$ for $X \sim \mathcal{N}(a,b)$, $Y \sim \mathcal{N}(c,d)$ with $X$ and $Y$ independent.
+
+Hint: Write $P(X \lt Y) = P(X − Y \lt 0)$ and then standardize $X−Y$. Check that your answer makes sense in the special case where $X$ and $Y$ are i.i.d.
+
+Answer:
+
+$$
+\begin{aligned}
+P(X \lt Y)
+&= P(X + (-Y) \lt 0)
+\end{aligned}
+$$
+
+By symmetry, we have $-Y \sim \mathcal{N}(-c, d)$, therefore
+$$
+X - Y \sim \mathcal{N}(a-c, b+d)
+$$
+
+And
+$$
+P(X \lt Y) = P(X-Y \lt 0) = \Phi(\frac{c-a}{\sqrt{b+d}})
+$$
+
+Suppose $X$ and $Y$ are both standard Normal r.v., we have $a = c = 0$ and $b = d = 1$, so $P(X \lt Y) = \Phi(0) = 0.5$ which makes sense by symmetry.
+
+### Q26
+
+Walter and Carl both often need to travel from Location A to Location B. Walter walks, and his travel time is Normal with mean $w$ minutes and standard deviation $\sigma$ minutes (travel time can’t be negative without using a tachyon beam, but assume that w is so much larger than $\sigma$ that the chance of a negative travel time is negligible).
+
+Carl drives his car, and his travel time is Normal with mean $c$ minutes and standard deviation $2 \sigma$ minutes (the standard deviation is larger for Carl due to variability in traffic conditions). Walter’s travel time is independent of Carl’s. On a certain day, Walter and Carl leave from Location A to Location B at the same time.
+
+(a) Find the probability that Carl arrives first (in terms of $\Phi$ and the parameters). For
+this you can use the important fact, proven in the next chapter, that if $X_1$ and $X_2$ are
+independent with $X_i \sim \mathcal{N}(\mu_i, \sigma_i^2)$, then $X_1 + X_2 \sim \mathcal{N}(\mu_1 + \mu_2,\sigma_1^2 + \sigma_2^2)$.
+
+(b) Give a fully simplified criterion (not in terms of $\Phi$), such that Carl has more than
+a $50\%$ chance of arriving first if and only if the criterion is satisfied.
+
+(c) Walter and Carl want to make it to a meeting at Location B that is scheduled to begin $w+10$ minutes after they depart from Location A. Give a fully simplified criterion (not in terms of $\Phi$) such that Carl is more likely than Walter to make it on time for the meeting if and only if the criterion is satisfied.
+
+Answer:
+
+(a)
+
+Let $X_w$ and $X_c$ be the travel times of Walter and Carl respectively. Then,
+$$
+\begin{aligned}
+P(X_c \lt X_w)
+&= P(X_c - X_w \lt 0) \\
+&= P(X_c + (-X_w) \lt 0) \\
+\end{aligned}
+$$
+
+By the symmetry of Normal distribution, we have $-X_w \sim \mathcal{N}(-w, \sigma^2)$, so we have
+$$
+X_c - X_w \sim \mathcal{N}(c-w, 5\sigma^2)
+$$
+
+Therefore,
+$$
+\begin{aligned}
+P(X_c \lt X_w)
+&= P(X_c - X_w \lt 0) \\
+&= \Phi(\frac{w-c}{\sqrt{5} \sigma}).
+\end{aligned}
+$$
+
+(b)
+
+We want
+$$
+P(X_c \lt X_w) > 0.5.
+$$
+From (a), we know that 
+$$
+P(X_c \lt X_w) = \Phi(\frac{w-c}{\sqrt{5} \sigma}).
+$$
+
+Since $\Phi$ is strictly increasing, and $\Phi(0) = 0.5$, it follows that
+$$
+P(X_c \lt X_w) > 0.5 \iff w\gt c
+$$
+
+(c)
+
+$$
+\begin{aligned}
+P(X_c \lt w + 10) \gt P(X_w \lt w + 10)
+&\iff \Phi(\frac{w + 10 - c}{2 \sigma}) \gt \Phi(\frac{10}{\sigma}) \\
+&\iff \frac{w + 10 - c}{2 \sigma} \gt \frac{10}{\sigma} \\
+&\iff w-c \gt 10 
+\end{aligned}
+$$
+
+### Q27
+
+Let $Z \sim \mathcal{N}(0,1)$. We know from the $68-95-99.7\%$ rule that there is a $68\%$ chance of $Z$
+being in the interval $(−1,1)$. Give a visual explanation of whether or not there is an interval $(a,b)$ that is shorter than the interval $(−1,1)$, yet which has at least as large a chance as $(−1,1)$ of containing $Z$.
+
+Answer:
+
+It's impossible, the area of under the PDF curve is $1$, because $69$, $95$, and $99.7$ are all greater than $0.5$, the corresponding remaining areas are less than half. And by the bell shape of Normal distributions, the remaining areas must have a larger intervals.
+
+### Q28
+
+Let $Y \sim \mathcal{N}(\mu,\sigma^2)$. Use the fact that $P(|Y - \mu| < 1.96 \sigma) \approx 0.95$ to construct a random interval $(a(Y),b(Y))$ (that is, an interval whose endpoints are r.v.s), such that the
+probability that $\mu$ is in the interval is approximately $0.95$. This interval is called a confidence interval for $\mu$; such intervals are often desired in statistics when estimating unknown parameters based on data.
+
+Answer:
+
+If $\mathbb{E}[b(Y)] = \mu + 1.96 \sigma$ and $\mathbb{E}[a(Y)] = \mu - 1.96 \sigma$, the $\mu$ is in the interval with approximately $0.95$.
+
+So we can let $b(Y) = Y+1.96\sigma$ and $a(Y) = Y - 1.96 \sigma$.
