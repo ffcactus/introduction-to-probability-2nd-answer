@@ -1209,6 +1209,123 @@ probability that $\mu$ is in the interval is approximately $0.95$. This interval
 
 Answer:
 
-If $\mathbb{E}[b(Y)] = \mu + 1.96 \sigma$ and $\mathbb{E}[a(Y)] = \mu - 1.96 \sigma$, the $\mu$ is in the interval with approximately $0.95$.
+From fact that $P(|Y - \mu| < 1.96 \sigma) \approx 0.95$, we know that
+$$
+P(\mu - 1.96 \sigma \lt Y \lt \mu + 1.96 \sigma) \approx 0.95.
+$$
 
-So we can let $b(Y) = Y+1.96\sigma$ and $a(Y) = Y - 1.96 \sigma$.
+That is
+$$
+P(Y-1.96\sigma \lt \mu \lt Y + 1.96 \sigma) \approx 0.95.
+$$
+
+So we can say
+$$
+a(Y) = Y-1.96\sigma, \qquad b(Y) = Y+1.96\sigma.
+$$
+
+### Q29
+
+Let $Y = |X|$, with $X \sim \mathcal{N}(\mu,\sigma^2)$. This is a well-defined continuous r.v., even though
+the absolute value function is not differentiable at $0$ (due to the sharp corner).
+
+(a) Find the CDF of $Y$ in terms of $\Phi$. Be sure to specify the CDF everywhere.
+
+(b) Find the PDF of $Y$.
+
+(c) Is the PDF of $Y$ continuous at $0$? If not, is this a problem as far as using the PDF to find probabilities?
+
+Answer:
+
+(a)
+
+For $x \ge 0$, we have
+$$
+\begin{aligned}
+F_Y(x)
+&=P(Y \le x) \\
+&=P(X \le x) - P(X \le -x) \\
+&=\Phi(\frac{x-\mu}{\sigma}) - \Phi(\frac{-x-\mu}{\sigma})
+\end{aligned}
+$$
+
+For $x \lt 0$, we have $F_Y(x) = 0$.
+
+(b)
+
+For $x \gt 0$, we have
+$$
+\begin{aligned}
+f_Y(x)
+&= F_Y'(x) \\
+&= \varphi(\frac{x - \mu}{\sigma})\frac{1}{\sigma} + \varphi(\frac{-x-\mu}{\sigma})\frac{1}{\sigma}.
+\end{aligned}
+$$
+
+For $x \lt 0$, we have $f_Y(x) = 0$.
+
+(c)
+
+$$
+\lim_{x \to 0^+} f_Y(x) = \frac{2}{\sigma} \varphi(\frac{-\mu}{\sigma})
+$$
+
+But $f_Y(0^-) = 0$, so $f_Y(x)$ is not continuous at $0$. The discontinuity in a single point causes no problem when using PDF to calculate the probability.
+
+### Q30
+
+Let $Z \sim \mathcal{N}(0,1)$ and let $S$ be a random sign independent of $Z$, i.e., $S$ is $1$ with
+probability $1/2$ and $−1$ with probability $1/2$. Show that $SZ \sim \mathcal{N}(0,1)$.
+
+Answer:
+
+$$
+\begin{aligned}
+P(SZ \le x)
+&= P(SZ \le x \mid Z = 1) P(Z = 1) + P(SZ \le x \mid Z = -1) P(Z = -1) \\
+&= \Phi(x) \cdot 0.5 + (1-\Phi(-x)) \cdot 0.5 \\
+&= \Phi(x) \cdot 0.5 + \Phi(x) \cdot 0.5 \\
+&= \Phi(x)
+\end{aligned}
+$$
+
+### Q31
+
+Let $Z \sim \mathcal{N}(0,1)$. Find $\mathbb{E}[\Phi(Z)]$ without using LOTUS, where $\Phi$ is the CDF of $Z$.
+
+Answer:
+
+The definition of the expectation of continuous r.v. is
+$$
+\mathbb{E}[X] = \int_{-\infty}^{+\infty} x f(x) dx
+$$
+in which $f(x)$ is the PDF of the r.v..
+
+Suppose $Y = g(X)$, by LOTUS we have
+$$
+\mathbb{E}[Y] = \int_{-\infty}^{+\infty} g(x) f(x) dx
+$$
+But here we are not going to use LOTUS.
+
+By the universality of Uniform, if the CDF $F_X(x)$ is a continuous strictly increasing function on the support of the distribution, we have
+$$
+F_X(X) \sim \operatorname{Unif}(0, 1)
+$$
+
+Therefore, if the CDF if $Z$ is $\Phi$, we have
+$$
+\Phi(Z) \sim \operatorname{Unif}(0, 1)
+$$
+
+So $\mathbb{E}[\Phi(Z)] = 0.5$.
+
+### Q32
+
+Let $Z \sim \mathcal{N}(0,1)$ and $X = Z^2$. Then the distribution of $X$ is called Chi-Square with $1$ degree of freedom. This distribution appears in many statistical methods.
+
+(a) Find a good numerical approximation to $P(1 \le X \le 4)$ using facts about the Normal distribution, without querying a calculator/computer/table about values of the Normal CDF.
+
+(b) Let $\Phi$ and $\varphi$ be the CDF and PDF of $Z$, respectively. Show that for any $t \gt 0$, $I(Z \gt t) \le (Z/t)I(Z \gt t)$. Using this and LOTUS, derive Mills’ inequality, which is the following lower bound on $\Phi$:
+$$
+\Phi(t) \ge 1 − \varphi(t)/t.
+$$
