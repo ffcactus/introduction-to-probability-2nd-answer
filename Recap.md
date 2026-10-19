@@ -17,6 +17,173 @@
 | $\cos^{-1}x=\arccos x$ | $\displaystyle -\frac{1}{\sqrt{1-x^2}}$ |
 | $\tan^{-1}x=\arctan x$ | $\displaystyle \frac{1}{1+x^2}$ |
 
+## Named distributions
+
+### Binomial
+
+Perform $n$ independent Bernoulli trials, each with the same success probability $p$. Count the number of successes.
+
+$$
+X \sim \operatorname{Bin}(n, p)
+$$
+
+$$
+P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
+$$
+
+$$
+\mathbb{E}[X] = np
+$$
+
+$$
+\operatorname{Var}
+$$
+
+### Hypergeometric
+
+Suppose a population contains:
+- $w$ white objects,
+- $b$ black objects,
+
+and you randomly choose $n$ objects without replacement.
+Let $X$ be the number of white objects selected.
+
+$$
+X \sim \operatorname{HGeom}(w, b, n)
+$$
+
+$$
+P(X=k) = \frac{\binom{w}{k} \binom{b}{n-k}}{\binom{w+b}{k}}
+$$
+
+$$
+\mathbb{E}[X] = np
+$$
+
+$$
+\operatorname{Var} = np(1-p)\frac{N-n}{N-1}
+$$
+
+### Discreted Uniform
+
+$$
+X\sim \operatorname{DUnif}(1,n)
+$$
+
+$$
+P(X=k)=\frac{1}{n}
+$$
+
+$$
+\mathbb{E}[X] = \frac{n+1}{2}
+$$
+
+$$
+\operatorname{Var} = \frac{n^2-1}{12}
+$$
+
+### Geometric
+
+Number of failures before the first success.
+
+$$
+X \sim \operatorname{Geom}(p)
+$$
+
+$$
+P(X=k) = q^k p
+$$
+
+$$
+\mathbb{E}[X] = \frac{q}{p}
+$$
+
+$$
+\operatorname{Var} = \frac{q}{p^2}
+$$
+
+### Negative Binomial
+
+Number of failures before the $r$-th success.
+
+$$
+X \sim \operatorname{NBin}(r, p)
+$$
+
+$$
+P(X=k) = \binom{k+r-1}{r-1}p^r q^k
+$$
+
+$$
+\mathbb{E}[X] = \frac{rq}{p}
+$$
+
+$$
+\operatorname{Var} = \frac{rq}{p^2}
+$$
+
+### First Success
+
+Number of trials that the first success appears.
+
+$$
+X \sim \operatorname{FS}(p)
+$$
+
+$$
+P(X=k) = q^{k-1}p
+$$
+
+$$
+\mathbb{E}[X] = \frac{1}{p}
+$$
+
+$$
+\operatorname{Var}(X) = \frac{q}{p^2}
+$$
+
+### Negative Hypergeometric
+
+An urn contains $w$ white balls and $b$ black balls, which are randomly drawn one by one without replacement, until $r$ white balls have been obtained. The number of black balls drawn before drawing the $r$-th white ball has a Negative Hypergeometric distribution with parameters $w,b,r$.
+
+$$
+X \sim \operatorname{NHGeom}(w,b,r)
+$$
+
+$$
+P(X=k) = \frac{\binom{w}{r-1} \binom{b}{k}}{\binom{w+b}{r+k-1}} \cdot \frac{w-r+1}{w+b-r-k+1}
+$$
+
+Alternatively
+$$
+P(X=k) = \frac{\binom{r+k-1}{r-1} \binom{w+b-r-k}{w-r}}{\binom{w+b}{w}}
+$$
+
+$$
+\mathbb{E}[X] = \frac{rb}{w+1}
+$$
+
+### Poisson
+
+Count how many relatively rare events occur in some interval.
+
+$$
+X \sim \operatorname{Pois}(\lambda)
+$$
+
+$$
+P(X=k) = e^{-\lambda} \frac{\lambda^k}{k!}
+$$
+
+$$
+\mathbb{E}[X] = \lambda
+$$
+
+$$
+\operatorname{Var} = \lambda
+$$
+
+
 ## Continuous Random Variable
 
 ### Uniform

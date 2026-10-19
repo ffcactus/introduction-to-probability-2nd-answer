@@ -1329,3 +1329,421 @@ Let $Z \sim \mathcal{N}(0,1)$ and $X = Z^2$. Then the distribution of $X$ is cal
 $$
 \Phi(t) \ge 1 − \varphi(t)/t.
 $$
+
+Answer:
+
+(a)
+
+$$
+\begin{aligned}
+P(1 \le X \le 4)
+&= P(1 \le Z^2 \le 4) \\
+&= P(1 \le |Z| \le 2) \\
+&= P(|Z| \le 2\sigma) - P(|Z| \le \sigma) \\
+&\approx 0.95 - 0.68 \\
+&= 0.17
+\end{aligned}
+$$
+
+(b)
+
+If $t \gt 0$ and $Z > t$ we have
+$$
+Z/t \gt 1, \qquad \text{and} \qquad I(Z \gt t) \lt (Z/t) I(Z \gt t)
+$$
+If $t \gt 0$ and $Z \le t$ we have
+$$
+I(Z > t) = 0, \qquad \text{and} \qquad I(Z \gt t) = (Z/t) I(Z \gt t)
+$$
+Therefore, we have
+$$
+I(Z \gt t) \le (Z/t) I(Z \gt t)
+$$
+
+From the survival function we have
+$$
+\begin{aligned}
+1 - \Phi(t) 
+&= P(Z > t) \\
+&= \mathbb{E}[I(Z \gt t)]
+\end{aligned}
+$$
+
+So we need to proof
+$$
+\mathbb{E}[I(Z \gt t)] \le \frac{\varphi(t)}{t}
+$$
+
+Because we already have
+$$
+I(Z \gt t) \le (Z/t)I(Z \gt t), \qquad \text{for $t \gt 0$,}
+$$
+and expectation keeps inequalities, we have
+$$
+\mathbb{E}[I(Z \gt t)] \le \mathbb{E}[(Z/t)I(Z \gt t)]
+$$
+
+Note that $\mathbb{E}[(Z/t)I(Z \gt t)]$ is an expectation of function of $Z$. To found the value of it, let define
+$$
+g(z) = \frac{z}{t} I(z \gt t)
+$$
+LOTUS tell us that
+$$
+\mathbb{E}[g(Z)] = \int_{-\infty}^{+\infty} g(z) \varphi(z) dz = \frac{1}{t} \int_{-\infty}^{+\infty}z I(z \gt t) \varphi(z)dz
+$$
+
+Because when $z \le t$ we have $I(z \gt t) = 0$, we have
+$$
+\mathbb{E}[g(Z)] = \frac{1}{t} \int_t^{+\infty}z \varphi(z) dz
+$$
+
+Therefore, we have
+$$
+1 - \Phi(t) \le \frac{1}{t} \int_t^{+\infty}z \varphi(z) dz
+$$
+
+Note that we have $\varphi'(t) = -t \varphi(t)$, so
+$$
+\int_t^{+\infty}z \varphi(z) dz = - \varphi(t) \Big|_t^{+\infty} = \varphi(t)
+$$
+
+Therefore,
+$$
+1 - \Phi(t) \le \frac{1}{t} \int_t^{+\infty}z \varphi(z) dz = \frac{\varphi(t)}{t}
+$$
+
+### Q33
+
+Let $Z \sim \mathcal{N}(0,1)$, with CDF $\Phi$. We will show in Chapter 8 that the PDF of $Z^2$ is the
+function $g$ given by
+$$
+g(w) = \frac{1}{\sqrt{2 \pi w}} e^{-w/2}
+$$
+for $w \gt 0$, and $g(w) = 0$ for $w \le 0$.
+
+(a) Find expressions for $\mathbb{E}[Z^4]$ as integrals in two different ways, one based on the PDF
+of $Z$ and the other based on the PDF of $Z^2$.
+
+(b) Find $\mathbb{E}[Z^2 + Z + \Phi(Z)]$.
+
+Answer:
+
+(a)
+
+Based on PDF of $Z$, we have
+$$
+\begin{aligned}
+\mathbb{E}[Z^4] = \int_{-\infty}^{+\infty} z^4 \varphi(z) \, dz
+\end{aligned}
+$$
+
+Based on PDF of $Z^2$, we have
+$$
+\begin{aligned}
+\mathbb{E}[Z^4] = \int_{-\infty}^{+\infty} w^2 g(w) \, dw
+\end{aligned}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+\mathbb{E}[Z^2 + Z + \Phi(Z)]
+&= \mathbb{E}[Z^2] + \mathbb{E}[Z] + \mathbb{E}[U] \\
+&= \mathbb{E}[Z^2] + 0 + 0.5 \\
+&= \operatorname{Var}(Z) + (\mathbb{E}[Z])^2 + 0.5 \\
+&= 1 + 0 + 0.5 \\
+&= 1.5
+\end{aligned}
+$$
+
+### Q34
+
+Let $Z \sim \mathcal{N}(0,1)$. A measuring device is used to observe $Z$, but the device can only handle positive values, and gives a reading of 0 if $Z \le 0$; this is an example of censored data. So assume that $X= ZI_Z>0$ is observed rather than $Z$, where $I_Z \gt 0$ is the indicator
+of $Z \gt 0$. Find $\mathbb{E}[X]$ and $\operatorname{Var}(X)$.
+
+Answer:
+
+$$
+\begin{aligned}
+\mathbb{E}[X] = \frac{1}{\sqrt{2 \pi}} \int_0^{+\infty} x e^{-x^2/2} \, dx
+\end{aligned}
+$$
+
+Since
+$$
+\frac{d}{dx}e^{-x^2/2} = -x e^{-x^2/2}
+$$
+we have
+$$
+\int_0^{+\infty} x e^{-x^2/2} \, dx = - e^{-x^2/2} \Big|_0^{+\infty} =1
+$$
+
+Therefore,
+$$
+\mathbb{E}[X] = \frac{1}{\sqrt{2 \pi}} \int_0^{+\infty} x e^{-x^2/2} \, dx = \frac{1}{\sqrt{2 \pi}}
+$$
+
+By the definition of variance we have
+$$
+\begin{aligned}
+\operatorname{Var}[X]
+&= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+&= \frac{1}{\sqrt{2 \pi}} \int_0^{+\infty} x^2 e^{-x^2/2} \, dx - \frac{1}{2 \pi}
+\end{aligned}
+$$
+
+Since the square of an indicator equals the indicator itself, and $z^2\varphi(z)$ is even, the integral over the positive half-line is half of $\mathbb{E}[Z^2]$, we have
+$$
+\begin{aligned}
+\mathbb{E}[X^2]
+&= \mathbb{E}[Z^2I_X^2] \\
+&= \mathbb{E}[Z^2I_X] \\
+&= \int_0^{\infty} z^2 \varphi(z) \, dz \\
+&= \frac{1}{2} \mathbb{E}[Z^2] \\
+&= \frac{1}{2}
+\end{aligned}
+$$
+
+Therefore,
+$$
+\operatorname{Var}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{1}{2} - \frac{1}{2 \pi}
+$$
+
+### Q35
+
+Let $Z \sim \mathcal{N}(0,1)$, and $c$ be a nonnegative constant. Find $\mathbb{E}[\max(Z−c,0)]$, in terms of
+the standard Normal CDF $\Phi$ and PDF $\varphi$. (This kind of calculation often comes up in quantitative finance.)
+
+Hint: Use LOTUS, and handle the max symbol by adjusting the limits of integration appropriately. As a check, make sure that your answer reduces to $1/\sqrt{2 \pi}$ when $c = 0$; this must be the case since we showed in Example 5.4.7 that $\mathbb{E}[|Z|]= 2/\pi $, and we have $|Z|= \max(Z,0) + \max(−Z,0)$ so by symmetry
+$$
+\mathbb{E}[|Z|] = \mathbb{E}[\max(Z,0)] + \mathbb{E}[\max(−Z,0)] = 2 \mathbb{E}[\max(Z,0)]
+$$
+
+Answer:
+
+By LOTUS, we have
+$$
+\begin{aligned}
+\mathbb{E}[\max(Z-c, 0)]
+&= \int_{-\infty}^{+\infty} \max(x - c, 0) \varphi(x) \, dx \\
+&= \int_{-\infty}^c 0 \varphi(x) \, dx + \int_c^{+\infty} (x-c) \varphi(x) \, dx \\
+&= \int_c^{+\infty} x \varphi(x) \, dx - c \int_c^{+\infty} \varphi(x) \, dx \\
+&= \frac{1}{\sqrt{2 \pi}} \int_c^{+\infty} x e^{-x^2/2} \, dx - c(1 - \Phi(c)) \\
+&= - \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} \Big|_c^{+\infty} + c\Phi(c) - c \\
+&= -(\varphi(+\infty) - \varphi(c)) + c\Phi(c) - c \\
+&= \varphi(c) + c\Phi(c) - c
+\end{aligned}
+$$
+
+## Exponential
+
+### Q36
+
+A post office has 2 clerks. Alice enters the post office while 2 other customers, Bob and Claire, are being served by the 2 clerks. She is next in line. Assume that the time a clerk spends serving a customer has an $\operatorname{Expo}(\lambda)$ distribution.
+
+(a) What is the probability that Alice is the last of the 3 customers to be done being served?
+
+Hint: No integrals are needed.
+
+(b) What is the expected total time that Alice needs to spend at the post office?
+
+Answer:
+
+(a)
+
+Whenever one of the two customers finish the serving, Alice start his serving. Due to the memoryless property of Exponential distribution Alice and the other customers act as if they were just started the serving. By the symmetry Alice is the last of the 3 customers to be done being served is $1/2$ by symmetry.
+
+(b)
+
+Let $A$ and $B$ be the remaining serving times for the 2 other customers after Alice arrived, and $Y$ be the serving time of Alice. We need to find
+$$
+\mathbb{E}[\min(A, B)] + \mathbb{E}[Y]
+$$
+
+To find $\mathbb{E}[\min(A, B)]$, we have
+$$
+\begin{aligned}
+\mathbb{E}[\min(A, B)]
+&= \int_0^{+\infty} P(\min(A, B) > t) \, dt \\
+&= \int_0^{+\infty} P(A > t) P(B > t) \, dt \\
+&= \int_0^{+\infty} (1-F(t)) (1-F(t)) \, dt \\
+&= \int_0^{+\infty} e^{-2\lambda t} \, dt \\
+&= - \frac{e^{-2 \lambda t}}{2 \lambda} \Big|_0^{+\infty} \\
+&= \frac{1}{2\lambda}
+\end{aligned}
+$$
+
+Therefore,
+$$
+\mathbb{E}[\min(A, B)] + \mathbb{E}[Y] = \frac{3}{2 \lambda}.
+$$
+
+### Q37
+
+Let $T$ be the time until a radioactive particle decays, and suppose (as is often done in physics and chemistry) that $T \sim \operatorname{Expo}(\sigma)$.
+
+(a) The half-life of the particle is the time at which there is a 50% chance that the particle has decayed (in statistical terminology, this is the median of the distribution of $T$). Find the half-life of the particle.
+
+(b) Show that for $\epsilon$ a small, positive constant, the probability that the particle decays in the time interval $[t,t + \epsilon]$, given that it has survived until time $t$, does not depend on $t$ and is approximately proportional to $\epsilon$.
+
+Hint: $e^x ≈ 1 + x$ if $x \approx 0$.
+
+(c) Now consider $n$ radioactive particles, with i.i.d. times until decay $T_1,\ldots,T_n \sim \operatorname{Expo}(\sigma)$. Let $L$ be the first time at which one of the particles decays. Find the CDF of $L$. Also, find $\mathbb{E}[L]$ and $\operatorname{Var}(L)$.
+
+(d) Continuing (c), find the mean and variance of $M = \max(T_1,\ldots,T_n)$, the last time at which one of the particles decays, without using calculus.
+
+Hint: Draw a timeline, apply (c), and remember the memoryless property.
+
+Answer:
+
+(a)
+
+Let x be the half-life of the particle, by the CDF of $T$, we have
+$$
+1 - e^{-\sigma x} = 0.5, \qquad \text{and} \qquad x = -\frac{\ln 0.5}{\sigma}
+$$
+
+(b)
+
+Suppose the particle decays at $T$, we have
+$$
+\begin{aligned}
+P(t \lt T \lt t + \epsilon \mid T \gt t)
+&= \frac{P(t \lt T \lt t + \epsilon, T \gt t)}{P(T \gt t)} \\
+&= \frac{P(t \lt T \lt t + \epsilon)}{P(T \gt t)} \\
+&= \frac{F_T(t+\epsilon) - F_T(t)}{1 - F_T(t)} \\
+&= \frac{e^{-\sigma t} - e^{- \sigma (t + \epsilon)}}{e^{-\sigma t}} \\
+&= 1 - e^{-\sigma \epsilon} \\
+&\approx \sigma \epsilon
+\end{aligned}
+$$
+
+Since the expression does not depend on $t$ and is approximately proportional to $\epsilon$ for sufficiently small $epsilon$, both claims follow.
+
+(c)
+
+Let
+$$
+L = \min(T_1, T_2, \ldots, T_n)
+$$
+
+By the definition of CDF, we have
+$$
+\begin{aligned}
+F_L(t)
+&= P(\min(T_1, T_2,\ldots,T_n) \le t) \\
+&= 1 - P(\text{$T_1, T_2, \ldots, T_n \gt t$}) \\
+&= 1 - \prod_{i=1}^n P(T_i \gt t) \\
+&= 1 - e^{-\sigma n t} \\
+\end{aligned}
+$$
+for $t \gt 0$, and $F_L(t) = 0$ otherwise.
+
+Therefore, we have
+$$
+L \sim \operatorname{Expo}(n \sigma)
+$$ 
+
+Using the survival-function formula for expectation, we have
+$$
+\begin{aligned}
+\mathbb{E}[L]
+&= \int_0^{+\infty} e^{-\sigma n t} \, dt \\
+&= - \frac{e^{- \sigma n t}}{\sigma n} \Big|_0^{+\infty} \\
+&= \frac{1}{\sigma n} 
+\end{aligned}
+$$
+
+This can also be obtained directly from $L \sim \operatorname{Expo}(n \sigma)$,
+$$
+\mathbb{E}[L] = \frac{1}{\sigma n}
+$$
+
+Also, we have
+$$
+\operatorname{Var}(L) = \frac{1}{n^2 \sigma^2}
+$$
+
+(d)
+
+Define $W_i$ be the wait time between the $i-1$-th decay and the $i$-th decay, with $W_1$ represents the wait time of the first decay.
+Then
+$$
+M = \sum_{i=1}^n W_i
+$$
+
+From part (c) we have
+$$
+W_i \sim \operatorname{Expo}((n+1-i) \sigma)
+$$
+
+By the linearity of expectation, and from part (c), we have
+$$
+\begin{aligned}
+\mathbb{E}[M] 
+&= \sum_{i=1}^n \frac{1}{i \sigma}
+\end{aligned}
+$$
+
+By independence of the original particle lifetimes and the memoryless property, the inter-decay waiting times $W_1,\ldots,W_n$ are independent. Therefore, the variance of their sum equals the sum of their variances.
+$$
+\operatorname{Var}(M) = \sum_{i=1}^n \frac{1}{i^2 \sigma^2}
+$$
+
+### Q38
+
+Fred wants to sell his car, after moving back to Blissville (where he is happy with the bus system). He decides to sell it to the first person to offer at least $18,000 for it. Assume that the offers are independent Exponential random variables with mean $12,000, and that Fred is able to keep getting offers until he obtains one that meets his criterion.
+
+(a) Find the expected number of offers Fred will have.
+
+(b) Find the expected amount of money that Fred will get for the car.
+
+Answer:
+
+(a)
+
+Let $O_i$ be the offer from person $i$, we have
+$$
+O_i \sim \operatorname{Expo}(1/12000)
+$$
+
+So we have
+$$
+P(O_i \ge 18000) = e^{-\frac{18000}{12000}} = e^{-1.5}
+$$
+
+Let $X$ be the number of offers Fred will have, we have
+$$
+X \sim \operatorname{FS}(e^{-1.5})
+$$
+
+Therefore,
+$$
+\mathbb{E}[X] = \frac{1}{e^{-1.5}} = e^{1.5}
+$$
+
+(b)
+
+Let
+$$
+O \sim \operatorname{Expo}(1/12000)
+$$
+represent an original offer, and let $L$ represent the accepted order.
+
+Before the offer are i.i.d. and Fred accept the first qualified offer. $L$ has the same distribution as $O$ conditional on $O \ge 18000$.
+
+Therefore
+$$
+\mathbb{E}[L] = \mathbb{E}[O \mid O \ge 18000]
+$$
+
+By the memorylessness,
+$$
+\mathbb{E}[O-18000 \mid O \ge 18000] = \mathbb{E}[O] = 12000
+$$
+
+Hence,
+$$
+\mathbb{E}[L] = 18000 + 12000 = 30000
+$$
