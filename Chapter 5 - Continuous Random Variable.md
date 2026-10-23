@@ -1747,3 +1747,402 @@ Hence,
 $$
 \mathbb{E}[L] = 18000 + 12000 = 30000
 $$
+
+### Q39
+
+As in the previous problem, Fred wants to sell his car, and the offers for his car are i.i.d. Exponential r.v.s with mean $12,000. Assume now though that he will wait until he has 3 offers (no matter how large or small they are), and then accept the largest of the 3 offers. Find the expected amount of money that Fred will get for his car.
+
+Answer:
+
+Since the offers are i.i.d., let $O_1, O_2, O_3$ denote their amounts, each following an $\operatorname{Expo}(1/12000)$. Let $M$ be the maximum value of them
+$$
+M = \max(O_1, O_2, O_3)
+$$
+
+By the result of Q37, we have
+$$
+\mathbb{E}[M] = \frac{1}{\lambda} + \frac{1}{2 \lambda} + \frac{1}{3 \lambda} = 12000 + 6000 + 4000 = 22000
+$$
+
+### Q40
+
+(a) Fred visits Blotchville again. He finds that the city has installed an electronic display at the bus stop, showing the time when the previous bus arrived. The times between arrivals of buses are still independent Exponentials with mean 10 minutes. Fred waits for the next bus, and then records the time between that bus and the previous bus. On average, what length of time between buses does he see?
+
+(b) Fred then visits Blunderville, where the times between buses are also 10 minutes on average, and independent. Yet to his dismay, he finds that on average he has to wait more than 1 hour for the next bus when he arrives at the bus stop! How is it possible that the average Fred-to-bus time is greater than the average bus-to-bus time even though Fred arrives at some time between two bus arrivals? Explain this intuitively, and construct a specific discrete distribution for the times between buses showing that this is possible.
+
+Answer:
+
+(a)
+
+Let $X$ demote the time elapsed the time since the previous bus arrived. Let $Y$ be the time Fred wait for the next bus. And $Z$ be interval, we have
+$$
+Z = X + Y
+$$
+
+If the display shows $t$ minutes that means there is no bus arrived during the preceding $t$ minutes, it is the same as no bus arrived in $t$ minutes in the future after Fred arriving at bus station. Therefore, the probability of such event is
+$$
+P(X \gt t) = e^{-\lambda t}, \text{ and } \lambda=1/10.
+$$
+We have 
+$$
+\mathbb{E}[X] = \int_0^{+\infty} e^{-\lambda t} dt = \frac{1}{\lambda} = 10
+$$
+
+By the memorylessness of Exponential distribution, we have $\mathbb{E}[Y] = 10$. Therefore,
+$$
+\mathbb{E}[Z] = \mathbb{E}[X] + \mathbb{E}[Y] = 20
+$$
+
+(b)
+
+Let $X$ be the interval of bus, and suppose it only has 2 possible values 7.5 and 20 minutes.
+$$
+P(X=7.5) = 0.8, \text{ and } P(X=20) = 0.2
+$$
+So we have
+$$
+\mathbb{E}[X] = 7.5 \cdot 0.8 + 20 \cdot 0.2 = 10
+$$
+
+Now suppose there are $N$ intervals. When $N$ is large there are about $0.8 N$ intervals are of $7.5$ minutes, and $0.2 N$ intervals are of $20$ minutes. If Fred uniformly arrives in the duration of $0.8 \cdot 7.5 N + 0.2 \cdot 20 N$.
+
+Let $Z$ be the interval Fred arrives.
+$$
+P(Z = 7.5) = \frac{0.8 \cdot 7.5 N}{0.8 \cdot 7.5 N + 0.2 \cdot 20 N} = \frac{0.8 \cdot 7.5}{0.8 \cdot 7.5 + 0.2 \cdot 20}
+$$
+
+$$
+P(Z = 20) = \frac{0.2 \cdot 20 N}{0.8 \cdot 7.5 N + 0.2 \cdot 20 N} = \frac{0.2 \cdot 20}{0.8 \cdot 7.5 + 0.2 \cdot 20}
+$$
+
+When Fred arrived at the interval, due to the uniform arrival, the expected wait time is half of the interval. Therefore, the expected wait time is
+$$
+\begin{aligned}
+\frac{1}{2} \cdot 7.5 \cdot P(Z=7.5) + \frac{1}{2} \cdot 20 \cdot P(Z=20)
+&= \frac{1}{2} \frac{0.8 \cdot 7.5^2 + 0.2 \cdot 20^2}{0.8 \cdot 7.5 + 0.2 \cdot 20}
+&= 6.25
+\end{aligned}
+$$
+
+Note that, by LOTUS, the formula above is
+$$
+\frac{\mathbb{E}[X^2]}{2 \mathbb{E}[X]}
+$$
+
+Of course, we can construct an example that makes it larger than 60.
+
+### Q41
+
+Fred and Gretchen are waiting at a bus stop in Blotchville. Two bus routes, Route 1 and Route 2, have buses that stop at this bus stop. For Route $i$, buses arrive according to a Poisson process with rate $\lambda_i$ buses/minute. The Route 1 process is independent of the Route 2 process. Fred is waiting for a Route 1 bus, and Gretchen is waiting for a Route 2 bus.
+
+(a) Given that Fred has already waited for 20 minutes, on average how much longer will
+he have to wait for his bus?
+
+(b) Find the probability that at least $n$ Route 1 buses will pass by before the first Route
+2 bus arrives. The following result from Chapter 7 may be useful here: for independent
+random variables $X_1 \sim \operatorname{Expo}(\lambda_1),X_2 \sim \operatorname{Expo}(\lambda_2)$, we have $P(X_1 < X_2) = \lambda_1/(\lambda_1+\lambda_2)$.
+
+(c) For this part only, assume that $\lambda_1 = \lambda_2 = \lambda$. Find the expected time it will take
+until both Fred and Gretchen have caught their buses.
+
+Answer:
+
+(a)
+
+The bus interval is an Exponential distribution in a Poisson process. Give that Fred has already waited for 20 minutes, let $X$ denote the bus interval, we have
+$$
+\mathbb{E}[X \mid X \gt 20] = 20 + \mathbb{E}[X] = 20 + \frac{1}{\lambda_1}
+$$
+On average, Fred has to wait $1/\lambda_1$ minutes given that he has already waited 20 minutes.
+
+(b)
+
+Let $T_2$ be the time till the first Route 2 bus arrives. Let $X$ be the number of Route 1 buses passed in $T_2$. When $T_2 = t$ we have
+$$
+P(X \ge n \mid T_2 = t) = 1 - P(X \le n - 1 \mid T_2 = t)
+$$
+
+We know that
+$$
+(X \mid T_2 = t) \sim \operatorname{Pois}(\lambda_1 t)
+$$
+
+Therefore,
+$$
+\begin{aligned}
+P(X \ge n \mid T_2 = t)
+&= 1 - \sum_{k=0}^{n-1} e^{-\lambda_1 t} \frac{\lambda_1^k t^k}{k!}
+\end{aligned}
+$$
+
+The conditional probability, we have
+$$
+\int_0^{+\infty} P(X \ge n \mid T_2 = t) f_{T_2}(t) \, dt
+$$
+
+On the other hand, support that from the start time of the observation, the probability that the first car is Route 1 is
+$$
+P(X_1 \lt X_2) = \frac{\lambda_1}{\lambda_1 + \lambda_2}
+$$
+
+After the first Route 1 bus arrived, by the memorylessness, the same game restart again, the probability that the second Route 1 bus is ahead of the first Route 2 bus is
+$$
+\frac{\lambda_1}{\lambda_1 + \lambda_2}
+$$
+
+Therefore, the probability for $n$ Route 1 buses to be ahead of the first Route 2 bus is
+$$
+(\frac{\lambda_1}{\lambda_1 + \lambda_2})^n
+$$
+
+(c)
+
+Suppose we start observation from time 0. Let $X_1$ and $X_2$ be the time the first Route 1 and Route 2 arrive. Let $L$ be the time for both of them have caught the bus. We have
+$$
+L = \max(X_1, X_2)
+$$
+
+Because $\lambda_1 = \lambda_2 = \lambda$, and by the result from Q37, we have
+$$
+\mathbb{E}[L] = \frac{1}{\lambda} + \frac{1}{2 \lambda}.
+$$
+
+### Q42
+
+Joe is waiting in continuous time for a book called The Winds of Winter to be released. Suppose that the waiting time $T$ until news of the book’s release is posted, measured in years relative to some starting point, has an Exponential distribution with $\lambda= 1/5$.
+
+Joe is not so obsessive as to check multiple times a day; instead, he checks the website once at the end of each day. Therefore, he observes the day on which the news was posted, rather than the exact time $T$.
+
+Let $X$ be this measurement, where $X = 0$ means that the news was posted within the first day (after the starting point), $X = 1$ means it was posted on the second day, etc. (assume that there are 365 days in a year). Find the PMF of $X$. Is this a named distribution that we have studied?
+
+Answer:
+
+If measured in days, we have
+$$
+T \sim \operatorname{Expo}(1/1825)
+$$
+
+So the probability that release is happened with a particular day is
+$$
+\begin{aligned}
+P(X = t)
+&= P(t \le T \lt t+1) \\
+&= P(T \lt t + 1) - P(T \le t) \\
+&= e^{- \lambda t} - e^{- \lambda(t+1)} \\
+&= e^{- \lambda t} (1 - e^{- \lambda})
+\end{aligned}
+$$
+
+Suppose $p = (1-e^{- \lambda})$ and $q = 1-p$, we have
+$$
+P(X=t) = q^tp
+$$
+
+Therefore, $X \sim \operatorname{Geom}(1-e^{-\lambda})$.
+
+### Q43
+
+The Exponential is the analog of the Geometric in continuous time. This problem explores the connection between Exponential and Geometric in more detail, asking what happens to a Geometric in a limit where the Bernoulli trials are performed faster and faster but with smaller and smaller success probabilities.
+Suppose that Bernoulli trials are being performed in continuous time; rather than only thinking about first trial, second trial, etc., imagine that the trials take place at points on a timeline. Assume that the trials are at regularly spaced times $0, \Delta t, 2\Delta t,...$, where $\Delta t$ is a small positive number. Let the probability of success of each trial be $\lambda \Delta t$, where $\lambda$ is a positive constant. Let $G$ be the number of failures before the first success (in discrete time), and $T$ be the time of the first success (in continuous time).
+
+(a) Find a simple equation relating $G$ to $T$.
+
+Hint: Draw a timeline and try out a simple example.
+
+(b) Find the CDF of $T$.
+Hint: First find $P(T \gt t)$.
+
+(c) Show that as $\Delta t \to 0$, the CDF of $T$ converges to the $\operatorname{Expo}(\lambda)$ CDF, evaluating all the CDFs at a fixed $t \ge 0$.
+Hint: Use the compound interest limit (see Section A.2.5 of the math appendix).
+
+Answer:
+
+(a)
+
+$T = G \Delta t$
+
+(b)
+
+For $t \ge 0$ we have
+$$
+\begin{aligned}
+F_T(t)
+&= P(T \le t) \\
+&= 1 - P(T \gt t) \\
+&= 1 - (1- \lambda \Delta t)^{\lfloor \frac{t}{\Delta t} \rfloor + 1}
+\end{aligned}
+$$
+
+(c)
+
+A know limit is
+$$
+\lim_{n \to +\infty} (1 + \frac{x}{n})^n = e^x.
+$$
+
+Let $n=\frac{1}{\Delta t}$, we have
+$$
+\begin{aligned}
+F_T(t)
+= 1 - (1 - \frac{\lambda}{n})^{\lfloor t n\rfloor + 1}
+\end{aligned}
+$$
+
+And
+$$
+\begin{aligned}
+\lim_{n \to +\infty} 1 - (1 - \frac{\lambda}{n})^{\lfloor t n\rfloor + 1}
+&= 1 - e^{-\lambda t}
+\end{aligned}
+$$
+
+Therefore,
+$$
+F_T(t) = 1 - e^{-\lambda t} \qquad \text{when $\Delta t \to 0$}
+$$
+
+### Q44
+
+The _Laplace distribution_ has PDF
+$$
+f(x) = \frac{1}{2} e^{-|x|}
+$$
+for all real $x$. The Laplace distribution is also called a symmetrized Exponential distribution. Explain this in the following two ways.
+
+(a) Plot the PDFs and explain how they relate.
+
+(b) Let $X \sim \operatorname{Expo}(1)$ and $S$ be a random sign ($1$ or $−1$, with equal probabilities), with $S$ and $X$ independent. Find the PDF of $SX$ (by first finding the CDF), and compare the PDF of $SX$ and the Laplace PDF.
+
+Answer:
+
+(a)
+
+Because $f(x) = f(-x)$, $f(x)$ is an even function. It is symmetric and centered at 0. First, let's remove the $1/2$ from the expression, it's right part is Exponential distribution with $\lambda = 1$. When adding the left part and to make the whole area of size $1$ we divide both side by 2.
+
+(b)
+
+Let $Y=SX$. For $y \ge 0$ we have
+$$
+\begin{aligned}
+F_Y(y)
+&= P(SX \le y) \\
+&= P(SX \le y \mid S = 1)P(S = 1) + P(SX \le y \mid S=-1)P(S=-1) \\
+&= (1-e^{-y}) \frac{1}{2} + \frac{1}{2} \\
+&= 1 - \frac{1}{2}e^{-y}
+\end{aligned}
+$$
+
+For $y \lt 0$ we have
+$$
+\begin{aligned}
+F_Y(y)
+&= P(SX \le y) \\
+&= P(SX \le y \mid S = 1)P(S = 1) + P(SX \le y \mid S=-1)P(S=-1) \\
+&= 0 + P(X \ge -y) \frac{1}{2} \\
+&= \frac{1}{2}e^{y}
+\end{aligned}
+$$
+
+Therefore,
+$$
+F_Y(y) = 
+\begin{cases}
+1 - \frac{1}{2}e^{-y}, & y \ge 0,\\
+\frac{1}{2}e^{y}, & y \lt 0.
+\end{cases}
+$$
+
+$$
+f_Y(y)=F_Y'(y)
+\begin{cases}
+\frac{1}{2} e^y, & y \lt 0,\\
+\frac{1}{2} e^{-y},&y>0.
+\end{cases}
+$$
+
+Comparing with
+$$
+f_X(x) = \frac{1}{2}e^{-|x|}
+$$
+We can say $SY$ has Laplace distribution.
+
+### Q45
+
+Emails arrive in an inbox according to a Poisson process with rate $20$ emails per hour. Let $T$ be the time at which the 3rd email arrives, measured in hours after a certain fixed starting time. Find $P(T \gt 0.1)$ without using calculus.
+
+Hint: Apply the count-time duality.
+
+Answer:
+
+Let $N_t$ be the number of emails before time $t$, we have
+$$
+P(T \gt t) \text{ is the same event as } N_t \lt 3
+$$
+
+Since
+$$
+N_{0.1}\sim\operatorname{Pois}(20\times0.1)=\operatorname{Pois}(2).
+$$
+Therefore,
+$$
+\begin{aligned}
+P(T \gt 0.1)
+&= \frac{e^{-2} (-2)^0}{0!} + \frac{e^{-2} (2)^1}{1!} + \frac{e^{-2} (2)^2}{2!} \\
+&= e^{-2} + 2 e^{-2} + 2 e^{-2} \\
+&= 5 e^{-2}
+\end{aligned}
+$$
+
+### Q46
+
+Let $T$ be the lifetime of a certain person (how long that person lives), and let $T$ have CDF $F$ and PDF $f$. The _hazard function_ of T is defined by
+$$
+h(t) = \frac{f(t)}{1-F(t)}
+$$
+
+(a) Explain why $h$ is called the hazard function and in particular, why $h(t)$ is the probability density for death at time t, given that the person survived up until then.
+
+(b) Show that an Exponential r.v. has constant hazard function and conversely, if the
+hazard function of $T$ is a constant then $T$ must be $\operatorname{Expo}(\lambda)$ for some $\lambda$.
+
+Answer:
+
+(a)
+
+Let $D$ be the time the person die. Given that the person survived up until $t$, the probability that he die at time $t$ is
+$$
+\begin{aligned}
+P(D = t \mid D \ge t)
+&= \frac{P(D=t, D\ge e)}{P(D \ge t)} \\
+&= \frac{P(D=t)}{P(D \ge t)} \\
+&= \frac{f(t)}{1-F(t)} \\
+&= h(t)
+\end{aligned}
+$$
+
+So that's why it is called hazard function.
+
+(b)
+
+For $X \sim \operatorname{Expo}(\lambda)$, we have
+$$
+h_X(t) = \frac{\lambda e^{-\lambda t}}{e^{-\lambda t}} = \lambda
+$$
+
+So Exponential r.v has constant hazard function.
+
+On the other hand, if
+$$
+h_X(t) = \frac{f(t)}{1-F(t)} = a,
+$$
+
+we have
+$$
+\begin{aligned}
+F(t)
+&=\int_0^t f(u) \, du = 1 - \frac{f(t)}{a}
+\end{aligned}
+$$
+
+
+
