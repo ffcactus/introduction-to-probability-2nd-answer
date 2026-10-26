@@ -2131,17 +2131,209 @@ $$
 
 So Exponential r.v has constant hazard function.
 
-On the other hand, if
+On the other hand, we know the $f(t) = F'(t)$, so we have
 $$
-h_X(t) = \frac{f(t)}{1-F(t)} = a,
+h(t) = \frac{f(t)}{1-F(t)} = \frac{F'(t)}{1-F(t)} = \lambda
+$$
+with $\lambda \gt 1$.
+
+Let $S(t) = 1 - F(t)$, we have $S'(t) = - F'(t)$, substitute this into the equation above we have
+$$
+S'(t) = -\lambda S(t)
 $$
 
-we have
+So
+$$
+S(t) = e^{-\lambda t}
+$$
+
+Therefore,
+$$
+F(t) = 1-e^{-\lambda t}
+$$
+
+This is the CDF of exponential.
+
+### Q47
+
+Let $T$ be the lifetime of a person (or animal or gadget), with CDF $F$ and PDF $f$. Let $h$ be the hazard function, defined as in the previous problem. If we know $F$ then we can calculate f, and then in turn we can calculate $h$. In this problem, we consider the reverse problem: how to recover $F$ and $f$ from knowing $h$.
+
+(a) Show that the CDF and hazard function are related by
+$$
+F(t) = 1 - \exp \left( -\int_0^t h(s) \, ds \right)
+$$
+
+for all $t \gt 0$.
+
+Hint: Let $G(t) = 1−F(t)$ be the survival function, and consider the derivative of $\log G(t)$.
+
+(b) Show that the PDF and hazard function are related by
+$$
+f(t) = h(t) \exp \left( - \int_0^t h(s) \, ds \right)
+$$
+for all $t \gt 0$.
+
+Hint: Apply the result of (a).
+
+Answer:
+
+(a)
+
+Let $G(t) = 1 - F(t)$, then we need to show that
+$$
+G(t) = \exp \left( - \int_0^t h(s) \, ds \right)
+$$
+
+Take logarithm to both side, we have
+$$
+\log(G(t)) = - \int_0^t h(s) \, ds
+$$
+
+We know that
+$$
+h(s) = - \frac{G'(s)}{G(s)}
+$$
+
+So we have
+$$
+\log(G(t)) = \int_0^t \frac{G'(s)}{G(s)} \, ds
+$$
+
+By the chain rule, we have
+$$
+\frac{d}{ds} \log G(s) = \frac{G'(s)}{G(s)}
+$$
+
+So
+$$
+\int_0^t \frac{G'(s)}{G(s)} \, ds = \left[ \log G(s) \right]_0^t = \log G(t) - \log G(0)
+$$
+
+Because $G(0) = 1 - F(0) = 1$, so we have
+$$
+\int_0^t \frac{G'(s)}{G(s)} \, ds = \log G(t)
+$$
+
+(b)
+
+From part (a) we have
+$$
+F(t) = 1 - \exp \left( -\int_0^t h(s) \, ds \right)
+$$
+
+Take derivative with respect to $t%$ we have
+
 $$
 \begin{aligned}
-F(t)
-&=\int_0^t f(u) \, du = 1 - \frac{f(t)}{a}
+f(t)
+&= \exp \left( -\int_0^t h(s) \, ds \right) \left( \frac{d}{dt} \int_0^t h(s) \, ds\right) \\
+&= h(t) \exp \left( -\int_0^t h(s) \, ds \right) \\
 \end{aligned}
+$$
+
+### Q48
+
+Find $\mathbb{E}(X^3)$ for $X \sim \operatorname{Expo}(\lambda)$, using LOTUS and the fact that $\mathbb{E}(X) = 1/\lambda$ and $\operatorname{Var}(X) = 1/\lambda^2$, and integration by parts at most once. In the next chapter, we’ll learn how to find $\mathbb{E}(X^n)$ for all $n$.
+
+Answer:
+
+By LOTUS we have
+$$
+\begin{aligned}
+\mathbb{E}[X^3]
+&= \int_0^{\infty} x^3 f(x) \, dx \\
+&= \lambda \int_0^{\infty} x^3 e^{-\lambda x} \, dx \\ 
+\end{aligned}
+$$
+
+Let
+$$
+u = x^3, \qquad dv = e^{-\lambda x} \, dx
+$$
+we have
+$$
+du = 3x^2 dx, \qquad v = - \frac{e^{-\lambda x}}{\lambda}.
+$$
+
+By integration by parts, we have
+$$
+\begin{aligned}
+\mathbb{E}[X^3]
+&= \lambda \int_0^{\infty} x^3 f(x) \, dx \\
+&= \lambda \int_0^{\infty} x^3 e^{-\lambda x} \, dx \\
+&= - \left[ x^3 e^{-\lambda x} \right]_0^\infty + \int_0^\infty \frac{3 x^2 e^{-\lambda x}}{\lambda} \, dx \\
+\end{aligned}
+$$
+
+Because $e^{-\lambda x}$ decrease more rapidly than the increase of $x^3$, we have
+$$
+- \left[ x^3 e^{-\lambda x} \right]_0^\infty = -(0-0) = 0
+$$
+
+Therefore, we have
+$$
+\begin{aligned}
+\mathbb{E}[X^3]
+&= - \left[ x^3 e^{-\lambda x} \right]_0^\infty + 3 \int_0^\infty x^2 e^{-\lambda x} \, dx \\
+&= \frac{3}{\lambda} \mathbb{E}[X^2] \\
+&= \frac{3}{\lambda} (\operatorname{Var}[X] + \mathbb{E}[X]^2) \\
+&= \frac{6}{\lambda^3}
+\end{aligned}
+$$
+
+### Q49
+
+The _Gumbel distribution_ is the distribution of $−\log X$ with $X \sim \operatorname{Expo}(1)$.
+
+(a) Find the CDF of the Gumbel distribution.
+
+(b) Let $X_1,X_2,\ldots$ be i.i.d. $\operatorname{Expo}(1)$ and let $M_n = \max(X_1,\ldots,X_n)$. Show that $M_n−\log n$ converges in distribution to the Gumbel distribution, i.e., as $n \to \infty$ the CDF of
+$M_n − \log n$ converges to the Gumbel CDF.
+
+Answer:
+
+(a)
+
+Let $Y = - \log X$, since $X \in (0, +\infty)$,  we have $Y \in (-\infty, +\infty)$, 
+
+$$
+\begin{aligned}
+F_Y(y)
+&= P(Y \le y) \\
+&= P(- \log X \le y) \\
+&= P(\log X \ge -y) \\
+&= P(X \ge e^{-y}) \\
+&= 1 - P(X \lt e^{-y}) \\
+&= 1 - (1 - e^{-e^{-y}}) \\
+&= e^{-e^{-y}}
+\end{aligned}
+$$
+
+$F_Y(y)$ is continuously in $\mathbb{R}$, and the range is $(0, 1)$. When $y \to -\infty$, we have $F_Y(y) = 0$. When $y \to +\infty$, we have $F_Y(y) = 1$. Therefore, $F_Y(y) = e^{-e^{-y}}$ is a valid CDF.
+
+(b)
+
+By the definition of CDF, we have
+
+$$
+\begin{aligned}
+P(M_n - \log n \le m)
+&= P(M_n \le \log n + m) \\
+&= P(X_1 \le \log n + m, X_2 \le \log n + m, \ldots, X_n \le \log n + m) \\
+&= \prod_{i=1}^n P(X_i \le \log n + m) \\
+&= \left( 1 - e^{-\log n - m} \right)^n \\
+&= (1 + \frac{- e^{-m}}{n})^n \\
+\end{aligned}
+$$
+
+Note that
+$$
+\lim_{n \to +\infty} (1 + \frac{x}{n})^n = e^x.
+$$
+
+Therefore,
+$$
+\lim_{n \to +\infty} P(M_n - \log n \le m) = e^{-e^{-m}}
 $$
 
 
