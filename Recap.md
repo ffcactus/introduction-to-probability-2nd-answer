@@ -17,7 +17,128 @@
 | $\cos^{-1}x=\arccos x$ | $\displaystyle -\frac{1}{\sqrt{1-x^2}}$ |
 | $\tan^{-1}x=\arctan x$ | $\displaystyle \frac{1}{1+x^2}$ |
 
-## Named distributions
+
+## Integration
+
+### Integration by Substitution
+
+Suppose
+$$
+I = \int_{-\infty}^{a + t} f(2a - x) \, dx
+$$
+
+Step 1, transform the differential.
+
+Let $w=2a-x$, differentiate to both side with respect to $x$ we have:
+$$
+\frac{dw}{dx} = -1
+$$
+Therefore,
+$$
+dw = -dx
+$$
+
+Step 2, transform the integration limits
+$$
+\begin{array}{c|c}
+\text{Original $x$} & \text{New $w = 2a - x$} \\
+\hline
+x \to -\infty & w \to +\infty \\
+x = a + t & w = 2a - (a + t) = a - t\\
+\end{array}
+$$
+
+Step 3, substitute.
+$$
+I = \int_{a-t}^{+\infty} f(w)(-dw) = - \int_{a-t}^{+\infty} f(w) \, dw
+$$
+
+
+### Integration by Parts
+
+Recall the product rules:
+$$
+\frac{d}{dx}[u(x)v(x)]=u'(x)v(x)+u(x)v'(x).
+$$
+
+Now integrate every term with respect to $x$:
+$$
+\int \frac{d}{dx}[u(x)v(x)]\,dx
+=
+\int u'(x)v(x)\,dx
++
+\int u(x)v'(x)\,dx.
+$$
+
+Simplify the left side:
+$$
+\int \frac{d}{dx}[u(x)v(x)]\,dx
+=u(x)v(x)+C.
+$$
+
+Therefore, we have
+$$
+u(x)v(x)
+=
+\int u'(x)v(x)\,dx
++
+\int u(x)v'(x)\,dx,
+$$
+where we've omitted the arbitrary integration constant for the moment.
+
+Introduce the shorthand $du$ and $dv$. By definition,
+$$
+du=u'(x)\,dx,\qquad dv=v'(x)\,dx.
+$$
+
+Consequently,
+$$
+\begin{aligned}
+\int u'(x)v(x)\,dx&=\int v\,du,\\
+\int u(x)v'(x)\,dx&=\int u\,dv.
+\end{aligned}
+$$
+
+$$
+uv=\int v\,du+\int u\,dv.
+$$
+
+Rearranging:
+$$
+\int u\,dv=uv-\int v\,du
+$$
+
+Here, $du = u'(x) dx$ and $dv = v'(x) dx$
+
+**Example**
+
+Suppose we want to calculate
+$$
+\int x e^x\,dx.
+$$
+
+Neither factor is difficult individually, but integrating their product directly isn't obvious.
+
+Choose
+$$
+u=x,\qquad dv=e^x\,dx.
+$$
+
+Then
+$$
+du=dx,\qquad v=e^x.
+$$
+
+Using integration by parts,
+$$
+\begin{aligned}
+\int xe^x\,dx
+&=xe^x-\int e^x\,dx\\
+&=xe^x-e^x+C.
+\end{aligned}
+$$
+
+## Named Distributions
 
 ### Binomial
 

@@ -2336,5 +2336,3 @@ $$
 \lim_{n \to +\infty} P(M_n - \log n \le m) = e^{-e^{-m}}
 $$
 
-
-
