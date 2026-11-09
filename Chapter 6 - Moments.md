@@ -868,3 +868,323 @@ Therefore,
 $$
 W \sim \operatorname{Expo}(\frac{1}{2})
 $$
+
+### Q16
+
+Let $X \sim \operatorname{Expo}(\lambda)$. Find the skewness of $X$, and explain why it is positive and why it does not depend on $\lambda$.
+
+Hint: Recall that $\lambda X \sim \operatorname{Expo}(1)$ and the $n$-th moment of an $\operatorname{Expo}(1)$ r.v. is $n!$ for all $n$.
+
+Answer:
+
+Let $Y=\lambda X$, we have $Y \sim \operatorname{Expo}(1)$. So we have
+$$
+\mathbb{E}[Y] = 1! = 1 \\
+\mathbb{E}[Y^2] = 2! = 2 \\
+\mathbb{E}[Y^3] = 3! = 6
+$$
+
+And
+$$
+\begin{aligned}
+\operatorname{Skew}[Y] 
+&= \frac{\mathbb{E}[(Y - \mathbb{E}[Y])^3]}{\operatorname{Var}(Y)^{3/2}} \\
+&= \frac{\mathbb{E}[Y^3 - 3Y^2 + 3Y - 1]}{(\mathbb{E}[Y^2] - (\mathbb{E}[Y])^2)} \\
+&= \frac{6-6 + 3 -1}{1} \\
+&= 2
+
+\end{aligned}
+$$
+
+$X$ is a scale of $Y$, and scale, which depends on $\lambda$, does not change the skewness.
+
+### Q17
+
+Let $X_1,\ldots,X_n$ be i.i.d. with mean $\mu$, variance $\sigma$, and MGF $M$. Let
+$$
+Z_n = \sqrt{n} \left( \frac{\bar{X}_n - \mu}{\sigma} \right)
+$$
+
+(a) Show that $Z_n$ is a standardized quantity, i.e., it has mean $0$ and variance $1$.
+
+(b) Find the MGF of $Z_n$ in terms of M, the MGF of each $X_j$.
+
+Answer:
+
+(a)
+
+We know that $\mathbb{E}[\bar{X}_n] = \mu$, and $\operatorname{Var}(\bar{X}_n) = \sigma^2 / n$.
+
+Therefore, we have
+$$
+\mathbb{E}[Z_n] = \frac{\sqrt{n}}{\sigma}(\mathbb{E}[\bar{X}_n] - \mu) = 0,
+$$
+
+$$
+\begin{aligned}
+\operatorname{Var}(Z_n)
+&= (\frac{\sqrt{n}}{\sigma})^2 \operatorname{Var}(\bar{X}_n - \mu) \\
+&= \frac{n}{\sigma^2} \operatorname{Var}(\bar{X}_n) \\
+&= \frac{n}{\sigma^2} \frac{\sigma^2}{n} \\
+&= 1
+\end{aligned}
+$$
+
+(b)
+
+$$
+\begin{aligned}
+Z_n
+&= \sqrt{n} \left( \frac{\bar{X}_n - \mu}{\sigma} \right) \\
+&= \sqrt{n} \left( \frac{\frac{1}{n}(X_1 + \ldots + X_n) - \mu}{\sigma} \right) \\
+&= \sqrt{n} \left( \frac{X_1 + \ldots + X_n - n \mu}{n \sigma} \right)
+\end{aligned}
+$$
+
+So we have
+$$
+e^{t Z_n} = e^{-\frac{t\sqrt{n} \mu}{\sigma}} e^{\frac{t X_1}{\sqrt{n} \sigma}} \cdots e^{\frac{t X_n}{\sqrt{n} \sigma}}
+$$
+
+Let $M_Z$ be the MGF of $Z_n$, we have
+$$
+\begin{aligned}
+M_Z(t)
+&= \mathbb{E}[e^{t Zn}] \\
+&= \mathbb{E}[e^{-\frac{t\sqrt{n} \mu}{\sigma}} e^{\frac{t X_1}{\sqrt{n} \sigma}} \cdots e^{\frac{t X_n}{\sqrt{n} \sigma}}] \\
+&= e^{-\frac{t\sqrt{n} \mu}{\sigma}} \left( \mathbb{E}[e^{\frac{t X_1}{\sqrt{n} \sigma}}] \right)^n \\
+&= e^{-\frac{t\sqrt{n} \mu}{\sigma}} \left( M(\frac{t}{\sqrt{n} \sigma}) \right)^n
+\end{aligned}
+$$
+
+### Q18
+
+Use the MGF of the $\operatorname{Geom}(p)$ distribution to give another proof that the mean of this distribution is $q/p$ and the variance is $q/p^2$, with $q = 1−p$.
+
+Answer:
+
+Let $X \sim \operatorname{Geom}(p)$, then
+$$
+M_X(t) = \frac{p}{1 - q e^t}
+$$
+
+To find the mean of $X$, we have
+$$
+\begin{aligned}
+M_X'(t)
+&= \frac{d}{dt} \frac{p}{1 - q e^t} \\
+&= p(-1)\frac{1}{(1-qe^t)^2} (-q) e^t \\
+&= \frac{p q e^t}{(1 -q e^t)^2}
+\end{aligned}
+$$
+
+$$
+\mathbb{E}[X] = M_X'(0) = \frac{pq}{(1-q)^2} = \frac{q}{p}
+$$
+
+To find the variance of $X$, we have
+$$
+\begin{aligned}
+M_X''(t)
+&= \frac{d}{dt} \frac{p q e^t}{(1 -q e^t)^2} \\
+&= \frac{pqe^t(1-q e^t)^2 - 2(1-qe^t)(-q)e^t pq e^t}{(1 - q e^t)^4} \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathbb{E}[X^2]
+&= M_X''(0) \\
+&= \frac{qp^3 + 2 q^2 p^2}{p^4} \\
+&= \frac{q}{p} + \frac{2q^2}{p^2}
+\end{aligned} 
+$$
+
+$$
+\begin{aligned}
+\operatorname{Var}(X)
+&= \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \\
+&= \frac{q}{p} + \frac{2q^2}{p^2} - \frac{q^2}{p^2} \\
+&= \frac{pq + q^2}{p^2} \\
+&= \frac{q(p+q)}{p^2} \\
+&= \frac{q}{p^2}
+\end{aligned}
+$$
+
+### Q19
+
+Use MGFs to determine whether $X + 2Y$ is Poisson if $X$ and $Y$ are i.i.d. $\operatorname{Pois}(\lambda)$.
+
+Answer:
+
+To determine if $Z = X + 2Y \sim \operatorname{Pois}(\mu)$, we can check if $Z$'s MGF is of the form
+$$
+M_Z(t) = e^{\mu(e^t -1)} 
+$$
+
+From the definition of MGF we have
+$$
+\begin{aligned}
+M_Z(t)
+&= \mathbb{E}[e^{tZ}] \\
+&= \mathbb{E}[e^{t(X+2Y)}] \\
+&= \mathbb{E}[e^{tX} e^{2tY}] \\
+&= \mathbb{E}[e^{tX}] \mathbb{E}[e^{t2Y}] \\
+&= e^{\lambda (e^t -1)} e^{\lambda (e^{2t} -1)} \\
+&= e^{\lambda (e^t + e^{2t} - 2)}
+\end{aligned}
+$$
+
+It doesn't follow the MGF of Poisson distribution.
+
+### Q20
+
+Let $X \sim \operatorname{Pois}(\lambda)$, and let $M(t)$ be the MGF of $X$. The _cumulant generating function_ is defined to be $g(t) = \log M(t)$. Expanding g(t) as a Taylor series
+$$
+g(t) = \sum_{j=1}^\infty \frac{c_j}{j!} t^j
+$$
+
+(the sum starts at $j = 1$ because $g(0) = 0$), the coefficient $c_j$ is called the $j$-th cumulant of $X$. Find the $j$-th cumulant of $X$, for all $j \ge 1$.
+
+Answer:
+
+$$
+\begin{aligned}
+g'(t)
+&= \frac{d}{dt} \log M(t) \\
+&= \frac{M'(t)}{M(t)} \\
+&= \frac{e^{\lambda(e^t -1)} \lambda e^t}{e^{\lambda (e^t -1)} } \\
+&= \lambda e^t
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+g''(t)
+&= \frac{d}{dt} \lambda e^t \\
+&= \lambda e^t
+\end{aligned}
+$$
+
+So all $n$-th derivative of $g(t)$ is $\lambda e^t$. By Taylor expansion we have
+$$
+\lambda e^t = \lambda \sum_{n=0}^\infty \frac{t^n}{n!}
+$$
+
+On the other hand, from
+$$
+g(t) = \sum_{j=1}^\infty \frac{c_j}{j!} t^j
+$$
+
+we have
+$$
+g'(t) = \sum_{j=1}^\infty \frac{c_j}{(j-1)!} t^{j-1}
+$$
+
+$$
+g''(t) = \sum_{j=2}^\infty \frac{c_j}{(j-2)!} t^{j-2}
+$$
+
+So we have
+$$
+\lambda \sum_{n=0}^\infty \frac{t^n}{n!} = \sum_{j=1}^\infty \frac{c_j}{(j-1)!} t^{j-1}
+$$
+
+So we have $C_j = \lambda$.
+
+### Q21
+
+Let $X_n \sim \operatorname{Bin}(n,p_n)$ for all $n \ge 1$, where $n p_n$ is a constant $\lambda \gt 0$ for all $n$ (so $p_n = \lambda/n$). Let $X \sim \operatorname{Pois}(\lambda)$. Show that the MGF of $X_n$ converges to the MGF of $X$
+(this gives another way to see that the $\operatorname{Bin}(n,p)$ distribution can be well-approximated by the $\operatorname{Pois}(\lambda)$ when $n$ is large, $p$ is small, and $\lambda= np$ is moderate).
+
+Answer
+
+Let $M_N$ be the MGF of $X_n$, we have
+$$
+\begin{aligned}
+M_N(t)
+&= (p_n e^t + 1 - p_n)^n \\
+&= (1 + \frac{\lambda}{n} e^t - \frac{\lambda}{n})^n \\
+&= (1 + \frac{\lambda(e^t - 1)}{n})^n
+\end{aligned}
+$$
+
+Since
+$$
+\lim_{n \to +\infty} (1 + \frac{x}{n})^n = e^x
+$$
+we have
+$$
+\lim_{n \to +\infty} M_N(t) = e^{\lambda(e^t -1)}
+$$
+which is the MFG of Poisson distribution.
+
+### Q22
+
+Consider a setting where a Poisson approximation should work well: let $A_1,\ldots,A_n$ be independent, rare events, with $n$ large and $p_j = P(A_j)$ small for all $j$. Let $X= I(A_1) + \ldots + I(A_n)$ count how many of the rare events occur, and let $\lambda = \mathbb{E}[X]$.
+
+(a) Find the MGF of $X$.
+
+(b) If the approximation $1 + x \approx e^x$ (this is a good approximation when x is very close to 0 but terrible when x is not close to 0) is used to write each factor in the MGF of $X$ as $e$ to a power, what happens to the MGF? Explain why the result makes sense intuitively.
+
+Answer:
+
+(a)
+
+$$
+\begin{aligned}
+M_X(t)
+&= \mathbb{E}[e^{tX}] \\
+&= \mathbb{E}[e^{t(I(A_1) + \ldots + I(A_n))}] \\
+&= \prod_{j=1}^n \mathbb{E}[e^{t I(A_j)}] \\
+&= \prod_{j=1}^n (e^t p_j + 1 - p_j) \\
+&= \prod_{j=1}^n (1 + p_j(e^t - 1)) \\
+\end{aligned}
+$$
+
+(b)
+
+When $p_j$ is sufficiently small, we have
+$$
+\begin{aligned}
+M_X(t)
+&\approx \prod_{j=1}^n e^{p_j(e^t - 1)} \\
+&= e^{\lambda (e^t -1)}
+\end{aligned}
+$$
+
+This is approximately the MGF of $\operatorname{Pois}(\lambda)$.
+This makes intuitive sense because $X$ counts the number of occurrences among a large number of independent, rare events.
+
+### Q23
+
+Let $U_1,U_2$ be i.i.d. $\operatorname{Unif}(0,1)$. Example 8.2.5 in Chapter 8 shows that $U_1 + U_2$ has a _Triangle distribution_, with PDF given by
+$$
+f(t) =
+\begin{cases}
+t & \text{for $0 \lt t \le 1$}, \\
+2 - t & \text{for $1 \lt t \lt 2$.}
+\end{cases}
+$$
+The method in Example 8.2.5 is useful but it often leads to diﬃcult integrals, so having
+alternative methods is important. Show that $U_1 + U_2$ has a Triangle distribution by showing that they have the same MGF.
+
+### Q24
+
+Let $X$ and $Y$ be i.i.d. $\operatorname{Expo}(1)$, and $L = X−Y$. The _Laplace distribution_ has PDF
+$$
+f(x) = \frac{1}{2} e^{-|x|}
+$$
+for all real $x$. Use MGFs to show that the distribution of $L$ is Laplace.
+
+
+### Q25
+
+Let $Z \sim \mathcal{N}(0,1)$, and $Y = |Z|$. So $Y$ has the Folded Normal distribution, discussed in Example 5.4.7. Find two expressions for the MGF of $Y$ as unsimplified integrals: one integral based on the PDF of $Y$, and one based on the PDF of $Z$.
+
+### Q26
+
+Let $X,Y,Z,W \sim \mathcal{N}(0,1)$ be i.i.d.
+
+(a) Find an expression for $\mathbb{E}[\Phi(Z)e^Z]$ as an unsimplified integral.
+(b) Find $\mathbb{E}(\Phi(Z))$ and $\mathbb{E}(e^Z)$ as fully simplified numbers.

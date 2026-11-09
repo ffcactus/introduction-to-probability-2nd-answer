@@ -160,6 +160,10 @@ $$
 \operatorname{Var}
 $$
 
+$$
+M_X(t) = (pe^t + q)^n
+$$
+
 ### Hypergeometric
 
 Suppose a population contains:
@@ -223,6 +227,10 @@ $$
 \operatorname{Var} = \frac{q}{p^2}
 $$
 
+$$
+M_X(t) = \frac{p}{1-q e^t}, \quad \text{for $t$ in $(-\infty, \log(1/q))$.}
+$$
+
 ### Negative Binomial
 
 Number of failures before the $r$-th success.
@@ -241,6 +249,10 @@ $$
 
 $$
 \operatorname{Var} = \frac{rq}{p^2}
+$$
+
+$$
+M_X(t) = \left( \frac{p}{1-qe^t} \right)^r, \quad \text{for $qe^t \lt 1$.}
 $$
 
 ### First Success
@@ -304,6 +316,10 @@ $$
 \operatorname{Var} = \lambda
 $$
 
+$$
+M_X(t) = e^{\lambda(e^t -1)} 
+$$
+
 
 ## Continuous Random Variable
 
@@ -338,6 +354,10 @@ $$
 Variance:
 $$
 \operatorname{Var}(U) = \frac{(b-a)^2}{12}
+$$
+
+$$
+M_X(t) = \frac{e^{tb} - e^{ta}}{t(b-a)}, \quad \text{for $t \ne 0$.} 
 $$
 
 ### Logistic
@@ -440,6 +460,10 @@ F(x)
 \end{aligned}
 $$
 
+$$
+M_X(t) = e^{\mu t + \frac{1}{2} \sigma^2 t^2}
+$$
+
 ### Exponential
 
 PDF:
@@ -462,4 +486,8 @@ $$
 Variance:
 $$
 \operatorname{Var}(X) = \frac{1}{\lambda^2}
+$$
+
+$$
+M_X(t) = \frac{\lambda}{\lambda-t}, \quad \text{for $t \lt \lambda$.}
 $$
