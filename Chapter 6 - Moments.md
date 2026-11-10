@@ -1166,8 +1166,99 @@ t & \text{for $0 \lt t \le 1$}, \\
 2 - t & \text{for $1 \lt t \lt 2$.}
 \end{cases}
 $$
-The method in Example 8.2.5 is useful but it often leads to diﬃcult integrals, so having
+The method in Example 8.2.5 is useful, but it often leads to difficult integrals, so having
 alternative methods is important. Show that $U_1 + U_2$ has a Triangle distribution by showing that they have the same MGF.
+
+Answer:
+
+Let $X$ follow Triangle distribution, the MGF of $X$ is
+$$
+\begin{aligned}
+M_X(t)
+&= \mathbb{E}[e^{tX}] \\
+&= \int_0^1 e^{tx} x \, dx + \int_1^2 e^{tx} (2-x) \, dx \\
+\end{aligned}
+$$
+
+To solve
+$$
+\int_0^1 e^{tx} x \, dx
+$$
+
+Choose
+$$
+u = x, \quad dv = e^{tx} \, dx
+$$
+
+Then
+$$
+du = dx, \quad v = \frac{e^{tx}}{t}
+$$
+
+Then
+$$
+\begin{aligned}
+\int_0^1 e^{tx} x \, dx 
+&= \frac{x e^{tx}}{t} - \int_0^1 \frac{e^{tx}}{t} \, dx \\
+&= (\frac{x e^{tx}}{t} - \frac{e^{tx}}{t^2}) \Big|_0^1 \\
+&= \frac{e^t(t-1) + 1}{t^2}
+\end{aligned}
+$$
+
+To solve
+$$
+\int_1^2 e^{tx} (2-x) \, dx
+$$
+
+Choose
+$$
+u = 2-x, \quad dv = e^{tx} \, dx
+$$
+
+Then
+$$
+du = -dx, \quad v = \frac{e^{tx}}{t}
+$$
+
+Then
+$$
+\begin{aligned}
+\int_1^2 e^{tx} (2-x) \, dx
+&= \frac{(2-x) e^{tx}}{t} + \int_1^2 \frac{e^{tx}}{t} \, dx \\
+&= (\frac{(2-x) e^{tx}}{t} + \frac{e^{tx}}{t^2}) \Big|_1^2 \\
+&= \frac{e^{2t} - e^t(t+1)}{t^2}
+\end{aligned}
+$$
+
+Therefore,
+$$
+\begin{aligned}
+M_X(t)
+&= \frac{e^t(t-1) + 1 + e^{2t} - e^t(t+1)}{t^2} \\
+&= \frac{(e^t - 1)^2}{t^2} \\
+&= (\frac{e^t - 1}{t})^2
+\end{aligned}
+$$
+
+Because
+$$
+\lim_{t \to 0} \frac{e^t - 1}{t} = 1,
+$$
+we have
+$$
+\lim_{t \to 0} M_X(t) = 1.
+$$
+
+Because $U_1, U_2$ are i.i.d, we have
+$$
+\begin{aligned}
+M_{U_1 + U_2}(t)
+&=M_{U_1}(t) M_{U_2}(t) \\
+&= (\frac{e^t - 1}{t})^2
+\end{aligned}
+$$
+
+Since the MGF is the same, $U_1 + U_2$ should have the the Triangle distribution.
 
 ### Q24
 
@@ -1177,14 +1268,124 @@ f(x) = \frac{1}{2} e^{-|x|}
 $$
 for all real $x$. Use MGFs to show that the distribution of $L$ is Laplace.
 
+Answer:
+
+$$
+\begin{aligned}
+M_{-Y}(t)
+&=\mathbb{E}[e^{-tx}] \\
+&= \int_0^\infty e^{-tx} e^{-x} \, dx \\
+&= \int_0^\infty e^{-(t+1)x} \, dx \\
+&= -\frac{e^{-(t+1)x}}{t+1} \Big|_0^\infty \\
+\end{aligned}
+$$
+
+for $t \gt -1$, we have
+$$
+M_{-Y}(t) = -(0 - \frac{1}{t+1}) = \frac{1}{1+t} 
+$$
+We also have $M_{-Y}(0) = 1$
+
+
+Since $X, Y$ are independent, we have
+$$
+\begin{aligned}
+M_L(t)
+&= M_X(t) M_{-Y}(t) \\
+&= \frac{1}{1-t} \frac{1}{1+t} \\
+&= \frac{1}{1-t^2}
+\end{aligned}
+$$
+
+On the other hand, suppose $L$ has Laplace distribution, we have
+$$
+\begin{aligned}
+M_L(t)
+&= \mathbb{E}[e^{tL}] \\
+&= \int_{-\infty}^{+\infty} e^{tx} \frac{1}{2} e^{-|x|} \, dx \\
+&= \int_{-\infty}^0 e^{tx} \frac{1}{2} e^{x} \, dx + \int_0^{+\infty} e^{tx} \frac{1}{2} e^{-x} \, dx \\
+&= \frac{1}{2} \int_{-\infty}^0 e^{x(t+1) \, dx} + \frac{1}{2} \int_0^{+\infty} e^{x(t-1)} \, dx \\
+&= \frac{1}{2} \frac{e^{x(t+1)}}{t+1} \Big|_{-\infty}^0 + \frac{1}{2} \frac{e^{x(t-1)}}{t-1} \Big|_0^{+\infty} \\
+\end{aligned}
+$$
+
+for $-1 \lt t \lt 1$, we have
+$$
+\begin{aligned}
+M_L(t)
+&= \frac{1}{2} \frac{e^{x(t+1)}}{t+1} \Big|_{-\infty}^0 + \frac{1}{2} \frac{e^{x(t-1)}}{t-1} \Big|_0^{+\infty} \\
+&= \frac{1}{2}(\frac{1}{t+1} - 0) + \frac{1}{2} (0 - \frac{1}{t-1}) \\
+&= \frac{1}{2} (\frac{1}{t+1} - \frac{1}{t-1}) \\
+&= \frac{1}{2} \frac{t-1 -t - 1}{t^2 -1} \\
+&= \frac{1}{(1 - t^2}
+\end{aligned}
+$$
 
 ### Q25
 
 Let $Z \sim \mathcal{N}(0,1)$, and $Y = |Z|$. So $Y$ has the Folded Normal distribution, discussed in Example 5.4.7. Find two expressions for the MGF of $Y$ as unsimplified integrals: one integral based on the PDF of $Y$, and one based on the PDF of $Z$.
+
+Answer:
+
+$$
+\begin{aligned}
+M_Y(t)
+&= \mathbb{E}[e^{tY}] \\
+&= \int_{-\infty}^0 e^{-tx} \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} \, dx + \int_0^{+\infty} e^{tx} \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} \, dx \\
+&= \frac{1}{\sqrt{2 \pi}} e^{t^2/2}\int_{-\infty}^0 e^{-(x+t)^2/2} \, dx + \frac{1}{\sqrt{2 \pi}} e^{t^2/2}\int_0^{+\infty} e^{-(x-t)^2/2} \, dx
+\end{aligned}
+$$
+
+The PDF of $Y$ is $2 \varphi(y)$ for $y \ge 0$, and 0 otherwise, so we have
+$$
+\begin{aligned}
+M_Y(t)
+&=\mathbb{E}[e^{ty}] \\
+&= \int_0^{\infty} e^{ty} \frac{2}{\sqrt{2 \pi}} e^{-y^2/2} \, dy \\
+&= \frac{2}{\sqrt{2 \pi}} e^{t^2/2}\int_0^{\infty} e^{-(y-t)^2/2} \, dy
+\end{aligned}
+$$
 
 ### Q26
 
 Let $X,Y,Z,W \sim \mathcal{N}(0,1)$ be i.i.d.
 
 (a) Find an expression for $\mathbb{E}[\Phi(Z)e^Z]$ as an unsimplified integral.
-(b) Find $\mathbb{E}(\Phi(Z))$ and $\mathbb{E}(e^Z)$ as fully simplified numbers.
+
+(b) Find $\mathbb{E}[\Phi(Z)]$ and $\mathbb{E}[e^Z]$ as fully simplified numbers.
+
+Answer:
+
+(a)
+
+By the definition of expectation, we have
+$$
+\begin{aligned}
+\mathbb{E}[\Phi(Z)e^Z]
+&= \int_{-\infty}^{+\infty} \left( \int_{-\infty}^z \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \, dt \right) e^z \frac{1}{\sqrt{2 \pi}} e^{-z^2/2} \, dz 
+\end{aligned}
+$$
+
+(b)
+
+By the Probability Integral Transformation, we have
+$$
+\Phi(Z) \sim \operatorname{Unif}(0,1)
+$$
+
+Therefore,
+$$
+\mathbb{E}[\Phi(Z)] = \frac{1}{2}
+$$
+
+By the definition of expectation, we have
+$$
+\begin{aligned}
+\mathbb{E}[e^Z]
+&= \int_{-\infty}^{+\infty} e^z \frac{1}{\sqrt{2 \pi}} e^{-z^2/2} \, dz \\
+&= \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{z^2-2z + 1 -1}{2}} \, dz \\
+&= \sqrt{e} \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2 \pi}} e^{-(z-1)^2/2} \, dz \\
+&= \sqrt{e}
+\end{aligned}
+$$
+
